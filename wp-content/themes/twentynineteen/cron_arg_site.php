@@ -1,6 +1,7 @@
 <?php
 
 /* Template Name: Cron Argument Site Template */
+
 $to = 'meet.makadiya@multidots.com';
 $subject = 'The subject';
 $body =  'The email body content';
