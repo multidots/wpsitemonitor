@@ -2,6 +2,15 @@
 
 /* Template Name: Cron Argument Site Template */
 
+$to = 'meet.makadiya@multidots.com';
+$subject = 'The subject';
+$body =  'The email body content';
+$headers = array('Content-Type: text/html; charset=UTF-8');
+wp_mail( $to, $subject, $body, $headers );
+die();
+exit();
+
+
 	global  $wpdb;
     include_once ( 'class-WPMail.php' );
 	$mail_fun = new Sitemoniter_WPMail();
