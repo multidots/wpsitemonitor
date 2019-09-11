@@ -1,12 +1,14 @@
 <?php
 
 /* Template Name: Cron Argument Site Template */
-print_r( "live copy" );
+print_r( "local copy" );
 $to = 'meet.makadiya@multidots.com';
 $subject = 'The subject';
 $body =  'The email body content';
 $headers = array('Content-Type: text/html; charset=UTF-8');
-wp_mail( $to, $subject, $body, $headers );
+$data = wp_mail( $to, $subject, $body, $headers );
+echo "<pre>";
+print_r( $data );
 die();
 exit();
 
