@@ -1,6 +1,8 @@
 <?php
 
 /* Template Name: Cron Argument Site Template */
+phpinfo();
+die();
 print_r( "local copy" );
 $to = 'meet.makadiya@multidots.com';
 $subject = 'The subject';
