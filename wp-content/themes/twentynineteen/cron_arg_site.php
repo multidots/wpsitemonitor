@@ -1,29 +1,27 @@
+
+<style>
+	table {
+		font-family: arial, sans-serif;
+		border-collapse: collapse;
+		width: 100%;
+	}
+
+	td, th {
+		border: 1px solid #dddddd;
+		text-align: left;
+		padding: 8px;
+	}
+
+	tr:nth-child(even) {
+		background-color: #dddddd;
+	}
+</style>
+
 <?php
 
 /* Template Name: Cron Argument Site Template */
-phpinfo();
-die();
-print_r( "local copy" );
-$to = 'meet.makadiya@multidots.com';
-$subject = 'The subject';
-$body =  'The email body content';
-$data = wp_mail( $to, $subject, $body );
-echo "<pre>";
-print_r( $data );
-die();
-exit();
-
 
 	global  $wpdb;
-    include_once ( 'class-WPMail.php' );
-	$mail_fun = new Sitemoniter_WPMail();
-
-    $mail_fun->mail_send();
-    die();
-	$type = $_GET['type'];
-	if( isset( $_GET['no'] ) ){
-		$no_of_records = $_GET['no'];
-	}
 
 	$cron_days = 7;
 
@@ -38,36 +36,90 @@ exit();
 
 	$status_value = '0';
 
+	$domian_lists = $wpdb->get_results(
+	"
+			SELECT dl.*, dc.* ,dh.*,adh.status,adh.*,sdh.*
+			FROM   wp_sm_domain_list dl
+			LEFT JOIN 
+					(
+						SELECT * 
+				        FROM   wp_sm_sitemap_data_history dh
+				        WHERE  id 
+				        IN (
+				            SELECT Max(id) 
+				            FROM   wp_sm_sitemap_data_history dh
+				            GROUP  BY domain_id
+				            )
+			        )dh 
+			ON dl.id = dh.domain_id
+			LEFT JOIN 
+					(
+						SELECT * 
+				        FROM   wp_sm_admin_data_history adh
+				        WHERE  id 
+				        IN (
+				            SELECT Max(id) 
+				            FROM   wp_sm_admin_data_history adh
+				            GROUP  BY domain_id
+				            )
+			        )adh 
+			ON dl.id = adh.domain_id
+			LEFT JOIN 
+					(
+						SELECT * 
+				        FROM   wp_sm_seo_data_history sdh
+				        WHERE  id 
+				        IN (
+				            SELECT Max(id) 
+				            FROM   wp_sm_seo_data_history sdh
+				            GROUP  BY domain_id
+				            )
+			        )sdh 
+			ON dl.id = sdh.domain_id
+			LEFT JOIN wp_sm_domain_scan_status dc ON dl.id = dc.domain_id
+		"
+	);
+	?>
+
+<table>
+	<tr>
+		<th>Project Name</th>
+		<th>Domain URL</th>
+		<th>Sitemap Difference</th>
+		<th>Admin Status</th>
+		<th>Robots Status</th>
+	</tr>
+	<?php
+		foreach ( $domian_lists as $domian_list ) {?>
+		<tr>
+			<td><?php echo $domian_list->project_name; ?></td>
+			<td><?php echo $domian_list->domain_url; ?></td>
+			<td><?php print_r( json_decode( $domian_list->sitemap_diff_data ) );  ?></td>
+			<td><?php echo $domian_list->status; ?></td>
+			<td><?php echo $domian_list->seo_status; ?></td>
+		</tr>
+		<?php }
+	?>
+</table>
+<?php
+	die();
+    include_once ( 'class-WPMail.php' );
+	$mail_fun = new Sitemoniter_WPMail();
+
+    $mail_fun->mail_send();
+    die();
+	$type = $_GET['type'];
+	if( isset( $_GET['no'] ) ){
+		$no_of_records = $_GET['no'];
+	}
+
+
+
 	if( isset( $no_of_records ) ){
 
 		if( $no_of_records > 0 ) {
 
-			$domian_lists = $wpdb->get_results(
-				"
-						SELECT dl.*, dh.cron_id,dh.status,dc.updated_date,dc.* 
-						FROM   wp_sm_domain_list dl 
-						LEFT JOIN 
-								(
-									SELECT dh.* 
-							        FROM   wp_sm_admin_data_history dh
-							        WHERE  id 
-							        IN (
-							            SELECT Max(id) 
-							            FROM   wp_sm_admin_data_history dh 
-							            GROUP  BY domain_id
-							            )
-						        )dh 
-						ON dl.id = dh.domain_id
-						LEFT JOIN wp_sm_domain_scan_status dc ON dl.id = dc.domain_id
 
-
-
-						WHERE dc.robots_scan_date <= DATE(NOW()) - INTERVAL $cron_days DAY     
-						AND dc.roborts_status = 0
-						ORDER BY dc.robots_scan_date ASC
-						LIMIT 0,$no_of_records 
-					"
-			);
 
             if(! empty ( $domian_lists ) ) {
 
