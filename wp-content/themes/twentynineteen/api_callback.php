@@ -44,10 +44,9 @@ function sm_get_domains( $request ) {
 
 		if ( ! empty( $sm_search ) ) {
 
-			/*$sm_search = $wpdb->esc_like('%' . $sm_search . '%');*/
-
-			$sm_query = $wpdb->prepare( "SELECT * FROM %1s WHERE project_name LIKE '%" . $sm_search . "%'  and user_id = %d ORDER BY id DESC LIMIT %d, %d",
+			$sm_query = $wpdb->prepare( "SELECT * FROM %1s WHERE project_name LIKE %s  and user_id = %d ORDER BY id DESC LIMIT %d, %d",
 				$wpdb->prefix . SM_DOMAIN_TABLE,
+				'%' . $wpdb->esc_like($sm_search)  . '%',
 				$sm_user_id,
 				$offset,
 				SM_RECORDS_PER_PAGE );
