@@ -90,7 +90,7 @@
 		<th>Robots Status</th>
 	</tr>
 	<?php
-		foreach ( $domian_lists as $domian_list ) {?>
+            foreach ( $domian_lists as $domian_list ) {?>
 		<tr>
 			<td><?php echo $domian_list->project_name; ?></td>
 			<td><?php echo $domian_list->domain_url; ?></td>

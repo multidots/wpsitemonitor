@@ -90,4 +90,22 @@ $sql = "CREATE TABLE IF NOT EXISTS {$sm_domain_scan_status} (
 	FOREIGN KEY (domain_id) REFERENCES " . $sm_domain_list . "(id) ON DELETE CASCADE
 	) {$charset_collate};";
 dbDelta( $sql );
+
+
+
+$sm_site_critical_history = $wpdb->prefix . 'sm_site_critical_history';
+
+$sql = "CREATE TABLE IF NOT EXISTS {$sm_site_critical_history} (
+	id int(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	domain_id int(20) NOT NULL,
+	cron_id int(20) NOT NULL,
+	url_status_code int(20) NOT NULL DEFAULT 0,
+	url_response_code int(20) NOT NULL,
+	log longtext NULL,
+	created_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	updated_date timestamp NULL DEFAULT CURRENT_TIMESTAMP,	
+	FOREIGN KEY (domain_id) REFERENCES " . $sm_domain_list . "(id) ON DELETE CASCADE,
+	FOREIGN KEY (cron_id) REFERENCES " . $sm_cron_status . "(id) ON DELETE CASCADE
+	) {$charset_collate};";
+dbDelta( $sql );
 exit;
