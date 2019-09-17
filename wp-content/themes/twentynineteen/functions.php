@@ -321,3 +321,7 @@ require get_template_directory() . '/inc/template-tags.php';
  * Customizer additions.
  */
 require get_template_directory() . '/inc/customizer.php';
+
+require_once get_template_directory() . '/register_api_endpoint.php';
+require_once get_template_directory() . '/api_callback.php';
+require_once get_template_directory() . '/constant.php';

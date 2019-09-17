@@ -18,18 +18,39 @@
  * @package WordPress
  */
 
-// ** MySQL settings ** //
-/** The name of the database for WordPress */
-define( 'DB_NAME', 'prj_wpsitemonito' );
 
-/** MySQL database username */
-define( 'DB_USER', 'prj_wpsitemonito' );
+if ( 'wpsitemonitor.md-staging.com' === $_SERVER['HTTP_HOST'] ) {
 
-/** MySQL database password */
-define( 'DB_PASSWORD', 'vQwyLs2etnYZc30S' );
+	// ** MySQL settings ** //
+	/** The name of the database for WordPress */
+	define( 'DB_NAME', 'prj_wpsitemonito' );
+
+	/** MySQL database username */
+	define( 'DB_USER', 'prj_wpsitemonito' );
+
+	/** MySQL database password */
+	define( 'DB_PASSWORD', 'vQwyLs2etnYZc30S' );
+
+	define( 'DB_HOST', '172.104.166.158' );
+
+} else {
+
+	/** The name of the database for WordPress */
+	define( 'DB_NAME', 'sitemap_wp' );
+
+	/** MySQL database username */
+	define( 'DB_USER', 'root' );
+
+	/** MySQL database password */
+	define( 'DB_PASSWORD', 'root' );
+
+	define( 'DB_HOST', 'localhost' );
+
+}
+
 
 /** MySQL hostname */
-define( 'DB_HOST', '172.104.166.158' );
+
 
 /** Database Charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
@@ -54,6 +75,9 @@ define('AUTH_SALT',        'vfZu9akgNKF/WaazEDu4nOpi6o2n98s6DLHdmJKgYGtA3tIr4wmn
 define('SECURE_AUTH_SALT', 'Bda9JjRvjiDvZCl8W/Vlypcwi6SgN7fdW1XTkhWT772oyYMOV5X8F0EhYNmXIC8VMn4XVqwWj6Zm3Rc9wDZwVg==');
 define('LOGGED_IN_SALT',   'UR/oV6VkfMdERhjNR49faE/qw8j5SFUR+72vCZ47KFH21dJdS1ndI6au4VArQ0B50jlQpBJdcMPIDm/V4uyTlg==');
 define('NONCE_SALT',       '/8qz++y0QWurZw6mGLiIFgAyhQx4oa6cNy9OajeKSOXqBrVi7Y0B6RwKCsEHY6Dr9p/yRo8tsuUIRKvtax355A==');
+
+define('JWT_AUTH_SECRET_KEY', '_F]q&BnR~2S+k2~$4tzp*l:yoiX=dCs3<^JcPvcB|_<a+W {)fnR{.?5~WpW1USW');
+define('JWT_AUTH_CORS_ENABLE', true);
 
 /**
  * WordPress Database Table prefix.
