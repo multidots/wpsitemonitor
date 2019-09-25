@@ -14,7 +14,7 @@ class MD_SM_API_Register_Controller extends WP_REST_Controller {
 		register_rest_route(
 			'md-site-monitor', '/login/',
 			array(
-				'methods'  => 'POST',
+				'methods'  => WP_REST_Server::EDITABLE,
 				'callback' => 'sm_login',
 			)
 		);
@@ -25,20 +25,77 @@ class MD_SM_API_Register_Controller extends WP_REST_Controller {
 		register_rest_route(
 			'md-site-monitor', '/get_domains',
 			array(
-				'methods'             => 'GET',
+				'methods'             => WP_REST_Server::READABLE,
 				'callback'            => 'sm_get_domains',
 				'permission_callback' => function ( WP_REST_Request $request ) {
-					$api_headers      = $request->get_headers();
-					$auth             = ! empty( $api_headers['authorization'][0] ) ? $api_headers['authorization'][0] : '';
-					$logged_user_data =  get_user_data_using_auth( $auth );
-					$error            = ! empty( $logged_user_data->error ) ? false : true;
-					if ( true === $error ) {
-						return true;
-					}
-					return false;
+					return $this->api_authorization_validation( $request );
 				},
 			)
 		);
+
+		/**
+		 *  Register API FOR THE ADDING A PROJECT
+		 */
+		register_rest_route(
+			'md-site-monitor', '/add_project',
+			array(
+				'methods'             => WP_REST_Server::EDITABLE,
+				'callback'            => 'sm_add_project',
+				'args'                => array(
+					'sm_project_name' => array(
+						'validate_callback' => function ( $param, $request, $key ) {
+							return empty( $param );
+						},
+					),
+					'sm_domain_url'   => array(
+						'validate_callback' => function ( $param, $request, $key ) {
+							return empty( $param );
+						},
+					),
+				),
+				'permission_callback' => function ( WP_REST_Request $request ) {
+					return $this->api_authorization_validation( $request );
+				},
+			)
+		);
+
+		/**
+		 *  Register API FOR THE ADDING A PROJECT
+		 */
+		register_rest_route(
+			'md-site-monitor', '/delete_projects',
+			array(
+				'methods'             => WP_REST_Server::DELETABLE,
+				'callback'            => 'sm_delete_projects',
+				'args'                => array(
+					'sm_project_name' => array(
+						'validate_callback' => function ( $param, $request, $key ) {
+							return empty( $param );
+						},
+					),
+					'sm_domain_url'   => array(
+						'validate_callback' => function ( $param, $request, $key ) {
+							return empty( $param );
+						},
+					),
+				),
+				'permission_callback' => function ( WP_REST_Request $request ) {
+					return $this->api_authorization_validation( $request );
+				},
+			)
+		);
+	}
+
+	public function api_authorization_validation( $request ) {
+		$api_headers      = $request->get_headers();
+		$auth             = ! empty( $api_headers['authorization'][0] ) ? $api_headers['authorization'][0] : '';
+		$logged_user_data = get_user_data_using_auth( $auth );
+		$error            = ! empty( $logged_user_data->error ) ? false : true;
+		if ( true === $error ) {
+			return true;
+		}
+
+		return false;
 	}
 }
 
