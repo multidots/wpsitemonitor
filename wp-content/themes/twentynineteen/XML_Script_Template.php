@@ -17,7 +17,7 @@
 	$_posts = wp_cache_get( $cache_key );
 
 	if ( false === $_posts ) {
-		$_posts = $wpdb->get_col( $wpdb->prepare("SELECT count(*) FROM %1s INNER JOIN %2s domain_scan ON domain_scan.domain_id = %1s.id WHERE domain_scan.roborts_status=%3s", $domain_tbl_name, $sm_domain_scan_status, $domain_tbl_name, $status_value ) ); // db call ok; OK
+            $_posts = $wpdb->get_col( $wpdb->prepare("SELECT count(*) FROM %1s INNER JOIN %2s domain_scan ON domain_scan.domain_id = %1s.id WHERE domain_scan.roborts_status=%3s", $domain_tbl_name, $sm_domain_scan_status, $domain_tbl_name, $status_value ) ); // db call ok; OK
 		wp_cache_set( $cache_key, $_posts );
 	}
 

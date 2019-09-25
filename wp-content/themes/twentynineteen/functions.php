@@ -325,3 +325,16 @@ require get_template_directory() . '/inc/customizer.php';
 require_once get_template_directory() . '/register_api_endpoint.php';
 require_once get_template_directory() . '/api_callback.php';
 require_once get_template_directory() . '/constant.php';
+
+
+function wpdocs_theme_name_scripts() {
+    //wp_enqueue_script( 'tabletocsv', get_template_directory_uri() . '/js/jquery.tabletocsv.js', array(), '1.0.0', true );
+    wp_enqueue_script( 'jQuery', get_template_directory_uri() . '/js/jquery.min.js', array(), '1.0.0', true );
+    wp_enqueue_script( 'pdfmake', get_template_directory_uri() . '/js/pdfmake.min.js', array(), '1.0.0', true );
+    wp_enqueue_script( 'html2canvas', get_template_directory_uri() . '/js/html2canvas.min.js', array(), '1.0.0', true );
+    wp_enqueue_script( 'custom', get_template_directory_uri() . '/js/jquery.custom.js', array(), '1.0.0', true );
+
+    wp_enqueue_style( 'custom', get_template_directory_uri() . '/css/custom_style.css' );
+
+}
+add_action( 'wp_enqueue_scripts', 'wpdocs_theme_name_scripts' );

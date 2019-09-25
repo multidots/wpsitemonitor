@@ -1,27 +1,9 @@
-
-<style>
-	table {
-		font-family: arial, sans-serif;
-		border-collapse: collapse;
-		width: 100%;
-	}
-
-	td, th {
-		border: 1px solid #dddddd;
-		text-align: left;
-		padding: 8px;
-	}
-
-	tr:nth-child(even) {
-		background-color: #dddddd;
-	}
-</style>
-
 <?php
+    /* Template Name: Cron Argument Site Template */
 
-/* Template Name: Cron Argument Site Template */
+    die();
 
-	global  $wpdb;
+    global  $wpdb;
 
 	$cron_days = 7;
 
@@ -81,26 +63,33 @@
 	);
 	?>
 
-<table>
-	<tr>
-		<th>Project Name</th>
-		<th>Domain URL</th>
-		<th>Sitemap Difference</th>
-		<th>Admin Status</th>
-		<th>Robots Status</th>
-	</tr>
-	<?php
-            foreach ( $domian_lists as $domian_list ) {?>
-		<tr>
-			<td><?php echo $domian_list->project_name; ?></td>
-			<td><?php echo $domian_list->domain_url; ?></td>
-			<td><?php print_r( json_decode( $domian_list->sitemap_diff_data ) );  ?></td>
-			<td><?php echo $domian_list->status; ?></td>
-			<td><?php echo $domian_list->seo_status; ?></td>
-		</tr>
-		<?php }
-	?>
+
+<table style="width:100%">
+    <?php foreach ( $domian_lists as $domian_list ) {?>
+        <tr>
+            <th>Project Name:</th>
+            <td><?php echo $domian_list->project_name; ?></td>
+        </tr>
+        <tr>
+            <th>Domain URL</th>
+            <td><?php echo $domian_list->domain_url; ?></td>
+        </tr>
+        <tr>
+            <th>Sitemap Difference</th>
+            <td><?php print_r( json_decode( $domian_list->sitemap_diff_data ) );  ?></td>
+        </tr>
+        <tr>
+            <th>Admin Status</th>
+            <td><?php echo $domian_list->status; ?></td>
+        </tr>
+        <tr>
+            <th>Robots Status</th>
+            <td><?php echo $domian_list->seo_status; ?></td>
+        </tr>
+
+    <?php die();} ?>
 </table>
+
 <?php
 	die();
     include_once ( 'class-WPMail.php' );

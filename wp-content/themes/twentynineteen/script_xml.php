@@ -51,7 +51,7 @@
                             ON dl.id = dh.domain_id
                             LEFT JOIN wp_sm_domain_scan_status dc ON dl.id = dc.domain_id
                             WHERE dc.sitemap_scan_date <= DATE(NOW()) - INTERVAL $cron_days DAY     
-                            AND dc.sitemap_status = 0
+                            AND dc.sitemap_status = 1
                             ORDER BY dc.sitemap_scan_date ASC
                             LIMIT 0,$no_of_records
                         "
@@ -199,7 +199,7 @@
 
 
 						WHERE dc.adminurl_scan_date <= DATE(NOW()) - INTERVAL $cron_days DAY     
-						AND dc.admin_status = 0
+						AND dc.admin_status = 1
 						ORDER BY dc.adminurl_scan_date ASC
 						LIMIT 0,$no_of_records 
 					"
@@ -284,7 +284,7 @@
 
 
 						WHERE dc.robots_scan_date <= DATE(NOW()) - INTERVAL $cron_days DAY     
-						AND dc.roborts_status = 0
+						AND dc.roborts_status = 1
 						ORDER BY dc.robots_scan_date ASC
 						LIMIT 0,$no_of_records 
 					"
@@ -348,25 +348,25 @@
 				if( $no_of_records > 0 ) {
 					$domian_lists = $wpdb->get_results(
 						"
-			SELECT dl.*,dh.*,dc.*
-			FROM   wp_sm_domain_list dl 
-			LEFT JOIN 
-					(
-						SELECT dh.* 
-				        FROM   wp_sm_site_critical_history dh
-				        WHERE  id 
-				        IN (
-				            SELECT Max(id) 
-				            FROM   wp_sm_site_critical_history dh 
-				            GROUP  BY domain_id
-				            )
-			        )dh 
-			ON dl.id = dh.domain_id
-			LEFT JOIN wp_sm_domain_scan_status dc ON dl.id = dc.domain_id
-			WHERE dc.site_scan_status <= DATE(NOW()) - INTERVAL $cron_days DAY     
-			AND dc.site_status = 0
-			ORDER BY dc.site_scan_status ASC
-			LIMIT 0,$no_of_records
+                        SELECT dl.*,dh.*,dc.*
+                        FROM   wp_sm_domain_list dl 
+                        LEFT JOIN 
+                                (
+                                    SELECT dh.* 
+                                    FROM   wp_sm_site_critical_history dh
+                                    WHERE  id 
+                                    IN (
+                                        SELECT Max(id) 
+                                        FROM   wp_sm_site_critical_history dh 
+                                        GROUP  BY domain_id
+                                        )
+                                )dh 
+                        ON dl.id = dh.domain_id
+                        LEFT JOIN wp_sm_domain_scan_status dc ON dl.id = dc.domain_id
+                        WHERE dc.site_scan_status <= DATE(NOW()) - INTERVAL $cron_days DAY     
+                        AND dc.site_status = 1
+                        ORDER BY dc.site_scan_status ASC
+                        LIMIT 0,$no_of_records
 		"
 					);
 					if(! empty ( $domian_lists ) ) {
