@@ -65,11 +65,13 @@
                             $url_list_result = array();
 
                             //Update data array
-                            $domain_id = $domian_list->id;
+                            $domain_id = $domian_list->domain_id;
 
                             //Insert Query
                             $last_insert_cron_id = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_name`, `status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_cron_status_tbl_name, $domain_id, 'sitemap_xml', '0', current_time( 'mysql', 1 ) ) );       // db call ok; OK
                             $last_insert_cron_id = $wpdb->insert_id;
+
+
 
                             //Check first time came or not
                             if ( empty( $domian_list->sitemap_xml_data ) ) {
@@ -210,7 +212,7 @@
                         foreach ( $domian_lists as $domian_list ) {
 
                             //Update data array
-                            $domain_id = $domian_list->id;
+                            $domain_id = $domian_list->domain_id;
 
                             //Insert Query
                             $last_insert_cron_id = $wpdb->query( $wpdb->prepare ("INSERT INTO %1s (`domain_id`, `cron_name`, `status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_cron_status_tbl_name, $domain_id, 'admin_url', '0', current_time( 'mysql', 1 ) ) );       // db call ok; OK
@@ -295,7 +297,7 @@
                         foreach ( $domian_lists as $domian_list ) {
 
                             //Update data array
-                            $domain_id = $domian_list->id;
+                            $domain_id = $domian_list->domain_id;
 
                             //Insert Query
                             $last_insert_cron_id = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_name`, `status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_cron_status_tbl_name, $domain_id, 'robots_url', '0', current_time( 'mysql', 1 ) ) );       // db call ok; OK

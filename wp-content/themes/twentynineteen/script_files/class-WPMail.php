@@ -16,8 +16,7 @@ class Sitemoniter_WPMail
         parent::__construct( $args );*/
     }
 
-    public function mail_send($to , $subject, $body) {
-
+    public function mail_send ( $to , $subject, $body ) {
         $headers = array('Content-Type: text/html; charset=UTF-8');
         wp_mail( $to, $subject, $body, $headers );
     }
@@ -40,5 +39,11 @@ class Sitemoniter_WPMail
         }
 
         return $output;
+    }
+
+    public function addSiteTemplate( $string ) {
+
+        include_once('add_site_mail_template.php');
+
     }
 }

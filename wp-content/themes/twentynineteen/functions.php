@@ -325,10 +325,10 @@ require get_template_directory() . '/inc/customizer.php';
 require_once get_template_directory() . '/register_api_endpoint.php';
 require_once get_template_directory() . '/api_callback.php';
 require_once get_template_directory() . '/constant.php';
+require_once get_template_directory() . '/script_files/class-WPMail.php';
 
 
 function wpdocs_theme_name_scripts() {
-    //wp_enqueue_script( 'tabletocsv', get_template_directory_uri() . '/js/jquery.tabletocsv.js', array(), '1.0.0', true );
     wp_enqueue_script( 'jQuery', get_template_directory_uri() . '/js/jquery.min.js', array(), '1.0.0', true );
     wp_enqueue_script( 'pdfmake', get_template_directory_uri() . '/js/pdfmake.min.js', array(), '1.0.0', true );
     wp_enqueue_script( 'html2canvas', get_template_directory_uri() . '/js/html2canvas.min.js', array(), '1.0.0', true );
@@ -338,3 +338,52 @@ function wpdocs_theme_name_scripts() {
 
 }
 add_action( 'wp_enqueue_scripts', 'wpdocs_theme_name_scripts' );
+
+//add_action( 'init', 'add_site_mail' );
+function add_site_mail( $siteData ) {
+    global $wpdb;
+    $siteData = [
+        'sm_project_name' => 'ghcgh',
+        'sm_domain_url' => 'fghfg',
+        'sm_sitemap_url' => 'dfghdfg',
+        'sm_sitemap_option' => 1,
+        'sm_robots_option' => 1,
+        'sm_admin_option' => 1,
+        'user_id' => 1,
+    ];
+    $siteData = (object) $siteData;
+    if (!is_object($siteData)) {
+        return false;
+    }
+
+    if( !isset( $siteData->sm_project_name ) ){ return false; }
+    if( !isset( $siteData->sm_domain_url ) ){ return false; }
+    if( !isset( $siteData->sm_sitemap_url ) ){ return false; }
+    if( !isset( $siteData->sm_sitemap_option ) ){ return false; }
+    if( !isset( $siteData->sm_robots_option ) ){ return false; }
+    if( !isset( $siteData->sm_admin_option ) ){ return false; }
+    if( !isset( $siteData->user_id ) ){ return false; }
+
+    $user_id = $siteData->user_id;
+
+    //Select Query
+    $allDomainList = $wpdb->get_results( $wpdb->prepare("
+            SELECT dl.*,users.*
+            FROM wp_sm_domain_list dl 
+            INNER JOIN  wp_users users
+            ON users.id = dl.user_id
+            WHERE dl.user_id = %s 
+            ORDER BY dl.id DESC
+            LIMIT 0,1", $user_id )
+    );
+    foreach ($allDomainList as $item) {
+        $user_login = $item->user_login;
+        $user_email = $item->user_email;
+        $domain_url = $item->domain_url;
+    }
+    $mailObjet = new Sitemoniter_WPMail ();
+    $body = $mailObjet->addSiteTemplate ( $domain_url );
+    echo "<pre>";
+    print_r ($body);die();
+    $mailObjet->mail_send( $user_email,'A new site was added to your account. We will now monitor '.$domain_url, $body);
+}
