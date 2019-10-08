@@ -196,7 +196,7 @@ class ProjectsViews extends React.Component {
             let project_id = tableMeta.rowData[0];
 
             project_id = process.env.NODE_ENV === 'development' ? parseInt(project_id)  : (parseInt(project_id) + 1);
-            const project_link = "/project/"+project_id+"/";
+            const project_link = "/projects/"+project_id+"/";
             return (
               <Link to={{pathname: project_link}}>{value}</Link>
                 );

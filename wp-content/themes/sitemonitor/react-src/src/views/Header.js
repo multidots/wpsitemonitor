@@ -65,7 +65,7 @@ class HeaderViews extends Component {
                       <Link className={'MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit'} to={{pathname: '/'}}>Home</Link>
                         {isAlreadyAuthenticated ?
                             <div>
-                            <Link className={'MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit'} to={{pathname: '/project'}}>Projects</Link>
+                            <Link className={'MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit'} to={{pathname: '/projects'}}>Projects</Link>
                             <Button onClick={this.handleLogout.bind(this)} color="inherit">Logout</Button>
                             </div>
                             : (

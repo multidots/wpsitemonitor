@@ -82,7 +82,7 @@ class LoginViews extends React.Component {
           } );
         } else {
           localStorage.setItem( 'token', data.token );
-          window.location.href = '/project';
+          window.location.href = '/projects';
 				}
 			} );
 

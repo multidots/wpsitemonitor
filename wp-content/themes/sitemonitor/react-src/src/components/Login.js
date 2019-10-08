@@ -10,7 +10,7 @@ class Login extends React.Component {
 		return (
       <Layout>
         <div>
-          {isAlreadyAuthenticated ? <Redirect to={{ pathname: '/project' }}/> : (
+          {isAlreadyAuthenticated ? <Redirect to={{ pathname: '/projects' }}/> : (
             <LoginViews />
           )}
         </div>

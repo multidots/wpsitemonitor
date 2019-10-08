@@ -108,7 +108,7 @@ class ProjectDetailSidebar extends React.Component {
   }
 
   Sidebar(){
-    const overview_link = "/project/" + this.props.project_id + "/";
+    const overview_link = "/projects/" + this.props.project_id + "/";
     const classes = useStyles();
     return(
       <List
