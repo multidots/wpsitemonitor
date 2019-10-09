@@ -116,6 +116,11 @@ class ProjectsViews extends React.Component {
   handleDeleteProject = (selectedRows,displayData) => {
     this.setState( { isLoading: true, data: [['Loading Data...']] } );
 
+    console.table(selectedRows);
+    console.table(displayData);
+
+    return true;
+
     const deleteData = selectedRows.data.map(function(data, idx) {
       return displayData[data.index].data[0];
     });
@@ -192,10 +197,8 @@ class ProjectsViews extends React.Component {
           sort: false,
           filter: false,
           customBodyRender: (value, tableMeta, updateValue) => {
-
             let project_id = tableMeta.rowData[0];
-
-            project_id = process.env.NODE_ENV === 'development' ? parseInt(project_id)  : (parseInt(project_id) + 1);
+            //project_id = process.env.NODE_ENV === 'development' ? parseInt(project_id)  : (parseInt(project_id) + 1);
             const project_link = "/projects/"+project_id+"/";
             return (
               <Link to={{pathname: project_link}}>{value}</Link>
