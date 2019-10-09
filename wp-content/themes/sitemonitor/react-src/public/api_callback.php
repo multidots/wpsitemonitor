@@ -1,5 +1,7 @@
 <?php
+
 use \Firebase\JWT\JWT;
+
 /**
  * Login API Callback Function
  *
@@ -235,4 +237,88 @@ function sm_get_domains( $request ) {
 	$response        = new WP_REST_Response( $api_responce, array( 'status' => 200 ) );
 
 	return $response;
+}
+
+function sm_project_report( $request ) {
+
+	global $wpdb;
+	$auth = validate_token();
+
+	if ( ! isset( $auth['status'] ) || empty( $auth['status'] ) || false === $auth['status'] ) {
+		return new WP_Error( 'invalid_user', esc_html__( 'User ID not found', 'md_site_monitor' ), array( 'status' => 403 ) );
+	}
+
+	$sm_user_id = $auth['uid'];
+	$project_id = filter_input( INPUT_GET, 'project_id', FILTER_SANITIZE_NUMBER_INT );
+	$type       = filter_input( INPUT_GET, 'type', FILTER_SANITIZE_STRING );
+
+	$api_responce = array();
+
+	switch ( $type ) {
+		case 'sitemap';
+			$api_responce = sitemap_report( $project_id );
+			break;
+		case 'admin';
+			admin_report( $project_id );
+			break;
+		case 'robots';
+			robots_report( $project_id );
+			break;
+		case 'all';
+			$api_responce = get_all_type_report($project_id);
+			break;
+	}
+
+	$response = new WP_REST_Response( $api_responce, array( 'status' => 200 ) );
+
+	return $response;
+}
+
+function sitemap_report( $project_id ) {
+
+	global $wpdb;
+	$sm_sitemap_data_history = $wpdb->prefix . SM_SITEMAP_HISTORY_TABLE;
+
+	$sitemap_data = $wpdb->get_results( $wpdb->prepare( "			
+					SELECT * FROM %1s 
+					WHERE domain_id = %d AND created_date >= DATE(NOW()) - INTERVAL 7 DAY
+					ORDER BY id DESC",
+		$sm_sitemap_data_history,
+		$project_id ), ARRAY_A );
+
+	$sitemap_filter_data = array();
+
+	foreach ( $sitemap_data as $key => $data ) {
+		$sitemap_filter_data[ $key ]['id']                = esc_html( $data['id'] );
+		$sitemap_filter_data[ $key ]['domain_id']         = esc_html( $data['domain_id'] );
+		$sitemap_filter_data[ $key ]['cron_id']           = esc_html( $data['cron_id'] );
+		$sitemap_filter_data[ $key ]['sitemap_diff_data'] = ! empty( $data['sitemap_diff_data'] ) ? json_decode( $data['sitemap_diff_data'] ) : array();
+		$sitemap_filter_data[ $key ]['date']              = ! empty( $data['created_date'] ) ? esc_html( date( 'd-m-Y', strtotime( $data['created_date'] ) ) ) : '';
+	}
+
+	return $sitemap_filter_data;
+}
+
+function get_all_type_report( $project_id ) {
+
+	global $wpdb;
+	$sm_sitemap_data_history = $wpdb->prefix . SM_SITEMAP_HISTORY_TABLE;
+	$sitemap_data = $wpdb->get_results( $wpdb->prepare( "			
+					SELECT * FROM %1s 
+					WHERE domain_id = %d AND created_date >= DATE(NOW()) - INTERVAL 7 DAY
+					ORDER BY id DESC",
+		$sm_sitemap_data_history,
+		$project_id ), ARRAY_A );
+
+	$sitemap_filter_data = array();
+
+	foreach ( $sitemap_data as $key => $data ) {
+		$sitemap_filter_data[ $key ]['id']                = esc_html( $data['id'] );
+		$sitemap_filter_data[ $key ]['domain_id']         = esc_html( $data['domain_id'] );
+		$sitemap_filter_data[ $key ]['cron_id']           = esc_html( $data['cron_id'] );
+		$sitemap_filter_data[ $key ]['sitemap_diff_data'] = ! empty( $data['sitemap_diff_data'] ) ? json_decode( $data['sitemap_diff_data'] ) : array();
+		$sitemap_filter_data[ $key ]['date']              = ! empty( $data['created_date'] ) ? esc_html( date( 'd-m-Y', strtotime( $data['created_date'] ) ) ) : '';
+	}
+
+	return $sitemap_filter_data;
 }

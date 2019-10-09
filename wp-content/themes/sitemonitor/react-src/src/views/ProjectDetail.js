@@ -3,16 +3,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Container from '@material-ui/core/Container';
-import { Link } from 'react-router-dom';
 
-import ProjectDetailSidebar from './ProjectDetailSidebar'
-
+import ProjectDetailSidebar from './ProjectDetailSidebar';
+import SiteMapReport from './SiteMapReport';
 
 const useStyles = makeStyles( theme => ({
-  spacing:{
+  spacing: {
     marginBottom: theme.spacing( 3 ),
   },
   toolbar: {
@@ -89,7 +87,7 @@ const useStyles = makeStyles( theme => ({
     backgroundColor: theme.palette.background.paper,
   },
   nested: {
-    paddingLeft: theme.spacing(4),
+    paddingLeft: theme.spacing( 4 ),
   },
 }) );
 
@@ -97,72 +95,98 @@ class ProjectDetailViews extends React.Component {
 
   constructor( props ) {
     super( props );
+    this.state = {
+      reportData: [],
+    };
     this.ProjectFeaturesBox = this.ProjectFeaturesBox.bind( this );
   }
 
-  ProjectFeaturesBox(props) {
+  componentDidMount( props ) {
+    let domain_id = this.props.data.match.params.id;
+    let type = this.props.data.match.params.status;
+    const token = localStorage.getItem( 'token' );
+    fetch( `/wp-json/md-site-monitor/project_report?project_id=${domain_id}&type=all`, {
+        method: 'GET',
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      }
+    )
+      .then( response => response.json() )
+      .then( data => {
+        this.setState( {
+          reportData: data,
+        } );
+
+      } );
+  }
+
+  ProjectFeaturesBox( props ) {
     const classes = useStyles();
-    const overview_link = this.props.data.match.params.id;
-    const featuredPosts = [
-      {
-        title: 'Sitemap',
-        date: 'Nov 12',
-        link: overview_link + "/sitemap",
-        link_slug: 'sitemap',
-        description:
-          'This is a wider card with supporting text below as a natural lead-in to additional content.',
-      },
-      {
-        title: 'Admin',
-        date: 'Nov 11',
-        link: overview_link + "/admin",
-        link_slug: 'admin',
-        description:
-          'This is a wider card with supporting text below as a natural lead-in to additional content.',
-      },{
-        title: 'Robots',
-        date: 'Nov 12',
-        link: overview_link + "/robots",
-        link_slug: 'robots',
-        description:
-          'This is a wider card with supporting text below as a natural lead-in to additional content.',
-      },
-    ];
-
     return (
-        <Grid container item xs={12} spacing={6} >
-            <Grid item xs={2}>
-              <ProjectDetailSidebar project_id={this.props.data.match.params.id}/>
-            </Grid>
-            <Grid container item xs={10} spacing={6}>
+      <Grid container item xs={12} md={12} spacing={1}>
 
-              {featuredPosts.map(post => (
-                <Grid item key={post.title} xs={4} md={4}>
-                  <CardActionArea component="a" href={post.link_slug}>
-                    <Card className={classes.card}>
-                      <div className={classes.cardDetails}>
-                        <CardContent>
-                          <Link to={post.link_slug}>{post.title}</Link>
-
-                          <Typography variant="subtitle1" paragraph>
-                            {post.description}
-                          </Typography>
-
-                        </CardContent>
-                      </div>
-                    </Card>
-                  </CardActionArea>
-                </Grid>
-              ))}
-            </Grid>
+        <Grid item xs={2} md={2}>
+          <ProjectDetailSidebar project_id={this.props.data.match.params.id}/>
         </Grid>
+
+        <Grid item xs={7} md={7}>
+          <Card className={classes.card}>
+            <div className={classes.cardDetails}>
+              <CardContent>
+                <Typography variant="h5" paragraph>
+                  Sitemap History
+                </Typography>
+                <Typography variant="subtitle1" paragraph>
+                  <SiteMapReport reportData={this.state.reportData}/>
+                </Typography>
+
+              </CardContent>
+            </div>
+          </Card>
+        </Grid>
+
+        <Grid container item xs={3} md={3}>
+
+          <Grid item xs={12} md={12}>
+            <Card className={classes.card}>
+              <div className={classes.cardDetails}>
+                <CardContent>
+                  <Typography variant="h5" paragraph>
+                    Wp-Admin URL
+                  </Typography>
+                  <Typography paragraph>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                  </Typography>
+                </CardContent>
+              </div>
+            </Card>
+          </Grid>
+
+          <Grid item xs={12} md={12}>
+            <Card className={classes.card}>
+              <div className={classes.cardDetails}>
+                <CardContent>
+                  <Typography variant="h5" paragraph>
+                   Robots
+                  </Typography>
+                  <Typography paragraph>
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                  </Typography>
+                </CardContent>
+              </div>
+            </Card>
+          </Grid>
+
+        </Grid>
+      </Grid>
     );
   }
 
   render() {
     return (
       <Container maxWidth="xl">
-      <this.ProjectFeaturesBox/>
+        <this.ProjectFeaturesBox/>
       </Container>
     );
   }

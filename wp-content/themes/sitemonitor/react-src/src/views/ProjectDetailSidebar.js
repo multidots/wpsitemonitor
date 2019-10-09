@@ -10,6 +10,7 @@ import LanguageIcon from '@material-ui/icons/Language';
 import SettingsIcon from '@material-ui/icons/Settings';
 import DescriptionIcon from '@material-ui/icons/Description';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { Link, Redirect } from 'react-router-dom';
 
 
 const useStyles = makeStyles( theme => ({
@@ -116,26 +117,26 @@ class ProjectDetailSidebar extends React.Component {
         aria-labelledby="nested-list-subheader"
         className={classes.root}
       >
-        <ListItem button className={classes.spacing} component="a" href={overview_link}>
+        <ListItem button className={classes.spacing} component={Link} to={{pathname: overview_link}}>
           <ListItemIcon>
             <DashboardIcon />
           </ListItemIcon>
           <ListItemText primary="Overview" />
         </ListItem>
 
-        <ListItem button component="a" href={overview_link + "sitemap"}>
+        <ListItem button component={Link} to={{pathname: overview_link + "sitemap"}}>
           <ListItemIcon>
             <DescriptionIcon />
           </ListItemIcon>
           <ListItemText primary="Sitemap" />
         </ListItem>
-        <ListItem button component="a" href={overview_link + "admin"}>
+        <ListItem button component={Link} to={{pathname: overview_link + "admin"}}>
           <ListItemIcon>
             <SupervisorAccountIcon />
           </ListItemIcon>
           <ListItemText primary="Admin" />
         </ListItem>
-        <ListItem button className={classes.spacing} component="a" href={overview_link + "robots"}>
+        <ListItem button className={classes.spacing} component={Link} to={{pathname: overview_link + "robots"}}>
           <ListItemIcon>
             <LanguageIcon />
           </ListItemIcon>
