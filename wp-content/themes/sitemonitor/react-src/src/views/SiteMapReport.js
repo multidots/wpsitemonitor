@@ -23,7 +23,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function SiteMapReport(props) {
-
   const reportData = props.reportData;
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -37,7 +36,7 @@ export default function SiteMapReport(props) {
       { Object.keys(reportData).length == 0 ?
 
         <Typography>
-          No any reports found.
+          Sitemap reports not generated yet.
         </Typography> :
 
           reportData.map(Data => (

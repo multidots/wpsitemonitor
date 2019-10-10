@@ -281,7 +281,7 @@ function sitemap_report( $project_id ) {
 
 	$sitemap_data = $wpdb->get_results( $wpdb->prepare( "			
 					SELECT * FROM %1s 
-					WHERE domain_id = %d AND created_date >= DATE(NOW()) - INTERVAL 7 DAY
+					WHERE domain_id = %d AND created_date >= DATE(NOW()) - INTERVAL 30 DAY
 					ORDER BY id DESC",
 		$sm_sitemap_data_history,
 		$project_id ), ARRAY_A );
@@ -289,11 +289,11 @@ function sitemap_report( $project_id ) {
 	$sitemap_filter_data = array();
 
 	foreach ( $sitemap_data as $key => $data ) {
-		$sitemap_filter_data[ $key ]['id']                = esc_html( $data['id'] );
-		$sitemap_filter_data[ $key ]['domain_id']         = esc_html( $data['domain_id'] );
-		$sitemap_filter_data[ $key ]['cron_id']           = esc_html( $data['cron_id'] );
-		$sitemap_filter_data[ $key ]['sitemap_diff_data'] = ! empty( $data['sitemap_diff_data'] ) ? json_decode( $data['sitemap_diff_data'] ) : array();
-		$sitemap_filter_data[ $key ]['date']              = ! empty( $data['created_date'] ) ? esc_html( date( 'd-m-Y', strtotime( $data['created_date'] ) ) ) : '';
+		$sitemap_filter_data['sitemap'][ $key ]['id']                = esc_html( $data['id'] );
+		$sitemap_filter_data['sitemap'][ $key ]['domain_id']         = esc_html( $data['domain_id'] );
+		$sitemap_filter_data['sitemap'][ $key ]['cron_id']           = esc_html( $data['cron_id'] );
+		$sitemap_filter_data['sitemap'][ $key ]['sitemap_diff_data'] = ! empty( $data['sitemap_diff_data'] ) ? json_decode( $data['sitemap_diff_data'] ) : array();
+		$sitemap_filter_data['sitemap'][ $key ]['date']              = ! empty( $data['created_date'] ) ? esc_html( date( 'd-m-Y', strtotime( $data['created_date'] ) ) ) : '';
 	}
 
 	return $sitemap_filter_data;
@@ -313,11 +313,36 @@ function get_all_type_report( $project_id ) {
 	$sitemap_filter_data = array();
 
 	foreach ( $sitemap_data as $key => $data ) {
-		$sitemap_filter_data[ $key ]['id']                = esc_html( $data['id'] );
-		$sitemap_filter_data[ $key ]['domain_id']         = esc_html( $data['domain_id'] );
-		$sitemap_filter_data[ $key ]['cron_id']           = esc_html( $data['cron_id'] );
-		$sitemap_filter_data[ $key ]['sitemap_diff_data'] = ! empty( $data['sitemap_diff_data'] ) ? json_decode( $data['sitemap_diff_data'] ) : array();
-		$sitemap_filter_data[ $key ]['date']              = ! empty( $data['created_date'] ) ? esc_html( date( 'd-m-Y', strtotime( $data['created_date'] ) ) ) : '';
+		$sitemap_filter_data['sitemap'][ $key ]['id']                = esc_html( $data['id'] );
+		$sitemap_filter_data['sitemap'][ $key ]['domain_id']         = esc_html( $data['domain_id'] );
+		$sitemap_filter_data['sitemap'][ $key ]['cron_id']           = esc_html( $data['cron_id'] );
+		$sitemap_filter_data['sitemap'][ $key ]['sitemap_diff_data'] = ! empty( $data['sitemap_diff_data'] ) ? json_decode( $data['sitemap_diff_data'] ) : array();
+		$sitemap_filter_data['sitemap'][ $key ]['date']              = ! empty( $data['created_date'] ) ? esc_html( date( 'd-m-Y', strtotime( $data['created_date'] ) ) ) : '';
+	}
+
+
+	$sm_admin_data_history = $wpdb->prefix . SM_ADMIN_HISTORY_TABLE;
+	$admin_data = $wpdb->get_row( $wpdb->prepare( "			
+					SELECT * FROM %1s 
+					WHERE domain_id = %d
+					ORDER BY id DESC",
+		$sm_admin_data_history,
+		$project_id ), ARRAY_A );
+
+	if(!empty($admin_data)){
+		$sitemap_filter_data['admin_status'] = 0 ===  absint($admin_data['status']) ? 0 : 1;
+	}
+
+	$sm_seo_data_history = $wpdb->prefix . SM_SEO_DATA_TABLE;
+	$robots_data = $wpdb->get_row( $wpdb->prepare( "			
+					SELECT * FROM %1s 
+					WHERE domain_id = %d
+					ORDER BY id DESC",
+		$sm_seo_data_history,
+		$project_id ), ARRAY_A );
+
+	if(!empty($robots_data)){
+		$sitemap_filter_data['robots_status'] = 0 ===  absint($robots_data['seo_status']) ? 0 : 1;
 	}
 
 	return $sitemap_filter_data;

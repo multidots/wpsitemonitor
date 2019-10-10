@@ -10,7 +10,7 @@ class ProjectDetailViews extends React.Component {
   constructor( props ) {
     super( props );
     this.state = {
-      reportData: [],
+      sitemapData: [],
     };
     this.ProjectStatusBox = this.ProjectStatusBox.bind( this );
   }
@@ -28,22 +28,28 @@ class ProjectDetailViews extends React.Component {
     )
       .then( response => response.json() )
       .then( data => {
-        this.setState( {
-          reportData: data,
-        } );
-
+        if (Object.keys(data).length == 0 || typeof data === 'undefined' || null === data || 403 === data ) {
+          this.setState( {
+            fullReportData: [],
+            sitemapData: [],
+          } );
+        } else {
+          this.setState( {
+            fullReportData: data,
+            sitemapData: data.sitemap,
+          } );
+        }
       } );
   }
 
   ProjectStatusBox( props ) {
-    console.table(this.state.reportData);
     return (
       <Grid container item xs={12} spacing={6}>
         <Grid item xs={2}>
           <ProjectDetailSidebar project_id={this.props.data.match.params.id}/>
         </Grid>
         <Grid container item xs={10} spacing={6}>
-          <SiteMapReport reportData={this.state.reportData}/>
+          <SiteMapReport reportData={this.state.sitemapData}/>
         </Grid>
       </Grid>
     );

@@ -5,6 +5,10 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Container from '@material-ui/core/Container';
+import { Link, Redirect } from 'react-router-dom';
+import Divider from '@material-ui/core/Divider';
+import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
+import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
 
 import ProjectDetailSidebar from './ProjectDetailSidebar';
 import SiteMapReport from './SiteMapReport';
@@ -56,6 +60,14 @@ const useStyles = makeStyles( theme => ({
   mainGrid: {
     marginTop: theme.spacing( 3 ),
   },
+  report_link:{
+    float:"right",
+    margin:"10px 0px"
+  },
+  status_icon:{
+    float:"right",
+    margin:"10px 0px"
+  },
   card: {
     display: 'flex',
   },
@@ -96,7 +108,8 @@ class ProjectDetailViews extends React.Component {
   constructor( props ) {
     super( props );
     this.state = {
-      reportData: [],
+      fullReportData: [],
+      sitemapData: [],
     };
     this.ProjectFeaturesBox = this.ProjectFeaturesBox.bind( this );
   }
@@ -114,17 +127,26 @@ class ProjectDetailViews extends React.Component {
     )
       .then( response => response.json() )
       .then( data => {
-        this.setState( {
-          reportData: data,
-        } );
-
+        if (Object.keys(data).length == 0 || typeof data === 'undefined' || null === data || 403 === data ) {
+          this.setState( {
+            fullReportData: [],
+            sitemapData: [],
+          } );
+        } else {
+          this.setState( {
+            fullReportData: data,
+            sitemapData: data.sitemap,
+          } );
+        }
       } );
   }
 
   ProjectFeaturesBox( props ) {
+
     const classes = useStyles();
+    const sitemap_page = "/projects/" + this.props.data.match.params.id + "/" + "sitemap";
     return (
-      <Grid container item xs={12} md={12} spacing={1}>
+      <Grid container item xs={12} md={12} spacing={3}>
 
         <Grid item xs={2} md={2}>
           <ProjectDetailSidebar project_id={this.props.data.match.params.id}/>
@@ -138,9 +160,11 @@ class ProjectDetailViews extends React.Component {
                   Sitemap History
                 </Typography>
                 <Typography variant="subtitle1" paragraph>
-                  <SiteMapReport reportData={this.state.reportData}/>
+                  <SiteMapReport reportData={this.state.sitemapData}/>
                 </Typography>
+                <Divider />
 
+                <Link className={classes.report_link} to={{pathname: sitemap_page}} >View full report</Link>
               </CardContent>
             </div>
           </Card>
@@ -154,9 +178,14 @@ class ProjectDetailViews extends React.Component {
                 <CardContent>
                   <Typography variant="h5" paragraph>
                     Wp-Admin URL
+                    { 1 === parseInt(this.state.fullReportData.admin_status) ? <CheckCircleRoundedIcon className={classes.status_icon} style={{color: '#43a047'}}/> : (
+                        <CancelRoundedIcon className={classes.status_icon} style={{color: '#D3302F'}}/>
+                    ) }
                   </Typography>
                   <Typography paragraph>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                    { 1 === parseInt(this.state.fullReportData.admin_status) ? "Custom URL set for the admin" : (
+                      "Default URL set for the admin "
+                    ) }
                   </Typography>
                 </CardContent>
               </div>
@@ -169,9 +198,13 @@ class ProjectDetailViews extends React.Component {
                 <CardContent>
                   <Typography variant="h5" paragraph>
                    Robots
+                    { 1 === parseInt(this.state.fullReportData.robots_status) ? <CheckCircleRoundedIcon className={classes.status_icon} style={{color: '#43a047'}}/> : (
+                      <CancelRoundedIcon className={classes.status_icon} style={{color: '#D3302F'}}/> ) }
                   </Typography>
                   <Typography paragraph>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                    { 1 === parseInt(this.state.fullReportData.robots_status) ?   "robots.txt is available on the root."  : (
+                      "robots.txt is not available on the root."
+                    ) }
                   </Typography>
                 </CardContent>
               </div>
