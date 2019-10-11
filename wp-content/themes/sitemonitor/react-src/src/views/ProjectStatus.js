@@ -26,9 +26,15 @@ class ProjectDetailViews extends React.Component {
         }
       }
     )
-      .then( response => response.json() )
+      .then( response => {
+        if(401 === parseInt(response.status)) {
+          localStorage.removeItem('token');
+          window.location.href = '/sign-in';
+        }
+        return response.json()
+      } )
       .then( data => {
-        if (Object.keys(data).length == 0 || typeof data === 'undefined' || null === data || 403 === data ) {
+        if (typeof data === 'undefined' || null === data) {
           this.setState( {
             fullReportData: [],
             sitemapData: [],

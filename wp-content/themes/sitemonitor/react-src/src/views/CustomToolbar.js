@@ -76,6 +76,18 @@ function CustomToolbar() {
     } else if("" === state.sm_domain_url){
       setState( {...state, ['form_error_msg']: "Please Enter Domain URL"} );
       return false;
+    } else if("" !== state.sm_domain_url){
+      let isValidUrl = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
+      if (!isValidUrl.test(state.sm_domain_url)) {
+        setState( {...state, ['form_error_msg']: "Please Enter valid Domain URL"} );
+        return false;
+      }
+      if("" !== state.sm_sitemap_url){
+        if (!isValidUrl.test(state.sm_sitemap_url)) {
+          setState( {...state, ['form_error_msg']: "Please Enter valid Sitemap URL"} );
+          return false;
+        }
+      }
     }
 
     const token = localStorage.getItem( 'token' );
@@ -97,14 +109,14 @@ function CustomToolbar() {
   }
 
   return (
-    <div>
+
       <React.Fragment>
-        <Tooltip title={'Add Project'}>
+        <Tooltip title={'Add Project'} className="add_btn">
           <IconButton onClick={handleClickOpen} >
             <AddIcon/>
           </IconButton>
         </Tooltip>
-      </React.Fragment>
+
       <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
         <form onSubmit={handleLocationSubmit}>
           <AppBar className={classes.appBar}>
@@ -215,7 +227,7 @@ function CustomToolbar() {
 
         </form>
       </Dialog>
-    </div>
+      </React.Fragment>
   );
 
 }

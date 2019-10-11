@@ -93,6 +93,9 @@ const useStyles = makeStyles( theme => ({
     marginTop: theme.spacing( 8 ),
     padding: theme.spacing( 6, 0 ),
   },
+  grid_item: {
+    marginTop: "10px"
+  },
   root: {
     width: '100%',
     maxWidth: 360,
@@ -125,9 +128,15 @@ class ProjectDetailViews extends React.Component {
         }
       }
     )
-      .then( response => response.json() )
+      .then( response => {
+        if(401 === parseInt(response.status)) {
+          localStorage.removeItem('token');
+          window.location.href = '/sign-in';
+        }
+        return response.json()
+      } )
       .then( data => {
-        if (Object.keys(data).length == 0 || typeof data === 'undefined' || null === data || 403 === data ) {
+        if (typeof data === 'undefined' || null === data) {
           this.setState( {
             fullReportData: [],
             sitemapData: [],
@@ -172,7 +181,7 @@ class ProjectDetailViews extends React.Component {
 
         <Grid container item xs={3} md={3}>
 
-          <Grid item xs={12} md={12}>
+          <Grid item xs={12} md={12} >
             <Card className={classes.card}>
               <div className={classes.cardDetails}>
                 <CardContent>
@@ -192,7 +201,7 @@ class ProjectDetailViews extends React.Component {
             </Card>
           </Grid>
 
-          <Grid item xs={12} md={12}>
+          <Grid item xs={12} md={12} className={classes.grid_item} >
             <Card className={classes.card}>
               <div className={classes.cardDetails}>
                 <CardContent>

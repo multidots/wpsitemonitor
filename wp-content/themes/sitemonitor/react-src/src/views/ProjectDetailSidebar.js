@@ -130,18 +130,7 @@ class ProjectDetailSidebar extends React.Component {
           </ListItemIcon>
           <ListItemText primary="Sitemap" />
         </ListItem>
-        <ListItem button component={Link} to={{pathname: overview_link + "admin"}}>
-          <ListItemIcon>
-            <SupervisorAccountIcon />
-          </ListItemIcon>
-          <ListItemText primary="Admin" />
-        </ListItem>
-        <ListItem button className={classes.spacing} component={Link} to={{pathname: overview_link + "robots"}}>
-          <ListItemIcon>
-            <LanguageIcon />
-          </ListItemIcon>
-          <ListItemText primary="Robots" />
-        </ListItem>
+
 
         <ListItem button>
           <ListItemIcon>

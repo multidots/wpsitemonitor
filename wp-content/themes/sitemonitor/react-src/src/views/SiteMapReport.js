@@ -20,6 +20,10 @@ const useStyles = makeStyles(theme => ({
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
   },
+  diff_links: {
+    backgroundColor: "yellow",
+    marginBottom: "5px"
+  }
 }));
 
 export default function SiteMapReport(props) {
@@ -47,12 +51,12 @@ export default function SiteMapReport(props) {
                   aria-controls="panel1bh-content"
                   id={'panel'+ Data.id +'bh-header'}
                 >
-                  <Typography className={classes.heading}>{Data.date}</Typography>
+                  <Typography className={classes.heading}><b>{Data.date}</b></Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails  id={'exp-panel-main-'+ Data.id +'bh-header'}>
                   <Typography>
                     {Data.sitemap_diff_data.map(diff => (
-                      <Typography>{diff}</Typography>
+                      <Typography className={classes.diff_links}>{diff}</Typography>
                     ))}
                   </Typography>
                 </ExpansionPanelDetails>
