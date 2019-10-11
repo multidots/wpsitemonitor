@@ -1,9 +1,9 @@
 <?php
 use \Firebase\JWT\JWT;
 require_once get_template_directory() . '/jwt/vendor/autoload.php';
-require_once get_template_directory() . '/register_api_endpoint.php';
-require_once get_template_directory() . '/api_callback.php';
-require_once get_template_directory() . '/constant.php';
+require_once get_template_directory() . '/api/register_api_endpoint.php';
+require_once get_template_directory() . '/api/api_callback.php';
+require_once get_template_directory() . '/api/constant.php';
 
 /**
  * Validate Authorization for the user

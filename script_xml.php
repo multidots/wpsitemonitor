@@ -1,7 +1,6 @@
 <?php
-
 	/* Template Name: SITE SCRIPT Template */
-
+	include "wp-load.php";
 	global  $wpdb;
 	$type = $_GET['type'];
 	if( isset( $_GET['no'] ) ){

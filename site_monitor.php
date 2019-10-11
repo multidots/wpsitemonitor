@@ -108,4 +108,37 @@ $sql = "CREATE TABLE IF NOT EXISTS {$sm_site_critical_history} (
 	FOREIGN KEY (cron_id) REFERENCES " . $sm_cron_status . "(id) ON DELETE CASCADE
 	) {$charset_collate};";
 dbDelta( $sql );
+
+
+$sm_site_https_history = $wpdb->prefix . 'sm_site_https_history';
+
+$sql = "CREATE TABLE IF NOT EXISTS {$sm_site_https_history} (
+	id int(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	domain_id int(20) NOT NULL,
+	cron_id int(20) NOT NULL,
+	https_status int(20) NOT NULL DEFAULT 0,
+	log longtext NULL,
+	created_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	updated_date timestamp NULL DEFAULT CURRENT_TIMESTAMP,	
+	FOREIGN KEY (domain_id) REFERENCES " . $sm_domain_list . "(id) ON DELETE CASCADE,
+	FOREIGN KEY (cron_id) REFERENCES " . $sm_cron_status . "(id) ON DELETE CASCADE
+	) {$charset_collate};";
+dbDelta( $sql );
+
+
+
+$sm_site_captcha_check_history = $wpdb->prefix . 'sm_site_captcha_check_history';
+
+$sql = "CREATE TABLE IF NOT EXISTS {$sm_site_captcha_check_history} (
+	id int(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	domain_id int(20) NOT NULL,
+	cron_id int(20) NOT NULL,
+	captcha_status int(20) NOT NULL DEFAULT 0,
+	log longtext NULL,
+	created_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	updated_date timestamp NULL DEFAULT CURRENT_TIMESTAMP,	
+	FOREIGN KEY (domain_id) REFERENCES " . $sm_domain_list . "(id) ON DELETE CASCADE,
+	FOREIGN KEY (cron_id) REFERENCES " . $sm_cron_status . "(id) ON DELETE CASCADE
+	) {$charset_collate};";
+dbDelta( $sql );
 exit;

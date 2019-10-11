@@ -1,14 +1,16 @@
 {
   "files": {
-    "static/js/0.chunk.js": "/wp-content/themes/sitemonitor/static/js/0.chunk.js",
-    "static/js/0.chunk.js.map": "/wp-content/themes/sitemonitor/static/js/0.chunk.js.map",
     "main.css": "/wp-content/themes/sitemonitor/static/css/main.chunk.css",
     "main.js": "/wp-content/themes/sitemonitor/static/js/main.chunk.js",
-    "main.css.map": "/wp-content/themes/sitemonitor/static/css/main.chunk.css.map",
     "main.js.map": "/wp-content/themes/sitemonitor/static/js/main.chunk.js.map",
     "runtime-main.js": "/wp-content/themes/sitemonitor/static/js/bundle.js",
     "runtime-main.js.map": "/wp-content/themes/sitemonitor/static/js/bundle.js.map",
+    "static/js/2.chunk.js": "/wp-content/themes/sitemonitor/static/js/2.chunk.js",
+    "static/js/2.chunk.js.map": "/wp-content/themes/sitemonitor/static/js/2.chunk.js.map",
     "index.php": "/wp-content/themes/sitemonitor/index.php",
+    "precache-manifest.409fb57065049e084be81c86ef389d0b.js": "/wp-content/themes/sitemonitor/precache-manifest.409fb57065049e084be81c86ef389d0b.js",
+    "service-worker.js": "/wp-content/themes/sitemonitor/service-worker.js",
+    "static/css/main.chunk.css.map": "/wp-content/themes/sitemonitor/static/css/main.chunk.css.map",
     "static/media/logo.png": "/wp-content/themes/sitemonitor/static/media/logo.3d149670.png"
   }
 }
