@@ -46,4 +46,21 @@ class Sitemoniter_WPMail
         include_once('add_site_mail_template.php');
 
     }
+
+    public function has_ssl( $domain ) {
+        $ssl_check = @fsockopen( 'ssl://' . $domain, 443, $errno, $errstr, 30 );
+        $res = !! $ssl_check;
+        if ( $ssl_check ) { fclose( $ssl_check ); }
+        return $res;
+    }
+
+    function url_get_content_html( $domain_contact_url ){
+        $content = file_get_contents( $domain_contact_url );
+        $html_format_content = htmlentities( $content );
+        if ( strpos ( $html_format_content, 'g-recaptcha-response' ) !== false ) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }
