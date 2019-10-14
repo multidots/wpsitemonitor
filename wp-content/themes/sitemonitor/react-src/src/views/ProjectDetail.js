@@ -60,13 +60,13 @@ const useStyles = makeStyles( theme => ({
   mainGrid: {
     marginTop: theme.spacing( 3 ),
   },
-  report_link:{
-    float:"right",
-    margin:"10px 0px"
+  report_link: {
+    float: 'right',
+    margin: '10px 0px'
   },
-  status_icon:{
-    float:"right",
-    margin:"10px 0px"
+  status_icon: {
+    float: 'right',
+    margin: '10px 0px'
   },
   card: {
     display: 'flex',
@@ -94,7 +94,7 @@ const useStyles = makeStyles( theme => ({
     padding: theme.spacing( 6, 0 ),
   },
   grid_item: {
-    marginTop: "10px"
+    marginTop: '10px'
   },
   root: {
     width: '100%',
@@ -113,6 +113,7 @@ class ProjectDetailViews extends React.Component {
     this.state = {
       fullReportData: [],
       sitemapData: [],
+      sitemapErrorMsg: "Loading...",
     };
     this.ProjectFeaturesBox = this.ProjectFeaturesBox.bind( this );
   }
@@ -129,22 +130,24 @@ class ProjectDetailViews extends React.Component {
       }
     )
       .then( response => {
-        if(401 === parseInt(response.status)) {
-          localStorage.removeItem('token');
+        if ( 401 === parseInt( response.status ) ) {
+          localStorage.removeItem( 'token' );
           window.location.href = '/sign-in';
         }
-        return response.json()
+        return response.json();
       } )
       .then( data => {
-        if (typeof data === 'undefined' || null === data) {
+        if ( typeof data === 'undefined' || null === data || Object.keys(data).length === 0 ) {
           this.setState( {
             fullReportData: [],
             sitemapData: [],
+            sitemapErrorMsg: "Sitemap reports not generated yet.",
           } );
         } else {
           this.setState( {
             fullReportData: data,
             sitemapData: data.sitemap,
+            sitemapErrorMsg: (Object.keys(data.sitemap).length === 0) ? "Sitemap reports not generated yet." : ""
           } );
         }
       } );
@@ -152,74 +155,108 @@ class ProjectDetailViews extends React.Component {
 
   ProjectFeaturesBox( props ) {
 
-    const classes = useStyles();
-    const sitemap_page = "/projects/" + this.props.data.match.params.id + "/" + "sitemap";
+    const classes =useStyles();
+    const sitemap_page = '/projects/' + this.props.data.match.params.id + '/' + 'sitemap';
     return (
       <Grid container item xs={12} md={12} spacing={3}>
 
         <Grid item xs={2} md={2}>
           <ProjectDetailSidebar project_id={this.props.data.match.params.id}/>
         </Grid>
+        <Grid container item xs={10} md={10} spacing={3}>
+          <Grid item xs={8} md={8}>
+            <Card className={classes.card}>
+              <div className={classes.cardDetails}>
+                <CardContent>
+                  <Typography variant="h5" paragraph>
+                    Sitemap History
+                  </Typography>
+                  <Typography variant="subtitle1" paragraph>
+                    <SiteMapReport reportData={this.state.sitemapData} sitemapMsg={this.state.sitemapErrorMsg}/>
+                  </Typography>
+                  <Divider/>
 
-        <Grid item xs={7} md={7}>
-          <Card className={classes.card}>
-            <div className={classes.cardDetails}>
-              <CardContent>
-                <Typography variant="h5" paragraph>
-                  Sitemap History
-                </Typography>
-                <Typography variant="subtitle1" paragraph>
-                  <SiteMapReport reportData={this.state.sitemapData}/>
-                </Typography>
-                <Divider />
-
-                <Link className={classes.report_link} to={{pathname: sitemap_page}} >View full report</Link>
-              </CardContent>
-            </div>
-          </Card>
-        </Grid>
-
-        <Grid container item xs={3} md={3}>
-
-          <Grid item xs={12} md={12} >
+                  <Link className={classes.report_link} to={{ pathname: sitemap_page }}>View full report</Link>
+                </CardContent>
+              </div>
+            </Card>
+          </Grid>
+          <Grid item xs={4} md={4}>
             <Card className={classes.card}>
               <div className={classes.cardDetails}>
                 <CardContent>
                   <Typography variant="h5" paragraph>
                     Wp-Admin URL
-                    { 1 === parseInt(this.state.fullReportData.admin_status) ? <CheckCircleRoundedIcon className={classes.status_icon} style={{color: '#43a047'}}/> : (
-                        <CancelRoundedIcon className={classes.status_icon} style={{color: '#D3302F'}}/>
-                    ) }
+                    {1 === parseInt( this.state.fullReportData.admin_status ) ? <CheckCircleRoundedIcon
+                      className={classes.status_icon} style={{ color: '#43a047' }}/> : (
+                      <CancelRoundedIcon className={classes.status_icon} style={{ color: '#D3302F' }}/>
+                    )}
                   </Typography>
                   <Typography paragraph>
-                    { 1 === parseInt(this.state.fullReportData.admin_status) ? "Custom URL set for the admin" : (
-                      "Default URL set for the admin "
-                    ) }
+                    {1 === parseInt( this.state.fullReportData.admin_status ) ? 'Custom URL set for the admin' : (
+                      'Default URL set for the admin '
+                    )}
                   </Typography>
                 </CardContent>
               </div>
             </Card>
           </Grid>
-
-          <Grid item xs={12} md={12} className={classes.grid_item} >
-            <Card className={classes.card}>
-              <div className={classes.cardDetails}>
-                <CardContent>
-                  <Typography variant="h5" paragraph>
-                   Robots
-                    { 1 === parseInt(this.state.fullReportData.robots_status) ? <CheckCircleRoundedIcon className={classes.status_icon} style={{color: '#43a047'}}/> : (
-                      <CancelRoundedIcon className={classes.status_icon} style={{color: '#D3302F'}}/> ) }
-                  </Typography>
-                  <Typography paragraph>
-                    { 1 === parseInt(this.state.fullReportData.robots_status) ?   "robots.txt is available on the root."  : (
-                      "robots.txt is not available on the root."
-                    ) }
-                  </Typography>
-                </CardContent>
-              </div>
-            </Card>
+          <Grid container item xs={12} md={12} spacing={3}>
+            <Grid item xs={4} md={4} className={classes.grid_item} >
+              <Card className={classes.card}>
+                <div className={classes.cardDetails}>
+                  <CardContent>
+                    <Typography variant="h5" paragraph>
+                      Robots
+                      { 1 === parseInt(this.state.fullReportData.robots_status) ? <CheckCircleRoundedIcon className={classes.status_icon} style={{color: '#43a047'}}/> : (
+                        <CancelRoundedIcon className={classes.status_icon} style={{color: '#D3302F'}}/> ) }
+                    </Typography>
+                    <Typography paragraph>
+                      { 1 === parseInt(this.state.fullReportData.robots_status) ?   "robots.txt is available on the root."  : (
+                        "robots.txt is not available on the root."
+                      ) }
+                    </Typography>
+                  </CardContent>
+                </div>
+              </Card>
+            </Grid>
+            <Grid item xs={4} md={4} className={classes.grid_item} >
+              <Card className={classes.card}>
+                <div className={classes.cardDetails}>
+                  <CardContent>
+                    <Typography variant="h5" paragraph>
+                      SSL
+                      { 1 === parseInt(this.state.fullReportData.https_status) ? <CheckCircleRoundedIcon className={classes.status_icon} style={{color: '#43a047'}}/> : (
+                        <CancelRoundedIcon className={classes.status_icon} style={{color: '#D3302F'}}/> ) }
+                    </Typography>
+                    <Typography paragraph>
+                      { 1 === parseInt(this.state.fullReportData.https_status) ?   "Site is secure."  : (
+                        "Site does not have any SSL certificate."
+                      ) }
+                    </Typography>
+                  </CardContent>
+                </div>
+              </Card>
+            </Grid>
+            <Grid item xs={4} md={4} className={classes.grid_item} >
+              <Card className={classes.card}>
+                <div className={classes.cardDetails}>
+                  <CardContent>
+                    <Typography variant="h5" paragraph>
+                      Captcha
+                      { 1 === parseInt(this.state.fullReportData.captcha_status) ? <CheckCircleRoundedIcon className={classes.status_icon} style={{color: '#43a047'}}/> : (
+                        <CancelRoundedIcon className={classes.status_icon} style={{color: '#D3302F'}}/> ) }
+                    </Typography>
+                    <Typography paragraph>
+                      { 1 === parseInt(this.state.fullReportData.captcha_status) ?   "Captcha successfully implemented on contact form."  : (
+                        "Missing captcha on contact form"
+                      ) }
+                    </Typography>
+                  </CardContent>
+                </div>
+              </Card>
+            </Grid>
           </Grid>
-
         </Grid>
       </Grid>
     );

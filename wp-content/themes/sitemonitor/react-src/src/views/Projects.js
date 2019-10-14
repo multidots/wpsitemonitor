@@ -208,12 +208,16 @@ class ProjectsViews extends React.Component {
           filter: false,
           customBodyRender: (value, tableMeta, updateValue) => {
 
-            const status = 1 === parseInt(value) ? true : false;
-            return (
-              status ? <CheckCircleRoundedIcon style={{color: '#43a047'}}/> : (
+            if ('undefined' ===  typeof value ){
+
+            } else {
+              const status = 1 === parseInt(value) ? true : false;
+              return (
+                status ? <CheckCircleRoundedIcon style={{color: '#43a047'}}/> : (
                   <CancelRoundedIcon style={{color: '#D3302F'}}/>
                 )
-            );
+              );
+            }
           }
         }
       },
@@ -222,12 +226,16 @@ class ProjectsViews extends React.Component {
           filter: false,
           customBodyRender: (value, tableMeta, updateValue) => {
 
-            const status = 1 === parseInt(value) ? true : false;
-            return (
-              status ? <CheckCircleRoundedIcon style={{color: '#43a047'}}/> : (
-                <CancelRoundedIcon style={{color: '#D3302F'}}/>
-              )
-            );
+            if ('undefined' ===  typeof value ){
+
+            } else {
+              const status = 1 === parseInt(value) ? true : false;
+              return (
+                status ? <CheckCircleRoundedIcon style={{color: '#43a047'}}/> : (
+                  <CancelRoundedIcon style={{color: '#D3302F'}}/>
+                )
+              );
+            }
           }
         }
       },
@@ -237,12 +245,16 @@ class ProjectsViews extends React.Component {
           filter: false,
           customBodyRender: (value, tableMeta, updateValue) => {
 
-            const status = 1 === parseInt(value) ? true : false;
-            return (
-              status ? <CheckCircleRoundedIcon style={{color: '#43a047'}}/> : (
-                <CancelRoundedIcon style={{color: '#D3302F'}}/>
-              )
-            );
+            if ('undefined' ===  typeof value ){
+
+            } else {
+              const status = 1 === parseInt(value) ? true : false;
+              return (
+                status ? <CheckCircleRoundedIcon style={{color: '#43a047'}}/> : (
+                  <CancelRoundedIcon style={{color: '#D3302F'}}/>
+                )
+              );
+            }
           }
         }
         },

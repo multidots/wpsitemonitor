@@ -1,48 +1,49 @@
 <?php
 
-	/* Template Name: SITE SCRIPT Template */
+/* Template Name: SITE SCRIPT Template */
 
-	global  $wpdb;
-    if ( isset( $_GET['type'] ) ) {
-        $type =  $_GET['type'];
-    }
-	if( isset( $_GET['no'] ) ){
-		$no_of_records = $_GET['no'];
-	}
-	$cron_days = 1;
+global $wpdb;
 
-	$url_list_result = array();
+$type = filter_input( INPUT_GET, 'type', FILTER_SANITIZE_STRING );
+$type = $type ? $type : "";
 
-    require_once('script_files/class-WPMail.php');
+$no_of_records = filter_input( INPUT_GET, 'no', FILTER_SANITIZE_NUMBER_INT );
+$no_of_records = $no_of_records ? absint( $no_of_records ) : "";
 
-    $class_file = new Sitemoniter_WPMail();
+$cron_days = 1;
 
-	$domain_tbl_name = "{$wpdb->prefix}sm_domain_list";
-	$sm_cron_status_tbl_name = "{$wpdb->prefix}sm_cron_status";
-	$sm_domain_scan_status = "{$wpdb->prefix}sm_domain_scan_status";
-	$sm_sitemap_data_history_tbl_name = "{$wpdb->prefix}sm_sitemap_data_history";
-	$sm_admin_data_history_tbl_name = "{$wpdb->prefix}sm_admin_data_history";
-	$sm_seo_data_history = "{$wpdb->prefix}sm_seo_data_history";
-	$sm_site_critical_history = "{$wpdb->prefix}sm_site_critical_history";
-	$sm_site_https_history = "{$wpdb->prefix}sm_site_https_history";
-	$sm_site_captcha_check_history = "{$wpdb->prefix}sm_site_captcha_check_history";
+$url_list_result = array();
 
-	$status_value = '0';
+require_once( 'script_files/class-WPMail.php' );
 
-	$cache_key = 'prefix_post_count_publish';
+$class_file = new Sitemoniter_WPMail();
 
-	$_posts = wp_cache_get( $cache_key );
+$domain_tbl_name                  = "{$wpdb->prefix}sm_domain_list";
+$sm_cron_status_tbl_name          = "{$wpdb->prefix}sm_cron_status";
+$sm_domain_scan_status            = "{$wpdb->prefix}sm_domain_scan_status";
+$sm_sitemap_data_history_tbl_name = "{$wpdb->prefix}sm_sitemap_data_history";
+$sm_admin_data_history_tbl_name   = "{$wpdb->prefix}sm_admin_data_history";
+$sm_seo_data_history              = "{$wpdb->prefix}sm_seo_data_history";
+$sm_site_critical_history         = "{$wpdb->prefix}sm_site_critical_history";
+$sm_site_https_history            = "{$wpdb->prefix}sm_site_https_history";
+$sm_site_captcha_check_history    = "{$wpdb->prefix}sm_site_captcha_check_history";
+
+$status_value = '0';
+
+$cache_key = 'prefix_post_count_publish';
+
+$_posts = wp_cache_get( $cache_key );
 
 
-	switch ($type) {
-		case 'sitemap':
-            if( isset( $no_of_records ) ){
+switch ( $type ) {
+	case 'sitemap':
+		if ( isset( $no_of_records ) ) {
 
-                if( $no_of_records > 0 ) {
+			if ( $no_of_records > 0 ) {
 
-                    $domian_lists = $wpdb->get_results(
-                            $wpdb->prepare(
-                                "
+				$domian_lists = $wpdb->get_results(
+					$wpdb->prepare(
+						"
                                     SELECT dl.*, dh.cron_id, dh.sitemap_xml_data, dh.sitemap_diff_data,dc.*,dl.id
                                     FROM   {$wpdb->prefix}sm_domain_list dl
                                     LEFT JOIN 
@@ -62,183 +63,182 @@
                                     AND dc.sitemap_status = %s
                                     ORDER BY dc.sitemap_scan_date ASC
                                     LIMIT 0,%d",
-                                    array(
-                                        $cron_days,
-                                        1,
-                                        $no_of_records
-                                    )
-                            )
-                    );
+						array(
+							$cron_days,
+							1,
+							$no_of_records,
+						)
+					)
+				);
 
-                    if ( ! empty ( $domian_lists ) ) {
+				if ( ! empty ( $domian_lists ) ) {
 
-                        foreach ( $domian_lists as $domian_list ) {
+					foreach ( $domian_lists as $domian_list ) {
 
-                            unset( $url_list_result );
-                            unset( $crawler_url_list );
-                            $url_list_result = array();
-                            $crawler_url_list = array();
+						unset( $url_list_result );
+						unset( $crawler_url_list );
+						$url_list_result  = array();
+						$crawler_url_list = array();
 
-                            //Update data array
-                            $domain_id = $domian_list->id;
+						//Update data array
+						$domain_id = $domian_list->id;
 
-                            //Insert Query
-                            $last_insert_cron_id = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_name`, `status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_cron_status_tbl_name, $domain_id, 'sitemap_xml', '0', current_time( 'mysql', 1 ) ) );       //db call ok; no-cache ok
-                            $last_insert_cron_id = $wpdb->insert_id;
-
-
-
-                            //Check first time came or not
-                            if ( empty( $domian_list->sitemap_xml_data ) ) {
-
-                                if ( isset( $domian_list->sitemap_url ) ) {
-
-                                    $sitemap_url           = $domian_list->sitemap_url;
-
-                                    $sitemap_url = rtrim($sitemap_url,"/").'';
-
-                                    $response = wp_remote_get( $sitemap_url );
-                                    $response_code = wp_remote_retrieve_response_code( $response );
-
-                                    if( $response_code === 200 ) {
-
-                                        $sitemap_url_list_data = new SimpleXMLElement ( $sitemap_url, null, true );
-
-                                        if ( is_object( $sitemap_url_list_data ) ) {
-
-                                            foreach ( $sitemap_url_list_data as $url ) {
-
-                                                if ( is_object( $url->loc ) ) {
-                                                    $url_list_result[] .= $url->loc;
-                                                } else {
-                                                    $url_list_result = '';
-                                                }
-                                            }
-                                            foreach ( $url_list_result as $url ) {
-
-                                                $sitemap_url_list_data = new SimpleXMLElement ( $url, null, true );
-
-                                                foreach ( $sitemap_url_list_data as $url ) {
-                                                    if ( is_object( $url->loc ) ) {
-                                                        $crawler_url_list[] .= $url->loc;
-                                                    } else {
-                                                        $crawler_url_list = '';
-                                                    }
-                                                }
-                                            }
-
-                                            $url_list_result = $crawler_url_list;
-                                            //Update data array
-                                            $url_list_result_json = wp_json_encode( $url_list_result );  //wp_json
+						//Insert Query
+						$last_insert_cron_id = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_name`, `status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_cron_status_tbl_name, $domain_id, 'sitemap_xml', '0', current_time( 'mysql', 1 ) ) );       //db call ok; no-cache ok
+						$last_insert_cron_id = $wpdb->insert_id;
 
 
-                                            if ( $last_insert_cron_id ) {
+						//Check first time came or not
+						if ( empty( $domian_list->sitemap_xml_data ) ) {
 
-                                                //Insert Query
-                                                $insert_data      = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `sitemap_xml_data`, `updated_date`) VALUES (%d, %d, %s, %s)", $sm_sitemap_data_history_tbl_name, absint( $domain_id ), absint( $last_insert_cron_id ), $url_list_result_json, current_time( 'mysql', 1 ) ) );     //db call ok; no-cache ok
-                                                $last_insert_data = $wpdb->insert_id;
-                                                if ( isset( $last_insert_data ) ) {
-                                                    $cron_tbl_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time( 'mysql', 1 ), $last_insert_cron_id ) );       //db call ok; no-cache ok
-                                                    $domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `sitemap_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                              //db call ok; no-cache ok
-                                                }
+							if ( isset( $domian_list->sitemap_url ) ) {
 
-                                            } else {
-                                                echo " last_insert_id missing";
-                                            }
+								$sitemap_url = $domian_list->sitemap_url;
 
-                                        }
-                                    }
+								$sitemap_url = rtrim( $sitemap_url, "/" ) . '';
+
+								$response      = wp_remote_get( $sitemap_url );
+								$response_code = wp_remote_retrieve_response_code( $response );
+
+								if ( $response_code === 200 ) {
+
+									$sitemap_url_list_data = new SimpleXMLElement ( $sitemap_url, null, true );
+
+									if ( is_object( $sitemap_url_list_data ) ) {
+
+										foreach ( $sitemap_url_list_data as $url ) {
+
+											if ( is_object( $url->loc ) ) {
+												$url_list_result[] .= $url->loc;
+											} else {
+												$url_list_result = '';
+											}
+										}
+										foreach ( $url_list_result as $url ) {
+
+											$sitemap_url_list_data = new SimpleXMLElement ( $url, null, true );
+
+											foreach ( $sitemap_url_list_data as $url ) {
+												if ( is_object( $url->loc ) ) {
+													$crawler_url_list[] .= $url->loc;
+												} else {
+													$crawler_url_list = '';
+												}
+											}
+										}
+
+										$url_list_result = $crawler_url_list;
+										//Update data array
+										$url_list_result_json = wp_json_encode( $url_list_result );  //wp_json
 
 
-                                }
+										if ( $last_insert_cron_id ) {
 
-                            } else {
+											//Insert Query
+											$insert_data      = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `sitemap_xml_data`, `updated_date`) VALUES (%d, %d, %s, %s)", $sm_sitemap_data_history_tbl_name, absint( $domain_id ), absint( $last_insert_cron_id ), $url_list_result_json, current_time( 'mysql', 1 ) ) );     //db call ok; no-cache ok
+											$last_insert_data = $wpdb->insert_id;
+											if ( isset( $last_insert_data ) ) {
+												$cron_tbl_update           = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time( 'mysql', 1 ), $last_insert_cron_id ) );       //db call ok; no-cache ok
+												$domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `sitemap_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                              //db call ok; no-cache ok
+											}
 
-                                $sitemap_url = $domian_list->sitemap_url;
+										} else {
+											echo " last_insert_id missing";
+										}
 
-                                $sitemap_url = rtrim($sitemap_url,"/").'';
+									}
+								}
 
-                                $sitemap_url_list_data = new SimpleXMLElement ( $sitemap_url, null, true );
 
-                                if ( is_object( $sitemap_url_list_data ) ) {
+							}
 
-                                        foreach ( $sitemap_url_list_data as $url ) {
+						} else {
 
-                                            if ( is_object( $url->loc ) ) {
-                                                $url_list_result[] .= $url->loc;
-                                            } else {
-                                                $url_list_result = '';
-                                            }
-                                        }
-                                        foreach ( $url_list_result as $url ) {
+							$sitemap_url = $domian_list->sitemap_url;
 
-                                            $sitemap_url_list_data = new SimpleXMLElement ( $url, null, true );
+							$sitemap_url = rtrim( $sitemap_url, "/" ) . '';
 
-                                            foreach ( $sitemap_url_list_data as $url ) {
-                                                if ( is_object( $url->loc ) ) {
-                                                    $crawler_url_list[] .= $url->loc;
-                                                } else {
-                                                    $crawler_url_list = '';
-                                                }
-                                            }
-                                        }
-                                    $url_list_result = $crawler_url_list;
+							$sitemap_url_list_data = new SimpleXMLElement ( $sitemap_url, null, true );
 
-                                    $old_sitemap_json = $domian_list->sitemap_xml_data;
-                                    $old_sitemap      = json_decode( $old_sitemap_json );
+							if ( is_object( $sitemap_url_list_data ) ) {
 
-                                    //Compare old and new sitemap URL
-                                    $result_diff = array_merge( array_diff( $url_list_result, $old_sitemap ), array_diff( $old_sitemap, $url_list_result ) );
+								foreach ( $sitemap_url_list_data as $url ) {
 
-                                    //Update data array
-                                    $url_list_result_json = wp_json_encode( $url_list_result );
+									if ( is_object( $url->loc ) ) {
+										$url_list_result[] .= $url->loc;
+									} else {
+										$url_list_result = '';
+									}
+								}
+								foreach ( $url_list_result as $url ) {
 
-                                    //check changes for compared sitemap
-                                    if ( ! empty( $result_diff ) ) {
+									$sitemap_url_list_data = new SimpleXMLElement ( $url, null, true );
 
-                                        if ( $last_insert_cron_id ) {
+									foreach ( $sitemap_url_list_data as $url ) {
+										if ( is_object( $url->loc ) ) {
+											$crawler_url_list[] .= $url->loc;
+										} else {
+											$crawler_url_list = '';
+										}
+									}
+								}
+								$url_list_result = $crawler_url_list;
 
-                                            //Update Query
-                                            $result_diff = wp_json_encode( $result_diff );
+								$old_sitemap_json = $domian_list->sitemap_xml_data;
+								$old_sitemap      = json_decode( $old_sitemap_json );
 
-                                            //Insert Query
-                                            $insert_data      = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `sitemap_xml_data`, `sitemap_diff_data`, `updated_date`) VALUES (%d, %d, %s, %s, %s)", $sm_sitemap_data_history_tbl_name, absint( $domain_id ), absint( $last_insert_cron_id ), $url_list_result_json, $result_diff, current_time( 'mysql', 1 ) ) );     //db call ok; no-cache ok
-                                            $last_insert_data = $wpdb->insert_id;
-                                            if ( isset( $last_insert_data ) ) {
-                                                $cron_tbl_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time( 'mysql', 1 ), $last_insert_cron_id ) );       //db call ok; no-cache ok
-                                                $domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `sitemap_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                              //db call ok; no-cache ok
-                                            }
-                                        } else {
-                                            echo "Old last_insert_id missing";
-                                        }
+								//Compare old and new sitemap URL
+								$result_diff = array_merge( array_diff( $url_list_result, $old_sitemap ), array_diff( $old_sitemap, $url_list_result ) );
 
-                                    } else {
+								//Update data array
+								$url_list_result_json = wp_json_encode( $url_list_result );
 
-                                        $insert_data      = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `sitemap_xml_data`, `updated_date`) VALUES (%d, %d, %s, %s)", $sm_sitemap_data_history_tbl_name, absint( $domain_id ), absint( $last_insert_cron_id ), $url_list_result_json, current_time( 'mysql', 1 ) ) );     //db call ok; no-cache ok
-                                        $last_insert_data = $wpdb->insert_id;
-                                        if ( isset( $last_insert_data ) ) {
-                                            $cron_tbl_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time( 'mysql', 1 ), $last_insert_cron_id ) );      //db call ok; no-cache ok
-                                            $domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `sitemap_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                              //db call ok; no-cache ok
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            } else {
-                print_r(  " No of Scan URL is missing " );
-            }
-			break;
+								//check changes for compared sitemap
+								if ( ! empty( $result_diff ) ) {
 
-		case 'adminurl':
-            if( isset( $no_of_records ) ){
+									if ( $last_insert_cron_id ) {
 
-                if( $no_of_records > 0 ) {
+										//Update Query
+										$result_diff = wp_json_encode( $result_diff );
 
-                    $domian_lists = $wpdb->get_results(
-                        $wpdb->prepare(
-                            "
+										//Insert Query
+										$insert_data      = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `sitemap_xml_data`, `sitemap_diff_data`, `updated_date`) VALUES (%d, %d, %s, %s, %s)", $sm_sitemap_data_history_tbl_name, absint( $domain_id ), absint( $last_insert_cron_id ), $url_list_result_json, $result_diff, current_time( 'mysql', 1 ) ) );     //db call ok; no-cache ok
+										$last_insert_data = $wpdb->insert_id;
+										if ( isset( $last_insert_data ) ) {
+											$cron_tbl_update           = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time( 'mysql', 1 ), $last_insert_cron_id ) );       //db call ok; no-cache ok
+											$domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `sitemap_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                              //db call ok; no-cache ok
+										}
+									} else {
+										echo "Old last_insert_id missing";
+									}
+
+								} else {
+
+									$insert_data      = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `sitemap_xml_data`, `updated_date`) VALUES (%d, %d, %s, %s)", $sm_sitemap_data_history_tbl_name, absint( $domain_id ), absint( $last_insert_cron_id ), $url_list_result_json, current_time( 'mysql', 1 ) ) );     //db call ok; no-cache ok
+									$last_insert_data = $wpdb->insert_id;
+									if ( isset( $last_insert_data ) ) {
+										$cron_tbl_update           = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time( 'mysql', 1 ), $last_insert_cron_id ) );      //db call ok; no-cache ok
+										$domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `sitemap_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                              //db call ok; no-cache ok
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		} else {
+			print_r( " No of Scan URL is missing " );
+		}
+		break;
+
+	case 'adminurl':
+		if ( isset( $no_of_records ) ) {
+
+			if ( $no_of_records > 0 ) {
+
+				$domian_lists = $wpdb->get_results(
+					$wpdb->prepare(
+						"
                                     SELECT dl.*, dh.cron_id,dh.status,dc.updated_date,dc.*,dl.id
                                     FROM   {$wpdb->prefix}sm_domain_list dl 
                                     LEFT JOIN 
@@ -258,77 +258,77 @@
                                     AND dc.admin_status = %s
                                     ORDER BY dc.adminurl_scan_date ASC
                                     LIMIT 0,%d",
-                            array(
-                                $cron_days,
-                                1,
-                                $no_of_records
-                            )
-                        )
-                    );
+						array(
+							$cron_days,
+							1,
+							$no_of_records,
+						)
+					)
+				);
 
-                    if(! empty ( $domian_lists ) ) {
+				if ( ! empty ( $domian_lists ) ) {
 
-                        foreach ( $domian_lists as $domian_list ) {
+					foreach ( $domian_lists as $domian_list ) {
 
-                            //Update data array
-                            $domain_id = $domian_list->id;
+						//Update data array
+						$domain_id = $domian_list->id;
 
-                            //Insert Query
-                            $last_insert_cron_id = $wpdb->query( $wpdb->prepare ("INSERT INTO %1s (`domain_id`, `cron_name`, `status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_cron_status_tbl_name, $domain_id, 'admin_url', '0', current_time( 'mysql', 1 ) ) );      //db call ok; no-cache ok
-                            $last_insert_cron_id = $wpdb->insert_id;
+						//Insert Query
+						$last_insert_cron_id = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_name`, `status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_cron_status_tbl_name, $domain_id, 'admin_url', '0', current_time( 'mysql', 1 ) ) );      //db call ok; no-cache ok
+						$last_insert_cron_id = $wpdb->insert_id;
 
-                            if( isset( $last_insert_cron_id ) ) {
+						if ( isset( $last_insert_cron_id ) ) {
 
-                                $site_url = $domian_list->domain_url;
+							$site_url = $domian_list->domain_url;
 
-                                $site_url = rtrim($site_url,"/").'/';
+							$site_url = rtrim( $site_url, "/" ) . '/';
 
-                                $site_login_url = $site_url."wp-admin/";
+							$site_login_url = $site_url . "wp-admin/";
 
-                                $response = wp_remote_get( $site_login_url );
+							$response = wp_remote_get( $site_login_url );
 
-                                $response_code = wp_remote_retrieve_response_code( $response );
+							$response_code = wp_remote_retrieve_response_code( $response );
 
-                                if( ! empty ( $response_code ) ) {
+							if ( ! empty ( $response_code ) ) {
 
-                                    if( 200 === $response_code ) {
+								if ( 200 === $response_code ) {
 
-                                        //Insert Query
-                                        $admin_data = $wpdb->query( $wpdb->prepare ("INSERT INTO %1s (`domain_id`, `cron_id`, `status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_admin_data_history_tbl_name, $domain_id, $last_insert_cron_id, '0', current_time( 'mysql', 1 ) ) );       //db call ok; no-cache ok
-                                        $admin_data_id = $wpdb->insert_id;
-                                        if ( isset( $admin_data_id ) ) {
-                                            $cron_tbl_update = $wpdb->query( $wpdb->prepare ("UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time( 'mysql', 1 ), $last_insert_cron_id ) );       //db call ok; no-cache ok
-                                            $domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `adminurl_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                             //db call ok; no-cache ok
-                                        }
+									//Insert Query
+									$admin_data    = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_admin_data_history_tbl_name, $domain_id, $last_insert_cron_id, '0', current_time( 'mysql', 1 ) ) );       //db call ok; no-cache ok
+									$admin_data_id = $wpdb->insert_id;
+									if ( isset( $admin_data_id ) ) {
+										$cron_tbl_update           = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time( 'mysql', 1 ), $last_insert_cron_id ) );       //db call ok; no-cache ok
+										$domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `adminurl_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                             //db call ok; no-cache ok
+									}
 
-                                    } else {
+								} else {
 
-                                        //Insert Query
-                                        $admin_data = $wpdb->query( $wpdb->prepare ("INSERT INTO %1s (`domain_id`, `cron_id`, `status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_admin_data_history_tbl_name, $domain_id, $last_insert_cron_id, '1', current_time( 'mysql', 1 ) ) );      //db call ok; no-cache ok
-                                        $admin_data_id = $wpdb->insert_id;
-                                        if ( isset( $admin_data_id ) ){
-                                            $cron_tbl_update = $wpdb->query( $wpdb->prepare ("UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time( 'mysql', 1 ), $last_insert_cron_id ) );      //db call ok; no-cache ok
-                                            $domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `adminurl_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                             //db call ok; no-cache ok
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            } else {
-                print_r(  " No of Scan URL is missing " );
-            }
-			break;
+									//Insert Query
+									$admin_data    = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_admin_data_history_tbl_name, $domain_id, $last_insert_cron_id, '1', current_time( 'mysql', 1 ) ) );      //db call ok; no-cache ok
+									$admin_data_id = $wpdb->insert_id;
+									if ( isset( $admin_data_id ) ) {
+										$cron_tbl_update           = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time( 'mysql', 1 ), $last_insert_cron_id ) );      //db call ok; no-cache ok
+										$domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `adminurl_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                             //db call ok; no-cache ok
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		} else {
+			print_r( " No of Scan URL is missing " );
+		}
+		break;
 
-		case 'robots':
-            if( isset( $no_of_records ) ){
+	case 'robots':
+		if ( isset( $no_of_records ) ) {
 
-                if( $no_of_records > 0 ) {
+			if ( $no_of_records > 0 ) {
 
-                    $domian_lists = $wpdb->get_results(
-                        $wpdb->prepare(
-                            "
+				$domian_lists = $wpdb->get_results(
+					$wpdb->prepare(
+						"
                                     SELECT dl.*, dh.cron_id,dh.status,dc.updated_date,dc.*,dl.id
                                     FROM   {$wpdb->prefix}sm_domain_list dl 
                                     LEFT JOIN 
@@ -348,77 +348,77 @@
                                     AND dc.roborts_status = %s
                                     ORDER BY dc.robots_scan_date ASC
                                     LIMIT 0,%d",
-                                    array(
-                                        $cron_days,
-                                        1,
-                                        $no_of_records
-                                    )
-                        )
-                    );
+						array(
+							$cron_days,
+							1,
+							$no_of_records,
+						)
+					)
+				);
 
-                    if(! empty ( $domian_lists ) ) {
+				if ( ! empty ( $domian_lists ) ) {
 
-                        foreach ( $domian_lists as $domian_list ) {
+					foreach ( $domian_lists as $domian_list ) {
 
-                            //Update data array
-                            $domain_id = $domian_list->id;
+						//Update data array
+						$domain_id = $domian_list->id;
 
-                            //Insert Query
-                            $last_insert_cron_id = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_name`, `status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_cron_status_tbl_name, $domain_id, 'robots_url', '0', current_time( 'mysql', 1 ) ) );       //db call ok; no-cache ok
-                            $last_insert_cron_id = $wpdb->insert_id;
+						//Insert Query
+						$last_insert_cron_id = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_name`, `status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_cron_status_tbl_name, $domain_id, 'robots_url', '0', current_time( 'mysql', 1 ) ) );       //db call ok; no-cache ok
+						$last_insert_cron_id = $wpdb->insert_id;
 
-                            if( isset( $last_insert_cron_id ) ) {
+						if ( isset( $last_insert_cron_id ) ) {
 
-                                $site_url = $domian_list->domain_url;
+							$site_url = $domian_list->domain_url;
 
-                                $site_url = rtrim($site_url,"/").'/';
+							$site_url = rtrim( $site_url, "/" ) . '/';
 
-                                $site_login_url = $site_url."robots.txt";
+							$site_login_url = $site_url . "robots.txt";
 
-                                $response = wp_remote_get( $site_login_url );
+							$response = wp_remote_get( $site_login_url );
 
-                                $response_code = wp_remote_retrieve_response_code( $response );
+							$response_code = wp_remote_retrieve_response_code( $response );
 
-                                if( ! empty ( $response_code ) ) {
+							if ( ! empty ( $response_code ) ) {
 
-                                    if( 200 === $response_code ) {
+								if ( 200 === $response_code ) {
 
-                                        //Insert Query
-                                        $admin_data = $wpdb->query( $wpdb->prepare ("INSERT INTO %1s (`domain_id`, `cron_id`, `seo_status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_seo_data_history, $domain_id, $last_insert_cron_id, '1', current_time( 'mysql', 1 ) ) );       ///db call ok; no-cache ok
-                                        $admin_data_id = $wpdb->insert_id;
-                                        if ( isset( $admin_data_id ) ) {
-                                            $cron_tbl_update = $wpdb->query( $wpdb->prepare ("UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time( 'mysql', 1 ), $last_insert_cron_id ) );       //db call ok; no-cache ok
-                                            $domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `robots_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                               //db call ok; no-cache ok
-                                        }
+									//Insert Query
+									$admin_data    = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `seo_status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_seo_data_history, $domain_id, $last_insert_cron_id, '1', current_time( 'mysql', 1 ) ) );       ///db call ok; no-cache ok
+									$admin_data_id = $wpdb->insert_id;
+									if ( isset( $admin_data_id ) ) {
+										$cron_tbl_update           = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time( 'mysql', 1 ), $last_insert_cron_id ) );       //db call ok; no-cache ok
+										$domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `robots_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                               //db call ok; no-cache ok
+									}
 
-                                    } else {
+								} else {
 
-                                        //Insert Query
-                                        $admin_data = $wpdb->query( $wpdb->prepare ("INSERT INTO %1s (`domain_id`, `cron_id`, `seo_status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_seo_data_history, $domain_id, $last_insert_cron_id, '0', current_time( 'mysql', 1 ) ) );      //db call ok; no-cache ok
-                                        $admin_data_id = $wpdb->insert_id;
-                                        if ( isset( $admin_data_id ) ){
-                                            $cron_tbl_update = $wpdb->query( $wpdb->prepare ("UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time( 'mysql', 1 ), $last_insert_cron_id ) );       //db call ok; no-cache ok
-                                            $domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `robots_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                                //db call ok; no-cache ok
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            } else {
-                print_r(  " No of Scan URL is missing " );
-            }
-            break;
+									//Insert Query
+									$admin_data    = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `seo_status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_seo_data_history, $domain_id, $last_insert_cron_id, '0', current_time( 'mysql', 1 ) ) );      //db call ok; no-cache ok
+									$admin_data_id = $wpdb->insert_id;
+									if ( isset( $admin_data_id ) ) {
+										$cron_tbl_update           = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time( 'mysql', 1 ), $last_insert_cron_id ) );       //db call ok; no-cache ok
+										$domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `robots_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                                //db call ok; no-cache ok
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		} else {
+			print_r( " No of Scan URL is missing " );
+		}
+		break;
 
-		case 'critical':
-			if( isset( $no_of_records ) ){
+	case 'critical':
+		if ( isset( $no_of_records ) ) {
 
-				if( $no_of_records > 0 ) {
+			if ( $no_of_records > 0 ) {
 
-                    $domian_lists = $wpdb->get_results(
-                        $wpdb->prepare(
-                            "
+				$domian_lists = $wpdb->get_results(
+					$wpdb->prepare(
+						"
                                     SELECT dl.*,dh.*,dc.*,dl.id
                                     FROM   {$wpdb->prefix}sm_domain_list dl 
                                     LEFT JOIN 
@@ -438,79 +438,79 @@
                                     AND dc.site_status = %s
                                     ORDER BY dc.site_scan_status ASC
                                     LIMIT 0,%s",
-                            array(
-                                $cron_days,
-                                1,
-                                $no_of_records
-                            )
-                        )
-                    );
+						array(
+							$cron_days,
+							1,
+							$no_of_records,
+						)
+					)
+				);
 
-					if(! empty ( $domian_lists ) ) {
+				if ( ! empty ( $domian_lists ) ) {
 
-						foreach ( $domian_lists as $domian_list ) {
+					foreach ( $domian_lists as $domian_list ) {
 
-							//Update data array
-							$domain_id = $domian_list->id;
+						//Update data array
+						$domain_id = $domian_list->id;
 
-							//Insert Query
-							$last_insert_cron_id = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_name`, `status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_cron_status_tbl_name, $domain_id, 'site_scan', '0', current_time( 'mysql', 1 ) ) );       //db call ok; no-cache ok
-							$last_insert_cron_id = $wpdb->insert_id;
+						//Insert Query
+						$last_insert_cron_id = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_name`, `status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_cron_status_tbl_name, $domain_id, 'site_scan', '0', current_time( 'mysql', 1 ) ) );       //db call ok; no-cache ok
+						$last_insert_cron_id = $wpdb->insert_id;
 
-							if ( isset( $last_insert_cron_id ) ) {
+						if ( isset( $last_insert_cron_id ) ) {
 
-								$site_url = $domian_list->domain_url;
+							$site_url = $domian_list->domain_url;
 
-								$response = wp_remote_get( $site_url );
+							$response = wp_remote_get( $site_url );
 
-								if( is_wp_error( $response ) ) {
-									return false;
-								}
+							if ( is_wp_error( $response ) ) {
+								return false;
+							}
 
-								$response_code = wp_remote_retrieve_response_code( $response );
-								$body = wp_remote_retrieve_body( $response );   // use the content
-								$body = wp_strip_all_tags( $body );
+							$response_code = wp_remote_retrieve_response_code( $response );
+							$body          = wp_remote_retrieve_body( $response );   // use the content
+							$body          = wp_strip_all_tags( $body );
 
-								if ( ! empty ( $response_code ) ) {
+							if ( ! empty ( $response_code ) ) {
 
-									if ( 200 === $response_code ) {
+								if ( 200 === $response_code ) {
 
-										//Insert Query
-										$admin_data    = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `url_status_code`, `url_response_code`, `updated_date`) VALUES (%d, %s, %s, %s, %s)", $sm_site_critical_history, $domain_id, $last_insert_cron_id, '0', $response_code, current_time( 'mysql', 1 ) ) );       //db call ok; no-cache ok
-										$admin_data_id = $wpdb->insert_id;
-										if ( isset( $admin_data_id ) ) {
-											$cron_tbl_update           = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time( 'mysql', 1 ), $last_insert_cron_id ) );        //db call ok; no-cache ok
-											$domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `site_scan_status` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                                           //db call ok; no-cache ok
-										}
+									//Insert Query
+									$admin_data    = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `url_status_code`, `url_response_code`, `updated_date`) VALUES (%d, %s, %s, %s, %s)", $sm_site_critical_history, $domain_id, $last_insert_cron_id, '0', $response_code, current_time( 'mysql', 1 ) ) );       //db call ok; no-cache ok
+									$admin_data_id = $wpdb->insert_id;
+									if ( isset( $admin_data_id ) ) {
+										$cron_tbl_update           = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time( 'mysql', 1 ), $last_insert_cron_id ) );        //db call ok; no-cache ok
+										$domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `site_scan_status` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                                           //db call ok; no-cache ok
+									}
 
-									} else {
+								} else {
 
-										//Insert Query
-										$admin_data    = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `url_status_code`, `url_response_code`, `log`, `updated_date`) VALUES (%d, %s, %s, %s, %s, %s)", $sm_site_critical_history, $domain_id, $last_insert_cron_id, '1', $response_code, $body, current_time( 'mysql', 1 ) ) );       //db call ok; no-cache ok
-										$admin_data_id = $wpdb->insert_id;
-										if ( isset( $admin_data_id ) ) {
-											$cron_tbl_update           = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time( 'mysql', 1 ), $last_insert_cron_id ) );       //db call ok; no-cache ok
-											$domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `site_scan_status` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                                           //db call ok; no-cache ok
-										}
+									//Insert Query
+									$admin_data    = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `url_status_code`, `url_response_code`, `log`, `updated_date`) VALUES (%d, %s, %s, %s, %s, %s)", $sm_site_critical_history, $domain_id, $last_insert_cron_id, '1', $response_code, $body, current_time( 'mysql', 1 ) ) );       //db call ok; no-cache ok
+									$admin_data_id = $wpdb->insert_id;
+									if ( isset( $admin_data_id ) ) {
+										$cron_tbl_update           = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time( 'mysql', 1 ), $last_insert_cron_id ) );       //db call ok; no-cache ok
+										$domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `site_scan_status` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                                           //db call ok; no-cache ok
 									}
 								}
 							}
 						}
 					}
 				}
-			}else {
-				print_r(  " No of Scan URL is missing " );
 			}
-			break;
+		} else {
+			print_r( " No of Scan URL is missing " );
+		}
+		break;
 
-        case 'https':
-            if( isset( $no_of_records ) ){
+	case 'https':
+		if ( isset( $no_of_records ) ) {
 
-                if( $no_of_records > 0 ) {
+			if ( $no_of_records > 0 ) {
 
-                    $domian_lists = $wpdb->get_results(
-                        $wpdb->prepare(
-                            "
+				$domian_lists = $wpdb->get_results(
+					$wpdb->prepare(
+						"
                                     SELECT dl.*, shh.*,dl.id
                                     FROM   {$wpdb->prefix}sm_domain_list dl 
                                     LEFT JOIN 
@@ -530,77 +530,77 @@
                                     AND dc.admin_status = %s
                                     ORDER BY dc.https_scan_date ASC
                                     LIMIT 0,%s",
-                            array(
-                                $cron_days,
-                                1,
-                                $no_of_records
-                            )
-                        )
-                    );
+						array(
+							$cron_days,
+							1,
+							$no_of_records,
+						)
+					)
+				);
 
-                    if (!empty ($domian_lists)) {
+				if ( ! empty ( $domian_lists ) ) {
 
-                        foreach ($domian_lists as $domian_list) {
+					foreach ( $domian_lists as $domian_list ) {
 
-                            //Update data array
-                            $domain_id = $domian_list->id;
+						//Update data array
+						$domain_id = $domian_list->id;
 
-                            //Insert Query
-                            $last_insert_cron_id = $wpdb->query($wpdb->prepare("INSERT INTO %1s (`domain_id`, `cron_name`, `status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_cron_status_tbl_name, $domain_id, 'https_scan', '0', current_time('mysql', 1)));      //db call ok; no-cache ok
-                            $last_insert_cron_id = $wpdb->insert_id;
+						//Insert Query
+						$last_insert_cron_id = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_name`, `status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_cron_status_tbl_name, $domain_id, 'https_scan', '0', current_time( 'mysql', 1 ) ) );      //db call ok; no-cache ok
+						$last_insert_cron_id = $wpdb->insert_id;
 
-                            if (isset($last_insert_cron_id)) {
+						if ( isset( $last_insert_cron_id ) ) {
 
-                                $site_url = $domian_list->domain_url;
+							$site_url = $domian_list->domain_url;
 
-                                $parse_url = wp_parse_url($domian_list->domain_url);
+							$parse_url = wp_parse_url( $domian_list->domain_url );
 
-                                if (is_array($parse_url)) {
+							if ( is_array( $parse_url ) ) {
 
-                                    if (isset($parse_url['host'])) {
-                                        $host = $parse_url['host'];
-                                        $host_status = $class_file->has_ssl($host);
+								if ( isset( $parse_url['host'] ) ) {
+									$host        = $parse_url['host'];
+									$host_status = $class_file->has_ssl( $host );
 
-                                        if ($host_status === 1) {
+									if ( $host_status === 1 ) {
 
-                                            //Insert Query
-                                            $admin_data = $wpdb->query($wpdb->prepare("INSERT INTO %1s (`domain_id`, `cron_id`, `https_status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_site_https_history, $domain_id, $last_insert_cron_id, '1', current_time('mysql', 1)));       //db call ok; no-cache ok
-                                            $admin_data_id = $wpdb->insert_id;
-                                            if (isset($admin_data_id)) {
-                                                $cron_tbl_update = $wpdb->query($wpdb->prepare("UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time('mysql', 1), $last_insert_cron_id));       //db call ok; no-cache ok
-                                                $domain_scan_status_update = $wpdb->query($wpdb->prepare("UPDATE %1s SET `https_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time('mysql', 1), $domain_id));                                             //db call ok; no-cache ok
-                                            }
+										//Insert Query
+										$admin_data    = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `https_status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_site_https_history, $domain_id, $last_insert_cron_id, '1', current_time( 'mysql', 1 ) ) );       //db call ok; no-cache ok
+										$admin_data_id = $wpdb->insert_id;
+										if ( isset( $admin_data_id ) ) {
+											$cron_tbl_update           = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time( 'mysql', 1 ), $last_insert_cron_id ) );       //db call ok; no-cache ok
+											$domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `https_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                             //db call ok; no-cache ok
+										}
 
-                                        } else {
+									} else {
 
-                                            //Insert Query
-                                            $admin_data = $wpdb->query($wpdb->prepare("INSERT INTO %1s (`domain_id`, `cron_id`, `https_status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_site_https_history, $domain_id, $last_insert_cron_id, '0', current_time('mysql', 1)));       //db call ok; no-cache ok
-                                            $admin_data_id = $wpdb->insert_id;
-                                            if (isset($admin_data_id)) {
-                                                $cron_tbl_update = $wpdb->query($wpdb->prepare("UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time('mysql', 1), $last_insert_cron_id));       //db call ok; no-cache ok
-                                                $domain_scan_status_update = $wpdb->query($wpdb->prepare("UPDATE %1s SET `https_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time('mysql', 1), $domain_id));                                             //db call ok; no-cache ok
-                                            }
-                                        }
-                                    }
-                                }
+										//Insert Query
+										$admin_data    = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `https_status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_site_https_history, $domain_id, $last_insert_cron_id, '0', current_time( 'mysql', 1 ) ) );       //db call ok; no-cache ok
+										$admin_data_id = $wpdb->insert_id;
+										if ( isset( $admin_data_id ) ) {
+											$cron_tbl_update           = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time( 'mysql', 1 ), $last_insert_cron_id ) );       //db call ok; no-cache ok
+											$domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `https_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                             //db call ok; no-cache ok
+										}
+									}
+								}
+							}
 
-                            }
-                        }
-                    }
-                }
-            } else {
-                print_r(  " No of Scan URL is missing " );
-            }
-            break;
+						}
+					}
+				}
+			}
+		} else {
+			print_r( " No of Scan URL is missing " );
+		}
+		break;
 
-        case 'captcha':
-            if( isset( $no_of_records ) ){
+	case 'captcha':
+		if ( isset( $no_of_records ) ) {
 
-                if( $no_of_records > 0 ) {
+			if ( $no_of_records > 0 ) {
 
-                    $domian_lists = $wpdb->get_results(
-                        $wpdb->prepare(
-                            "
+				$domian_lists = $wpdb->get_results(
+					$wpdb->prepare(
+						"
                                     SELECT dl.*, cch.*,dl.id
                                     FROM   {$wpdb->prefix}sm_domain_list dl 
                                     LEFT JOIN 
@@ -620,151 +620,152 @@
                                     AND dc.admin_status = %s
                                     ORDER BY dc.https_scan_date ASC
                                     LIMIT 0,%s",
-                                    array(
-                                        $cron_days,
-                                        1,
-                                        $no_of_records
-                                    )
-                        )
-                    );
+						array(
+							$cron_days,
+							1,
+							$no_of_records,
+						)
+					)
+				);
 
-                    if (!empty ($domian_lists)) {
+				if ( ! empty ( $domian_lists ) ) {
 
-                        foreach ($domian_lists as $domian_list) {
+					foreach ( $domian_lists as $domian_list ) {
 
-                            //Update data array
-                            $domain_id = $domian_list->id;
+						//Update data array
+						$domain_id = $domian_list->id;
 
-                            //Insert Query
-                            $last_insert_cron_id = $wpdb->query($wpdb->prepare("INSERT INTO %1s (`domain_id`, `cron_name`, `status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_cron_status_tbl_name, $domain_id, 'captcha_scan', '0', current_time('mysql', 1)));      //db call ok; no-cache ok
-                            $last_insert_cron_id = $wpdb->insert_id;
+						//Insert Query
+						$last_insert_cron_id = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_name`, `status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_cron_status_tbl_name, $domain_id, 'captcha_scan', '0', current_time( 'mysql', 1 ) ) );      //db call ok; no-cache ok
+						$last_insert_cron_id = $wpdb->insert_id;
 
-                            if (isset($last_insert_cron_id)) {
+						if ( isset( $last_insert_cron_id ) ) {
 
-                                $domain_url = $domian_list->domain_url;
-                                $domain_contact_url = $domain_url.'contact-us/';
-                                $domain_sitemap_url =  $domian_list->sitemap_url;
+							$domain_url         = $domian_list->domain_url;
+							$domain_contact_url = $domain_url . 'contact-us/';
+							$domain_sitemap_url = $domian_list->sitemap_url;
 
-                                $response = wp_remote_get( $domain_sitemap_url );
-                                $response_code = wp_remote_retrieve_response_code( $response );
+							$response      = wp_remote_get( $domain_sitemap_url );
+							$response_code = wp_remote_retrieve_response_code( $response );
 
-                                if( $response_code === 200 ) {
+							if ( $response_code === 200 ) {
 
-                                    $sitemap_url_list_data = new SimpleXMLElement ( $domain_sitemap_url, null, true );
+								$sitemap_url_list_data = new SimpleXMLElement ( $domain_sitemap_url, null, true );
 
-                                    foreach ( $sitemap_url_list_data as $url ) {
+								foreach ( $sitemap_url_list_data as $url ) {
 
-                                        if ( is_object( $url->loc ) ) {
-                                            $url_list_result[] .= $url->loc;
-                                        } else {
-                                            $url_list_result = '';
-                                        }
-                                    }
+									if ( is_object( $url->loc ) ) {
+										$url_list_result[] .= $url->loc;
+									} else {
+										$url_list_result = '';
+									}
+								}
 
-                                    foreach ( $url_list_result as $url ) {
+								foreach ( $url_list_result as $url ) {
 
-                                        $sitemap_url_list_data = new SimpleXMLElement ( $url, null, true );
+									$sitemap_url_list_data = new SimpleXMLElement ( $url, null, true );
 
-                                        foreach ( $sitemap_url_list_data as $url ) {
-                                            if ( is_object( $url->loc ) ) {
-                                                $crawler_url_list[] .= $url->loc;
-                                            } else {
-                                                $crawler_url_list = '';
-                                            }
-                                        }
-                                    }
+									foreach ( $sitemap_url_list_data as $url ) {
+										if ( is_object( $url->loc ) ) {
+											$crawler_url_list[] .= $url->loc;
+										} else {
+											$crawler_url_list = '';
+										}
+									}
+								}
 
-                                } else {
+							} else {
 
-                                    print_r( "Sitemap URL Not Found" );
-                                    die();
+								print_r( "Sitemap URL Not Found" );
+								die();
 
-                                }
+							}
 
-                                $input = 'contact';
-                                $result = array_filter($crawler_url_list, function ($item) use ($input) {
-                                    if (stripos($item, $input) !== false) {
-                                        return true;
-                                    }
-                                    return false;
-                                });
+							$input  = 'contact';
+							$result = array_filter( $crawler_url_list, function ( $item ) use ( $input ) {
+								if ( stripos( $item, $input ) !== false ) {
+									return true;
+								}
 
-                                if( !empty( $result ) ) {
+								return false;
+							} );
 
-                                    foreach ( $result as $result_url ){
-                                        $response = wp_remote_get( $result_url );
-                                        $response_code = wp_remote_retrieve_response_code( $response );
+							if ( ! empty( $result ) ) {
 
-                                        if( $response_code === 200 ) {
+								foreach ( $result as $result_url ) {
+									$response      = wp_remote_get( $result_url );
+									$response_code = wp_remote_retrieve_response_code( $response );
 
-                                            $status = $class_file->url_get_content_html( $result_url );
+									if ( $response_code === 200 ) {
 
-                                            //Insert Query
-                                            $admin_data = $wpdb->query($wpdb->prepare("INSERT INTO %1s (`domain_id`, `cron_id`, `captcha_status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_site_captcha_check_history, $domain_id, $last_insert_cron_id, $status, current_time('mysql', 1)));       //db call ok; no-cache ok
-                                            $admin_data_id = $wpdb->insert_id;
-                                            if (isset($admin_data_id)) {
-                                                $cron_tbl_update = $wpdb->query($wpdb->prepare("UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time('mysql', 1), $last_insert_cron_id));       //db call ok; no-cache ok
-                                                $domain_scan_status_update = $wpdb->query($wpdb->prepare("UPDATE %1s SET `captcha_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time('mysql', 1), $domain_id));                                             //db call ok; no-cache ok
-                                            }
-                                        }
-                                    }
-                                } else {
-                                    $response = wp_remote_get( $domain_contact_url );
-                                    $response_code = wp_remote_retrieve_response_code( $response );
+										$status = $class_file->url_get_content_html( $result_url );
 
-                                    if( $response_code === 200 ) {
+										//Insert Query
+										$admin_data    = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `captcha_status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_site_captcha_check_history, $domain_id, $last_insert_cron_id, $status, current_time( 'mysql', 1 ) ) );       //db call ok; no-cache ok
+										$admin_data_id = $wpdb->insert_id;
+										if ( isset( $admin_data_id ) ) {
+											$cron_tbl_update           = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time( 'mysql', 1 ), $last_insert_cron_id ) );       //db call ok; no-cache ok
+											$domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `captcha_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                             //db call ok; no-cache ok
+										}
+									}
+								}
+							} else {
+								$response      = wp_remote_get( $domain_contact_url );
+								$response_code = wp_remote_retrieve_response_code( $response );
 
-                                        $status = $class_file->url_get_content_html( $domain_contact_url );
-                                        //Insert Query
-                                        $admin_data = $wpdb->query($wpdb->prepare("INSERT INTO %1s (`domain_id`, `cron_id`, `captcha_status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_site_captcha_check_history, $domain_id, $last_insert_cron_id, $status, current_time('mysql', 1)));       //db call ok; no-cache ok
-                                        $admin_data_id = $wpdb->insert_id;
-                                        if (isset($admin_data_id)) {
-                                            $cron_tbl_update = $wpdb->query($wpdb->prepare("UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time('mysql', 1), $last_insert_cron_id));       //db call ok; no-cache ok
-                                            $domain_scan_status_update = $wpdb->query($wpdb->prepare("UPDATE %1s SET `captcha_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time('mysql', 1), $domain_id));                                             //db call ok; no-cache ok
-                                        }
+								if ( $response_code === 200 ) {
 
-                                    } else {
-                                        $domain_contact_url = $domain_url.'contact/';
-                                        $response = wp_remote_get( $domain_contact_url );
-                                        $response_code = wp_remote_retrieve_response_code( $response );
+									$status = $class_file->url_get_content_html( $domain_contact_url );
+									//Insert Query
+									$admin_data    = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `captcha_status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_site_captcha_check_history, $domain_id, $last_insert_cron_id, $status, current_time( 'mysql', 1 ) ) );       //db call ok; no-cache ok
+									$admin_data_id = $wpdb->insert_id;
+									if ( isset( $admin_data_id ) ) {
+										$cron_tbl_update           = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time( 'mysql', 1 ), $last_insert_cron_id ) );       //db call ok; no-cache ok
+										$domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `captcha_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                             //db call ok; no-cache ok
+									}
 
-                                        if( $response_code === 200 ) {
+								} else {
+									$domain_contact_url = $domain_url . 'contact/';
+									$response           = wp_remote_get( $domain_contact_url );
+									$response_code      = wp_remote_retrieve_response_code( $response );
 
-                                            $status = $class_file->url_get_content_html( $domain_contact_url );
-                                            //Insert Query
-                                            $admin_data = $wpdb->query($wpdb->prepare("INSERT INTO %1s (`domain_id`, `cron_id`, `captcha_status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_site_captcha_check_history, $domain_id, $last_insert_cron_id, $status, current_time('mysql', 1)));       //db call ok; no-cache ok
-                                            $admin_data_id = $wpdb->insert_id;
-                                            if (isset($admin_data_id)) {
-                                                $cron_tbl_update = $wpdb->query($wpdb->prepare("UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time('mysql', 1), $last_insert_cron_id));       //db call ok; no-cache ok
-                                                $domain_scan_status_update = $wpdb->query($wpdb->prepare("UPDATE %1s SET `captcha_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time('mysql', 1), $domain_id));                                             //db call ok; no-cache ok
-                                            }
+									if ( $response_code === 200 ) {
 
-                                        } else {
+										$status = $class_file->url_get_content_html( $domain_contact_url );
+										//Insert Query
+										$admin_data    = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `captcha_status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_site_captcha_check_history, $domain_id, $last_insert_cron_id, $status, current_time( 'mysql', 1 ) ) );       //db call ok; no-cache ok
+										$admin_data_id = $wpdb->insert_id;
+										if ( isset( $admin_data_id ) ) {
+											$cron_tbl_update           = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time( 'mysql', 1 ), $last_insert_cron_id ) );       //db call ok; no-cache ok
+											$domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `captcha_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                             //db call ok; no-cache ok
+										}
 
-                                            $log = 'Contact page not found or not available';
-                                            //Insert Query
-                                            $admin_data = $wpdb->query($wpdb->prepare("INSERT INTO %1s (`domain_id`, `cron_id`, `captcha_status`, `log`, `updated_date`) VALUES (%d, %s, %s, %s, %s)", $sm_site_captcha_check_history, $domain_id, $last_insert_cron_id, '0', $log, current_time('mysql', 1)));       //db call ok; no-cache ok
-                                            $admin_data_id = $wpdb->insert_id;
-                                            if (isset($admin_data_id)) {
-                                                $cron_tbl_update = $wpdb->query($wpdb->prepare("UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time('mysql', 1), $last_insert_cron_id));       //db call ok; no-cache ok
-                                                $domain_scan_status_update = $wpdb->query($wpdb->prepare("UPDATE %1s SET `captcha_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time('mysql', 1), $domain_id));                                             //db call ok; no-cache ok
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
+									} else {
 
-                }
+										$log = 'Contact page not found or not available';
+										//Insert Query
+										$admin_data    = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `captcha_status`, `log`, `updated_date`) VALUES (%d, %s, %s, %s, %s)", $sm_site_captcha_check_history, $domain_id, $last_insert_cron_id, '0', $log, current_time( 'mysql', 1 ) ) );       //db call ok; no-cache ok
+										$admin_data_id = $wpdb->insert_id;
+										if ( isset( $admin_data_id ) ) {
+											$cron_tbl_update           = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time( 'mysql', 1 ), $last_insert_cron_id ) );       //db call ok; no-cache ok
+											$domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `captcha_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                             //db call ok; no-cache ok
+										}
+									}
+								}
+							}
+						}
+					}
+				}
 
-            } else {
-                print_r(  " No of Scan URL is missing " );
-            }
-            break;
+			}
 
-		default:
-			echo "Type is not defind or invalid type";
-	}
+		} else {
+			print_r( " No of Scan URL is missing " );
+		}
+		break;
 
-	die();
+	default:
+		echo "Type is not defind or invalid type";
+}
+
+die();

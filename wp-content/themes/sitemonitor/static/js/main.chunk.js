@@ -2254,12 +2254,12 @@ const useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["
     marginTop: theme.spacing(3)
   },
   report_link: {
-    float: "right",
-    margin: "10px 0px"
+    float: 'right',
+    margin: '10px 0px'
   },
   status_icon: {
-    float: "right",
-    margin: "10px 0px"
+    float: 'right',
+    margin: '10px 0px'
   },
   card: {
     display: 'flex'
@@ -2286,7 +2286,7 @@ const useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["
     padding: theme.spacing(6, 0)
   },
   grid_item: {
-    marginTop: "10px"
+    marginTop: '10px'
   },
   root: {
     width: '100%',
@@ -2303,7 +2303,8 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Co
     super(props);
     this.state = {
       fullReportData: [],
-      sitemapData: []
+      sitemapData: [],
+      sitemapErrorMsg: "Loading..."
     };
     this.ProjectFeaturesBox = this.ProjectFeaturesBox.bind(this);
   }
@@ -2325,15 +2326,17 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Co
 
       return response.json();
     }).then(data => {
-      if (typeof data === 'undefined' || null === data) {
+      if (typeof data === 'undefined' || null === data || Object.keys(data).length === 0) {
         this.setState({
           fullReportData: [],
-          sitemapData: []
+          sitemapData: [],
+          sitemapErrorMsg: "Sitemap reports not generated yet."
         });
       } else {
         this.setState({
           fullReportData: data,
-          sitemapData: data.sitemap
+          sitemapData: data.sitemap,
+          sitemapErrorMsg: Object.keys(data.sitemap).length === 0 ? "Sitemap reports not generated yet." : ""
         });
       }
     });
@@ -2341,7 +2344,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Co
 
   ProjectFeaturesBox(props) {
     const classes = useStyles();
-    const sitemap_page = "/projects/" + this.props.data.match.params.id + "/" + "sitemap";
+    const sitemap_page = '/projects/' + this.props.data.match.params.id + '/' + 'sitemap';
     return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
       container: true,
       item: true,
@@ -2350,7 +2353,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Co
       spacing: 3,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 158
+        lineNumber: 161
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -2359,43 +2362,54 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Co
       md: 2,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 160
+        lineNumber: 163
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_ProjectDetailSidebar__WEBPACK_IMPORTED_MODULE_12__["default"], {
       project_id: this.props.data.match.params.id,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 161
+        lineNumber: 164
       },
       __self: this
     })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      container: true,
       item: true,
-      xs: 7,
-      md: 7,
+      xs: 10,
+      md: 10,
+      spacing: 3,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 164
+        lineNumber: 166
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      item: true,
+      xs: 8,
+      md: 8,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 167
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_5__["default"], {
       className: classes.card,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 165
+        lineNumber: 168
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: classes.cardDetails,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 166
+        lineNumber: 169
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_6__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 167
+        lineNumber: 170
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -2403,7 +2417,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Co
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 168
+        lineNumber: 171
       },
       __self: this
     }, "Sitemap History"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -2411,20 +2425,21 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Co
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 171
+        lineNumber: 174
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_SiteMapReport__WEBPACK_IMPORTED_MODULE_13__["default"], {
       reportData: this.state.sitemapData,
+      sitemapMsg: this.state.sitemapErrorMsg,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 172
+        lineNumber: 175
       },
       __self: this
     })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_9__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 174
+        lineNumber: 177
       },
       __self: this
     }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_8__["Link"], {
@@ -2434,23 +2449,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 176
+        lineNumber: 179
       },
       __self: this
     }, "View full report"))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      container: true,
       item: true,
-      xs: 3,
-      md: 3,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 182
-      },
-      __self: this
-    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
-      item: true,
-      xs: 12,
-      md: 12,
+      xs: 4,
+      md: 4,
       __source: {
         fileName: _jsxFileName,
         lineNumber: 184
@@ -2501,44 +2506,55 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 191
+        lineNumber: 192
       },
       __self: this
     })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_3__["default"], {
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 194
+        lineNumber: 195
       },
       __self: this
-    }, 1 === parseInt(this.state.fullReportData.admin_status) ? "Custom URL set for the admin" : "Default URL set for the admin "))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    }, 1 === parseInt(this.state.fullReportData.admin_status) ? 'Custom URL set for the admin' : 'Default URL set for the admin '))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      container: true,
       item: true,
       xs: 12,
       md: 12,
-      className: classes.grid_item,
+      spacing: 3,
       __source: {
         fileName: _jsxFileName,
         lineNumber: 204
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      item: true,
+      xs: 4,
+      md: 4,
+      className: classes.grid_item,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 205
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_5__["default"], {
       className: classes.card,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 205
+        lineNumber: 206
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
       className: classes.cardDetails,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 206
+        lineNumber: 207
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_6__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 207
+        lineNumber: 208
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -2546,7 +2562,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Co
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 208
+        lineNumber: 209
       },
       __self: this
     }, "Robots", 1 === parseInt(this.state.fullReportData.robots_status) ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_CheckCircleRounded__WEBPACK_IMPORTED_MODULE_10___default.a, {
@@ -2556,7 +2572,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 210
+        lineNumber: 211
       },
       __self: this
     }) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_CancelRounded__WEBPACK_IMPORTED_MODULE_11___default.a, {
@@ -2566,17 +2582,147 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 211
+        lineNumber: 212
       },
       __self: this
     })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_3__["default"], {
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 213
+        lineNumber: 214
       },
       __self: this
-    }, 1 === parseInt(this.state.fullReportData.robots_status) ? "robots.txt is available on the root." : "robots.txt is not available on the root.")))))));
+    }, 1 === parseInt(this.state.fullReportData.robots_status) ? "robots.txt is available on the root." : "robots.txt is not available on the root."))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      item: true,
+      xs: 4,
+      md: 4,
+      className: classes.grid_item,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 223
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      className: classes.card,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 224
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: classes.cardDetails,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 225
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 226
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      variant: "h5",
+      paragraph: true,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 227
+      },
+      __self: this
+    }, "SSL", 1 === parseInt(this.state.fullReportData.https_status) ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_CheckCircleRounded__WEBPACK_IMPORTED_MODULE_10___default.a, {
+      className: classes.status_icon,
+      style: {
+        color: '#43a047'
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 229
+      },
+      __self: this
+    }) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_CancelRounded__WEBPACK_IMPORTED_MODULE_11___default.a, {
+      className: classes.status_icon,
+      style: {
+        color: '#D3302F'
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 230
+      },
+      __self: this
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      paragraph: true,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 232
+      },
+      __self: this
+    }, 1 === parseInt(this.state.fullReportData.https_status) ? "Site is secure." : "Site does not have any SSL certificate."))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      item: true,
+      xs: 4,
+      md: 4,
+      className: classes.grid_item,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 241
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      className: classes.card,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 242
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      className: classes.cardDetails,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 243
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 244
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      variant: "h5",
+      paragraph: true,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 245
+      },
+      __self: this
+    }, "Captcha", 1 === parseInt(this.state.fullReportData.captcha_status) ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_CheckCircleRounded__WEBPACK_IMPORTED_MODULE_10___default.a, {
+      className: classes.status_icon,
+      style: {
+        color: '#43a047'
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 247
+      },
+      __self: this
+    }) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_CancelRounded__WEBPACK_IMPORTED_MODULE_11___default.a, {
+      className: classes.status_icon,
+      style: {
+        color: '#D3302F'
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 248
+      },
+      __self: this
+    })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      paragraph: true,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 250
+      },
+      __self: this
+    }, 1 === parseInt(this.state.fullReportData.captcha_status) ? "Captcha successfully implemented on contact form." : "Missing captcha on contact form"))))))));
   }
 
   render() {
@@ -2584,13 +2730,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Co
       maxWidth: "xl",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 230
+        lineNumber: 267
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(this.ProjectFeaturesBox, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 231
+        lineNumber: 268
       },
       __self: this
     }));
@@ -2915,7 +3061,8 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Co
   constructor(props) {
     super(props);
     this.state = {
-      sitemapData: []
+      sitemapData: [],
+      sitemapErrorMsg: "Please wait... Data will be loaded soon."
     };
     this.ProjectStatusBox = this.ProjectStatusBox.bind(this);
   }
@@ -2937,15 +3084,17 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Co
 
       return response.json();
     }).then(data => {
-      if (typeof data === 'undefined' || null === data) {
+      if (typeof data === 'undefined' || null === data || Object.keys(data).length === 0) {
         this.setState({
           fullReportData: [],
-          sitemapData: []
+          sitemapData: [],
+          sitemapErrorMsg: "Sitemap reports not generated yet."
         });
       } else {
         this.setState({
           fullReportData: data,
-          sitemapData: data.sitemap
+          sitemapData: data.sitemap,
+          sitemapErrorMsg: ""
         });
       }
     });
@@ -2959,7 +3108,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Co
       spacing: 6,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 53
+        lineNumber: 56
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -2967,14 +3116,14 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Co
       xs: 2,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 54
+        lineNumber: 57
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ProjectDetailSidebar__WEBPACK_IMPORTED_MODULE_3__["default"], {
       project_id: this.props.data.match.params.id,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 55
+        lineNumber: 58
       },
       __self: this
     })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -2984,14 +3133,15 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Co
       spacing: 6,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 57
+        lineNumber: 60
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SiteMapReport__WEBPACK_IMPORTED_MODULE_4__["default"], {
       reportData: this.state.sitemapData,
+      sitemapMsg: this.state.sitemapErrorMsg,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 58
+        lineNumber: 61
       },
       __self: this
     })));
@@ -3002,13 +3152,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Co
       maxWidth: "xl",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 66
+        lineNumber: 69
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(this.ProjectStatusBox, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 67
+        lineNumber: 70
       },
       __self: this
     }));
@@ -3310,26 +3460,28 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Compone
       options: {
         filter: false,
         customBodyRender: (value, tableMeta, updateValue) => {
-          const status = 1 === parseInt(value) ? true : false;
-          return status ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_CheckCircleRounded__WEBPACK_IMPORTED_MODULE_8___default.a, {
-            style: {
-              color: '#43a047'
-            },
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 213
-            },
-            __self: this
-          }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_CancelRounded__WEBPACK_IMPORTED_MODULE_9___default.a, {
-            style: {
-              color: '#D3302F'
-            },
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 214
-            },
-            __self: this
-          });
+          if ('undefined' === typeof value) {} else {
+            const status = 1 === parseInt(value) ? true : false;
+            return status ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_CheckCircleRounded__WEBPACK_IMPORTED_MODULE_8___default.a, {
+              style: {
+                color: '#43a047'
+              },
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 216
+              },
+              __self: this
+            }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_CancelRounded__WEBPACK_IMPORTED_MODULE_9___default.a, {
+              style: {
+                color: '#D3302F'
+              },
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 217
+              },
+              __self: this
+            });
+          }
         }
       }
     }, {
@@ -3338,26 +3490,28 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Compone
       options: {
         filter: false,
         customBodyRender: (value, tableMeta, updateValue) => {
-          const status = 1 === parseInt(value) ? true : false;
-          return status ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_CheckCircleRounded__WEBPACK_IMPORTED_MODULE_8___default.a, {
-            style: {
-              color: '#43a047'
-            },
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 227
-            },
-            __self: this
-          }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_CancelRounded__WEBPACK_IMPORTED_MODULE_9___default.a, {
-            style: {
-              color: '#D3302F'
-            },
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 228
-            },
-            __self: this
-          });
+          if ('undefined' === typeof value) {} else {
+            const status = 1 === parseInt(value) ? true : false;
+            return status ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_CheckCircleRounded__WEBPACK_IMPORTED_MODULE_8___default.a, {
+              style: {
+                color: '#43a047'
+              },
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 234
+              },
+              __self: this
+            }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_CancelRounded__WEBPACK_IMPORTED_MODULE_9___default.a, {
+              style: {
+                color: '#D3302F'
+              },
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 235
+              },
+              __self: this
+            });
+          }
         }
       }
     }, {
@@ -3366,26 +3520,28 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Compone
       options: {
         filter: false,
         customBodyRender: (value, tableMeta, updateValue) => {
-          const status = 1 === parseInt(value) ? true : false;
-          return status ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_CheckCircleRounded__WEBPACK_IMPORTED_MODULE_8___default.a, {
-            style: {
-              color: '#43a047'
-            },
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 242
-            },
-            __self: this
-          }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_CancelRounded__WEBPACK_IMPORTED_MODULE_9___default.a, {
-            style: {
-              color: '#D3302F'
-            },
-            __source: {
-              fileName: _jsxFileName,
-              lineNumber: 243
-            },
-            __self: this
-          });
+          if ('undefined' === typeof value) {} else {
+            const status = 1 === parseInt(value) ? true : false;
+            return status ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_CheckCircleRounded__WEBPACK_IMPORTED_MODULE_8___default.a, {
+              style: {
+                color: '#43a047'
+              },
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 253
+              },
+              __self: this
+            }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_CancelRounded__WEBPACK_IMPORTED_MODULE_9___default.a, {
+              style: {
+                color: '#D3302F'
+              },
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 254
+              },
+              __self: this
+            });
+          }
         }
       }
     }];
@@ -3415,14 +3571,14 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Compone
         className: classes.iconContainer,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 268
+          lineNumber: 280
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Tooltip__WEBPACK_IMPORTED_MODULE_5__["default"], {
         title: "Delete Projects",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 269
+          lineNumber: 281
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -3430,14 +3586,14 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Compone
         onClick: this.handleDeleteProject.bind(this, selectedRows, displayData),
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 270
+          lineNumber: 282
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_7___default.a, {
         className: classes.icon,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 271
+          lineNumber: 283
         },
         __self: this
       })))),
@@ -3445,7 +3601,7 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Compone
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CustomToolbar__WEBPACK_IMPORTED_MODULE_12__["default"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 278
+            lineNumber: 290
           },
           __self: this
         });
@@ -3485,13 +3641,13 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Compone
         variant: 'body2',
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 309
+          lineNumber: 321
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 310
+          lineNumber: 322
         },
         __self: this
       }, "Project Reports"), isLoading && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_1__["CircularProgress"], {
@@ -3503,7 +3659,7 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Compone
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 312
+          lineNumber: 324
         },
         __self: this
       })),
@@ -3512,7 +3668,7 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Compone
       options: options,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 307
+        lineNumber: 319
       },
       __self: this
     });
@@ -3600,7 +3756,7 @@ function SiteMapReport(props) {
       lineNumber: 42
     },
     __self: this
-  }, "Sitemap reports not generated yet.") : reportData.map(Data => react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_ExpansionPanel__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }, props.sitemapMsg) : reportData.map(Data => react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_ExpansionPanel__WEBPACK_IMPORTED_MODULE_3__["default"], {
     id: 'panel-main-' + Data.id + 'bh-header',
     expanded: expanded === Data.id,
     onChange: handleChange(Data.id),

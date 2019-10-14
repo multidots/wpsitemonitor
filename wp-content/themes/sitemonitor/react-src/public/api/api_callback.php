@@ -124,7 +124,7 @@ function sm_add_project( $request ) {
 	$wpdb->insert( $sm_domain_list, array(
 		'user_id'      => absint( $sm_user_id ),
 		'project_name' => $sm_project_name,
-		'domain_url'   => $sm_domain_url,
+		'domain_url'   => trim(strtolower($sm_domain_url)),
 		'sitemap_url'  => $sm_sitemap_url,
 		'created_date' => date( 'Y-m-d H:i:s' ),
 		'updated_date' => date( 'Y-m-d H:i:s' ),
@@ -221,10 +221,15 @@ function sm_get_domains( $request ) {
 	}
 
 	if ( ! empty( $sm_search ) ) {
-		$sm_total_domain_data = $wpdb->get_row( $wpdb->prepare( "SELECT COUNT(*) as sm_total_domain FROM %1s WHERE project_name LIKE '%" . $sm_search . "%' and user_id = %d",
-			$domain_table_name,
-			$sm_user_id
-		) );
+		$sm_total_domain_data = $wpdb->get_row(
+			$wpdb->prepare( "
+					SELECT COUNT(*) as sm_total_domain FROM %1s 
+					WHERE project_name LIKE %s 
+					and user_id = %d",
+				$domain_table_name,
+				'%' . $wpdb->esc_like( $sm_search ) . '%',
+				$sm_user_id
+			) );
 	} else {
 		$sm_total_domain_data = $wpdb->get_row( $wpdb->prepare( "SELECT COUNT(*) as sm_total_domain FROM %1s WHERE user_id = %d", $domain_table_name,
 			$sm_user_id ) );
@@ -320,29 +325,30 @@ function get_all_type_report( $project_id ) {
 		$sitemap_filter_data['sitemap'][ $key ]['date']              = ! empty( $data['created_date'] ) ? esc_html( date( 'd-m-Y', strtotime( $data['created_date'] ) ) ) : '';
 	}
 
+	$sm_domain_scan_status = $wpdb->prefix . SM_DOMAIN_STATUS_TABLE;
 
-	$sm_admin_data_history = $wpdb->prefix . SM_ADMIN_HISTORY_TABLE;
-	$admin_data = $wpdb->get_row( $wpdb->prepare( "			
-					SELECT * FROM %1s 
+	$all_status = $wpdb->get_row($wpdb->prepare( "			
+					SELECT * FROM %1s					
 					WHERE domain_id = %d
 					ORDER BY id DESC",
-		$sm_admin_data_history,
+		$sm_domain_scan_status,
 		$project_id ), ARRAY_A );
 
-	if(!empty($admin_data)){
-		$sitemap_filter_data['admin_status'] = 0 ===  absint($admin_data['status']) ? 0 : 1;
+
+	if(!empty($all_status['admin_status'])){
+		$sitemap_filter_data['admin_status'] = 0 ===  absint($all_status['admin_status']) ? 0 : 1;
 	}
 
-	$sm_seo_data_history = $wpdb->prefix . SM_SEO_DATA_TABLE;
-	$robots_data = $wpdb->get_row( $wpdb->prepare( "			
-					SELECT * FROM %1s 
-					WHERE domain_id = %d
-					ORDER BY id DESC",
-		$sm_seo_data_history,
-		$project_id ), ARRAY_A );
+	if(!empty($all_status['roborts_status'])){
+		$sitemap_filter_data['robots_status'] = 0 ===  absint($all_status['roborts_status']) ? 0 : 1;
+	}
 
-	if(!empty($robots_data)){
-		$sitemap_filter_data['robots_status'] = 0 ===  absint($robots_data['seo_status']) ? 0 : 1;
+	if(!empty($all_status['https_status'])){
+		$sitemap_filter_data['https_status'] = 0 ===  absint($all_status['https_status']) ? 0 : 1;
+	}
+
+	if(!empty($all_status['captcha_status'])){
+		$sitemap_filter_data['captcha_status'] = 0 ===  absint($all_status['captcha_status']) ? 0 : 1;
 	}
 
 	return $sitemap_filter_data;

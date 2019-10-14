@@ -40,7 +40,7 @@ export default function SiteMapReport(props) {
       { Object.keys(reportData).length == 0 ?
 
         <Typography>
-          Sitemap reports not generated yet.
+          {props.sitemapMsg}
         </Typography> :
 
           reportData.map(Data => (
