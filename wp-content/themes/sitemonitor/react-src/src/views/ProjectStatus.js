@@ -11,6 +11,7 @@ class ProjectDetailViews extends React.Component {
     super( props );
     this.state = {
       sitemapData: [],
+      sitemapErrorMsg: "Please wait... Data will be loaded soon.",
     };
     this.ProjectStatusBox = this.ProjectStatusBox.bind( this );
   }
@@ -34,15 +35,17 @@ class ProjectDetailViews extends React.Component {
         return response.json()
       } )
       .then( data => {
-        if (typeof data === 'undefined' || null === data) {
+        if (typeof data === 'undefined' || null === data || Object.keys(data).length === 0) {
           this.setState( {
             fullReportData: [],
             sitemapData: [],
+            sitemapErrorMsg: "Sitemap reports not generated yet.",
           } );
         } else {
           this.setState( {
             fullReportData: data,
             sitemapData: data.sitemap,
+            sitemapErrorMsg: "",
           } );
         }
       } );
@@ -55,7 +58,7 @@ class ProjectDetailViews extends React.Component {
           <ProjectDetailSidebar project_id={this.props.data.match.params.id}/>
         </Grid>
         <Grid container item xs={10} spacing={6}>
-          <SiteMapReport reportData={this.state.sitemapData}/>
+          <SiteMapReport reportData={this.state.sitemapData} sitemapMsg={this.state.sitemapErrorMsg}/>
         </Grid>
       </Grid>
     );

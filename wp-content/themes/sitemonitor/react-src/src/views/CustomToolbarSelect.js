@@ -1,12 +1,8 @@
 import React from "react";
 import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
-import CompareArrowsIcon from "@material-ui/icons/CompareArrows";
-import IndeterminateCheckBoxIcon from "@material-ui/icons/IndeterminateCheckBox";
 import BlockIcon from "@material-ui/icons/Block";
 import { withStyles } from "@material-ui/core/styles";
-
-import ProjectsViews,{testpoly} from './Projects';
 
 const defaultToolbarSelectStyles = {
   iconButton: {
