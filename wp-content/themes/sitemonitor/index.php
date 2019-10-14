@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<<<<<<< HEAD
 <?php $BRC_TEMPLATE_PATH = parse_url(get_template_directory_uri(), PHP_URL_PATH); ?>
 <script src='<?php echo $BRC_TEMPLATE_PATH; ?>/react-src/node_modules/@devloco/react-scripts-wptheme-utils/wpThemeClient.js'></script>
 <script src='<?php echo $BRC_TEMPLATE_PATH; ?>/react-src/node_modules/@devloco/react-scripts-wptheme-error-overlay/wpThemeErrorOverlay.js'></script>
@@ -12,6 +13,10 @@
 
 <meta charset="utf-8" />
     <link rel="shortcut icon" href="/wp-content/themes/sitemonitor/favicon.ico" />
+=======
+<meta charset="utf-8" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+>>>>>>> 9c5c641341c8b386714974a3912fcba920e411fa
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
@@ -28,17 +33,30 @@
         If you're reading this from "view source" in your browser, it might not make sense as
         these tokens have already been evaluated and replaced, even in this remark blurb.
 
+<<<<<<< HEAD
         Notice the use of "php echo $TEMPLATE_PATH;" and /wp-content/themes/sitemonitor in the tags above.
         Both will be replaced with the URL of the `public` folder during the build (/wp-content/themes/sitemonitor) or
         at render time (php echo $TEMPLATE_PATH;)
         Only files inside the `public` folder can be referenced like this.
 
         Unlike "/favicon.ico" or "favicon.ico", "/wp-content/themes/sitemonitor/favicon.ico" will
+=======
+        Notice the use of "php echo $TEMPLATE_PATH;" and %PUBLIC_URL% in the tags above.
+        Both will be replaced with the URL of the `public` folder during the build (%PUBLIC_URL%) or
+        at render time (php echo $TEMPLATE_PATH;)
+        Only files inside the `public` folder can be referenced like this.
+
+        Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+>>>>>>> 9c5c641341c8b386714974a3912fcba920e411fa
         work correctly both with client-side routing and a non-root public URL.
         Learn how to configure a non-root public URL by running `npm run wpbuild`.
     -->
     <title>React WordPress Theme</title>
+<<<<<<< HEAD
 <link href="/wp-content/themes/sitemonitor/static/css/main.chunk.css?0438cbb3fa2e0a84b002" rel="stylesheet"></head>
+=======
+</head>
+>>>>>>> 9c5c641341c8b386714974a3912fcba920e411fa
     <body>
     <noscript>
         You need to enable JavaScript to run this app.
@@ -54,5 +72,9 @@
         To begin the development, run `npm run wpstart` or `yarn wpstart`.
         To create a production bundle, use `npm run wpbuild` or `yarn wpbuild`.
     -->
+<<<<<<< HEAD
     <script src="/wp-content/themes/sitemonitor/static/js/bundle.js?0438cbb3fa2e0a84b002"></script><script src="/wp-content/themes/sitemonitor/static/js/1.chunk.js?0438cbb3fa2e0a84b002"></script><script src="/wp-content/themes/sitemonitor/static/js/main.chunk.js?0438cbb3fa2e0a84b002"></script></body>
+=======
+    </body>
+>>>>>>> 9c5c641341c8b386714974a3912fcba920e411fa
 </html>
