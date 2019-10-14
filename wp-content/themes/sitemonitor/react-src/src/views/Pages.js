@@ -29,12 +29,11 @@ class PagesViews extends React.Component {
   render() {
 
     const is404 = this.state.pageData;
-    console.log(is404);
     return (
       <div>
         { false === is404 || typeof is404 === 'undefined' ? <NotFoundPage /> : (
-            <div>
-              <div dangerouslySetInnerHTML={this.createMarkup( this.state.pageData.content.rendered )}/>
+            <div className="entry">
+              <div className="entry-content" dangerouslySetInnerHTML={this.createMarkup( this.state.pageData.content.rendered )}/>
             </div>
           )}
       </div>

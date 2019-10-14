@@ -66,16 +66,30 @@ class MD_SM_API_Register_Controller extends WP_REST_Controller {
 			array(
 				'methods'             => WP_REST_Server::DELETABLE,
 				'callback'            => 'sm_delete_projects',
+				'permission_callback' => function ( WP_REST_Request $request ) {
+					$auth = validate_token();
+					return $auth['status'];
+				},
+			)
+		);
+
+
+		/**
+		 *  Register API FOR THE Reports based on Project and Report Type
+		 */
+		register_rest_route(
+			'md-site-monitor', '/project_report',
+			array(
+				'methods'             => WP_REST_Server::READABLE,
+				'callback'            => 'sm_project_report',
 				'args'                => array(
-					'sm_project_name' => array(
-						'validate_callback' => function ( $param, $request, $key ) {
-							return empty( $param );
-						},
+					'project_id' => array(
+						'required' => true,
+						'type' => 'integer',
 					),
-					'sm_domain_url'   => array(
-						'validate_callback' => function ( $param, $request, $key ) {
-							return empty( $param );
-						},
+					'type'   => array(
+						'required' => true,
+						'type' => 'string',
 					),
 				),
 				'permission_callback' => function ( WP_REST_Request $request ) {

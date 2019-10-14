@@ -1,5 +1,7 @@
 <?php
+
 use \Firebase\JWT\JWT;
+
 /**
  * Login API Callback Function
  *
@@ -235,4 +237,113 @@ function sm_get_domains( $request ) {
 	$response        = new WP_REST_Response( $api_responce, array( 'status' => 200 ) );
 
 	return $response;
+}
+
+function sm_project_report( $request ) {
+
+	global $wpdb;
+	$auth = validate_token();
+
+	if ( ! isset( $auth['status'] ) || empty( $auth['status'] ) || false === $auth['status'] ) {
+		return new WP_Error( 'invalid_user', esc_html__( 'User ID not found', 'md_site_monitor' ), array( 'status' => 403 ) );
+	}
+
+	$sm_user_id = $auth['uid'];
+	$project_id = filter_input( INPUT_GET, 'project_id', FILTER_SANITIZE_NUMBER_INT );
+	$type       = filter_input( INPUT_GET, 'type', FILTER_SANITIZE_STRING );
+
+	$api_responce = array();
+
+	switch ( $type ) {
+		case 'sitemap';
+			$api_responce = sitemap_report( $project_id );
+			break;
+		case 'admin';
+			admin_report( $project_id );
+			break;
+		case 'robots';
+			robots_report( $project_id );
+			break;
+		case 'all';
+			$api_responce = get_all_type_report($project_id);
+			break;
+	}
+
+	$response = new WP_REST_Response( $api_responce, array( 'status' => 200 ) );
+
+	return $response;
+}
+
+function sitemap_report( $project_id ) {
+
+	global $wpdb;
+	$sm_sitemap_data_history = $wpdb->prefix . SM_SITEMAP_HISTORY_TABLE;
+
+	$sitemap_data = $wpdb->get_results( $wpdb->prepare( "			
+					SELECT * FROM %1s 
+					WHERE domain_id = %d AND created_date >= DATE(NOW()) - INTERVAL 30 DAY
+					ORDER BY id DESC",
+		$sm_sitemap_data_history,
+		$project_id ), ARRAY_A );
+
+	$sitemap_filter_data = array();
+
+	foreach ( $sitemap_data as $key => $data ) {
+		$sitemap_filter_data['sitemap'][ $key ]['id']                = esc_html( $data['id'] );
+		$sitemap_filter_data['sitemap'][ $key ]['domain_id']         = esc_html( $data['domain_id'] );
+		$sitemap_filter_data['sitemap'][ $key ]['cron_id']           = esc_html( $data['cron_id'] );
+		$sitemap_filter_data['sitemap'][ $key ]['sitemap_diff_data'] = ! empty( $data['sitemap_diff_data'] ) ? json_decode( $data['sitemap_diff_data'] ) : array();
+		$sitemap_filter_data['sitemap'][ $key ]['date']              = ! empty( $data['created_date'] ) ? esc_html( date( 'd-m-Y', strtotime( $data['created_date'] ) ) ) : '';
+	}
+
+	return $sitemap_filter_data;
+}
+
+function get_all_type_report( $project_id ) {
+
+	global $wpdb;
+	$sm_sitemap_data_history = $wpdb->prefix . SM_SITEMAP_HISTORY_TABLE;
+	$sitemap_data = $wpdb->get_results( $wpdb->prepare( "			
+					SELECT * FROM %1s 
+					WHERE domain_id = %d AND created_date >= DATE(NOW()) - INTERVAL 7 DAY
+					ORDER BY id DESC",
+		$sm_sitemap_data_history,
+		$project_id ), ARRAY_A );
+
+	$sitemap_filter_data = array();
+
+	foreach ( $sitemap_data as $key => $data ) {
+		$sitemap_filter_data['sitemap'][ $key ]['id']                = esc_html( $data['id'] );
+		$sitemap_filter_data['sitemap'][ $key ]['domain_id']         = esc_html( $data['domain_id'] );
+		$sitemap_filter_data['sitemap'][ $key ]['cron_id']           = esc_html( $data['cron_id'] );
+		$sitemap_filter_data['sitemap'][ $key ]['sitemap_diff_data'] = ! empty( $data['sitemap_diff_data'] ) ? json_decode( $data['sitemap_diff_data'] ) : array();
+		$sitemap_filter_data['sitemap'][ $key ]['date']              = ! empty( $data['created_date'] ) ? esc_html( date( 'd-m-Y', strtotime( $data['created_date'] ) ) ) : '';
+	}
+
+
+	$sm_admin_data_history = $wpdb->prefix . SM_ADMIN_HISTORY_TABLE;
+	$admin_data = $wpdb->get_row( $wpdb->prepare( "			
+					SELECT * FROM %1s 
+					WHERE domain_id = %d
+					ORDER BY id DESC",
+		$sm_admin_data_history,
+		$project_id ), ARRAY_A );
+
+	if(!empty($admin_data)){
+		$sitemap_filter_data['admin_status'] = 0 ===  absint($admin_data['status']) ? 0 : 1;
+	}
+
+	$sm_seo_data_history = $wpdb->prefix . SM_SEO_DATA_TABLE;
+	$robots_data = $wpdb->get_row( $wpdb->prepare( "			
+					SELECT * FROM %1s 
+					WHERE domain_id = %d
+					ORDER BY id DESC",
+		$sm_seo_data_history,
+		$project_id ), ARRAY_A );
+
+	if(!empty($robots_data)){
+		$sitemap_filter_data['robots_status'] = 0 ===  absint($robots_data['seo_status']) ? 0 : 1;
+	}
+
+	return $sitemap_filter_data;
 }

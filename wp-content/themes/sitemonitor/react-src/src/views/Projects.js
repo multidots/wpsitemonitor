@@ -116,11 +116,6 @@ class ProjectsViews extends React.Component {
   handleDeleteProject = (selectedRows,displayData) => {
     this.setState( { isLoading: true, data: [['Loading Data...']] } );
 
-    console.table(selectedRows);
-    console.table(displayData);
-
-    return true;
-
     const deleteData = selectedRows.data.map(function(data, idx) {
       return displayData[data.index].data[0];
     });
@@ -152,7 +147,7 @@ class ProjectsViews extends React.Component {
       }
       return res.json();
     } ).then( function( response ) {
-      console.log(response);
+
     } ).catch( err => {
       this.setState( { isLoading: false } );
     } );

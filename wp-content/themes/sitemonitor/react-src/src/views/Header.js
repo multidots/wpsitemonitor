@@ -57,8 +57,10 @@ class HeaderViews extends Component {
                 <AppBar position="static" style={{ marginBottom: 20 }}>
                     <Toolbar>
                         <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                           <img src={logo} alt="logo" width="35px" height="35px"/>
+                           <Link to={{'pathname': "/"}}>
+                            <img src={logo} alt="logo" width="35px" height="35px"/></Link>
                         </IconButton>
+
                         <Typography variant="h6" className={classes.title}>
                             Site Monitor
                         </Typography>

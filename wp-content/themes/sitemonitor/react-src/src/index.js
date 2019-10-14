@@ -3,12 +3,11 @@ import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 
-import App from './components/App';
-import Login from './components/Login';
 import ProjectsDetail from './components/ProjectDetail';
 import ProjectDetailStatus from './components/ProjectStatus';
 import Pages from './components/Pages';
 
+//import './views/style.css';
 
 const routing = (
 	<Router>
