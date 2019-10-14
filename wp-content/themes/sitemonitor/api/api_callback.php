@@ -124,7 +124,7 @@ function sm_add_project( $request ) {
 	$wpdb->insert( $sm_domain_list, array(
 		'user_id'      => absint( $sm_user_id ),
 		'project_name' => $sm_project_name,
-		'domain_url'   => trim(strtolower($sm_domain_url)),
+		'domain_url'   => trim( strtolower( $sm_domain_url ) ),
 		'sitemap_url'  => $sm_sitemap_url,
 		'created_date' => date( 'Y-m-d H:i:s' ),
 		'updated_date' => date( 'Y-m-d H:i:s' ),
@@ -270,7 +270,7 @@ function sm_project_report( $request ) {
 			robots_report( $project_id );
 			break;
 		case 'all';
-			$api_responce = get_all_type_report($project_id);
+			$api_responce = get_all_type_report( $project_id );
 			break;
 	}
 
@@ -308,7 +308,7 @@ function get_all_type_report( $project_id ) {
 
 	global $wpdb;
 	$sm_sitemap_data_history = $wpdb->prefix . SM_SITEMAP_HISTORY_TABLE;
-	$sitemap_data = $wpdb->get_results( $wpdb->prepare( "			
+	$sitemap_data            = $wpdb->get_results( $wpdb->prepare( "			
 					SELECT * FROM %1s 
 					WHERE domain_id = %d AND created_date >= DATE(NOW()) - INTERVAL 7 DAY
 					ORDER BY id DESC",
@@ -327,29 +327,17 @@ function get_all_type_report( $project_id ) {
 
 	$sm_domain_scan_status = $wpdb->prefix . SM_DOMAIN_STATUS_TABLE;
 
-	$all_status = $wpdb->get_row($wpdb->prepare( "			
+	$all_status = $wpdb->get_row( $wpdb->prepare( "			
 					SELECT * FROM %1s					
 					WHERE domain_id = %d
 					ORDER BY id DESC",
 		$sm_domain_scan_status,
 		$project_id ), ARRAY_A );
 
-
-	if(!empty($all_status['admin_status'])){
-		$sitemap_filter_data['admin_status'] = 0 ===  absint($all_status['admin_status']) ? 0 : 1;
-	}
-
-	if(!empty($all_status['roborts_status'])){
-		$sitemap_filter_data['robots_status'] = 0 ===  absint($all_status['roborts_status']) ? 0 : 1;
-	}
-
-	if(!empty($all_status['https_status'])){
-		$sitemap_filter_data['https_status'] = 0 ===  absint($all_status['https_status']) ? 0 : 1;
-	}
-
-	if(!empty($all_status['captcha_status'])){
-		$sitemap_filter_data['captcha_status'] = 0 ===  absint($all_status['captcha_status']) ? 0 : 1;
-	}
-
+	$sitemap_filter_data['admin_status']   = 0 === absint( $all_status['admin_status'] ) ? 0 : 1;
+	$sitemap_filter_data['robots_status']  = 0 === absint( $all_status['roborts_status'] ) ? 0 : 1;
+	$sitemap_filter_data['https_status']   = 0 === absint( $all_status['https_status'] ) ? 0 : 1;
+	$sitemap_filter_data['captcha_status'] = 0 === absint( $all_status['captcha_status'] ) ? 0 : 1;
+	
 	return $sitemap_filter_data;
 }
