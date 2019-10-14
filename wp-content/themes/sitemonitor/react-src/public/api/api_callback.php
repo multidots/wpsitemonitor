@@ -338,6 +338,6 @@ function get_all_type_report( $project_id ) {
 	$sitemap_filter_data['robots_status']  = 0 === absint( $all_status['roborts_status'] ) ? 0 : 1;
 	$sitemap_filter_data['https_status']   = 0 === absint( $all_status['https_status'] ) ? 0 : 1;
 	$sitemap_filter_data['captcha_status'] = 0 === absint( $all_status['captcha_status'] ) ? 0 : 1;
-	
+
 	return $sitemap_filter_data;
 }
