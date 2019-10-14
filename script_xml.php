@@ -1,6 +1,6 @@
 <?php
 
-	/* Template Name: SITE SCRIPT Template */
+include "wp-load.php";
 
 	global  $wpdb;
 
