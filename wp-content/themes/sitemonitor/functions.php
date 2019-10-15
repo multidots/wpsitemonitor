@@ -5,6 +5,7 @@ require_once get_template_directory() . '/class-WPMail.php';
 require_once get_template_directory() . '/api/register_api_endpoint.php';
 require_once get_template_directory() . '/api/api_callback.php';
 require_once get_template_directory() . '/api/constant.php';
+require_once get_template_directory() . '/api/email_template.php';
 
 /**
  * Validate Authorization for the user
