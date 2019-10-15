@@ -191,7 +191,7 @@ function sm_get_domains( $request ) {
 
 	if ( ! empty( $sm_search ) ) {
 		$domain_data = $wpdb->get_results( $wpdb->prepare( "			
-					SELECT * FROM %1s as dl 
+					SELECT dl.id,dl.project_name,dl.domain_url,dl.sitemap_url,cs.sitemap_status,cs.admin_status,cs.admin_status,cs.roborts_status FROM %1s as dl 
 					JOIN %1s as cs
 					ON dl.id = cs.domain_id 
 					WHERE dl.project_name LIKE %s
@@ -204,7 +204,7 @@ function sm_get_domains( $request ) {
 			SM_RECORDS_PER_PAGE ), ARRAY_A );
 	} else {
 		$domain_data = $wpdb->get_results( $wpdb->prepare( "			
-					SELECT * FROM %1s as dl 
+					SELECT dl.id,dl.project_name,dl.domain_url,dl.sitemap_url,cs.sitemap_status,cs.admin_status,cs.admin_status,cs.roborts_status FROM %1s as dl 
 					JOIN %1s as cs
 					ON dl.id = cs.domain_id 
 					AND dl.user_id = %d ORDER BY dl.id DESC LIMIT %d, %d",
@@ -239,7 +239,6 @@ function sm_get_domains( $request ) {
 		'total_data' => $sm_total_domain,
 	);
 	$response        = new WP_REST_Response( $api_responce, array( 'status' => 200 ) );
-
 	return $response;
 }
 
