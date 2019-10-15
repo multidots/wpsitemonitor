@@ -91,8 +91,7 @@ function CustomToolbar() {
     }
 
     const token = localStorage.getItem( 'token' );
-    const site_url = Constants.SITE_URL;
-    fetch( `${site_url}/wp-json/md-site-monitor/add_project`, {
+    fetch( `/wp-json/md-site-monitor/add_project`, {
       method: 'POST',
       body: JSON.stringify( state ),
       headers: {
