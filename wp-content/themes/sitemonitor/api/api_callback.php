@@ -158,7 +158,7 @@ function sm_add_project( $request ) {
 	$stats_id = $wpdb->insert_id;
 
 	if ( isset( $project_id ) && ! empty( $project_id ) && isset( $stats_id ) && ! empty( $stats_id ) ) {
-
+		add_project_notification( $project_data );
 		$response = array(
 			'project_id' => $project_id,
 			'message'    => "Project Successfully added.",
@@ -191,7 +191,7 @@ function sm_get_domains( $request ) {
 
 	if ( ! empty( $sm_search ) ) {
 		$domain_data = $wpdb->get_results( $wpdb->prepare( "			
-					SELECT * FROM %1s as dl 
+					SELECT dl.id,dl.project_name,dl.domain_url,dl.sitemap_url,cs.sitemap_status,cs.admin_status,cs.admin_status,cs.roborts_status FROM %1s as dl 
 					JOIN %1s as cs
 					ON dl.id = cs.domain_id 
 					WHERE dl.project_name LIKE %s
@@ -204,7 +204,7 @@ function sm_get_domains( $request ) {
 			SM_RECORDS_PER_PAGE ), ARRAY_A );
 	} else {
 		$domain_data = $wpdb->get_results( $wpdb->prepare( "			
-					SELECT * FROM %1s as dl 
+					SELECT dl.id,dl.project_name,dl.domain_url,dl.sitemap_url,cs.sitemap_status,cs.admin_status,cs.admin_status,cs.roborts_status FROM %1s as dl 
 					JOIN %1s as cs
 					ON dl.id = cs.domain_id 
 					AND dl.user_id = %d ORDER BY dl.id DESC LIMIT %d, %d",
@@ -239,7 +239,6 @@ function sm_get_domains( $request ) {
 		'total_data' => $sm_total_domain,
 	);
 	$response        = new WP_REST_Response( $api_responce, array( 'status' => 200 ) );
-
 	return $response;
 }
 
@@ -306,8 +305,8 @@ function sitemap_report( $project_id ) {
 function get_all_type_report( $project_id ) {
 
 	global $wpdb;
-	$sitemap_filter_data   = array();
-	$sitemap_filter_data['sitemap']   = sitemap_report( $project_id );
+	$sitemap_filter_data            = array();
+	$sitemap_filter_data['sitemap'] = sitemap_report( $project_id );
 
 	$sm_domain_scan_status = $wpdb->prefix . SM_DOMAIN_STATUS_TABLE;
 	$all_status            = $wpdb->get_row( $wpdb->prepare( "			
@@ -317,10 +316,47 @@ function get_all_type_report( $project_id ) {
 		$sm_domain_scan_status,
 		$project_id ), ARRAY_A );
 
-	$sitemap_filter_data['admin_status']   = 0 === absint( $all_status['admin_status'] ) ? 0 : 1;
-	$sitemap_filter_data['robots_status']  = 0 === absint( $all_status['roborts_status'] ) ? 0 : 1;
-	$sitemap_filter_data['https_status']   = 0 === absint( $all_status['https_status'] ) ? 0 : 1;
-	$sitemap_filter_data['captcha_status'] = 0 === absint( $all_status['captcha_status'] ) ? 0 : 1;
+	$sitemap_filter_data['admin_status']   = get_project_status( 'admin_url', $project_id );
+	$sitemap_filter_data['robots_status']  = get_project_status( 'robots_url', $project_id );
+	$sitemap_filter_data['https_status']   = get_project_status( 'https_scan', $project_id );
+	$sitemap_filter_data['captcha_status'] = get_project_status( 'captcha_scan', $project_id );
 
 	return $sitemap_filter_data;
+}
+
+
+function add_project_notification( $domainData ) {
+
+	$user_id    = $domainData->user_id;
+	$domain_url = $domainData->sm_domain_url;
+
+	$user_info  = get_userdata( $user_id );
+	$user_email = $user_info->user_email;
+
+	$body = add_site_email_template( $domain_url );
+
+	$headers = array('Content-Type: text/html; charset=UTF-8');
+	wp_mail( $user_email, 'A new site was added to your account. We will now monitor ' . $domain_url, $body , $headers);
+}
+
+
+function get_project_status( $status_type, $project_id ) {
+	global $wpdb;
+	$sm_cron_status = $wpdb->prefix . SM_CRON_STATUS_TABLE;
+	$project_status = $wpdb->get_results(
+		$wpdb->prepare(
+			"SELECT status FROM %1s WHERE domain_id =%d AND cron_name = %s ORDER BY id DESC LIMIT 1",
+			array(
+				$sm_cron_status,
+				$project_id,
+				$status_type,
+			)
+		)
+	);
+
+	if ( ! empty( $project_status ) ) {
+		return $project_status->status;
+	} else {
+		return 0;
+	}
 }

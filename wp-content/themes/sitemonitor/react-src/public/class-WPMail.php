@@ -41,12 +41,6 @@ class Sitemoniter_WPMail
         return $output;
     }
 
-    public function addSiteTemplate( $string ) {
-
-        include_once('add_site_mail_template.php');
-
-    }
-
     public function has_ssl( $domain ) {
         $ssl_check = @fsockopen( 'ssl://' . $domain, 443, $errno, $errstr, 30 );
         $res = !! $ssl_check;
