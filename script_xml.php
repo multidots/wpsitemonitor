@@ -1,8 +1,8 @@
 <?php
 
-	/* Template Name: SITE SCRIPT Template */
+include "wp-load.php";
 
-	global  $wpdb;
+	global  $wpdb;  
 
 	$type = filter_input( INPUT_GET, 'type', FILTER_SANITIZE_STRING );
 	$type = $type ? $type : "";
