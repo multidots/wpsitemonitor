@@ -184,7 +184,7 @@ class ProjectsViews extends React.Component {
 		const columns = [
       { label: 'ID', name: 'id',
         options: {
-          display: true
+          display: false
         }
       },
 			{ label: 'Project', name: 'project_name',
