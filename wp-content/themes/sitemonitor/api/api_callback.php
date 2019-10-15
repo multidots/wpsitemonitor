@@ -321,7 +321,7 @@ function get_all_type_report( $project_id ) {
 	$sitemap_filter_data['robots_status']  = get_project_status( 'robots_url', $project_id );
 	$sitemap_filter_data['https_status']   = get_project_status( 'https_scan', $project_id );
 	$sitemap_filter_data['captcha_status'] = get_project_status( 'captcha_scan', $project_id );
-	
+
 	return $sitemap_filter_data;
 }
 
@@ -336,7 +336,8 @@ function add_project_notification( $domainData ) {
 
 	$body = add_site_email_template( $domain_url );
 
-	wp_mail( $user_email, 'A new site was added to your account. We will now monitor ' . $domain_url, $body );
+	$headers = array('Content-Type: text/html; charset=UTF-8');
+	wp_mail( $user_email, 'A new site was added to your account. We will now monitor ' . $domain_url, $body , $headers);
 }
 
 

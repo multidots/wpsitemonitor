@@ -102,7 +102,7 @@ function CustomToolbar() {
       return res.json();
     } ).then( function( response ) {
       handleClose();
-      //window.location.href = '/projects';
+      window.location.href = '/projects';
     } ).catch( err => {
 
     } );
