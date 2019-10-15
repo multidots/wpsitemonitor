@@ -37,14 +37,12 @@ class ProjectDetailViews extends React.Component {
       .then( data => {
         if (typeof data === 'undefined' || null === data || Object.keys(data).length === 0) {
           this.setState( {
-            fullReportData: [],
             sitemapData: [],
             sitemapErrorMsg: "Sitemap reports not generated yet.",
           } );
         } else {
           this.setState( {
-            fullReportData: data,
-            sitemapData: data.sitemap,
+            sitemapData: data,
             sitemapErrorMsg: "",
           } );
         }

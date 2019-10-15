@@ -73,7 +73,6 @@ function sm_delete_projects( $request ) {
 	if ( ! isset( $auth['status'] ) || empty( $auth['status'] ) || false === $auth['status'] ) {
 		return new WP_Error( 'invalid_user', esc_html__( 'User ID not found', 'md_site_monitor' ), array( 'status' => 403 ) );
 	}
-	$sm_user_id = $auth['uid'];
 
 	global $wpdb;
 	$delete_data = json_decode( $request->get_body() );
@@ -246,14 +245,12 @@ function sm_get_domains( $request ) {
 
 function sm_project_report( $request ) {
 
-	global $wpdb;
 	$auth = validate_token();
 
 	if ( ! isset( $auth['status'] ) || empty( $auth['status'] ) || false === $auth['status'] ) {
 		return new WP_Error( 'invalid_user', esc_html__( 'User ID not found', 'md_site_monitor' ), array( 'status' => 403 ) );
 	}
 
-	$sm_user_id = $auth['uid'];
 	$project_id = filter_input( INPUT_GET, 'project_id', FILTER_SANITIZE_NUMBER_INT );
 	$type       = filter_input( INPUT_GET, 'type', FILTER_SANITIZE_STRING );
 
@@ -293,12 +290,14 @@ function sitemap_report( $project_id ) {
 
 	$sitemap_filter_data = array();
 
-	foreach ( $sitemap_data as $key => $data ) {
-		$sitemap_filter_data['sitemap'][ $key ]['id']                = esc_html( $data['id'] );
-		$sitemap_filter_data['sitemap'][ $key ]['domain_id']         = esc_html( $data['domain_id'] );
-		$sitemap_filter_data['sitemap'][ $key ]['cron_id']           = esc_html( $data['cron_id'] );
-		$sitemap_filter_data['sitemap'][ $key ]['sitemap_diff_data'] = ! empty( $data['sitemap_diff_data'] ) ? json_decode( $data['sitemap_diff_data'] ) : array();
-		$sitemap_filter_data['sitemap'][ $key ]['date']              = ! empty( $data['created_date'] ) ? esc_html( date( 'd-m-Y', strtotime( $data['created_date'] ) ) ) : '';
+	if ( ! empty( $sitemap_data ) ) {
+		foreach ( $sitemap_data as $key => $data ) {
+			$sitemap_filter_data[ $key ]['id']                = esc_html( $data['id'] );
+			$sitemap_filter_data[ $key ]['domain_id']         = esc_html( $data['domain_id'] );
+			$sitemap_filter_data[ $key ]['cron_id']           = esc_html( $data['cron_id'] );
+			$sitemap_filter_data[ $key ]['sitemap_diff_data'] = ! empty( $data['sitemap_diff_data'] ) ? json_decode( $data['sitemap_diff_data'] ) : array();
+			$sitemap_filter_data[ $key ]['date']              = ! empty( $data['created_date'] ) ? esc_html( date( 'd-m-Y', strtotime( $data['created_date'] ) ) ) : '';
+		}
 	}
 
 	return $sitemap_filter_data;
@@ -307,27 +306,11 @@ function sitemap_report( $project_id ) {
 function get_all_type_report( $project_id ) {
 
 	global $wpdb;
-	$sm_sitemap_data_history = $wpdb->prefix . SM_SITEMAP_HISTORY_TABLE;
-	$sitemap_data            = $wpdb->get_results( $wpdb->prepare( "			
-					SELECT * FROM %1s 
-					WHERE domain_id = %d AND created_date >= DATE(NOW()) - INTERVAL 7 DAY
-					ORDER BY id DESC",
-		$sm_sitemap_data_history,
-		$project_id ), ARRAY_A );
-
-	$sitemap_filter_data = array();
-
-	foreach ( $sitemap_data as $key => $data ) {
-		$sitemap_filter_data['sitemap'][ $key ]['id']                = esc_html( $data['id'] );
-		$sitemap_filter_data['sitemap'][ $key ]['domain_id']         = esc_html( $data['domain_id'] );
-		$sitemap_filter_data['sitemap'][ $key ]['cron_id']           = esc_html( $data['cron_id'] );
-		$sitemap_filter_data['sitemap'][ $key ]['sitemap_diff_data'] = ! empty( $data['sitemap_diff_data'] ) ? json_decode( $data['sitemap_diff_data'] ) : array();
-		$sitemap_filter_data['sitemap'][ $key ]['date']              = ! empty( $data['created_date'] ) ? esc_html( date( 'd-m-Y', strtotime( $data['created_date'] ) ) ) : '';
-	}
+	$sitemap_filter_data   = array();
+	$sitemap_filter_data['sitemap']   = sitemap_report( $project_id );
 
 	$sm_domain_scan_status = $wpdb->prefix . SM_DOMAIN_STATUS_TABLE;
-
-	$all_status = $wpdb->get_row( $wpdb->prepare( "			
+	$all_status            = $wpdb->get_row( $wpdb->prepare( "			
 					SELECT * FROM %1s					
 					WHERE domain_id = %d
 					ORDER BY id DESC",
@@ -338,6 +321,6 @@ function get_all_type_report( $project_id ) {
 	$sitemap_filter_data['robots_status']  = 0 === absint( $all_status['roborts_status'] ) ? 0 : 1;
 	$sitemap_filter_data['https_status']   = 0 === absint( $all_status['https_status'] ) ? 0 : 1;
 	$sitemap_filter_data['captcha_status'] = 0 === absint( $all_status['captcha_status'] ) ? 0 : 1;
-	
+
 	return $sitemap_filter_data;
 }
