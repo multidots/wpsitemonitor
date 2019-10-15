@@ -3,6 +3,7 @@
 /* Template Name: Check Captcha SCRIPT Template */
 
     global  $wpdb;
+
     $type = $_GET['type'];
     if( isset( $_GET['no'] ) ){
         $no_of_records = $_GET['no'];

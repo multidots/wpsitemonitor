@@ -31,10 +31,10 @@ class Sitemoniter_WPMail
         $key = hash( 'sha256', $secret_key );
         $iv = substr( hash( 'sha256', $secret_iv ), 0, 16 );
 
-        if( $action == 'e' ) {
+        if( $action === 'e' ) {
             $output = base64_encode( openssl_encrypt( $string, $encrypt_method, $key, 0, $iv ) );
         }
-        else if( $action == 'd' ){
+        else if( $action === 'd' ){
             $output = openssl_decrypt( base64_decode( $string ), $encrypt_method, $key, 0, $iv );
         }
 
@@ -48,7 +48,7 @@ class Sitemoniter_WPMail
     }
 
     public function has_ssl( $domain ) {
-        $ssl_check = @fsockopen( 'ssl://' . $domain, 443, $errno, $errstr, 30 );
+        $ssl_check = fsockopen( 'ssl://' . $domain, 443, $errno, $errstr, 30 );
         $res = !! $ssl_check;
         if ( $ssl_check ) { fclose( $ssl_check ); }
         return $res;
