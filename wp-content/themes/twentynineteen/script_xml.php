@@ -8,7 +8,7 @@
     $type = $type ? $type : "";
 
     $no_of_records = filter_input( INPUT_GET, 'no', FILTER_SANITIZE_NUMBER_INT );
-    $no_of_records = $no_of_records ? absint( $no_of_records ) : "";
+    $no_of_records = $no_of_records ? absint( $no_of_records ) : 50;
 
     $cron_days = 1;
 
@@ -90,6 +90,7 @@
                             //Insert Query
                             $last_insert_cron_id = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_name`, `status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_cron_status_tbl_name, $domain_id, 'sitemap_xml', '0', current_time( 'mysql', 1 ) ) );       //db call ok; no-cache ok
                             $last_insert_cron_id = $wpdb->insert_id;
+
 
 
                             //Check first time came or not
@@ -232,6 +233,7 @@
                 }
             } else {
                 print_r( " No of Scan URL is missing " );
+
             }
             break;
 
