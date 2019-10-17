@@ -52,12 +52,7 @@ class ProjectDetailViews extends React.Component {
   ProjectStatusBox( props ) {
     return (
       <Grid container item xs={12} spacing={6}>
-        <Grid item xs={2}>
-          <ProjectDetailSidebar project_id={this.props.data.match.params.id}/>
-        </Grid>
-        <Grid container item xs={10} spacing={6}>
           <SiteMapReport reportData={this.state.sitemapData} sitemapMsg={this.state.sitemapErrorMsg}/>
-        </Grid>
       </Grid>
     );
   }

@@ -175,44 +175,6 @@ function CustomToolbar() {
                   id="sm_domain_url"
                 />
 
-                <FormControlLabel
-                  label="Sitemap"
-                  labelPlacement="end"
-                  control={
-                    <Checkbox
-                      checked={state.sm_sitemap_option}
-                      onChange={handleSwitchChange( 'sm_sitemap_option' )}
-                      value="checkedB"
-                      color="primary"
-                    />
-                  }
-                />
-                <FormControlLabel
-                  label="Robots"
-                  labelPlacement="end"
-                  control={
-                    <Checkbox
-                      checked={state.sm_robots_option}
-                      onChange={handleSwitchChange( 'sm_robots_option' )}
-                      value="checkedB"
-                      color="primary"
-                    />
-                  }
-                />
-
-                <FormControlLabel
-                  label="Admin"
-                  labelPlacement="end"
-                  control={
-                    <Checkbox
-                      checked={state.sm_admin_option}
-                      onChange={handleSwitchChange( 'sm_admin_option' )}
-                      value="on"
-                      color="primary"
-                    />
-                  }
-                />
-
                 <Button
                   type="submit"
                   fullWidth

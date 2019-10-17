@@ -13,8 +13,28 @@
       <executable />
     </execution>
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
   </component>
   <component name="ProjectId" id="1RrVRJonemrjgBqisbGatfhhWoO" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -58,7 +78,8 @@
       <workItem from="1570697402199" duration="13871000" />
       <workItem from="1570768968562" duration="17385000" />
       <workItem from="1571028370170" duration="18031000" />
-      <workItem from="1571114789746" duration="18187000" />
+      <workItem from="1571114789746" duration="22419000" />
+      <workItem from="1571291608146" duration="7148000" />
     </task>
     <servers />
   </component>

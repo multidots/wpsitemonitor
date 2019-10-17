@@ -159,11 +159,6 @@ class ProjectDetailViews extends React.Component {
     const sitemap_page = '/projects/' + this.props.data.match.params.id + '/' + 'sitemap';
     return (
       <Grid container item xs={12} md={12} spacing={3}>
-
-        <Grid item xs={2} md={2}>
-          <ProjectDetailSidebar project_id={this.props.data.match.params.id}/>
-        </Grid>
-        <Grid container item xs={10} md={10} spacing={3}>
           <Grid item xs={8} md={8}>
             <Card className={classes.card}>
               <div className={classes.cardDetails}>
@@ -176,12 +171,13 @@ class ProjectDetailViews extends React.Component {
                   </Typography>
                   <Divider/>
 
-                  <Link className={classes.report_link} to={{ pathname: sitemap_page }}>View full report</Link>
+                  <Link className={classes.report_link} to={{ pathname: sitemap_page }}>View More</Link>
                 </CardContent>
               </div>
             </Card>
           </Grid>
-          <Grid item xs={4} md={4}>
+          <Grid container item xs={4} md={4} >
+            <Grid item xs={12} md={12}>
             <Card className={classes.card}>
               <div className={classes.cardDetails}>
                 <CardContent>
@@ -201,55 +197,54 @@ class ProjectDetailViews extends React.Component {
               </div>
             </Card>
           </Grid>
-          <Grid container item xs={12} md={12} spacing={3}>
-            <Grid item xs={4} md={4} className={classes.grid_item} >
+            <Grid item xs={12} md={12} className={classes.grid_item} >
               <Card className={classes.card}>
                 <div className={classes.cardDetails}>
                   <CardContent>
                     <Typography variant="h5" paragraph>
                       Robots
                       { 1 === parseInt(this.state.fullReportData.robots_status) ? <CheckCircleRoundedIcon className={classes.status_icon} style={{color: '#43a047'}}/> : (
-                        <CancelRoundedIcon className={classes.status_icon} style={{color: '#D3302F'}}/> ) }
+                          <CancelRoundedIcon className={classes.status_icon} style={{color: '#D3302F'}}/> ) }
                     </Typography>
                     <Typography paragraph>
                       { 1 === parseInt(this.state.fullReportData.robots_status) ?   "robots.txt is available on the root."  : (
-                        "robots.txt is not available on the root."
+                          "robots.txt is not available on the root."
                       ) }
                     </Typography>
                   </CardContent>
                 </div>
               </Card>
             </Grid>
-            <Grid item xs={4} md={4} className={classes.grid_item} >
+            <Grid item xs={12} md={12} className={classes.grid_item} >
               <Card className={classes.card}>
                 <div className={classes.cardDetails}>
                   <CardContent>
                     <Typography variant="h5" paragraph>
                       SSL
                       { 1 === parseInt(this.state.fullReportData.https_status) ? <CheckCircleRoundedIcon className={classes.status_icon} style={{color: '#43a047'}}/> : (
-                        <CancelRoundedIcon className={classes.status_icon} style={{color: '#D3302F'}}/> ) }
+                          <CancelRoundedIcon className={classes.status_icon} style={{color: '#D3302F'}}/> ) }
                     </Typography>
                     <Typography paragraph>
                       { 1 === parseInt(this.state.fullReportData.https_status) ?   "Site is secure."  : (
-                        "Site does not have any SSL certificate."
+                          "Site does not have any SSL certificate."
                       ) }
                     </Typography>
                   </CardContent>
                 </div>
               </Card>
             </Grid>
-            <Grid item xs={4} md={4} className={classes.grid_item} >
+            <Grid item xs={12} md={12} className={classes.grid_item} >
               <Card className={classes.card}>
                 <div className={classes.cardDetails}>
                   <CardContent>
                     <Typography variant="h5" paragraph>
                       Captcha
                       { 1 === parseInt(this.state.fullReportData.captcha_status) ? <CheckCircleRoundedIcon className={classes.status_icon} style={{color: '#43a047'}}/> : (
-                        <CancelRoundedIcon className={classes.status_icon} style={{color: '#D3302F'}}/> ) }
+                          <CancelRoundedIcon className={classes.status_icon} style={{color: '#D3302F'}}/> ) }
                     </Typography>
                     <Typography paragraph>
                       { 1 === parseInt(this.state.fullReportData.captcha_status) ?   "Captcha successfully implemented on contact form."  : (
-                        "Missing captcha on contact form"
+                          "Missing captcha on contact form"
                       ) }
                     </Typography>
                   </CardContent>
@@ -257,7 +252,6 @@ class ProjectDetailViews extends React.Component {
               </Card>
             </Grid>
           </Grid>
-        </Grid>
       </Grid>
     );
   }
