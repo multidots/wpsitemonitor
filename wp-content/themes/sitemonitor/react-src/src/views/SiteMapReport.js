@@ -51,7 +51,10 @@ export default function SiteMapReport(props) {
                   aria-controls="panel1bh-content"
                   id={'panel'+ Data.id +'bh-header'}
                 >
-                  <Typography className={classes.heading}><b>{Data.date}</b></Typography>
+                  <Typography className={classes.heading}>
+                    Text goes here
+                    <b>{Data.date}</b>
+                  </Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails  id={'exp-panel-main-'+ Data.id +'bh-header'}>
                   <Typography>

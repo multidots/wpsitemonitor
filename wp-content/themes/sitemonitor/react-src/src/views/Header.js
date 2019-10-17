@@ -9,6 +9,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import {Redirect} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import logo from './logo.png';
+import ListItem from "@material-ui/core/ListItem";
 
 class HeaderViews extends Component {
     constructor(props) {
@@ -29,7 +30,7 @@ class HeaderViews extends Component {
 
     handleLogout(){
        localStorage.removeItem('token');
-        window.location.reload();
+        window.location.href='/sign-in';
     }
 
     renderRedirect = () => {
@@ -44,10 +45,12 @@ class HeaderViews extends Component {
                 flexGrow: 1,
             },
             menuButton: {
-                marginRight: theme.spacing(2),
+                //marginRight: theme.spacing(2),
             },
             title: {
                 flexGrow: 1,
+                color: "#fff",
+                textDecoration: "none",
             },
         }));
         const classes = useStyles();
@@ -57,17 +60,16 @@ class HeaderViews extends Component {
                 <AppBar position="static" style={{ marginBottom: 20 }}>
                     <Toolbar>
                         <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                           <Link to={{'pathname': "/"}}>
+                           <Link to={{'pathname': "/projects"}}>
                             <img src={logo} alt="logo" width="35px" height="35px"/></Link>
                         </IconButton>
 
                         <Typography variant="h6" className={classes.title}>
-                            Site Monitor
+                            <Link className={classes.title} to={{'pathname': "/projects"}}>Site Monitor</Link>
                         </Typography>
-                      <Link className={'MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit'} to={{pathname: '/'}}>Home</Link>
+
                         {isAlreadyAuthenticated ?
                             <div>
-                            <Link className={'MuiButtonBase-root MuiButton-root MuiButton-text MuiButton-colorInherit'} to={{pathname: '/projects'}}>Projects</Link>
                             <Button onClick={this.handleLogout.bind(this)} color="inherit">Logout</Button>
                             </div>
                             : (
