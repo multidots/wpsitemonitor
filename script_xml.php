@@ -32,7 +32,6 @@ include "wp-load.php";
 
 	$_posts = wp_cache_get( $cache_key );
 
-
 	switch ( $type ) {
         case 'sitemap':
             if ( isset( $no_of_records ) ) {

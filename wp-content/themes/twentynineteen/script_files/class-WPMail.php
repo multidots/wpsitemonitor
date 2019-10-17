@@ -58,9 +58,9 @@ class Sitemoniter_WPMail
         $content = file_get_contents( $domain_contact_url );
         $html_format_content = htmlentities( $content );
         if ( strpos ( $html_format_content, 'g-recaptcha-response' ) !== false ) {
-            return 1;
+            return '1';
         } else {
-            return 0;
+            return '0';
         }
     }
 }
