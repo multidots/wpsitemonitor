@@ -29,7 +29,7 @@ class HeaderViews extends Component {
 
     handleLogout(){
        localStorage.removeItem('token');
-        window.location.reload();
+        window.location.href='/sign-in';
     }
 
     renderRedirect = () => {
