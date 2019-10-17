@@ -92,6 +92,57 @@ function sm_delete_projects( $request ) {
 	return new WP_REST_Response( $delete_data, 200 );
 }
 
+function sm_projects_status( $request ) {
+
+	$auth = validate_token();
+
+	if ( ! isset( $auth['status'] ) || empty( $auth['status'] ) || false === $auth['status'] ) {
+		return new WP_Error( 'invalid_user', esc_html__( 'User ID not found', 'md_site_monitor' ), array( 'status' => 403 ) );
+	}
+
+	global $wpdb;
+    $projectData  = json_decode( $request->get_body() );
+    $project_id = $projectData->projectID ? absint(esc_html( $projectData->projectID )) : '';
+
+    $projectStatus = $projectData->projectStatus ? true : false;
+	if ( empty( $project_id ) ) {
+		return new WP_Error( 'invalid_data', esc_html__( 'Project data not found', 'md_site_monitor' ), array( 'status' => 403 ) );
+	} else {
+
+        $sm_sitemap_option = 0;
+        $sm_admin_option = 0;
+        $sm_robots_option = 0;
+        if(true === $projectStatus || 1 === $projectStatus){
+            $sm_sitemap_option = 1;
+            $sm_admin_option = 1;
+            $sm_robots_option = 1;
+        }
+
+        $sm_domain_scan_status = $wpdb->prefix . 'sm_domain_scan_status';
+       $test =  $wpdb->update(
+            $sm_domain_scan_status,
+            array(
+                'sitemap_status'=>$sm_sitemap_option,
+                'admin_status'=>$sm_admin_option,
+                'roborts_status'=>$sm_robots_option,
+                'updated_date'=>date( 'Y-m-d H:i:s' )
+            ),
+            array(
+                'domain_id'=>$project_id
+            )
+        );
+
+       //print_r($test);
+	}
+
+    $response = array(
+        'project_id' => $project_id,
+        'message'    => "Project updated Successfully.",
+    );
+
+	return new WP_REST_Response( $response, 200 );
+}
+
 
 function sm_add_project( $request ) {
 
@@ -110,9 +161,9 @@ function sm_add_project( $request ) {
 	$sm_admin_option       = $project_data->sm_admin_option ? 1 : 0;
 	$sm_robots_option      = $project_data->sm_robots_option ? 1 : 0;
 	$sm_sitemap_option     = $project_data->sm_sitemap_option ? 1 : 0;
-	$sm_domain_url         = $project_data->sm_domain_url ? esc_html( $project_data->sm_domain_url ) : '';
-	$sm_sitemap_url        = $project_data->sm_sitemap_url ? esc_html( $project_data->sm_sitemap_url ) : '';
-	$sm_project_name       = $project_data->sm_project_name ? esc_html( $project_data->sm_project_name ) : '';
+	$sm_domain_url         = $project_data->sm_domain_url ? esc_html( $project_data->sm_domain_url ) : 1;
+	$sm_sitemap_url        = $project_data->sm_sitemap_url ? esc_html( $project_data->sm_sitemap_url ) : 1;
+	$sm_project_name       = $project_data->sm_project_name ? esc_html( $project_data->sm_project_name ) : 1;
 
 	if ( empty( $sm_project_name ) || empty( $sm_domain_url ) ) {
 		return new WP_Error( 'data_not_found', esc_html__( 'Please enter required data.', 'md_site_monitor' ), array( 'status' => 403 ) );

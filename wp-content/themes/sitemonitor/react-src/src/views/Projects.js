@@ -8,7 +8,10 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
-import TableCell from '@material-ui/core/TableCell';
+
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
+
 import './style.css'; // Tell Webpack that Button.js uses these styles
 
 import CustomToolbar from "./CustomToolbar";
@@ -20,6 +23,59 @@ const defaultToolbarSelectStyles = {
     marginRight: "24px",
   },
 };
+
+const IOSSwitch = withStyles(theme => ({
+    root: {
+        width: 42,
+        height: 26,
+        padding: 0,
+        margin: theme.spacing(1),
+    },
+    switchBase: {
+        padding: 1,
+        '&$checked': {
+            transform: 'translateX(16px)',
+            color: theme.palette.common.white,
+            '& + $track': {
+                backgroundColor: '#52d869',
+                opacity: 1,
+                border: 'none',
+            },
+        },
+        '&$focusVisible $thumb': {
+            color: '#52d869',
+            border: '6px solid #fff',
+        },
+    },
+    thumb: {
+        width: 24,
+        height: 24,
+    },
+    track: {
+        borderRadius: 26 / 2,
+        border: `1px solid ${theme.palette.grey[400]}`,
+        backgroundColor: theme.palette.grey[50],
+        opacity: 1,
+        transition: theme.transitions.create(['background-color', 'border']),
+    },
+    checked: {},
+    focusVisible: {},
+}))(({ classes, ...props }) => {
+    return (
+        <Switch
+            focusVisibleClassName={classes.focusVisible}
+            disableRipple
+            classes={{
+                root: classes.root,
+                switchBase: classes.switchBase,
+                thumb: classes.thumb,
+                track: classes.track,
+                checked: classes.checked,
+            }}
+            {...props}
+        />
+    );
+});
 
 class ProjectsViews extends React.Component {
 
@@ -63,12 +119,6 @@ class ProjectsViews extends React.Component {
       }
     } );
   };
-
-  handle403(){
-    return(
-      <Redirect to={{ pathname: '/sign-in' }}/>
-    )
-  }
 
 	xhrRequest = (page, searchText) => {
     const token = localStorage.getItem( 'token' );
@@ -153,32 +203,30 @@ class ProjectsViews extends React.Component {
     } );
   };
 
-
-  getMuiTheme = () => createMuiTheme({
-    overrides: {
-      MUIDataTable: {
-        root: {
-          backgroundColor: "#FF000",
-        },
-        paper: {
-          boxShadow: "none",
-        }
-      },
-      MUIDataTableBodyCell: {
-        root: {
-          backgroundColor: "#FFF"
-        }
+    xhrRequestStatus = (project_id,project_stats) => {
+    const token = localStorage.getItem( 'token' );
+    const site_url = Constants.SITE_URL;
+    return fetch( `/wp-json/md-site-monitor/projects_status`, {
+      method: 'POST',
+      body: JSON.stringify( {projectID: project_id,projectStatus: project_stats}),
+      headers: {
+        Authorization: 'Bearer ' + token
       }
-    }
-  });
+    } ).then( res => {
+      return res.json();
+    } ).then( function( response ) {
+    } ).catch( err => {
+      this.setState( { isLoading: false } );
+    } );
+  };
 
-  CustomTableHead(column_name){
-    return (
-      <TableCell style={{cursor:"text",backgroundColor:"#3F51B6",color:"#fff"}}>
-        {column_name}
-      </TableCell>
-    );
-  }
+    handleChange( event ) {
+       let project_id = event.target.value;
+       let project_stats = event.target.checked;
+        this.xhrRequestStatus(project_id,project_stats).then( res => {
+            this.getData();
+        } );
+    }
 
 	render() {
 		const columns = [
@@ -193,7 +241,6 @@ class ProjectsViews extends React.Component {
           filter: false,
           customBodyRender: (value, tableMeta, updateValue) => {
             let project_id = tableMeta.rowData[0];
-            //project_id = process.env.NODE_ENV === 'development' ? parseInt(project_id)  : (parseInt(project_id) + 1);
             const project_link = "/projects/"+project_id+"/";
             return (
               <Link to={{pathname: project_link}}>{value}</Link>
@@ -201,63 +248,52 @@ class ProjectsViews extends React.Component {
           }
         }
       },
-			{ label: 'Domain URL', name: 'domain_url'},
-			{ label: 'Sitemap', name: 'sitemap_status',
+            { label: 'Domain URL', name: 'domain_url'},
+		{ label: 'Status', name: 'roborts_status',
 
         options: {
           filter: false,
           customBodyRender: (value, tableMeta, updateValue) => {
-
+              let project_id = tableMeta.rowData[0];
             if ('undefined' ===  typeof value ){
 
             } else {
               const status = 1 === parseInt(value) ? true : false;
               return (
-                status ? <CheckCircleRoundedIcon style={{color: '#43a047'}}/> : (
-                  <CancelRoundedIcon style={{color: '#D3302F'}}/>
-                )
-              );
-            }
-          }
-        }
-      },
-			{ label: 'Wp-Admin URL', name: 'admin_status',
-        options: {
-          filter: false,
-          customBodyRender: (value, tableMeta, updateValue) => {
-
-            if ('undefined' ===  typeof value ){
-
-            } else {
-              const status = 1 === parseInt(value) ? true : false;
-              return (
-                status ? <CheckCircleRoundedIcon style={{color: '#43a047'}}/> : (
-                  <CancelRoundedIcon style={{color: '#D3302F'}}/>
-                )
-              );
-            }
-          }
-        }
-      },
-			{ label: 'Robots', name: 'roborts_status',
-
-        options: {
-          filter: false,
-          customBodyRender: (value, tableMeta, updateValue) => {
-
-            if ('undefined' ===  typeof value ){
-
-            } else {
-              const status = 1 === parseInt(value) ? true : false;
-              return (
-                status ? <CheckCircleRoundedIcon style={{color: '#43a047'}}/> : (
-                  <CancelRoundedIcon style={{color: '#D3302F'}}/>
-                )
+                  <FormControlLabel
+                      control={
+                          <IOSSwitch
+                              checked={status}
+                              onChange={this.handleChange.bind(this)}
+                              value={project_id}
+                          />
+                      }
+                  />
               );
             }
           }
         }
         },
+
+        /*{ label: 'Action', name: 'roborts_status',
+
+        options: {
+          filter: false,
+          customBodyRender: (value, tableMeta, updateValue) => {
+
+            if ('undefined' ===  typeof value ){
+
+            } else {
+              const status = 1 === parseInt(value) ? true : false;
+              return (
+                status ? <CheckCircleRoundedIcon style={{color: '#43a047'}}/> : (
+                  <CancelRoundedIcon style={{color: '#D3302F'}}/>
+                )
+              );
+            }
+          }
+        }
+        },*/
 		];
     const { classes } = this.props;
 		const { data, page, count, isLoading, rowsPerPage } = this.state;
