@@ -17,6 +17,7 @@ class Sitemoniter_WPMail
     }
 
     public function mail_send ( $to , $subject, $body ) {
+    	echo 234;exit;
         $headers = array('Content-Type: text/html; charset=UTF-8');
         wp_mail( $to, $subject, $body, $headers );
     }

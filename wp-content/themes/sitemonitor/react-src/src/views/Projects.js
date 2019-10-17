@@ -262,6 +262,7 @@ class ProjectsViews extends React.Component {
           sort: false,
           filter: false,
           customBodyRender: ( value, tableMeta, updateValue ) => {
+            console.log(tableMeta);
             let project_id = tableMeta.rowData[ 0 ];
             const project_link = '/projects/' + project_id + '/';
             return (
@@ -272,39 +273,44 @@ class ProjectsViews extends React.Component {
       },
       { label: 'Domain URL', name: 'domain_url' },
       {
-        label: 'Scan Status', name: 'roborts_status',
+        label: 'Scan Status', name: 'cron_status',
 
         options: {
           filter: false,
           customBodyRender: ( value, tableMeta, updateValue ) => {
+            console.log(value);
 
-            if ( 'undefined' === typeof value ) {
+            return (
 
-            } else {
-              const status = 1 === parseInt( value ) ? true : false;
-              return (
-                <PopupState variant="popper" popupId="demo-popup-popper">
-                  {popupState => (
-                    <div>
-                      <HtmlTooltip style={{backgroundColor:"#fff"}}
-                        title={
-                          <React.Fragment>
-                            <ul className="status_tooltip">
-                              <li><FiberManualRecordIcon style={{ color: '#43a047',fontSize: "small" }}/>  Wp-admin URL</li>
-                              <li><FiberManualRecordIcon style={{ color: '#D3302F',fontSize: "small" }}/>  SSL</li>
-                            </ul>
-                          </React.Fragment>
-                        }
-                      >
+
+              <PopupState variant="popper" popupId="demo-popup-popper">
+                {popupState => (
+                  <div>
+                    <HtmlTooltip style={{backgroundColor:"#fff"}}
+                                 title={
+                                   <React.Fragment>
+                                     <ul className="status_tooltip">
+
+                                         <div>
+                                       <li><FiberManualRecordIcon style={{ color: '#43a047',fontSize: "small" }}/>  Wp-admin URL</li>
+                                       <li><FiberManualRecordIcon style={{ color: '#D3302F',fontSize: "small" }}/>  SSL</li>
+                                         </div>
+                                       
+                                     </ul>
+                                   </React.Fragment>
+                                 }
+                    >
                       <Button variant="contained" {...bindToggle(popupState)}>
                         <FiberManualRecordIcon style={{ color: '#43a047',fontSize: "small" }}/>  Completed
                       </Button>
-                      </HtmlTooltip>
-                    </div>
-                  )}
-                </PopupState>
-              );
-            }
+                    </HtmlTooltip>
+                  </div>
+                )}
+              </PopupState>
+
+
+          );
+
           }
         }
       },

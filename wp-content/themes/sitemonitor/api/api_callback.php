@@ -285,6 +285,16 @@ function sm_get_domains( $request ) {
 			$sm_user_id ) );
 	}
 	$sm_total_domain = absint( $sm_total_domain_data->sm_total_domain );
+	foreach ($domain_data as $key => $data){
+		$domain_data[$key]['cron_status']['sitemap_xml']   = get_project_status( 'sitemap_xml', $data['id'] );
+		$domain_data[$key]['cron_status']['admin_status']   = get_project_status( 'admin_url', $data['id'] );
+		$domain_data[$key]['cron_status']['robots_status']  = get_project_status( 'robots_url', $data['id'] );
+		$domain_data[$key]['cron_status']['https_status']   = get_project_status( 'https_scan', $data['id'] );
+		$domain_data[$key]['cron_status']['captcha_status'] = get_project_status( 'captcha_scan', $data['id'] );
+	}
+
+
+	//print_r($domain_data);
 	$api_responce    = array(
 		'data'       => $domain_data,
 		'total_data' => $sm_total_domain,
@@ -394,7 +404,7 @@ function add_project_notification( $domainData ) {
 function get_project_status( $status_type, $project_id ) {
 	global $wpdb;
 	$sm_cron_status = $wpdb->prefix . SM_CRON_STATUS_TABLE;
-	$project_status = $wpdb->get_results(
+	$project_status = $wpdb->get_row(
 		$wpdb->prepare(
 			"SELECT status FROM %1s WHERE domain_id =%d AND cron_name = %s ORDER BY id DESC LIMIT 1",
 			array(
@@ -404,7 +414,6 @@ function get_project_status( $status_type, $project_id ) {
 			)
 		)
 	);
-
 	if ( ! empty( $project_status ) ) {
 		return $project_status->status;
 	} else {
