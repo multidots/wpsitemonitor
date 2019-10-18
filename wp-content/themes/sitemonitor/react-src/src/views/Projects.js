@@ -262,7 +262,6 @@ class ProjectsViews extends React.Component {
           sort: false,
           filter: false,
           customBodyRender: ( value, tableMeta, updateValue ) => {
-            console.log(tableMeta);
             let project_id = tableMeta.rowData[ 0 ];
             const project_link = '/projects/' + project_id + '/';
             return (
@@ -278,11 +277,17 @@ class ProjectsViews extends React.Component {
         options: {
           filter: false,
           customBodyRender: ( value, tableMeta, updateValue ) => {
-            console.log(value);
+
+            let cron_status = 0;
+
+            if(typeof value != 'undefined' || null != value){
+              if( 1 === value.sitemap_xml && 1 === value.admin_status && 1 === value.captcha_status && 1 === value.https_status && 1 === value.robots_status){
+                cron_status = 1;
+                //console.log(cron_status);
+              }
+            }
 
             return (
-
-
               <PopupState variant="popper" popupId="demo-popup-popper">
                 {popupState => (
                   <div>
@@ -290,18 +295,27 @@ class ProjectsViews extends React.Component {
                                  title={
                                    <React.Fragment>
                                      <ul className="status_tooltip">
-
-                                         <div>
-                                       <li><FiberManualRecordIcon style={{ color: '#43a047',fontSize: "small" }}/>  Wp-admin URL</li>
-                                       <li><FiberManualRecordIcon style={{ color: '#D3302F',fontSize: "small" }}/>  SSL</li>
-                                         </div>
-                                       
+                                       { typeof value != 'undefined' || null != value ?
+                                            <div>
+                                           <li><FiberManualRecordIcon style={{ color: value.sitemap_xml === 1 ? '#43a047' : '#D3302F',fontSize: "small" }}/>  Sitemap</li>
+                                           <li><FiberManualRecordIcon style={{ color: value.admin_status === 1 ? '#43a047' : '#D3302F',fontSize: "small" }}/>  Admin URL</li>
+                                           <li><FiberManualRecordIcon style={{ color: value.robots_status === 1 ? '#43a047' : '#D3302F',fontSize: "small" }}/>  Robots</li>
+                                           <li><FiberManualRecordIcon style={{ color: value.https_status === 1 ? '#43a047' : '#D3302F',fontSize: "small" }}/>  SSL</li>
+                                           <li><FiberManualRecordIcon style={{ color: value.captcha_status === 1 ? '#43a047' : '#D3302F',fontSize: "small" }}/>  Captcha</li>
+                                            </div>
+                                        :""}
                                      </ul>
                                    </React.Fragment>
                                  }
                     >
+
                       <Button variant="contained" {...bindToggle(popupState)}>
-                        <FiberManualRecordIcon style={{ color: '#43a047',fontSize: "small" }}/>  Completed
+                        { 1 == cron_status ?
+                          <div><FiberManualRecordIcon style={{ color: '#43a047',fontSize: "small" }}/> Completed</div>
+                          :
+                          <div><FiberManualRecordIcon style={{ color: '#D3302F',fontSize: "small" }}/>Pending</div>
+                        }
+
                       </Button>
                     </HtmlTooltip>
                   </div>
