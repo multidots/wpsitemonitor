@@ -288,12 +288,12 @@ class ProjectsViews extends React.Component {
             }
 
             return (
-              <PopupState variant="popper" popupId="demo-popup-popper">
+              <PopupState className="tooltip_container" variant="popper" popupId="demo-popup-popper">
                 {popupState => (
-                  <div>
-                    <HtmlTooltip style={{backgroundColor:"#fff"}}
+
+                    <HtmlTooltip  style={{backgroundColor:"#fff"}}
                                  title={
-                                   <React.Fragment>
+
                                      <ul className="status_tooltip">
                                        { typeof value != 'undefined' || null != value ?
                                             <div>
@@ -305,7 +305,7 @@ class ProjectsViews extends React.Component {
                                             </div>
                                         :""}
                                      </ul>
-                                   </React.Fragment>
+
                                  }
                     >
 
@@ -318,7 +318,7 @@ class ProjectsViews extends React.Component {
 
                       </Button>
                     </HtmlTooltip>
-                  </div>
+
                 )}
               </PopupState>
 

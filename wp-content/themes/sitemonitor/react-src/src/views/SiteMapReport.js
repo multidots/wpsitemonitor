@@ -52,7 +52,7 @@ export default function SiteMapReport(props) {
                   id={'panel'+ Data.id +'bh-header'}
                   className="sitemap_Container"
                 >
-                  <Typography className="sitemap_text">
+                  <Typography className={Data.sitemap_text_class}>
                     {Data.sitemap_diff_text}
                   </Typography>
                   <Typography className="sitemap_date">

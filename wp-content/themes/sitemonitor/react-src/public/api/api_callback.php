@@ -368,10 +368,13 @@ function sitemap_report( $project_id ) {
 				$old_diff_count                               = $sitemap_filter_data[ $old_key ]['sitemap_count'];
 				$diff_count                                   = absint( $current_diff_count ) - absint( $old_diff_count );
 				if ( $diff_count === 0 ) {
+					$sitemap_filter_data[ $key ]['sitemap_text_class'] = "sitemap_text green_text";
 					$sitemap_filter_data[ $key ]['sitemap_diff_text'] = sprintf( __( 'Sitemap is not changed', 'sitemonitor' ), $diff_count );
 				} else if ( $diff_count > 0 ) {
 					$sitemap_filter_data[ $key ]['sitemap_diff_text'] = sprintf( __( '%d url was added', 'sitemonitor' ), $diff_count );
+					$sitemap_filter_data[ $key ]['sitemap_text_class'] = "sitemap_text green_text";
 				} else {
+					$sitemap_filter_data[ $key ]['sitemap_text_class'] = "sitemap_text red_text";
 					$sitemap_filter_data[ $key ]['sitemap_diff_text'] = sprintf( __( '%d url was remove', 'sitemonitor' ), abs( $diff_count ) );
 				}
 			} else {
@@ -405,7 +408,7 @@ function get_all_type_report( $project_id ) {
 
 	$captcha_scan = get_project_status( 'captcha_scan', $project_id );
 	$sitemap_filter_data['captcha_status'] = !empty($captcha_scan['status']) ? $captcha_scan['status'] : 0;
-	$sitemap_filter_data['captcha_status_text'] = !empty($captcha_scan['status_text']) ? v['status_text'] : 0;
+	$sitemap_filter_data['captcha_status_text'] = !empty($captcha_scan['status_text']) ? $captcha_scan['status_text'] : 0;
 
 	return $sitemap_filter_data;
 }
@@ -489,28 +492,27 @@ function get_project_status( $status_type, $project_id ) {
 		)
 	);  //db call ok; no-cache ok
 
-	if(!empty($domain_lists))
-	$date1 = strtotime( $domain_lists->updated_date );
-	$date2 = time();
-	$subTime = $date2 - $date1;
-	$y = ($subTime/(60*60*24*365));
-	$d = ($subTime/(60*60*24))%365;
-	$h = ($subTime/(60*60))%24;
-	$m = ($subTime/60)%60;
+	$response_data = array();
+	if(!empty($domain_lists)){
+		$response_data['status'] = absint($domain_lists->status);
+		$date1 = strtotime( $domain_lists->updated_date );
+		$date2 = time();
+		$subTime = $date2 - $date1;
+		$y = ($subTime/(60*60*24*365));
+		$d = ($subTime/(60*60*24))%365;
+		$h = ($subTime/(60*60))%24;
+		$m = ($subTime/60)%60;
 
-	if($y > 0){
-		$status_text = sprintf( __( '%d year ago', 'sitemonitor' ), abs( $y ) );
-	} elseif ($d > 0){
-		$status_text = sprintf( __( '%d days ago', 'sitemonitor' ), abs( $d ) );
-	} elseif ($h > 0){
-		$status_text = sprintf( __( '%d hours ago', 'sitemonitor' ), abs( $h ) );
-	} else {
-		$status_text = sprintf( __( '%d seconds ago', 'sitemonitor' ), abs( $m ) );
+		if($y > 1){
+			$status_text = sprintf( __( 'Update %d year ago', 'sitemonitor' ), abs( $y ) );
+		} elseif ($d > 1){
+			$status_text = sprintf( __( 'Update %d days ago', 'sitemonitor' ), abs( $d ) );
+		} elseif ($h > 1){
+			$status_text = sprintf( __( 'Update %d hours ago', 'sitemonitor' ), abs( $h ) );
+		} else {
+			$status_text = sprintf( __( 'Update %d seconds ago', 'sitemonitor' ), abs( $m ) );
+		}
+		$response_data['status_text'] = $status_text;
 	}
-
-	if ( ! empty( $project_status ) ) {
-		return $status_text;
-	} else {
-		return 0;
-	}
+	return $response_data;
 }

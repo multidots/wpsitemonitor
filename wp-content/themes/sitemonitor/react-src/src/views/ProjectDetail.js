@@ -193,6 +193,9 @@ class ProjectDetailViews extends React.Component {
                       'Default URL set for the admin '
                     )}
                   </Typography>
+                  <Typography paragraph className="status_text">
+                    {this.state.fullReportData.admin_status_text}
+                  </Typography>
                 </CardContent>
               </div>
             </Card>
@@ -211,6 +214,9 @@ class ProjectDetailViews extends React.Component {
                           "robots.txt is not available on the root."
                       ) }
                     </Typography>
+                    <Typography paragraph className="status_text">
+                      {this.state.fullReportData.robots_status_text}
+                    </Typography>
                   </CardContent>
                 </div>
               </Card>
@@ -221,13 +227,16 @@ class ProjectDetailViews extends React.Component {
                   <CardContent>
                     <Typography variant="h5" paragraph>
                       SSL
-                      { 1 === parseInt(this.state.fullReportData.https_status) ? <CheckCircleRoundedIcon className={classes.status_icon} style={{color: '#43a047'}}/> : (
+                      { 1 === parseInt(this.state.fullReportData.ssl_status) ? <CheckCircleRoundedIcon className={classes.status_icon} style={{color: '#43a047'}}/> : (
                           <CancelRoundedIcon className={classes.status_icon} style={{color: '#D3302F'}}/> ) }
                     </Typography>
                     <Typography paragraph>
-                      { 1 === parseInt(this.state.fullReportData.https_status) ?   "Site is secure."  : (
+                      { 1 === parseInt(this.state.fullReportData.ssl_status) ?   "Site is secure."  : (
                           "Site does not have any SSL certificate."
                       ) }
+                    </Typography>
+                    <Typography paragraph className="status_text">
+                      {this.state.fullReportData.ssl_status_text}
                     </Typography>
                   </CardContent>
                 </div>
@@ -246,6 +255,9 @@ class ProjectDetailViews extends React.Component {
                       { 1 === parseInt(this.state.fullReportData.captcha_status) ?   "Captcha successfully implemented on contact form."  : (
                           "Missing captcha on contact form"
                       ) }
+                    </Typography>
+                    <Typography paragraph className="status_text">
+                      {this.state.fullReportData.captcha_status_text}
                     </Typography>
                   </CardContent>
                 </div>
