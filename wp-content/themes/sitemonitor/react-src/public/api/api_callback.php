@@ -101,44 +101,44 @@ function sm_projects_status( $request ) {
 	}
 
 	global $wpdb;
-    $projectData  = json_decode( $request->get_body() );
-    $project_id = $projectData->projectID ? absint(esc_html( $projectData->projectID )) : '';
+	$projectData = json_decode( $request->get_body() );
+	$project_id  = $projectData->projectID ? absint( esc_html( $projectData->projectID ) ) : '';
 
-    $projectStatus = $projectData->projectStatus ? true : false;
+	$projectStatus = $projectData->projectStatus ? true : false;
 	if ( empty( $project_id ) ) {
 		return new WP_Error( 'invalid_data', esc_html__( 'Project data not found', 'md_site_monitor' ), array( 'status' => 403 ) );
 	} else {
 
-        $sm_sitemap_option = 0;
-        $sm_admin_option = 0;
-        $sm_robots_option = 0;
-        if(true === $projectStatus || 1 === $projectStatus){
-            $sm_sitemap_option = 1;
-            $sm_admin_option = 1;
-            $sm_robots_option = 1;
-        }
+		$sm_sitemap_option = 0;
+		$sm_admin_option   = 0;
+		$sm_robots_option  = 0;
+		if ( true === $projectStatus || 1 === $projectStatus ) {
+			$sm_sitemap_option = 1;
+			$sm_admin_option   = 1;
+			$sm_robots_option  = 1;
+		}
 
-        $sm_domain_scan_status = $wpdb->prefix . 'sm_domain_scan_status';
-       $test =  $wpdb->update(
-            $sm_domain_scan_status,
-            array(
-                'sitemap_status'=>$sm_sitemap_option,
-                'admin_status'=>$sm_admin_option,
-                'roborts_status'=>$sm_robots_option,
-                'updated_date'=>date( 'Y-m-d H:i:s' )
-            ),
-            array(
-                'domain_id'=>$project_id
-            )
-        );
+		$sm_domain_scan_status = $wpdb->prefix . 'sm_domain_scan_status';
+		$test                  = $wpdb->update(
+			$sm_domain_scan_status,
+			array(
+				'sitemap_status' => $sm_sitemap_option,
+				'admin_status'   => $sm_admin_option,
+				'roborts_status' => $sm_robots_option,
+				'updated_date'   => date( 'Y-m-d H:i:s' ),
+			),
+			array(
+				'domain_id' => $project_id,
+			)
+		);
 
-       //print_r($test);
+		//print_r($test);
 	}
 
-    $response = array(
-        'project_id' => $project_id,
-        'message'    => "Project updated Successfully.",
-    );
+	$response = array(
+		'project_id' => $project_id,
+		'message'    => "Project updated Successfully.",
+	);
 
 	return new WP_REST_Response( $response, 200 );
 }
@@ -285,11 +285,22 @@ function sm_get_domains( $request ) {
 			$sm_user_id ) );
 	}
 	$sm_total_domain = absint( $sm_total_domain_data->sm_total_domain );
-	$api_responce    = array(
+	foreach ( $domain_data as $key => $data ) {
+		$domain_data[ $key ]['cron_status']['sitemap_xml']    = get_project_cron_status( 'sitemap_xml', $data['id'] );
+		$domain_data[ $key ]['cron_status']['admin_status']   = get_project_cron_status( 'admin_url', $data['id'] );
+		$domain_data[ $key ]['cron_status']['robots_status']  = get_project_cron_status( 'robots_url', $data['id'] );
+		$domain_data[ $key ]['cron_status']['https_status']   = get_project_cron_status( 'https_scan', $data['id'] );
+		$domain_data[ $key ]['cron_status']['captcha_status'] = get_project_cron_status( 'captcha_scan', $data['id'] );
+	}
+
+
+	//print_r($domain_data);
+	$api_responce = array(
 		'data'       => $domain_data,
 		'total_data' => $sm_total_domain,
 	);
-	$response        = new WP_REST_Response( $api_responce, array( 'status' => 200 ) );
+	$response     = new WP_REST_Response( $api_responce, array( 'status' => 200 ) );
+
 	return $response;
 }
 
@@ -334,7 +345,7 @@ function sitemap_report( $project_id ) {
 	$sitemap_data = $wpdb->get_results( $wpdb->prepare( "			
 					SELECT * FROM %1s 
 					WHERE domain_id = %d AND created_date >= DATE(NOW()) - INTERVAL 30 DAY
-					ORDER BY id DESC",
+					ORDER BY id ASC",
 		$sm_sitemap_data_history,
 		$project_id ), ARRAY_A );
 
@@ -342,13 +353,37 @@ function sitemap_report( $project_id ) {
 
 	if ( ! empty( $sitemap_data ) ) {
 		foreach ( $sitemap_data as $key => $data ) {
+
 			$sitemap_filter_data[ $key ]['id']                = esc_html( $data['id'] );
 			$sitemap_filter_data[ $key ]['domain_id']         = esc_html( $data['domain_id'] );
 			$sitemap_filter_data[ $key ]['cron_id']           = esc_html( $data['cron_id'] );
+			$sitemap_filter_data[ $key ]['sitemap_xml_data']  = ! empty( $data['sitemap_xml_data'] ) ? json_decode( $data['sitemap_xml_data'] ) : array();
 			$sitemap_filter_data[ $key ]['sitemap_diff_data'] = ! empty( $data['sitemap_diff_data'] ) ? json_decode( $data['sitemap_diff_data'] ) : array();
 			$sitemap_filter_data[ $key ]['date']              = ! empty( $data['created_date'] ) ? esc_html( date( 'd-m-Y', strtotime( $data['created_date'] ) ) ) : '';
+
+			if ( ! empty( $sitemap_filter_data[ $key ]['sitemap_xml_data'] ) ) {
+				$current_diff_count                           = count( $sitemap_filter_data[ $key ]['sitemap_xml_data'] );
+				$sitemap_filter_data[ $key ]['sitemap_count'] = $current_diff_count;
+				$old_key                                      = $key - 1;
+				$old_diff_count                               = $sitemap_filter_data[ $old_key ]['sitemap_count'];
+				$diff_count                                   = absint( $current_diff_count ) - absint( $old_diff_count );
+				if ( $diff_count === 0 ) {
+					$sitemap_filter_data[ $key ]['sitemap_text_class'] = "sitemap_text green_text";
+					$sitemap_filter_data[ $key ]['sitemap_diff_text'] = sprintf( __( 'Sitemap is not changed', 'sitemonitor' ), $diff_count );
+				} else if ( $diff_count > 0 ) {
+					$sitemap_filter_data[ $key ]['sitemap_diff_text'] = sprintf( __( '%d url was added', 'sitemonitor' ), $diff_count );
+					$sitemap_filter_data[ $key ]['sitemap_text_class'] = "sitemap_text green_text";
+				} else {
+					$sitemap_filter_data[ $key ]['sitemap_text_class'] = "sitemap_text red_text";
+					$sitemap_filter_data[ $key ]['sitemap_diff_text'] = sprintf( __( '%d url was remove', 'sitemonitor' ), abs( $diff_count ) );
+				}
+			} else {
+				$sitemap_filter_data[ $key ]['sitemap_diff_text'] = __( 'sitemap was added', 'sitemonitor' );
+			}
+
 		}
 	}
+	array_shift( $sitemap_filter_data );
 
 	return $sitemap_filter_data;
 }
@@ -359,18 +394,21 @@ function get_all_type_report( $project_id ) {
 	$sitemap_filter_data            = array();
 	$sitemap_filter_data['sitemap'] = sitemap_report( $project_id );
 
-	$sm_domain_scan_status = $wpdb->prefix . SM_DOMAIN_STATUS_TABLE;
-	$all_status            = $wpdb->get_row( $wpdb->prepare( "			
-					SELECT * FROM %1s					
-					WHERE domain_id = %d
-					ORDER BY id DESC",
-		$sm_domain_scan_status,
-		$project_id ), ARRAY_A );
+	$admin_url = get_project_status( 'admin_url', $project_id );
+	$sitemap_filter_data['admin_status'] = !empty($admin_url['status']) ? $admin_url['status'] : 0;
+	$sitemap_filter_data['admin_status_text'] = !empty($admin_url['status_text']) ? $admin_url['status_text'] : 0;
 
-	$sitemap_filter_data['admin_status']   = get_project_status( 'admin_url', $project_id );
-	$sitemap_filter_data['robots_status']  = get_project_status( 'robots_url', $project_id );
-	$sitemap_filter_data['https_status']   = get_project_status( 'https_scan', $project_id );
-	$sitemap_filter_data['captcha_status'] = get_project_status( 'captcha_scan', $project_id );
+	$robots_url = get_project_status( 'robots_url', $project_id );
+	$sitemap_filter_data['robots_status'] = !empty($robots_url['status']) ? $robots_url['status'] : 0;
+	$sitemap_filter_data['robots_status_text'] = !empty($robots_url['status_text']) ? $robots_url['status_text'] : 0;
+
+	$https_scan = get_project_status( 'https_scan', $project_id );
+	$sitemap_filter_data['ssl_status'] = !empty($https_scan['status']) ? $https_scan['status'] : 0;
+	$sitemap_filter_data['ssl_status_text'] = !empty($https_scan['status_text']) ? $https_scan['status_text'] : 0;
+
+	$captcha_scan = get_project_status( 'captcha_scan', $project_id );
+	$sitemap_filter_data['captcha_status'] = !empty($captcha_scan['status']) ? $captcha_scan['status'] : 0;
+	$sitemap_filter_data['captcha_status_text'] = !empty($captcha_scan['status_text']) ? $captcha_scan['status_text'] : 0;
 
 	return $sitemap_filter_data;
 }
@@ -386,15 +424,15 @@ function add_project_notification( $domainData ) {
 
 	$body = add_site_email_template( $domain_url );
 
-	$headers = array('Content-Type: text/html; charset=UTF-8');
-	wp_mail( $user_email, 'A new site was added to your account. We will now monitor ' . $domain_url, $body , $headers);
+	$headers = array( 'Content-Type: text/html; charset=UTF-8' );
+	wp_mail( $user_email, 'A new site was added to your account. We will now monitor ' . $domain_url, $body, $headers );
 }
 
 
-function get_project_status( $status_type, $project_id ) {
+function get_project_cron_status( $status_type, $project_id ) {
 	global $wpdb;
 	$sm_cron_status = $wpdb->prefix . SM_CRON_STATUS_TABLE;
-	$project_status = $wpdb->get_results(
+	$project_status = $wpdb->get_row(
 		$wpdb->prepare(
 			"SELECT status FROM %1s WHERE domain_id =%d AND cron_name = %s ORDER BY id DESC LIMIT 1",
 			array(
@@ -404,10 +442,77 @@ function get_project_status( $status_type, $project_id ) {
 			)
 		)
 	);
-
 	if ( ! empty( $project_status ) ) {
-		return $project_status->status;
+		return absint( $project_status->status );
 	} else {
 		return 0;
 	}
+}
+
+
+function get_project_status( $status_type, $project_id ) {
+
+	global $wpdb;
+	$sm_admin_data_history = $wpdb->prefix . SM_ADMIN_HISTORY_TABLE;
+	$sm_seo_data_history = $wpdb->prefix . SM_SEO_DATA_TABLE;
+	$sm_site_https_history = $wpdb->prefix . SM_SSL_DATA_TABLE;
+	$sm_site_captcha_check_history = $wpdb->prefix . SM_CAPTCHA_DATA_TABLE;
+
+	$domain_id = $project_id;
+	$crontype = $status_type;
+
+	if( $crontype == 'admin_url' ) {
+		$tablename = $sm_admin_data_history;
+		$status = 'status';
+	}
+	if( $crontype == 'robots_url' ) {
+		$tablename = $sm_seo_data_history;
+		$status = 'seo_status';
+	}
+	if( $crontype == 'https_scan' ) {
+		$tablename = $sm_site_https_history;
+		$status = 'https_status';
+	}
+	if( $crontype == 'captcha_scan' ) {
+		$tablename = $sm_site_captcha_check_history;
+		$status = 'captcha_status';
+	}
+	$domain_lists = $wpdb->get_row(
+		$wpdb->prepare("
+                SELECT adh.updated_date,  adh.%1s  as status 
+                FROM   %1s adh 
+                WHERE adh.domain_id = %d
+                ORDER BY adh.id DESC 
+                LIMIT 0,1",
+			array(
+				$status,
+				$tablename,
+				$domain_id,
+			)
+		)
+	);  //db call ok; no-cache ok
+
+	$response_data = array();
+	if(!empty($domain_lists)){
+		$response_data['status'] = absint($domain_lists->status);
+		$date1 = strtotime( $domain_lists->updated_date );
+		$date2 = time();
+		$subTime = $date2 - $date1;
+		$y = ($subTime/(60*60*24*365));
+		$d = ($subTime/(60*60*24))%365;
+		$h = ($subTime/(60*60))%24;
+		$m = ($subTime/60)%60;
+
+		if($y > 1){
+			$status_text = sprintf( __( 'Update %d year ago', 'sitemonitor' ), abs( $y ) );
+		} elseif ($d > 1){
+			$status_text = sprintf( __( 'Update %d days ago', 'sitemonitor' ), abs( $d ) );
+		} elseif ($h > 1){
+			$status_text = sprintf( __( 'Update %d hours ago', 'sitemonitor' ), abs( $h ) );
+		} else {
+			$status_text = sprintf( __( 'Update %d seconds ago', 'sitemonitor' ), abs( $m ) );
+		}
+		$response_data['status_text'] = $status_text;
+	}
+	return $response_data;
 }
