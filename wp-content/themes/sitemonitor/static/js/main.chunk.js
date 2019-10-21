@@ -3842,6 +3842,7 @@ function SiteMapReport(props) {
     }),
     "aria-controls": "panel1bh-content",
     id: 'panel' + Data.id + 'bh-header',
+    className: "sitemap_Container",
     __source: {
       fileName: _jsxFileName,
       lineNumber: 49
@@ -3851,40 +3852,41 @@ function SiteMapReport(props) {
     className: "sitemap_text",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 54
+      lineNumber: 55
     },
     __self: this
   }, Data.sitemap_diff_text), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_6__["default"], {
     className: "sitemap_date",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 57
+      lineNumber: 58
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", {
+    className: "sitemap_date",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 58
+      lineNumber: 59
     },
     __self: this
   }, Data.date))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_ExpansionPanelDetails__WEBPACK_IMPORTED_MODULE_4__["default"], {
     id: 'exp-panel-main-' + Data.id + 'bh-header',
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 61
+      lineNumber: 62
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_6__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 62
+      lineNumber: 63
     },
     __self: this
   }, Data.sitemap_diff_data.map(diff => react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_6__["default"], {
     className: classes.diff_links,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 64
+      lineNumber: 65
     },
     __self: this
   }, diff)))))));

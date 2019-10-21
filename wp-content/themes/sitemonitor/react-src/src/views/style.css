@@ -1423,3 +1423,20 @@ pre.wp-block-verse {
 
 .status_tooltip{
 }
+
+
+
+/*.sitemap_Container{
+  padding: 0 24px 0 0px !important;
+}*/
+.sitemap_text {
+  display: inline-block !important;
+  width: 100% !important;
+  font-size: 12px !important;
+}
+.sitemap_date{
+  display: inline-block;
+  width: 100px;
+  text-align: right;
+  float: right;
+}

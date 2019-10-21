@@ -399,7 +399,7 @@ function get_all_type_report( $project_id ) {
 		$sm_domain_scan_status,
 		$project_id ), ARRAY_A );
 
-	print_r(get_project_status( 'admin_url', $project_id ));
+	//print_r(get_project_status( 'admin_url', $project_id ));
 
 	$sitemap_filter_data['admin_status']   = get_project_status( 'admin_url', $project_id );
 	$sitemap_filter_data['robots_status']  = get_project_status( 'robots_url', $project_id );
@@ -451,35 +451,57 @@ function get_project_status( $status_type, $project_id ) {
 	global $wpdb;
 	$sm_admin_data_history = $wpdb->prefix . SM_ADMIN_HISTORY_TABLE;
 	$sm_seo_data_history = $wpdb->prefix . SM_SEO_DATA_TABLE;
+	$sm_seo_data_history = $wpdb->prefix . SM_SSL_DATA_TABLE;
+	$sm_seo_data_history = $wpdb->prefix . SM_SEO_DATA_TABLE;
 
-	echo $wpdb->prepare(
-		"	SELECT * FROM %1s as ad
-					JOIN %1s as seo
-					ON ad.domain_id = seo.domain_id
-					WHERE ad.domain_id =%d OR seo.domain_id = %d
-					ORDER BY id DESC LIMIT 1",
-		array(
-			$sm_admin_data_history,
-			$sm_seo_data_history,
-			$project_id,
-			$project_id,
-		)
-	);
 
-	$project_status = $wpdb->get_row(
-		$wpdb->prepare(
-			"	SELECT * FROM %1s as ad
-					JOIN %1s as seo
-					WHERE ad.domain_id =%d OR seo.domain_id = %d
-					ORDER BY id DESC LIMIT 1",
+
+	$domain_id = 7;
+	$crontype = 'captcha_scan';
+
+	if( $crontype == 'admin_url' ) {
+		$tablename = $sm_admin_data_history_tbl_name;
+		$status = 'status';
+	}
+	if( $crontype == 'robots_url' ) {
+		$tablename = $sm_seo_data_history;
+		$status = 'seo_status';
+	}
+	if( $crontype == 'https_scan' ) {
+		$tablename = $sm_site_https_history;
+		$status = 'https_status';
+	}
+	if( $crontype == 'captcha_scan' ) {
+		$tablename = $sm_site_captcha_check_history;
+		$status = 'captcha_status';
+	}
+	$domian_lists = $wpdb->get_results(
+		$wpdb->prepare("
+                SELECT adh.*,  adh.%1s  as status 
+                FROM   %1s adh 
+                WHERE adh.domain_id = %d
+                ORDER BY adh.id DESC 
+                LIMIT 0,1",
 			array(
-				$sm_admin_data_history,
-				$sm_seo_data_history,
-				$project_id,
-				$project_id,
+				$status,
+				$tablename,
+				$domain_id,
 			)
 		)
-	);
+	);  //db call ok; no-cache ok
+
+	$date1 = strtotime( $domian_lists[0]->updated_date );
+	$date2 = time();
+	$subTime = $date2 - $date1;
+	$y = ($subTime/(60*60*24*365));
+	$d = ($subTime/(60*60*24))%365;
+	$h = ($subTime/(60*60))%24;
+	$m = ($subTime/60)%60;
+
+	echo $y." years\n";
+	echo $d." days\n";
+	echo $h." hours\n";
+	echo $m." minutes\n";
 	if ( ! empty( $project_status ) ) {
 		return absint( $project_status->status );
 	} else {
