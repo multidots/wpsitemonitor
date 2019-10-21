@@ -195,9 +195,13 @@ function sm_add_project( $request ) {
 		'sitemap_status' => absint( $sm_sitemap_option ),
 		'admin_status'   => absint( $sm_admin_option ),
 		'roborts_status' => absint( $sm_robots_option ),
+		'https_status' => 1,
+		'captcha_status' => 1,
 		'created_date'   => date( 'Y-m-d H:i:s' ),
 		'updated_date'   => date( 'Y-m-d H:i:s' ),
 	), array(
+		'%d',
+		'%d',
 		'%d',
 		'%d',
 		'%d',
@@ -510,7 +514,7 @@ function get_project_status( $status_type, $project_id ) {
 		} elseif ($h > 1){
 			$status_text = sprintf( __( 'Update %d hours ago', 'sitemonitor' ), abs( $h ) );
 		} else {
-			$status_text = sprintf( __( 'Update %d seconds ago', 'sitemonitor' ), abs( $m ) );
+			$status_text = sprintf( __( 'Update %d minutes ago', 'sitemonitor' ), abs( $m ) );
 		}
 		$response_data['status_text'] = $status_text;
 	}
