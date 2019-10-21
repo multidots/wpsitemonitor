@@ -272,39 +272,59 @@ class ProjectsViews extends React.Component {
       },
       { label: 'Domain URL', name: 'domain_url' },
       {
-        label: 'Scan Status', name: 'roborts_status',
+        label: 'Scan Status', name: 'cron_status',
 
         options: {
           filter: false,
           customBodyRender: ( value, tableMeta, updateValue ) => {
 
-            if ( 'undefined' === typeof value ) {
+            let cron_status = 0;
 
-            } else {
-              const status = 1 === parseInt( value ) ? true : false;
-              return (
-                <PopupState variant="popper" popupId="demo-popup-popper">
-                  {popupState => (
-                    <div>
-                      <HtmlTooltip style={{backgroundColor:"#fff"}}
-                        title={
-                          <React.Fragment>
-                            <ul className="status_tooltip">
-                              <li><FiberManualRecordIcon style={{ color: '#43a047',fontSize: "small" }}/>  Wp-admin URL</li>
-                              <li><FiberManualRecordIcon style={{ color: '#D3302F',fontSize: "small" }}/>  SSL</li>
-                            </ul>
-                          </React.Fragment>
-                        }
-                      >
-                      <Button variant="contained" {...bindToggle(popupState)}>
-                        <FiberManualRecordIcon style={{ color: '#43a047',fontSize: "small" }}/>  Completed
-                      </Button>
-                      </HtmlTooltip>
-                    </div>
-                  )}
-                </PopupState>
-              );
+            if(typeof value != 'undefined' || null != value){
+              if( 1 === value.sitemap_xml && 1 === value.admin_status && 1 === value.captcha_status && 1 === value.https_status && 1 === value.robots_status){
+                cron_status = 1;
+                //console.log(cron_status);
+              }
             }
+
+            return (
+              <PopupState className="tooltip_container" variant="popper" popupId="demo-popup-popper">
+                {popupState => (
+
+                    <HtmlTooltip  style={{backgroundColor:"#fff"}}
+                                 title={
+
+                                     <ul className="status_tooltip">
+                                       { typeof value != 'undefined' || null != value ?
+                                            <div>
+                                           <li><FiberManualRecordIcon style={{ color: value.sitemap_xml === 1 ? '#43a047' : '#D3302F',fontSize: "small" }}/>  Sitemap</li>
+                                           <li><FiberManualRecordIcon style={{ color: value.admin_status === 1 ? '#43a047' : '#D3302F',fontSize: "small" }}/>  Admin URL</li>
+                                           <li><FiberManualRecordIcon style={{ color: value.robots_status === 1 ? '#43a047' : '#D3302F',fontSize: "small" }}/>  Robots</li>
+                                           <li><FiberManualRecordIcon style={{ color: value.https_status === 1 ? '#43a047' : '#D3302F',fontSize: "small" }}/>  SSL</li>
+                                           <li><FiberManualRecordIcon style={{ color: value.captcha_status === 1 ? '#43a047' : '#D3302F',fontSize: "small" }}/>  Captcha</li>
+                                            </div>
+                                        :""}
+                                     </ul>
+
+                                 }
+                    >
+
+                      <Button variant="contained" {...bindToggle(popupState)}>
+                        { 1 == cron_status ?
+                          <div><FiberManualRecordIcon style={{ color: '#43a047',fontSize: "small" }}/> Completed</div>
+                          :
+                          <div><FiberManualRecordIcon style={{ color: '#D3302F',fontSize: "small" }}/>Pending</div>
+                        }
+
+                      </Button>
+                    </HtmlTooltip>
+
+                )}
+              </PopupState>
+
+
+          );
+
           }
         }
       },
