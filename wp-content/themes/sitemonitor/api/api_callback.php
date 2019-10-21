@@ -391,20 +391,21 @@ function get_all_type_report( $project_id ) {
 	$sitemap_filter_data            = array();
 	$sitemap_filter_data['sitemap'] = sitemap_report( $project_id );
 
-	$sm_domain_scan_status = $wpdb->prefix . SM_DOMAIN_STATUS_TABLE;
-	$all_status            = $wpdb->get_row( $wpdb->prepare( "			
-					SELECT * FROM %1s					
-					WHERE domain_id = %d
-					ORDER BY id DESC",
-		$sm_domain_scan_status,
-		$project_id ), ARRAY_A );
+	$admin_url = get_project_status( 'admin_url', $project_id );
+	$sitemap_filter_data['admin_status'] = !empty($admin_url['status']) ? $admin_url['status'] : 0;
+	$sitemap_filter_data['admin_status_text'] = !empty($admin_url['status_text']) ? $admin_url['status_text'] : 0;
 
-	//print_r(get_project_status( 'admin_url', $project_id ));
+	$robots_url = get_project_status( 'robots_url', $project_id );
+	$sitemap_filter_data['robots_status'] = !empty($robots_url['status']) ? $robots_url['status'] : 0;
+	$sitemap_filter_data['robots_status_text'] = !empty($robots_url['status_text']) ? $robots_url['status_text'] : 0;
 
-	$sitemap_filter_data['admin_status']   = get_project_status( 'admin_url', $project_id );
-	$sitemap_filter_data['robots_status']  = get_project_status( 'robots_url', $project_id );
-	$sitemap_filter_data['https_status']   = get_project_status( 'https_scan', $project_id );
-	$sitemap_filter_data['captcha_status'] = get_project_status( 'captcha_scan', $project_id );
+	$https_scan = get_project_status( 'https_scan', $project_id );
+	$sitemap_filter_data['ssl_status'] = !empty($https_scan['status']) ? $https_scan['status'] : 0;
+	$sitemap_filter_data['ssl_status_text'] = !empty($https_scan['status_text']) ? $https_scan['status_text'] : 0;
+
+	$captcha_scan = get_project_status( 'captcha_scan', $project_id );
+	$sitemap_filter_data['captcha_status'] = !empty($captcha_scan['status']) ? $captcha_scan['status'] : 0;
+	$sitemap_filter_data['captcha_status_text'] = !empty($captcha_scan['status_text']) ? v['status_text'] : 0;
 
 	return $sitemap_filter_data;
 }
@@ -451,16 +452,14 @@ function get_project_status( $status_type, $project_id ) {
 	global $wpdb;
 	$sm_admin_data_history = $wpdb->prefix . SM_ADMIN_HISTORY_TABLE;
 	$sm_seo_data_history = $wpdb->prefix . SM_SEO_DATA_TABLE;
-	$sm_seo_data_history = $wpdb->prefix . SM_SSL_DATA_TABLE;
-	$sm_seo_data_history = $wpdb->prefix . SM_SEO_DATA_TABLE;
+	$sm_site_https_history = $wpdb->prefix . SM_SSL_DATA_TABLE;
+	$sm_site_captcha_check_history = $wpdb->prefix . SM_CAPTCHA_DATA_TABLE;
 
-
-
-	$domain_id = 7;
-	$crontype = 'captcha_scan';
+	$domain_id = $project_id;
+	$crontype = $status_type;
 
 	if( $crontype == 'admin_url' ) {
-		$tablename = $sm_admin_data_history_tbl_name;
+		$tablename = $sm_admin_data_history;
 		$status = 'status';
 	}
 	if( $crontype == 'robots_url' ) {
@@ -475,9 +474,9 @@ function get_project_status( $status_type, $project_id ) {
 		$tablename = $sm_site_captcha_check_history;
 		$status = 'captcha_status';
 	}
-	$domian_lists = $wpdb->get_results(
+	$domain_lists = $wpdb->get_row(
 		$wpdb->prepare("
-                SELECT adh.*,  adh.%1s  as status 
+                SELECT adh.updated_date,  adh.%1s  as status 
                 FROM   %1s adh 
                 WHERE adh.domain_id = %d
                 ORDER BY adh.id DESC 
@@ -490,7 +489,8 @@ function get_project_status( $status_type, $project_id ) {
 		)
 	);  //db call ok; no-cache ok
 
-	$date1 = strtotime( $domian_lists[0]->updated_date );
+	if(!empty($domain_lists))
+	$date1 = strtotime( $domain_lists->updated_date );
 	$date2 = time();
 	$subTime = $date2 - $date1;
 	$y = ($subTime/(60*60*24*365));
@@ -498,12 +498,18 @@ function get_project_status( $status_type, $project_id ) {
 	$h = ($subTime/(60*60))%24;
 	$m = ($subTime/60)%60;
 
-	echo $y." years\n";
-	echo $d." days\n";
-	echo $h." hours\n";
-	echo $m." minutes\n";
+	if($y > 0){
+		$status_text = sprintf( __( '%d year ago', 'sitemonitor' ), abs( $y ) );
+	} elseif ($d > 0){
+		$status_text = sprintf( __( '%d days ago', 'sitemonitor' ), abs( $d ) );
+	} elseif ($h > 0){
+		$status_text = sprintf( __( '%d hours ago', 'sitemonitor' ), abs( $h ) );
+	} else {
+		$status_text = sprintf( __( '%d seconds ago', 'sitemonitor' ), abs( $m ) );
+	}
+
 	if ( ! empty( $project_status ) ) {
-		return absint( $project_status->status );
+		return $status_text;
 	} else {
 		return 0;
 	}
