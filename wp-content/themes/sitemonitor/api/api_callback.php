@@ -507,14 +507,14 @@ function get_project_status( $status_type, $project_id ) {
 		$h = ($subTime/(60*60))%24;
 		$m = ($subTime/60)%60;
 
-		if($y > 1){
-			$status_text = sprintf( __( 'Update %d year ago', 'sitemonitor' ), abs( $y ) );
-		} elseif ($d > 1){
-			$status_text = sprintf( __( 'Update %d days ago', 'sitemonitor' ), abs( $d ) );
-		} elseif ($h > 1){
-			$status_text = sprintf( __( 'Update %d hours ago', 'sitemonitor' ), abs( $h ) );
+		if($y >= 1){
+			$status_text = sprintf( __( 'Update %d year ago', 'sitemonitor' ), absint( $y ) );
+		} elseif ($d >= 1){
+			$status_text = sprintf( __( 'Update %d days ago', 'sitemonitor' ), absint( $d ) );
+		} elseif ($h >= 1){
+			$status_text = sprintf( __( 'Update %d hours ago', 'sitemonitor' ), absint( $h ) );
 		} else {
-			$status_text = sprintf( __( 'Update %d minutes ago', 'sitemonitor' ), abs( $m ) );
+			$status_text = sprintf( __( 'Update %d minutes ago', 'sitemonitor' ), absint( $m ) );
 		}
 		$response_data['status_text'] = $status_text;
 	}
