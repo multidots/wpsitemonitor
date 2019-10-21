@@ -732,6 +732,7 @@
                         )
                     );  //db call ok; no-cache ok
 
+
                     if ( ! empty ( $domian_lists ) ) {
 
                         foreach ( $domian_lists as $domian_list ) {
@@ -744,7 +745,6 @@
                             $last_insert_cron_id = $wpdb->insert_id;
 
                             $dataOfOldScan =  $wpdb->get_row( $wpdb->prepare( "SELECT captcha_status FROM %1s WHERE domain_id = %d ORDER BY id desc LIMIT 0,1",$sm_site_captcha_check_history,$domain_id ) );       //db call ok; no-cache ok
-
 
                             if ( isset( $last_insert_cron_id ) ) {
 
