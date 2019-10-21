@@ -1,0 +1,8 @@
+User-agent: *
+
+Sitemap: https://www.multidots.com/sitemap.xml
+
+Disallow: /wp-admin/
+Disallow: /license.txt
+Disallow: /phpinfo.php
+Disallow: /readme.html
