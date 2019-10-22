@@ -793,7 +793,6 @@ $cron_days = 1;
                         )
                     )
                 ); //db call ok; no-cache ok
-                print_r($domian_lists);die;
 
                 if( !empty( $domian_lists ) ) {
 
