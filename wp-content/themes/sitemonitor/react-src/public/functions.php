@@ -1,11 +1,25 @@
 <?php
+
 use \Firebase\JWT\JWT;
+
 require_once get_template_directory() . '/jwt/vendor/autoload.php';
 require_once get_template_directory() . '/class-WPMail.php';
 require_once get_template_directory() . '/api/register_api_endpoint.php';
 require_once get_template_directory() . '/api/api_callback.php';
 require_once get_template_directory() . '/api/constant.php';
 require_once get_template_directory() . '/api/email_template.php';
+
+add_action( 'init', "sm_run_cron" );
+
+function sm_run_cron() {
+
+	$sm_cron_run = FILTER_INPUT( INPUT_GET, 'sm_cron_run', FILTER_SANITIZE_NUMBER_INT );
+	$sm_cron_run = 1 === absint($sm_cron_run) ? absint( $sm_cron_run ) : false;
+
+	if ( 1 === $sm_cron_run ) {
+		require_once get_template_directory() . '/cron/cron.php';
+	}
+}
 
 /**
  * Validate Authorization for the user
