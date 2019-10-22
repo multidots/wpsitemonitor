@@ -22,6 +22,9 @@ $cron_days = 1;
 	$sm_site_critical_history = "{$wpdb->prefix}sm_site_critical_history";
 	$sm_site_https_history = "{$wpdb->prefix}sm_site_https_history";
 	$sm_site_captcha_check_history = "{$wpdb->prefix}sm_site_captcha_check_history";
+	$users = "{$wpdb->prefix}users";
+
+	$site_project_url = 'http://wpsitemonitor.md-staging.com/projects/';
 
 	$status_value = '0';
 
@@ -754,6 +757,63 @@ $cron_days = 1;
 
                 }
 
+            } else {
+                print_r(  " No of Scan URL is missing " );
+            }
+            break;
+
+        case 'result':
+            if( isset( $no_of_records ) ) {
+
+                $domian_lists = $wpdb->get_results(
+                    $wpdb->prepare("
+                SELECT dl.id,dl.project_name,users.user_email,users.user_login
+                FROM   %1s  users 
+                INNER JOIN  %1s dl ON ( dl.user_id = users.id )
+                INNER JOIN  %1s sdh ON ( sdh.domain_id = dl.id )
+                INNER JOIN  %1s adh ON ( adh.domain_id = dl.id )
+                INNER JOIN  %1s rdh ON ( rdh.domain_id = dl.id)
+                INNER JOIN  %1s shh ON ( shh.domain_id = dl.id)
+                INNER JOIN  %1s acch ON ( acch.domain_id = dl.id)
+                WHERE sdh.updated_date > DATE(NOW()) - INTERVAL %d DAY 
+                    OR adh.updated_date > DATE(NOW()) - INTERVAL %d DAY
+                    OR rdh.updated_date > DATE(NOW()) - INTERVAL %d DAY
+                    OR shh.updated_date > DATE(NOW()) - INTERVAL %d DAY
+                    OR acch.updated_date > DATE(NOW()) - INTERVAL %d DAY
+                GROUP BY dl.user_id",
+                        array(
+                            $users,
+                            $domain_tbl_name,
+                            $sm_sitemap_data_history_tbl_name,
+                            $sm_admin_data_history_tbl_name,
+                            $sm_seo_data_history,
+                            $sm_site_https_history,
+                            $sm_site_captcha_check_history,
+                            1,1,1,1,1
+                        )
+                    )
+                ); //db call ok; no-cache ok
+
+                if( !empty( $domian_lists ) ) {
+
+                    foreach ( $domian_lists as $domian_list ) {
+
+                        $domain_id = $domian_list->id;
+
+                        $project_name = isset($domian_list->project_name) ? $domian_list->project_name : "";
+                        $user_email = isset($domian_list->user_email) ? $domian_list->user_email : "";
+                        $user_login = isset($domian_list->user_login) ? $domian_list->user_login : "";
+                        $site_url = $site_project_url.$domain_id;
+
+                        $body = cron_completed_email_template( $site_url );
+
+                        $headers = array( 'Content-Type: text/html; charset=UTF-8' );
+                        wp_mail( $user_email, 'your site cron run completed.', $body, $headers );
+                    }
+                }
+                else{
+                    print_r( " No Record Found ");
+                }
             } else {
                 print_r(  " No of Scan URL is missing " );
             }
