@@ -16,9 +16,23 @@ class PagesViews extends React.Component {
     fetch( `/wp-json/wp/v2/pages?slug=${slug}` )
       .then( response => response.json() )
       .then( data => {
-        this.setState( {
-          pageData: data[ 0 ]
-        } );
+        if(Object.keys(data).length === 0){
+          fetch( `/wp-json/wp/v2/posts?slug=${slug}` )
+            .then( response => response.json() )
+            .then( data => {
+              if(Object.keys(data).length === 0){
+
+              } else {
+                this.setState( {
+                  pageData: data[ 0 ]
+                } );
+              }
+            } );
+        } else {
+          this.setState( {
+            pageData: data[ 0 ]
+          } );
+        }
       } );
   }
 

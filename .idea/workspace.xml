@@ -74,7 +74,8 @@
       <workItem from="1571309963705" duration="786000" />
       <workItem from="1571310777849" duration="9169000" />
       <workItem from="1571374003650" duration="18038000" />
-      <workItem from="1571634040162" duration="16072000" />
+      <workItem from="1571634040162" duration="16672000" />
+      <workItem from="1571721195897" duration="6713000" />
     </task>
     <servers />
   </component>
@@ -108,28 +109,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/wp-content/themes/sitemonitor/functions.php</url>
-          <line>1</line>
+          <line>2</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/wp-content/themes/sitemonitor/functions.php</url>
-          <line>2</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/wp-content/themes/sitemonitor/react-src/public/functions.php</url>
           <line>4</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/wp-content/themes/sitemonitor/react-src/public/functions.php</url>
-          <line>1</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/wp-content/themes/sitemonitor/react-src/public/functions.php</url>
-          <line>3</line>
-          <option name="timeStamp" value="8" />
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/script_xml.php</url>

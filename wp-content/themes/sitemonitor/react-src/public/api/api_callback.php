@@ -85,10 +85,6 @@ function sm_delete_projects( $request ) {
 		}
 	}
 
-	$response = array(
-		'message' => "Projects deleted Successfully.",
-	);
-
 	return new WP_REST_Response( $delete_data, 200 );
 }
 
@@ -112,27 +108,31 @@ function sm_projects_status( $request ) {
 		$sm_sitemap_option = 0;
 		$sm_admin_option   = 0;
 		$sm_robots_option  = 0;
+		$sm_https_status  = 0;
+		$sm_captcha_status  = 0;
 		if ( true === $projectStatus || 1 === $projectStatus ) {
 			$sm_sitemap_option = 1;
 			$sm_admin_option   = 1;
 			$sm_robots_option  = 1;
+			$sm_https_status  = 1;
+			$sm_captcha_status = 1;
 		}
 
 		$sm_domain_scan_status = $wpdb->prefix . 'sm_domain_scan_status';
-		$test                  = $wpdb->update(
+		$wpdb->update(
 			$sm_domain_scan_status,
 			array(
 				'sitemap_status' => $sm_sitemap_option,
 				'admin_status'   => $sm_admin_option,
 				'roborts_status' => $sm_robots_option,
+				'https_status' => $sm_https_status,
+				'captcha_status' => $sm_captcha_status,
 				'updated_date'   => date( 'Y-m-d H:i:s' ),
 			),
 			array(
 				'domain_id' => $project_id,
 			)
 		);
-
-		//print_r($test);
 	}
 
 	$response = array(
@@ -465,19 +465,19 @@ function get_project_status( $status_type, $project_id ) {
 	$domain_id = $project_id;
 	$crontype = $status_type;
 
-	if( $crontype == 'admin_url' ) {
+	if( 'admin_url' === $crontype  ) {
 		$tablename = $sm_admin_data_history;
 		$status = 'status';
 	}
-	if( $crontype == 'robots_url' ) {
+	if( 'robots_url' === $crontype ) {
 		$tablename = $sm_seo_data_history;
 		$status = 'seo_status';
 	}
-	if( $crontype == 'https_scan' ) {
+	if( 'https_scan' === $crontype ) {
 		$tablename = $sm_site_https_history;
 		$status = 'https_status';
 	}
-	if( $crontype == 'captcha_scan' ) {
+	if( 'captcha_scan' === $crontype ) {
 		$tablename = $sm_site_captcha_check_history;
 		$status = 'captcha_status';
 	}
