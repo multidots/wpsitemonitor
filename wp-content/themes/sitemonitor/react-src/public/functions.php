@@ -9,8 +9,11 @@ require_once get_template_directory() . '/api/api_callback.php';
 require_once get_template_directory() . '/api/constant.php';
 require_once get_template_directory() . '/api/email_template.php';
 
-add_action( 'init', "sm_run_cron" );
 
+
+/**
+ * Execute cron file.
+ */
 function sm_run_cron() {
 
 	$sm_cron_run = FILTER_INPUT( INPUT_GET, 'sm_cron_run', FILTER_SANITIZE_NUMBER_INT );
@@ -20,6 +23,7 @@ function sm_run_cron() {
 		require_once get_template_directory() . '/cron/cron.php';
 	}
 }
+add_action( 'init', "sm_run_cron" );
 
 /**
  * Validate Authorization for the user
@@ -85,6 +89,10 @@ function validate_token() {
 		return false;
 	}
 }
+
+/**
+ * Create necessary tables in database when theme activated.
+ */
 
 function md_sitemonitor_set_default_tables() {
 	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );

@@ -66,6 +66,14 @@ function sm_login( $request ) {
 	return new WP_REST_Response( $data, 200 );
 }
 
+/**
+ * Delete Projects API callback.
+ *
+ * @param $request
+ *
+ * @return \WP_Error|\WP_REST_Response
+ */
+
 function sm_delete_projects( $request ) {
 
 	$auth = validate_token();
@@ -87,6 +95,15 @@ function sm_delete_projects( $request ) {
 
 	return new WP_REST_Response( $delete_data, 200 );
 }
+
+/**
+ *
+ * Enabled / Disabled projects for scan
+ *
+ * @param $request
+ *
+ * @return \WP_Error|\WP_REST_Response
+ */
 
 function sm_projects_status( $request ) {
 
@@ -143,6 +160,14 @@ function sm_projects_status( $request ) {
 	return new WP_REST_Response( $response, 200 );
 }
 
+/**
+ *
+ * Add project API callback function
+ *
+ * @param $request
+ *
+ * @return array|\WP_Error|\WP_REST_Response
+ */
 
 function sm_add_project( $request ) {
 
@@ -227,6 +252,15 @@ function sm_add_project( $request ) {
 	}
 }
 
+/**
+ *
+ * Callback function for the list of projects with search and pagination.
+ *
+ * @param $request
+ *
+ * @return \WP_Error|\WP_REST_Response
+ */
+
 function sm_get_domains( $request ) {
 
 	global $wpdb;
@@ -308,6 +342,13 @@ function sm_get_domains( $request ) {
 	return $response;
 }
 
+/**
+ * Get Status of specific project along with sitemap data and other status.
+ * @param $request
+ *
+ * @return \WP_Error|\WP_REST_Response
+ */
+
 function sm_project_report( $request ) {
 
 	$auth = validate_token();
@@ -341,6 +382,15 @@ function sm_project_report( $request ) {
 	return $response;
 }
 
+/**
+ *
+ * Get only sitemap data for the specific projects.
+ *
+ * @param $project_id
+ *
+ * @return array
+ */
+
 function sitemap_report( $project_id ) {
 
 	global $wpdb;
@@ -373,13 +423,13 @@ function sitemap_report( $project_id ) {
 				$diff_count                                   = absint( $current_diff_count ) - absint( $old_diff_count );
 				if ( $diff_count === 0 ) {
 					$sitemap_filter_data[ $key ]['sitemap_text_class'] = "sitemap_text green_text";
-					$sitemap_filter_data[ $key ]['sitemap_diff_text'] = sprintf( __( 'Sitemap is not changed', 'sitemonitor' ), $diff_count );
+					$sitemap_filter_data[ $key ]['sitemap_diff_text'] = sprintf( __( 'No any changes found in the sitemap', 'sitemonitor' ), $diff_count );
 				} else if ( $diff_count > 0 ) {
-					$sitemap_filter_data[ $key ]['sitemap_diff_text'] = sprintf( __( '%d url was added', 'sitemonitor' ), $diff_count );
+					$sitemap_filter_data[ $key ]['sitemap_diff_text'] = sprintf( __( 'Sitemap Updated - %d recored was added', 'sitemonitor' ), $diff_count );
 					$sitemap_filter_data[ $key ]['sitemap_text_class'] = "sitemap_text green_text";
 				} else {
 					$sitemap_filter_data[ $key ]['sitemap_text_class'] = "sitemap_text red_text";
-					$sitemap_filter_data[ $key ]['sitemap_diff_text'] = sprintf( __( '%d url was remove', 'sitemonitor' ), abs( $diff_count ) );
+					$sitemap_filter_data[ $key ]['sitemap_diff_text'] = sprintf( __( 'Sitemap Updated - %d recored was removed', 'sitemonitor' ), abs( $diff_count ) );
 				}
 			} else {
 				$sitemap_filter_data[ $key ]['sitemap_diff_text'] = __( 'sitemap was added', 'sitemonitor' );
@@ -392,6 +442,15 @@ function sitemap_report( $project_id ) {
 	return $sitemap_filter_data;
 }
 
+/**
+ *
+ *  Get all the status of given project id.
+ *
+ * @param $project_id
+ *
+ * @return array
+ */
+
 function get_all_type_report( $project_id ) {
 
 	global $wpdb;
@@ -400,23 +459,28 @@ function get_all_type_report( $project_id ) {
 
 	$admin_url = get_project_status( 'admin_url', $project_id );
 	$sitemap_filter_data['admin_status'] = !empty($admin_url['status']) ? $admin_url['status'] : 0;
-	$sitemap_filter_data['admin_status_text'] = !empty($admin_url['status_text']) ? $admin_url['status_text'] : 0;
+	$sitemap_filter_data['admin_status_text'] = !empty($admin_url['status_text']) ? $admin_url['status_text'] : "";
 
 	$robots_url = get_project_status( 'robots_url', $project_id );
 	$sitemap_filter_data['robots_status'] = !empty($robots_url['status']) ? $robots_url['status'] : 0;
-	$sitemap_filter_data['robots_status_text'] = !empty($robots_url['status_text']) ? $robots_url['status_text'] : 0;
+	$sitemap_filter_data['robots_status_text'] = !empty($robots_url['status_text']) ? $robots_url['status_text'] : "";
 
 	$https_scan = get_project_status( 'https_scan', $project_id );
 	$sitemap_filter_data['ssl_status'] = !empty($https_scan['status']) ? $https_scan['status'] : 0;
-	$sitemap_filter_data['ssl_status_text'] = !empty($https_scan['status_text']) ? $https_scan['status_text'] : 0;
+	$sitemap_filter_data['ssl_status_text'] = !empty($https_scan['status_text']) ? $https_scan['status_text'] : "";
 
 	$captcha_scan = get_project_status( 'captcha_scan', $project_id );
 	$sitemap_filter_data['captcha_status'] = !empty($captcha_scan['status']) ? $captcha_scan['status'] : 0;
-	$sitemap_filter_data['captcha_status_text'] = !empty($captcha_scan['status_text']) ? $captcha_scan['status_text'] : 0;
+	$sitemap_filter_data['captcha_status_text'] = !empty($captcha_scan['status_text']) ? $captcha_scan['status_text'] : "";
 
 	return $sitemap_filter_data;
 }
 
+/**
+ * Send email notification when project added by user.
+ *
+ * @param $domainData
+ */
 
 function add_project_notification( $domainData ) {
 
@@ -432,6 +496,15 @@ function add_project_notification( $domainData ) {
 	wp_mail( $user_email, 'A new site was added to your account. We will now monitor ' . $domain_url, $body, $headers );
 }
 
+/**
+ *
+ * Get cron data ( cron execute or not ) of the specific project.
+ *
+ * @param $status_type
+ * @param $project_id
+ *
+ * @return int
+ */
 
 function get_project_cron_status( $status_type, $project_id ) {
 	global $wpdb;
@@ -453,6 +526,15 @@ function get_project_cron_status( $status_type, $project_id ) {
 	}
 }
 
+/**
+ *
+ * Get Status of the specific project and type.
+ *
+ * @param $status_type
+ * @param $project_id
+ *
+ * @return array\
+ */
 
 function get_project_status( $status_type, $project_id ) {
 
@@ -508,13 +590,17 @@ function get_project_status( $status_type, $project_id ) {
 		$m = ($subTime/60)%60;
 
 		if($y >= 1){
-			$status_text = sprintf( __( 'Update %d year ago', 'sitemonitor' ), absint( $y ) );
+			$ago_caption = 1 === $y ? "year" : "years";
+			$status_text = sprintf( __( 'Updated %d %s ago', 'sitemonitor' ), absint( $y ) , $ago_caption);
 		} elseif ($d >= 1){
-			$status_text = sprintf( __( 'Update %d days ago', 'sitemonitor' ), absint( $d ) );
+			$ago_caption = 1 === $d ? "day" : "days";
+			$status_text = sprintf( __( 'Updated %d %s ago', 'sitemonitor' ), absint( $d ) , $ago_caption );
 		} elseif ($h >= 1){
-			$status_text = sprintf( __( 'Update %d hours ago', 'sitemonitor' ), absint( $h ) );
+			$ago_caption = 1 === $h ? "hour" : "hours";
+			$status_text = sprintf( __( 'Updated %d %s ago', 'sitemonitor' ), absint( $h ), $ago_caption );
 		} else {
-			$status_text = sprintf( __( 'Update %d minutes ago', 'sitemonitor' ), absint( $m ) );
+			$ago_caption = 1 === $m ? "minute" : "minutes";
+			$status_text = sprintf( __( 'Updated %d %s ago', 'sitemonitor' ), absint( $m ), $ago_caption );
 		}
 		$response_data['status_text'] = $status_text;
 	}
