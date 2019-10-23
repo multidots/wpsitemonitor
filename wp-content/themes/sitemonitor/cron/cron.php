@@ -780,7 +780,7 @@ $cron_days = 1;
                     OR rdh.updated_date > DATE(NOW()) - INTERVAL %d DAY
                     OR shh.updated_date > DATE(NOW()) - INTERVAL %d DAY
                     OR acch.updated_date > DATE(NOW()) - INTERVAL %d DAY
-                GROUP BY dl.user_id",
+                GROUP BY dl.id",
                         array(
                             $users,
                             $domain_tbl_name,

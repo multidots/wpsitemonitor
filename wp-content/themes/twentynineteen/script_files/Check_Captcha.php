@@ -48,7 +48,7 @@
                     OR rdh.updated_date > DATE(NOW()) - INTERVAL %d DAY
                     OR shh.updated_date > DATE(NOW()) - INTERVAL %d DAY
                     OR acch.updated_date > DATE(NOW()) - INTERVAL %d DAY
-                GROUP BY dl.user_id",
+                GROUP BY dl.id",
             array(
                 $users,
                 $domain_tbl_name,
@@ -57,11 +57,10 @@
                 $sm_seo_data_history,
                 $sm_site_https_history,
                 $sm_site_captcha_check_history,
-                1,1,1,1,1
+                3,3,3,3,3
             )
         )
     ); //db call ok; no-cache ok
-
 
     if( !empty( $domian_lists ) ) {
 
