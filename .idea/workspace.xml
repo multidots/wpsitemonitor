@@ -76,7 +76,7 @@
       <workItem from="1571374003650" duration="18038000" />
       <workItem from="1571634040162" duration="16672000" />
       <workItem from="1571721195897" duration="9379000" />
-      <workItem from="1571812168051" duration="8162000" />
+      <workItem from="1571812168051" duration="9941000" />
     </task>
     <servers />
   </component>
@@ -120,7 +120,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/script_xml.php</url>
-          <line>35</line>
+          <line>34</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
       </breakpoints>

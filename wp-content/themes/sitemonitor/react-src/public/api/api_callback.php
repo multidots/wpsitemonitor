@@ -473,6 +473,21 @@ function get_all_type_report( $project_id ) {
 	$sitemap_filter_data['captcha_status'] = !empty($captcha_scan['status']) ? $captcha_scan['status'] : 0;
 	$sitemap_filter_data['captcha_status_text'] = !empty($captcha_scan['status_text']) ? $captcha_scan['status_text'] : "";
 
+
+	$domain_table_name  = $wpdb->prefix . SM_DOMAIN_TABLE;
+	$domain_scan_status = $wpdb->prefix . SM_DOMAIN_STATUS_TABLE;
+
+	$domain_data = $wpdb->get_results( $wpdb->prepare( "			
+					SELECT dl.id,dl.project_name,dl.domain_url,dl.sitemap_url,cs.sitemap_status,cs.admin_status,cs.admin_status,cs.roborts_status FROM %1s as dl 
+					JOIN %1s as cs
+					ON dl.id = cs.domain_id 
+					AND dl.user_id = %d ORDER BY dl.id DESC LIMIT %d, %d",
+		$domain_table_name,
+		$domain_scan_status,
+		$sm_user_id,
+		$offset,
+		SM_RECORDS_PER_PAGE ), ARRAY_A );
+
 	return $sitemap_filter_data;
 }
 
