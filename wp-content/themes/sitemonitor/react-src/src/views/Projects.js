@@ -13,7 +13,7 @@ import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 
-import './style.css'; // Tell Webpack that Button.js uses these styles
+import './style.css';
 
 import CustomToolbar from './CustomToolbar';
 

@@ -116,40 +116,46 @@ function sm_projects_status( $request ) {
 	global $wpdb;
 	$projectData = json_decode( $request->get_body() );
 	$project_id  = $projectData->projectID ? absint( esc_html( $projectData->projectID ) ) : '';
+	$project_type  = $projectData->project_type ? esc_html( $projectData->project_type ) : '';
 
 	$projectStatus = $projectData->projectStatus ? true : false;
 	if ( empty( $project_id ) ) {
 		return new WP_Error( 'invalid_data', esc_html__( 'Project data not found', 'md_site_monitor' ), array( 'status' => 403 ) );
 	} else {
 
-		$sm_sitemap_option = 0;
-		$sm_admin_option   = 0;
-		$sm_robots_option  = 0;
-		$sm_https_status  = 0;
-		$sm_captcha_status  = 0;
+		$sm_status = 0;
 		if ( true === $projectStatus || 1 === $projectStatus ) {
-			$sm_sitemap_option = 1;
-			$sm_admin_option   = 1;
-			$sm_robots_option  = 1;
-			$sm_https_status  = 1;
-			$sm_captcha_status = 1;
+			$sm_status = 1;
 		}
 
 		$sm_domain_scan_status = $wpdb->prefix . 'sm_domain_scan_status';
-		$wpdb->update(
-			$sm_domain_scan_status,
-			array(
-				'sitemap_status' => $sm_sitemap_option,
-				'admin_status'   => $sm_admin_option,
-				'roborts_status' => $sm_robots_option,
-				'https_status' => $sm_https_status,
-				'captcha_status' => $sm_captcha_status,
-				'updated_date'   => date( 'Y-m-d H:i:s' ),
-			),
-			array(
-				'domain_id' => $project_id,
-			)
-		);
+		if(!empty($project_type)){
+			$wpdb->update(
+				$sm_domain_scan_status,
+				array(
+					$project_type. "_status" => $sm_status,
+					'updated_date'   => date( 'Y-m-d H:i:s' ),
+				),
+				array(
+					'domain_id' => $project_id,
+				)
+			);
+		} else {
+			$wpdb->update(
+				$sm_domain_scan_status,
+				array(
+					'sitemap_status' => $sm_status,
+					'admin_status'   => $sm_status,
+					'roborts_status' => $sm_status,
+					'https_status' => $sm_status,
+					'captcha_status' => $sm_status,
+					'updated_date'   => date( 'Y-m-d H:i:s' ),
+				),
+				array(
+					'domain_id' => $project_id,
+				)
+			);
+		}
 	}
 
 	$response = array(
@@ -353,12 +359,16 @@ function sm_project_report( $request ) {
 
 	$auth = validate_token();
 
+	global $wpdb;
+
 	if ( ! isset( $auth['status'] ) || empty( $auth['status'] ) || false === $auth['status'] ) {
 		return new WP_Error( 'invalid_user', esc_html__( 'User ID not found', 'md_site_monitor' ), array( 'status' => 403 ) );
 	}
 
 	$project_id = filter_input( INPUT_GET, 'project_id', FILTER_SANITIZE_NUMBER_INT );
 	$type       = filter_input( INPUT_GET, 'type', FILTER_SANITIZE_STRING );
+
+	$sm_user_id = $auth['uid'];
 
 	$api_responce = array();
 
@@ -373,7 +383,7 @@ function sm_project_report( $request ) {
 			robots_report( $project_id );
 			break;
 		case 'all';
-			$api_responce = get_all_type_report( $project_id );
+			$api_responce = get_all_type_report( $project_id);
 			break;
 	}
 
@@ -458,20 +468,36 @@ function get_all_type_report( $project_id ) {
 	$sitemap_filter_data['sitemap'] = sitemap_report( $project_id );
 
 	$admin_url = get_project_status( 'admin_url', $project_id );
-	$sitemap_filter_data['admin_status'] = !empty($admin_url['status']) ? $admin_url['status'] : 0;
+	$sitemap_filter_data['admin_status'] = !empty($admin_url['status']) ? absint($admin_url['status']) : 0;
 	$sitemap_filter_data['admin_status_text'] = !empty($admin_url['status_text']) ? $admin_url['status_text'] : "";
 
 	$robots_url = get_project_status( 'robots_url', $project_id );
-	$sitemap_filter_data['robots_status'] = !empty($robots_url['status']) ? $robots_url['status'] : 0;
+	$sitemap_filter_data['robots_status'] = !empty($robots_url['status']) ? absint($robots_url['status']) : 0;
 	$sitemap_filter_data['robots_status_text'] = !empty($robots_url['status_text']) ? $robots_url['status_text'] : "";
 
 	$https_scan = get_project_status( 'https_scan', $project_id );
-	$sitemap_filter_data['ssl_status'] = !empty($https_scan['status']) ? $https_scan['status'] : 0;
+	$sitemap_filter_data['ssl_status'] = !empty($https_scan['status']) ? absint($https_scan['status']) : 0;
 	$sitemap_filter_data['ssl_status_text'] = !empty($https_scan['status_text']) ? $https_scan['status_text'] : "";
 
 	$captcha_scan = get_project_status( 'captcha_scan', $project_id );
-	$sitemap_filter_data['captcha_status'] = !empty($captcha_scan['status']) ? $captcha_scan['status'] : 0;
+	$sitemap_filter_data['captcha_status'] = !empty($captcha_scan['status']) ? absint($captcha_scan['status']) : 0;
 	$sitemap_filter_data['captcha_status_text'] = !empty($captcha_scan['status_text']) ? $captcha_scan['status_text'] : "";
+
+	$domain_table_name  = $wpdb->prefix . SM_DOMAIN_TABLE;
+	$domain_scan_status = $wpdb->prefix . SM_DOMAIN_STATUS_TABLE;
+
+	$project_details = $wpdb->get_row( $wpdb->prepare( "			
+					SELECT dl.id,dl.project_name,dl.domain_url,dl.sitemap_url,cs.sitemap_status,cs.admin_status,cs.roborts_status,cs.captcha_status,cs.https_status FROM %1s as dl 
+					JOIN %1s as cs
+					ON dl.id = cs.domain_id 
+					WHERE dl.id = %d
+					ORDER BY dl.id DESC",
+		$domain_table_name,
+		$domain_scan_status,
+		$project_id
+	), ARRAY_A );
+
+	$sitemap_filter_data['project_details'] = $project_details;
 
 	return $sitemap_filter_data;
 }
