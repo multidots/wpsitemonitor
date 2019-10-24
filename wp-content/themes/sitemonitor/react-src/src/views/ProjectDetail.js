@@ -10,6 +10,12 @@ import Divider from '@material-ui/core/Divider';
 import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
 
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+
 import ProjectDetailSidebar from './ProjectDetailSidebar';
 import SiteMapReport from './SiteMapReport';
 
@@ -22,6 +28,10 @@ const useStyles = makeStyles( theme => ({
   },
   toolbarTitle: {
     flex: 1,
+  },
+  table: {
+    width: 800,
+    marginLeft: 20
   },
   toolbarSecondary: {
     justifyContent: 'space-between',
@@ -159,7 +169,60 @@ class ProjectDetailViews extends React.Component {
     const sitemap_page = '/projects/' + this.props.data.match.params.id + '/' + 'sitemap';
     return (
       <Grid container item xs={12} md={12} spacing={3}>
-          <Grid item xs={8} md={8}>
+
+        <Grid container item xs={8} md={8} >
+          <Grid item xs={12} md={12}>
+            <Card className={classes.card}>
+              <CardContent>
+              <Typography variant="h5" paragraph>
+                Project Details
+              </Typography>
+
+                <Table className={classes.table} aria-label="simple table">
+                  <TableBody>
+                      <TableRow>
+                        <TableCell component="th" scope="row">
+                          <b>Project Name</b>
+                        </TableCell>
+                        <TableCell>Multidots</TableCell>
+                      </TableRow>
+                    <TableRow>
+                      <TableCell component="th" scope="row">
+                        <b>Domain URL</b>
+                      </TableCell>
+                      <TableCell><a target="_blank" href="https://www.multidots.com/">https://www.multidots.com/</a></TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell component="th" scope="row">
+                        <b>Sitemap URL</b>
+                      </TableCell>
+                      <TableCell><a target="_blank" href="https://www.multidots.com/">https://www.multidots.com/</a></TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell component="th" scope="row">
+                        <b>Sitemap</b>
+                      </TableCell>
+                      <TableCell>ON</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell component="th" scope="row">
+                        <b>WP Admin</b>
+                      </TableCell>
+                      <TableCell>OFF</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell component="th" scope="row">
+                        <b>SSL</b>
+                      </TableCell>
+                      <TableCell>ON</TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12} md={12}>
             <Card className={classes.card}>
               <div className={classes.cardDetails}>
                 <CardContent>
@@ -176,6 +239,8 @@ class ProjectDetailViews extends React.Component {
               </div>
             </Card>
           </Grid>
+        </Grid>
+
           <Grid container item xs={4} md={4} >
             <Grid item xs={12} md={12}>
             <Card className={classes.card}>
@@ -189,8 +254,8 @@ class ProjectDetailViews extends React.Component {
                     )}
                   </Typography>
                   <Typography paragraph>
-                    {1 === parseInt( this.state.fullReportData.admin_status ) ? 'Custom URL set for the admin' : (
-                      'Default URL set for the admin '
+                    {1 === parseInt( this.state.fullReportData.admin_status ) ? 'Custom URL set for the WP Admin.' : (
+                      'Default WP Admin URL set for the project.'
                     )}
                   </Typography>
                   <Typography paragraph className="status_text">
@@ -210,8 +275,8 @@ class ProjectDetailViews extends React.Component {
                           <CancelRoundedIcon className={classes.status_icon} style={{color: '#D3302F'}}/> ) }
                     </Typography>
                     <Typography paragraph>
-                      { 1 === parseInt(this.state.fullReportData.robots_status) ?   "robots.txt is available on the root."  : (
-                          "robots.txt is not available on the root."
+                      { 1 === parseInt(this.state.fullReportData.robots_status) ?   "We have found the robots.txt file on the root."  : (
+                          "We can't found the robots.txt file on the root."
                       ) }
                     </Typography>
                     <Typography paragraph className="status_text">
@@ -231,8 +296,8 @@ class ProjectDetailViews extends React.Component {
                           <CancelRoundedIcon className={classes.status_icon} style={{color: '#D3302F'}}/> ) }
                     </Typography>
                     <Typography paragraph>
-                      { 1 === parseInt(this.state.fullReportData.ssl_status) ?   "Site is secure."  : (
-                          "Site does not have any SSL certificate."
+                      { 1 === parseInt(this.state.fullReportData.ssl_status) ?   "Voila! site have a secure connection."  : (
+                          "Sorry, We could not found any secure connection for this project."
                       ) }
                     </Typography>
                     <Typography paragraph className="status_text">
@@ -252,8 +317,8 @@ class ProjectDetailViews extends React.Component {
                           <CancelRoundedIcon className={classes.status_icon} style={{color: '#D3302F'}}/> ) }
                     </Typography>
                     <Typography paragraph>
-                      { 1 === parseInt(this.state.fullReportData.captcha_status) ?   "Captcha successfully implemented on contact form."  : (
-                          "Missing captcha on contact form"
+                      { 1 === parseInt(this.state.fullReportData.captcha_status) ?   "We have found captcha is successfully implemented on your project."  : (
+                          "Sorry! We could not found any captcha on your project."
                       ) }
                     </Typography>
                     <Typography paragraph className="status_text">

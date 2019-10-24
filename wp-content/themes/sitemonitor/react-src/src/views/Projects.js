@@ -6,18 +6,10 @@ import { Link, Redirect } from 'react-router-dom';
 import Tooltip from '@material-ui/core/Tooltip';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
-import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
-
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
-import Popper from '@material-ui/core/Popper';
 import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
-import Fade from '@material-ui/core/Fade';
-import Paper from '@material-ui/core/Paper';
-
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
-
-
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 
@@ -272,18 +264,30 @@ class ProjectsViews extends React.Component {
       },
       { label: 'Domain URL', name: 'domain_url' },
       {
-        label: 'Scan Status', name: 'cron_status',
+        label: 'Report Status', name: 'cron_status',
 
         options: {
           filter: false,
           customBodyRender: ( value, tableMeta, updateValue ) => {
 
-            let cron_status = 0;
+            let status_text = "";
+            let cron_status = "";
 
             if(typeof value != 'undefined' || null != value){
               if( 1 === value.sitemap_xml && 1 === value.admin_status && 1 === value.captcha_status && 1 === value.https_status && 1 === value.robots_status){
+                status_text = "Completed";
                 cron_status = 1;
-                //console.log(cron_status);
+              } else if ( 0 === value.sitemap_xml && 0 === value.admin_status && 0 === value.captcha_status && 0 === value.https_status && 0 === value.robots_status){
+                status_text = "Pending";
+                cron_status = 2;
+              } else {
+                status_text = "In Process";
+                cron_status = 0;
+              }
+
+              if(tableMeta.rowData[4] == 0){
+                status_text = "On Hold";
+                cron_status = 2;
               }
             }
 
@@ -292,28 +296,14 @@ class ProjectsViews extends React.Component {
                 {popupState => (
 
                     <HtmlTooltip  style={{backgroundColor:"#fff"}}
-                                 title={
-
-                                     <ul className="status_tooltip">
-                                       { typeof value != 'undefined' || null != value ?
-                                            <div>
-                                           <li><FiberManualRecordIcon style={{ color: value.sitemap_xml === 1 ? '#43a047' : '#D3302F',fontSize: "small" }}/>  Sitemap</li>
-                                           <li><FiberManualRecordIcon style={{ color: value.admin_status === 1 ? '#43a047' : '#D3302F',fontSize: "small" }}/>  Admin URL</li>
-                                           <li><FiberManualRecordIcon style={{ color: value.robots_status === 1 ? '#43a047' : '#D3302F',fontSize: "small" }}/>  Robots</li>
-                                           <li><FiberManualRecordIcon style={{ color: value.https_status === 1 ? '#43a047' : '#D3302F',fontSize: "small" }}/>  SSL</li>
-                                           <li><FiberManualRecordIcon style={{ color: value.captcha_status === 1 ? '#43a047' : '#D3302F',fontSize: "small" }}/>  Captcha</li>
-                                            </div>
-                                        :""}
-                                     </ul>
-
-                                 }
+                                 title=""
                     >
 
                       <Button variant="contained" {...bindToggle(popupState)}>
                         { 1 == cron_status ?
-                          <div><FiberManualRecordIcon style={{ color: '#43a047',fontSize: "small" }}/> Completed</div>
+                          <div><FiberManualRecordIcon style={{ color: '#43a047',fontSize: "small" }}/> {status_text}</div>
                           :
-                          <div><FiberManualRecordIcon style={{ color: '#D3302F',fontSize: "small" }}/>Pending</div>
+                          <div><FiberManualRecordIcon style={{ color: '#D3302F',fontSize: "small" }}/> {status_text}</div>
                         }
 
                       </Button>
@@ -329,17 +319,19 @@ class ProjectsViews extends React.Component {
         }
       },
       {
-        label: 'Status', name: 'roborts_status',
+        label: 'Action', name: 'roborts_status',
 
         options: {
           filter: false,
           customBodyRender: ( value, tableMeta, updateValue ) => {
+
             let project_id = tableMeta.rowData[ 0 ];
             if ( 'undefined' === typeof value ) {
 
             } else {
               const status = 1 === parseInt( value ) ? true : false;
               return (
+                <div>
                 <FormControlLabel
                   control={
                     <IOSSwitch
@@ -349,6 +341,28 @@ class ProjectsViews extends React.Component {
                     />
                   }
                 />
+                  <HtmlTooltip  style={{backgroundColor:"#fff"}}
+                                title={
+
+                                  <ul className="status_tooltip">
+                                    { typeof tableMeta.rowData[3] != 'undefined' || null != tableMeta.rowData[3] ?
+                                      <div>
+                                        <li><FiberManualRecordIcon style={{ color: tableMeta.rowData[3].sitemap_xml === 1 ? '#43a047' : '#D3302F',fontSize: "small" }}/>  Sitemap</li>
+                                        <li><FiberManualRecordIcon style={{ color: tableMeta.rowData[3].admin_status === 1 ? '#43a047' : '#D3302F',fontSize: "small" }}/>  Admin URL</li>
+                                        <li><FiberManualRecordIcon style={{ color: tableMeta.rowData[3].robots_status === 1 ? '#43a047' : '#D3302F',fontSize: "small" }}/>  Robots</li>
+                                        <li><FiberManualRecordIcon style={{ color: tableMeta.rowData[3].https_status === 1 ? '#43a047' : '#D3302F',fontSize: "small" }}/>  SSL</li>
+                                        <li><FiberManualRecordIcon style={{ color: tableMeta.rowData[3].captcha_status === 1 ? '#43a047' : '#D3302F',fontSize: "small" }}/>  Captcha</li>
+                                      </div>
+                                      :""}
+                                  </ul>
+
+                                }
+                  >
+                  <IconButton aria-label="settings">
+                    <MoreVertIcon />
+                  </IconButton>
+                  </HtmlTooltip>
+                </div>
               );
             }
           }
