@@ -530,7 +530,7 @@ $cron_days = 1;
 
                                         $dataOfOldScan =  $wpdb->get_row( $wpdb->prepare( "SELECT https_status FROM %1s WHERE domain_id = %d ORDER BY id desc LIMIT 0,1",$sm_site_https_history,$domain_id ) );       //db call ok; no-cache ok
 
-                                        if ($host_status === 1) {
+                                        if ($host_status == 1) {
 
                                             if( isset( $dataOfOldScan->https_status ) ) {
 
