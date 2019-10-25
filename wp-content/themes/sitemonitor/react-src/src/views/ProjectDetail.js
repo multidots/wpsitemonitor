@@ -192,7 +192,11 @@ class ProjectDetailViews extends React.Component {
       sitemapErrorMsg: 'Loading...',
       edit_data: false,
       project_id: this.props.data.match.params.id,
-      update_data: []
+      update_data: [],
+      error: {
+        project_name: false,
+        domain_url: false,
+      }
     };
     this.ProjectFeaturesBox = this.ProjectFeaturesBox.bind( this );
     this.editProjectData = this.editProjectData.bind( this );
@@ -296,6 +300,27 @@ class ProjectDetailViews extends React.Component {
 
   editProjectData(){
 
+
+    let project_name = this.state.projectData.project_name;
+    let domain_url = this.state.projectData.domain_url;
+
+    if("" === project_name){
+      this.setState( {
+        error: {
+          project_name: true
+        }
+      } );
+      return false;
+    } else if("" === domain_url){
+      this.setState( {
+        error: {
+          domain_url: true
+        }
+      } );
+      return false;
+    }
+
+
     if(true === this.state.edit_data){
       this.xhrRequestUpdateProject().then( res => {
         //this.getData();
@@ -313,7 +338,7 @@ class ProjectDetailViews extends React.Component {
 
   ProjectFeaturesBox( props ) {
 
-    console.log(this.state.projectData);
+    let input_type = this.state.error.project_name ? "" : "error";
 
     const classes = useStyles();
     const sitemap_page = '/projects/' + this.state.project_id + '/' + 'sitemap';

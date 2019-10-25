@@ -2390,7 +2390,11 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       sitemapErrorMsg: 'Loading...',
       edit_data: false,
       project_id: this.props.data.match.params.id,
-      update_data: []
+      update_data: [],
+      error: {
+        project_name: false,
+        domain_url: false
+      }
     };
     this.ProjectFeaturesBox = this.ProjectFeaturesBox.bind(this);
     this.editProjectData = this.editProjectData.bind(this);
@@ -2453,6 +2457,25 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
   }
 
   editProjectData() {
+    let project_name = this.state.projectData.project_name;
+    let domain_url = this.state.projectData.domain_url;
+
+    if ("" === project_name) {
+      this.setState({
+        error: {
+          project_name: true
+        }
+      });
+      return false;
+    } else if ("" === domain_url) {
+      this.setState({
+        error: {
+          domain_url: true
+        }
+      });
+      return false;
+    }
+
     if (true === this.state.edit_data) {
       this.xhrRequestUpdateProject().then(res => {//this.getData();
       });
@@ -2472,7 +2495,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
   }
 
   ProjectFeaturesBox(props) {
-    console.log(this.state.projectData);
+    let input_type = this.state.error.project_name ? "" : "error";
     const classes = useStyles();
     const sitemap_page = '/projects/' + this.state.project_id + '/' + 'sitemap';
     return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -2483,7 +2506,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       spacing: 3,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 321
+        lineNumber: 346
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -2493,7 +2516,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       md: 8,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 323
+        lineNumber: 348
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -2502,20 +2525,20 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       md: 12,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 324
+        lineNumber: 349
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_6__["default"], {
       className: classes.card,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 325
+        lineNumber: 350
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_7__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 326
+        lineNumber: 351
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -2523,13 +2546,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 327
+        lineNumber: 352
       },
       __self: this
     }, "Project Details", this.state.edit_data ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 330
+        lineNumber: 355
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_19__["default"], {
@@ -2537,13 +2560,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       onClick: this.cancelProjectData.bind(this),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 331
+        lineNumber: 356
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_icons_Close__WEBPACK_IMPORTED_MODULE_22___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 332
+        lineNumber: 357
       },
       __self: this
     })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_19__["default"], {
@@ -2551,13 +2574,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       onClick: this.editProjectData.bind(this),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 334
+        lineNumber: 359
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_icons_Save__WEBPACK_IMPORTED_MODULE_24___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 335
+        lineNumber: 360
       },
       __self: this
     }))) : react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_19__["default"], {
@@ -2565,13 +2588,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       onClick: this.editProjectData.bind(this),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 340
+        lineNumber: 365
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_icons_Edit__WEBPACK_IMPORTED_MODULE_16___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 341
+        lineNumber: 366
       },
       __self: this
     }))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Table__WEBPACK_IMPORTED_MODULE_13__["default"], {
@@ -2579,19 +2602,19 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       "aria-label": "simple table",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 346
+        lineNumber: 371
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_14__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 347
+        lineNumber: 372
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_17__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 348
+        lineNumber: 373
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_15__["default"], {
@@ -2599,19 +2622,19 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       scope: "row",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 349
+        lineNumber: 374
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("b", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 350
+        lineNumber: 375
       },
       __self: this
     }, "Project Name")), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_15__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 352
+        lineNumber: 377
       },
       __self: this
     }, this.state.edit_data ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_23__["default"], {
@@ -2623,13 +2646,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       onChange: this.handleUpdate.bind(this),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 354
+        lineNumber: 379
       },
       __self: this
     }) : this.state.projectData.project_name)), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_17__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 366
+        lineNumber: 391
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_15__["default"], {
@@ -2637,19 +2660,19 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       scope: "row",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 367
+        lineNumber: 392
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("b", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 368
+        lineNumber: 393
       },
       __self: this
     }, "Domain URL")), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_15__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 370
+        lineNumber: 395
       },
       __self: this
     }, this.state.edit_data ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_23__["default"], {
@@ -2661,7 +2684,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       onChange: this.handleUpdate.bind(this),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 372
+        lineNumber: 397
       },
       __self: this
     }) : react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
@@ -2669,13 +2692,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       href: this.state.projectData.domain_url,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 379
+        lineNumber: 404
       },
       __self: this
     }, this.state.projectData.domain_url))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_17__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 384
+        lineNumber: 409
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_15__["default"], {
@@ -2683,19 +2706,19 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       scope: "row",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 385
+        lineNumber: 410
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("b", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 386
+        lineNumber: 411
       },
       __self: this
     }, "Sitemap URL")), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_15__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 388
+        lineNumber: 413
       },
       __self: this
     }, this.state.edit_data ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_23__["default"], {
@@ -2707,7 +2730,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       onChange: this.handleUpdate.bind(this),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 390
+        lineNumber: 415
       },
       __self: this
     }) : this.state.projectData.sitemap_url ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
@@ -2715,7 +2738,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       href: this.state.projectData.sitemap_url,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 397
+        lineNumber: 422
       },
       __self: this
     }, this.state.projectData.sitemap_url) : '-'))))))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -2724,27 +2747,27 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       md: 12,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 409
+        lineNumber: 434
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_6__["default"], {
       className: classes.card,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 410
+        lineNumber: 435
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
       className: classes.cardDetails,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 411
+        lineNumber: 436
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_7__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 412
+        lineNumber: 437
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -2752,7 +2775,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 413
+        lineNumber: 438
       },
       __self: this
     }, "Sitemap History", react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_20__["default"], {
@@ -2763,13 +2786,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
         value: "sitemap",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 418
+          lineNumber: 443
         },
         __self: this
       }),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 416
+        lineNumber: 441
       },
       __self: this
     })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -2777,7 +2800,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 426
+        lineNumber: 451
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_SiteMapReport__WEBPACK_IMPORTED_MODULE_18__["default"], {
@@ -2785,13 +2808,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       sitemapMsg: this.state.sitemapErrorMsg,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 427
+        lineNumber: 452
       },
       __self: this
     })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_10__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 429
+        lineNumber: 454
       },
       __self: this
     }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__["Link"], {
@@ -2801,7 +2824,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 431
+        lineNumber: 456
       },
       __self: this
     }, "View More")))))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -2811,7 +2834,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       md: 4,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 438
+        lineNumber: 463
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -2820,27 +2843,27 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       md: 12,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 439
+        lineNumber: 464
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_6__["default"], {
       className: classes.card,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 440
+        lineNumber: 465
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
       className: classes.cardDetails,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 441
+        lineNumber: 466
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_7__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 442
+        lineNumber: 467
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -2848,7 +2871,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 443
+        lineNumber: 468
       },
       __self: this
     }, "Wp-Admin URL", react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_20__["default"], {
@@ -2859,13 +2882,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
         value: "admin",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 447
+          lineNumber: 472
         },
         __self: this
       }),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 445
+        lineNumber: 470
       },
       __self: this
     }), 1 === parseInt(this.state.fullReportData.admin_status) ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_icons_CheckCircleRounded__WEBPACK_IMPORTED_MODULE_11___default.a, {
@@ -2875,7 +2898,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 454
+        lineNumber: 479
       },
       __self: this
     }) : react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_icons_CancelRounded__WEBPACK_IMPORTED_MODULE_12___default.a, {
@@ -2885,14 +2908,14 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 456
+        lineNumber: 481
       },
       __self: this
     })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 459
+        lineNumber: 484
       },
       __self: this
     }, 1 === parseInt(this.state.fullReportData.admin_status) ? 'Custom URL set for the WP Admin.' : 'Default WP Admin URL set for the project.'), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -2900,7 +2923,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       className: "status_text",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 464
+        lineNumber: 489
       },
       __self: this
     }, this.state.fullReportData.admin_status_text))))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -2910,27 +2933,27 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       className: classes.grid_item,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 471
+        lineNumber: 496
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_6__["default"], {
       className: classes.card,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 472
+        lineNumber: 497
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
       className: classes.cardDetails,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 473
+        lineNumber: 498
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_7__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 474
+        lineNumber: 499
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -2938,7 +2961,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 475
+        lineNumber: 500
       },
       __self: this
     }, "Robots", react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_20__["default"], {
@@ -2949,13 +2972,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
         value: "roborts",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 479
+          lineNumber: 504
         },
         __self: this
       }),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 477
+        lineNumber: 502
       },
       __self: this
     }), 1 === parseInt(this.state.fullReportData.robots_status) ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_icons_CheckCircleRounded__WEBPACK_IMPORTED_MODULE_11___default.a, {
@@ -2965,7 +2988,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 486
+        lineNumber: 511
       },
       __self: this
     }) : react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_icons_CancelRounded__WEBPACK_IMPORTED_MODULE_12___default.a, {
@@ -2975,14 +2998,14 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 488
+        lineNumber: 513
       },
       __self: this
     })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 490
+        lineNumber: 515
       },
       __self: this
     }, 1 === parseInt(this.state.fullReportData.robots_status) ? 'We have found the robots.txt file on the root.' : 'We can\'t found the robots.txt file on the root.'), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -2990,7 +3013,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       className: "status_text",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 495
+        lineNumber: 520
       },
       __self: this
     }, this.state.fullReportData.robots_status_text))))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -3000,27 +3023,27 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       className: classes.grid_item,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 502
+        lineNumber: 527
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_6__["default"], {
       className: classes.card,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 503
+        lineNumber: 528
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
       className: classes.cardDetails,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 504
+        lineNumber: 529
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_7__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 505
+        lineNumber: 530
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -3028,7 +3051,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 506
+        lineNumber: 531
       },
       __self: this
     }, "SSL", react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_20__["default"], {
@@ -3039,13 +3062,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
         value: "https",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 510
+          lineNumber: 535
         },
         __self: this
       }),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 508
+        lineNumber: 533
       },
       __self: this
     }), 1 === parseInt(this.state.fullReportData.ssl_status) ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_icons_CheckCircleRounded__WEBPACK_IMPORTED_MODULE_11___default.a, {
@@ -3055,7 +3078,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 517
+        lineNumber: 542
       },
       __self: this
     }) : react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_icons_CancelRounded__WEBPACK_IMPORTED_MODULE_12___default.a, {
@@ -3065,14 +3088,14 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 519
+        lineNumber: 544
       },
       __self: this
     })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 521
+        lineNumber: 546
       },
       __self: this
     }, 1 === parseInt(this.state.fullReportData.ssl_status) ? 'Voila! site have a secure connection.' : 'Sorry, We could not found any secure connection for this project.'), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -3080,7 +3103,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       className: "status_text",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 526
+        lineNumber: 551
       },
       __self: this
     }, this.state.fullReportData.ssl_status_text))))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -3090,27 +3113,27 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       className: classes.grid_item,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 533
+        lineNumber: 558
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_6__["default"], {
       className: classes.card,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 534
+        lineNumber: 559
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
       className: classes.cardDetails,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 535
+        lineNumber: 560
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_7__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 536
+        lineNumber: 561
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -3118,7 +3141,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 537
+        lineNumber: 562
       },
       __self: this
     }, "Captcha", react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_20__["default"], {
@@ -3129,13 +3152,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
         value: "captcha",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 541
+          lineNumber: 566
         },
         __self: this
       }),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 539
+        lineNumber: 564
       },
       __self: this
     }), 1 === parseInt(this.state.fullReportData.captcha_status) ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_icons_CheckCircleRounded__WEBPACK_IMPORTED_MODULE_11___default.a, {
@@ -3145,7 +3168,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 548
+        lineNumber: 573
       },
       __self: this
     }) : react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_icons_CancelRounded__WEBPACK_IMPORTED_MODULE_12___default.a, {
@@ -3155,14 +3178,14 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 550
+        lineNumber: 575
       },
       __self: this
     })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 552
+        lineNumber: 577
       },
       __self: this
     }, 1 === parseInt(this.state.fullReportData.captcha_status) ? 'We have found captcha is successfully implemented on your project.' : 'Sorry! We could not found any captcha on your project.'), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -3170,7 +3193,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       className: "status_text",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 557
+        lineNumber: 582
       },
       __self: this
     }, this.state.fullReportData.captcha_status_text)))))));
@@ -3181,13 +3204,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       maxWidth: "xl",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 571
+        lineNumber: 596
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(this.ProjectFeaturesBox, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 572
+        lineNumber: 597
       },
       __self: this
     }));
