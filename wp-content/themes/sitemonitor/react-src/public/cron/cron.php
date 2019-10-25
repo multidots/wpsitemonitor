@@ -99,7 +99,7 @@ switch ($type) {
                                 $response = wp_remote_get( $sitemap_url );
                                 $response_code = wp_remote_retrieve_response_code( $response );
 
-                                if( $response_code === 200 ) {
+                                if( $response_code == 200 ) {
 
                                     $sitemap_url_list_data = new SimpleXMLElement ( $sitemap_url, null, true );
 
@@ -416,7 +416,7 @@ switch ($type) {
 
                                     if( isset( $dataOfOldScan->seo_status ) ) {
 
-                                        if ( $dataOfOldScan->seo_status !== '1' ) {
+                                        if ( $dataOfOldScan->seo_status != '1' ) {
 
                                             //Insert Query
                                             $admin_data    = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `seo_status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_seo_data_history, $domain_id, $last_insert_cron_id, 1, current_time( 'mysql', 1 ) ) );       ///db call ok; no-cache ok
@@ -438,7 +438,7 @@ switch ($type) {
 
                                     if( isset( $dataOfOldScan->seo_status ) ) {
 
-                                        if ( $dataOfOldScan->seo_status !== '0' ) {
+                                        if ( $dataOfOldScan->seo_status != '0' ) {
 
                                             //Insert Query
                                             $admin_data    = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `seo_status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_seo_data_history, $domain_id, $last_insert_cron_id, 0, current_time( 'mysql', 1 ) ) );      //db call ok; no-cache ok
@@ -792,7 +792,7 @@ switch ($type) {
 
             $domian_lists = $wpdb->get_results(
                 $wpdb->prepare("
-                SELECT dl.id,dl.project_name,users.user_email,users.user_login
+                SELECT dl.project_name,users.user_email,users.user_login,dl.id
                 FROM   %1s  users 
                 INNER JOIN  %1s dl ON ( dl.user_id = users.id )
                 INNER JOIN  %1s sdh ON ( sdh.domain_id = dl.id )
