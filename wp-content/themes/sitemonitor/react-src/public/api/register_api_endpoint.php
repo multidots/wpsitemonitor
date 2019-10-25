@@ -113,6 +113,21 @@ class MD_SM_API_Register_Controller extends WP_REST_Controller {
                 },
             )
         );
+
+        /**
+         *  Register API TO UPDATE PROJECT DATA
+         */
+        register_rest_route(
+            'md-site-monitor', '/update_project',
+            array(
+                'methods'             => WP_REST_Server::EDITABLE,
+                'callback'            => 'sm_project_update',
+                'permission_callback' => function ( WP_REST_Request $request ) {
+                    $auth = validate_token();
+                    return $auth['status'];
+                },
+            )
+        );
 	}
 
 }

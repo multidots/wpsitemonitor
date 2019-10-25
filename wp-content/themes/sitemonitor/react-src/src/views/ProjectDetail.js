@@ -18,7 +18,9 @@ import SiteMapReport from './SiteMapReport';
 import Avatar from '@material-ui/core/Avatar';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
-import * as Constants from '../components/Constants';
+import CloseIcon from '@material-ui/icons/Close';
+import TextField from '@material-ui/core/TextField';
+import SaveIcon from '@material-ui/icons/Save';
 
 const useStyles = makeStyles( theme => ({
   spacing: {
@@ -107,6 +109,9 @@ const useStyles = makeStyles( theme => ({
   grid_item: {
     marginTop: '10px'
   },
+  status_switch: {
+    marginLeft: '10px'
+  },
   root: {
     width: '100%',
     maxWidth: 360,
@@ -115,7 +120,8 @@ const useStyles = makeStyles( theme => ({
   avatar: {
     margin: theme.spacing( 1 ),
     backgroundColor: '#3F51B6',
-    float: 'right'
+    float: 'right',
+    cursor: "pointer"
   },
   nested: {
     paddingLeft: theme.spacing( 4 ),
@@ -184,8 +190,12 @@ class ProjectDetailViews extends React.Component {
       projectData: [],
       sitemapData: [],
       sitemapErrorMsg: 'Loading...',
+      edit_data: false,
+      project_id: this.props.data.match.params.id,
+      update_data: []
     };
     this.ProjectFeaturesBox = this.ProjectFeaturesBox.bind( this );
+    this.editProjectData = this.editProjectData.bind( this );
   }
 
   componentDidMount( props ) {
@@ -193,7 +203,7 @@ class ProjectDetailViews extends React.Component {
   }
 
   getData(){
-    let domain_id = this.props.data.match.params.id;
+    let domain_id = this.state.project_id;
     let type = this.props.data.match.params.status;
     const token = localStorage.getItem( 'token' );
     fetch( `/wp-json/md-site-monitor/project_report?project_id=${domain_id}&type=all`, {
@@ -230,11 +240,27 @@ class ProjectDetailViews extends React.Component {
 
   xhrRequestStatus = ( project_type, project_stats ) => {
     const token = localStorage.getItem( 'token' );
-    const site_url = Constants.SITE_URL;
-    let domain_id = this.props.data.match.params.id;
+    let domain_id = this.state.project_id;
     return fetch( `/wp-json/md-site-monitor/projects_status`, {
       method: 'POST',
       body: JSON.stringify( { projectID: domain_id, projectStatus: project_stats , project_type: project_type} ),
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
+    } ).then( res => {
+      return res.json();
+    } ).then( function( response ) {
+    } ).catch( err => {
+      this.setState( { isLoading: false } );
+    } );
+  };
+
+  xhrRequestUpdateProject = () => {
+    const token = localStorage.getItem( 'token' );
+    let domain_id = this.state.project_id;
+    return fetch( `/wp-json/md-site-monitor/update_project`, {
+      method: 'POST',
+      body: JSON.stringify( this.state.projectData),
       headers: {
         Authorization: 'Bearer ' + token
       }
@@ -254,10 +280,43 @@ class ProjectDetailViews extends React.Component {
     } );
   }
 
+  handleUpdate( event ) {
+
+    let key = event.target.name;
+    let value = event.target.value;
+
+    this.setState((prevState, props , ) => ({
+      projectData: {
+        ...prevState.projectData,
+        [key] : value,
+      },
+
+    }));
+  }
+
+  editProjectData(){
+
+    if(true === this.state.edit_data){
+      this.xhrRequestUpdateProject().then( res => {
+        //this.getData();
+      } );
+    }
+
+    let value = this.state.edit_data ? false : true;
+    this.setState( { edit_data: value } );
+  }
+
+  cancelProjectData(){
+    this.setState( { edit_data: false } );
+    this.getData();
+  }
+
   ProjectFeaturesBox( props ) {
 
+    console.log(this.state.projectData);
+
     const classes = useStyles();
-    const sitemap_page = '/projects/' + this.props.data.match.params.id + '/' + 'sitemap';
+    const sitemap_page = '/projects/' + this.state.project_id + '/' + 'sitemap';
     return (
       <Grid container item xs={12} md={12} spacing={3}>
 
@@ -267,9 +326,22 @@ class ProjectDetailViews extends React.Component {
               <CardContent>
                 <Typography variant="h5" paragraph>
                   Project Details
-                  <Avatar className={classes.avatar}>
-                    <EditIcon/>
-                  </Avatar>
+                  { this.state.edit_data ?
+                    <div>
+                    <Avatar className={classes.avatar} onClick={this.cancelProjectData.bind(this)}>
+                    <CloseIcon/>
+                    </Avatar>
+                    <Avatar className={classes.avatar} onClick={this.editProjectData.bind(this)}>
+                      <SaveIcon/>
+                    </Avatar>
+                    </div>
+                    :
+
+                    <Avatar className={classes.avatar} onClick={this.editProjectData.bind(this)}>
+                      <EditIcon/>
+                    </Avatar>
+                  }
+
                 </Typography>
                 <Table className={classes.table} aria-label="simple table">
                   <TableBody>
@@ -277,103 +349,57 @@ class ProjectDetailViews extends React.Component {
                       <TableCell component="th" scope="row">
                         <b>Project Name</b>
                       </TableCell>
-                      <TableCell>{this.state.projectData.project_name}</TableCell>
+                      <TableCell>
+                        { this.state.edit_data ?
+                        <TextField
+                          variant="outlined"
+                          margin="normal"
+                          value={this.state.projectData.project_name}
+                          id="project_name"
+                          name="project_name"
+                          onChange={this.handleUpdate.bind( this )}
+                        /> : this.state.projectData.project_name
+                        }
+                      </TableCell>
+
                     </TableRow>
                     <TableRow>
                       <TableCell component="th" scope="row">
                         <b>Domain URL</b>
                       </TableCell>
-                      <TableCell><a target="_blank"
-                                    href={this.state.projectData.domain_url}>{this.state.projectData.domain_url}</a></TableCell>
+                      <TableCell>
+                        { this.state.edit_data ?
+                          <TextField
+                            variant="outlined"
+                            margin="normal"
+                            value={this.state.projectData.domain_url}
+                            id="domain_url"
+                            name="domain_url"
+                            onChange={this.handleUpdate.bind( this )}
+                          /> : <a target="_blank"
+                                  href={this.state.projectData.domain_url}>{this.state.projectData.domain_url}</a>
+                        }
+                      </TableCell>
                     </TableRow>
                     <TableRow>
                       <TableCell component="th" scope="row">
                         <b>Sitemap URL</b>
                       </TableCell>
-                      <TableCell>{this.state.projectData.sitemap_url ? <a target="_blank"
-                                                                          href={this.state.projectData.sitemap_url}>{this.state.projectData.sitemap_url}</a> : '-'}</TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell component="th" scope="row">
-                        <b>Sitemap</b>
-                      </TableCell>
                       <TableCell>
-
-                        <FormControlLabel
-                          control={
-                            <IOSSwitch
-                              checked={parseInt(this.state.projectData.sitemap_status)}
-                              onChange={this.handleChange.bind( this )}
-                              value="sitemap"
-                            />
-                          }
-                        />
-
-                        </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell component="th" scope="row">
-                        <b>WP Admin</b>
-                      </TableCell>
-                      <TableCell>
-                        <FormControlLabel
-                        control={
-                          <IOSSwitch
-                            checked={parseInt(this.state.projectData.admin_status)}
-                            onChange={this.handleChange.bind( this )}
-                            value="admin"
-                          />
+                        { this.state.edit_data ?
+                          <TextField
+                            variant="outlined"
+                            margin="normal"
+                            value={this.state.projectData.sitemap_url}
+                            id="sitemap_url"
+                            name="sitemap_url"
+                            onChange={this.handleUpdate.bind( this )}
+                          /> : this.state.projectData.sitemap_url ? <a target="_blank"
+                                                                        href={this.state.projectData.sitemap_url}>{this.state.projectData.sitemap_url}</a> : '-'
                         }
-                      /></TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell component="th" scope="row">
-                        <b>Robots</b>
-                      </TableCell>
-                      <TableCell>
-                        <FormControlLabel
-                          control={
-                            <IOSSwitch
-                              checked={parseInt(this.state.projectData.roborts_status)}
-                              onChange={this.handleChange.bind( this )}
-                              value="roborts"
-                            />
-                          }
-                        />
                       </TableCell>
                     </TableRow>
-                    <TableRow>
-                      <TableCell component="th" scope="row">
-                        <b>Captcha</b>
-                      </TableCell>
-                      <TableCell>
-                        <FormControlLabel
-                          control={
-                            <IOSSwitch
-                              checked={parseInt(this.state.projectData.captcha_status)}
-                              onChange={this.handleChange.bind( this )}
-                              value="captcha"
-                            />
-                          }
-                        />
-                      </TableCell>
-                    </TableRow>
-                    <TableRow>
-                      <TableCell component="th" scope="row">
-                        <b>SSL</b>
-                      </TableCell>
-                      <TableCell>
-                        <FormControlLabel
-                          control={
-                            <IOSSwitch
-                              checked={parseInt(this.state.projectData.https_status)}
-                              onChange={this.handleChange.bind( this )}
-                              value="https"
-                            />
-                          }
-                        />
-                      </TableCell>
-                    </TableRow>
+
                   </TableBody>
                 </Table>
 
@@ -386,6 +412,16 @@ class ProjectDetailViews extends React.Component {
                 <CardContent>
                   <Typography variant="h5" paragraph>
                     Sitemap History
+
+                    <FormControlLabel className={classes.status_switch}
+                      control={
+                        <IOSSwitch
+                          checked={parseInt(this.state.projectData.sitemap_status)}
+                          onChange={this.handleChange.bind( this )}
+                          value="sitemap"
+                        />
+                      }
+                    />
                   </Typography>
                   <Typography variant="subtitle1" paragraph>
                     <SiteMapReport reportData={this.state.sitemapData} sitemapMsg={this.state.sitemapErrorMsg}/>
@@ -406,6 +442,15 @@ class ProjectDetailViews extends React.Component {
                 <CardContent>
                   <Typography variant="h5" paragraph>
                     Wp-Admin URL
+                    <FormControlLabel className={classes.status_switch}
+                    control={
+                      <IOSSwitch
+                        checked={parseInt(this.state.projectData.admin_status)}
+                        onChange={this.handleChange.bind( this )}
+                        value="admin"
+                      />
+                    }
+                    />
                     {1 === parseInt( this.state.fullReportData.admin_status ) ? <CheckCircleRoundedIcon
                       className={classes.status_icon} style={{ color: '#43a047' }}/> : (
                       <CancelRoundedIcon className={classes.status_icon} style={{ color: '#D3302F' }}/>
@@ -429,6 +474,15 @@ class ProjectDetailViews extends React.Component {
                 <CardContent>
                   <Typography variant="h5" paragraph>
                     Robots
+                    <FormControlLabel className={classes.status_switch}
+                      control={
+                        <IOSSwitch
+                          checked={parseInt(this.state.projectData.roborts_status)}
+                          onChange={this.handleChange.bind( this )}
+                          value="roborts"
+                        />
+                      }
+                    />
                     {1 === parseInt( this.state.fullReportData.robots_status ) ? <CheckCircleRoundedIcon
                       className={classes.status_icon} style={{ color: '#43a047' }}/> : (
                       <CancelRoundedIcon className={classes.status_icon} style={{ color: '#D3302F' }}/>)}
@@ -451,6 +505,15 @@ class ProjectDetailViews extends React.Component {
                 <CardContent>
                   <Typography variant="h5" paragraph>
                     SSL
+                    <FormControlLabel className={classes.status_switch}
+                      control={
+                        <IOSSwitch
+                          checked={parseInt(this.state.projectData.https_status)}
+                          onChange={this.handleChange.bind( this )}
+                          value="https"
+                        />
+                      }
+                    />
                     {1 === parseInt( this.state.fullReportData.ssl_status ) ? <CheckCircleRoundedIcon
                       className={classes.status_icon} style={{ color: '#43a047' }}/> : (
                       <CancelRoundedIcon className={classes.status_icon} style={{ color: '#D3302F' }}/>)}
@@ -473,6 +536,15 @@ class ProjectDetailViews extends React.Component {
                 <CardContent>
                   <Typography variant="h5" paragraph>
                     Captcha
+                    <FormControlLabel className={classes.status_switch}
+                      control={
+                        <IOSSwitch
+                          checked={parseInt(this.state.projectData.captcha_status)}
+                          onChange={this.handleChange.bind( this )}
+                          value="captcha"
+                        />
+                      }
+                    />
                     {1 === parseInt( this.state.fullReportData.captcha_status ) ? <CheckCircleRoundedIcon
                       className={classes.status_icon} style={{ color: '#43a047' }}/> : (
                       <CancelRoundedIcon className={classes.status_icon} style={{ color: '#D3302F' }}/>)}

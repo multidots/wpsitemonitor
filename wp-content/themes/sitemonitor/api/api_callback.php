@@ -260,6 +260,65 @@ function sm_add_project( $request ) {
 
 /**
  *
+ * update project API callback function
+ *
+ * @param $request
+ *
+ * @return array|\WP_Error|\WP_REST_Response
+ */
+
+function sm_project_update( $request ) {
+
+	$auth = validate_token();
+
+	if ( ! isset( $auth['status'] ) || empty( $auth['status'] ) || false === $auth['status'] ) {
+		return new WP_Error( 'invalid_user', esc_html__( 'User ID not found', 'md_site_monitor' ), array( 'status' => 403 ) );
+	}
+	$sm_user_id = $auth['uid'];
+
+	global $wpdb;
+
+	$project_data = json_decode( $request->get_body() );
+
+	$sm_domain_url         = $project_data->domain_url ? esc_html( $project_data->domain_url ) : "";
+	$sm_sitemap_url        = $project_data->sitemap_url ? esc_html( $project_data->sitemap_url ) : "";
+	$sm_project_name       = $project_data->project_name ? esc_html( $project_data->project_name ) : "";
+	$project_id       = $project_data->id ? esc_html( $project_data->id ) : "";
+	if ( empty($project_id) || empty( $sm_project_name ) || empty( $sm_domain_url ) ) {
+		return new WP_Error( 'data_not_found', esc_html__( 'Please enter required data.', 'md_site_monitor' ), array( 'status' => 403 ) );
+	}
+
+	$sm_domain_list = $wpdb->prefix . 'sm_domain_list';
+
+	$project_id = $wpdb->update(
+		$sm_domain_list,
+		array(
+			'project_name' => $sm_project_name,
+			'domain_url'   => esc_url(trim( strtolower( $sm_domain_url ) )),
+			'sitemap_url'  => esc_url(trim( strtolower( $sm_sitemap_url ) )),
+			'updated_date'   => date( 'Y-m-d H:i:s' ),
+		),
+		array(
+			'id' => $project_id,
+		)
+	);
+
+	if ( isset( $project_id ) && ! empty( $project_id )) {
+		$response = array(
+			'project_id' => $project_id,
+			'message'    => "Project Successfully updated.",
+		);
+
+		$response = new WP_REST_Response( $response, array( 'status' => 200 ) );
+
+		return $response;
+	} else {
+		return new WP_Error( 'error', esc_html__( 'Something went wrong.', 'md_site_monitor' ), array( 'status' => 200 ) );
+	}
+}
+
+/**
+ *
  * Callback function for the list of projects with search and pagination.
  *
  * @param $request
