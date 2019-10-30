@@ -12,6 +12,7 @@ import PopupState, { bindToggle, bindPopper } from 'material-ui-popup-state';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import Pace from 'react-pace-progress'
 
 import './style.css';
 
@@ -98,7 +99,7 @@ class ProjectsViews extends React.Component {
       count: 11,
       rowsPerPage: Constants.ROW_PER_PAGE,
       data: [['Loading Data...']],
-      isLoading: false,
+      isLoading: true,
       searchText: ''
     };
 
@@ -427,18 +428,22 @@ class ProjectsViews extends React.Component {
     };
 
     return (
-      <MUIDataTable
-        title={
-          <Typography component={'span'} variant={'body2'}>
-            <h2>Project Reports</h2>
-            {isLoading &&
-            <CircularProgress size={24} style={{ marginLeft: 15, position: 'relative', top: 4 }}/>}
-          </Typography>
-        }
-        data={data}
-        columns={columns}
-        options={options}
-      />
+
+        <div>
+          {this.state.isLoading ? <Pace color="#3f51b5"/> : <MUIDataTable
+              title={
+                <Typography component={'span'} variant={'body2'}>
+                  <h2>Project Reports</h2>
+                  {isLoading &&
+                  <CircularProgress size={24} style={{ marginLeft: 15, position: 'relative', top: 4 }}/>}
+                </Typography>
+              }
+              data={data}
+              columns={columns}
+              options={options}
+          />}
+        </div>
+
     );
   }
 }

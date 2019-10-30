@@ -21,6 +21,7 @@ import Switch from '@material-ui/core/Switch';
 import CloseIcon from '@material-ui/icons/Close';
 import TextField from '@material-ui/core/TextField';
 import SaveIcon from '@material-ui/icons/Save';
+import Pace from "react-pace-progress";
 
 const useStyles = makeStyles( theme => ({
   spacing: {
@@ -196,7 +197,8 @@ class ProjectDetailViews extends React.Component {
       error: {
         project_name: false,
         domain_url: false,
-      }
+      },
+      isLoading: true,
     };
     this.ProjectFeaturesBox = this.ProjectFeaturesBox.bind( this );
     this.editProjectData = this.editProjectData.bind( this );
@@ -230,13 +232,15 @@ class ProjectDetailViews extends React.Component {
             fullReportData: [],
             sitemapData: [],
             sitemapErrorMsg: 'Sitemap reports not generated yet.',
+            isLoading: false
           } );
         } else {
           this.setState( {
             fullReportData: data,
             projectData: data.project_details,
             sitemapData: data.sitemap,
-            sitemapErrorMsg: (Object.keys( data.sitemap ).length === 0) ? 'Sitemap reports not generated yet.' : ''
+            sitemapErrorMsg: (Object.keys( data.sitemap ).length === 0) ? 'Sitemap reports not generated yet.' : '',
+            isLoading: false
           } );
         }
       } );
@@ -260,6 +264,7 @@ class ProjectDetailViews extends React.Component {
   };
 
   xhrRequestUpdateProject = () => {
+    this.setState( { isLoading: true } );
     const token = localStorage.getItem( 'token' );
     let domain_id = this.state.project_id;
     return fetch( `/wp-json/md-site-monitor/update_project`, {
@@ -271,6 +276,7 @@ class ProjectDetailViews extends React.Component {
     } ).then( res => {
       return res.json();
     } ).then( function( response ) {
+      this.setState( { isLoading: false } );
     } ).catch( err => {
       this.setState( { isLoading: false } );
     } );
@@ -303,21 +309,49 @@ class ProjectDetailViews extends React.Component {
 
     let project_name = this.state.projectData.project_name;
     let domain_url = this.state.projectData.domain_url;
-
+    let sitemap_url = this.state.projectData.sitemap_url;
+    let isValidUrl = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
     if("" === project_name){
       this.setState( {
         error: {
-          project_name: true
+          project_name: true,
+          msg: "Please enter project name"
         }
       } );
       return false;
-    } else if("" === domain_url){
+    }
+    if("" === domain_url){
       this.setState( {
         error: {
-          domain_url: true
+          domain_url: true,
+          msg: "Please enter domain URL"
         }
       } );
       return false;
+    }
+
+    if("" !== domain_url){
+      if (!isValidUrl.test(domain_url)) {
+        this.setState( {
+          error: {
+            domain_url: true,
+            msg: "Please enter valid domain URL"
+          }
+        } );
+        return false;
+      }
+    }
+
+    if("" !== sitemap_url){
+      if (!isValidUrl.test(sitemap_url)) {
+        this.setState( {
+          error: {
+            sitemap_url: true,
+            msg: "Please enter valid sitemap URL"
+          }
+        } );
+        return false;
+      }
     }
 
 
@@ -328,7 +362,13 @@ class ProjectDetailViews extends React.Component {
     }
 
     let value = this.state.edit_data ? false : true;
-    this.setState( { edit_data: value } );
+    this.setState( {
+        edit_data: value,
+        error: {
+          domain_url: false,
+          project_name: false
+        }
+      } );
   }
 
   cancelProjectData(){
@@ -376,14 +416,25 @@ class ProjectDetailViews extends React.Component {
                       </TableCell>
                       <TableCell>
                         { this.state.edit_data ?
-                        <TextField
-                          variant="outlined"
-                          margin="normal"
-                          value={this.state.projectData.project_name}
-                          id="project_name"
-                          name="project_name"
-                          onChange={this.handleUpdate.bind( this )}
-                        /> : this.state.projectData.project_name
+
+                            this.state.error.project_name ? <TextField error="error"
+                                                                       helperText={this.state.error.msg}
+                                                                       variant="outlined"
+                                                                       margin="normal"
+                                                                       value={this.state.projectData.project_name}
+                                                                       id="project_name"
+                                                                       name="project_name"
+                                                                       onChange={this.handleUpdate.bind( this )}
+                            />
+                          : <TextField
+                                       variant="outlined"
+                                       margin="normal"
+                                       value={this.state.projectData.project_name}
+                                       id="project_name"
+                                       name="project_name"
+                                       onChange={this.handleUpdate.bind( this )}
+                            /> : this.state.projectData.project_name
+
                         }
                       </TableCell>
 
@@ -394,15 +445,27 @@ class ProjectDetailViews extends React.Component {
                       </TableCell>
                       <TableCell>
                         { this.state.edit_data ?
-                          <TextField
-                            variant="outlined"
-                            margin="normal"
-                            value={this.state.projectData.domain_url}
-                            id="domain_url"
-                            name="domain_url"
-                            onChange={this.handleUpdate.bind( this )}
-                          /> : <a target="_blank"
-                                  href={this.state.projectData.domain_url}>{this.state.projectData.domain_url}</a>
+
+
+                            this.state.error.domain_url ? <TextField error="error"
+                                                                       helperText={this.state.error.msg}
+                                                                       variant="outlined"
+                                                                       margin="normal"
+                                                                       value={this.state.projectData.domain_url}
+                                                                       id="domain_url"
+                                                                       name="domain_url"
+                                                                       onChange={this.handleUpdate.bind( this )}
+                                />
+                                : <TextField
+                                    variant="outlined"
+                                    margin="normal"
+                                    value={this.state.projectData.domain_url}
+                                    id="domain_url"
+                                    name="domain_url"
+                                    onChange={this.handleUpdate.bind( this )}
+                                /> : <a target="_blank"
+                                        href={this.state.projectData.domain_url}>{this.state.projectData.domain_url}</a>
+
                         }
                       </TableCell>
                     </TableRow>
@@ -412,15 +475,27 @@ class ProjectDetailViews extends React.Component {
                       </TableCell>
                       <TableCell>
                         { this.state.edit_data ?
-                          <TextField
-                            variant="outlined"
-                            margin="normal"
-                            value={this.state.projectData.sitemap_url}
-                            id="sitemap_url"
-                            name="sitemap_url"
-                            onChange={this.handleUpdate.bind( this )}
-                          /> : this.state.projectData.sitemap_url ? <a target="_blank"
-                                                                        href={this.state.projectData.sitemap_url}>{this.state.projectData.sitemap_url}</a> : '-'
+
+
+                            this.state.error.sitemap_url ? <TextField error="error"
+                                                                     helperText={this.state.error.msg}
+                                                                     variant="outlined"
+                                                                     margin="normal"
+                                                                     value={this.state.projectData.sitemap_url}
+                                                                     id="sitemap_url"
+                                                                     name="sitemap_url"
+                                                                     onChange={this.handleUpdate.bind( this )}
+                                />
+                                : <TextField
+                                    variant="outlined"
+                                    margin="normal"
+                                    value={this.state.projectData.sitemap_url}
+                                    id="sitemap_url"
+                                    name="sitemap_url"
+                                    onChange={this.handleUpdate.bind( this )}
+                                /> : <a target="_blank"
+                                        href={this.state.projectData.sitemap_url}>{this.state.projectData.sitemap_url}</a>
+
                         }
                       </TableCell>
                     </TableRow>
@@ -594,7 +669,8 @@ class ProjectDetailViews extends React.Component {
   render() {
     return (
       <Container maxWidth="xl">
-        <this.ProjectFeaturesBox/>
+        {this.state.isLoading ? <Pace color="#3f51b5"/> : <this.ProjectFeaturesBox/> }
+
       </Container>
     );
   }

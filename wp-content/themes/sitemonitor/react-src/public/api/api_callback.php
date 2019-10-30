@@ -178,7 +178,7 @@ function sm_projects_status( $request ) {
 function sm_add_project( $request ) {
 
 	$auth = validate_token();
-
+    sleep(1);
 	if ( ! isset( $auth['status'] ) || empty( $auth['status'] ) || false === $auth['status'] ) {
 		return new WP_Error( 'invalid_user', esc_html__( 'User ID not found', 'md_site_monitor' ), array( 'status' => 403 ) );
 	}
@@ -270,7 +270,7 @@ function sm_add_project( $request ) {
 function sm_project_update( $request ) {
 
 	$auth = validate_token();
-
+    sleep(1);
 	if ( ! isset( $auth['status'] ) || empty( $auth['status'] ) || false === $auth['status'] ) {
 		return new WP_Error( 'invalid_user', esc_html__( 'User ID not found', 'md_site_monitor' ), array( 'status' => 403 ) );
 	}
@@ -330,7 +330,7 @@ function sm_get_domains( $request ) {
 
 	global $wpdb;
 	$auth = validate_token();
-
+    sleep(1);
 	if ( ! isset( $auth['status'] ) || empty( $auth['status'] ) || false === $auth['status'] ) {
 		return new WP_Error( 'invalid_user', esc_html__( 'User ID not found', 'md_site_monitor' ), array( 'status' => 403 ) );
 	}
@@ -417,7 +417,7 @@ function sm_get_domains( $request ) {
 function sm_project_report( $request ) {
 
 	$auth = validate_token();
-
+    sleep(1);
 	global $wpdb;
 
 	if ( ! isset( $auth['status'] ) || empty( $auth['status'] ) || false === $auth['status'] ) {

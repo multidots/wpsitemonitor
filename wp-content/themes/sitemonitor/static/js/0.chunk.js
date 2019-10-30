@@ -34451,6 +34451,39 @@ exports.default = _default;
 
 /***/ }),
 
+/***/ "./node_modules/@material-ui/icons/CancelRounded.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/@material-ui/icons/CancelRounded.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)(_react.default.createElement(_react.default.Fragment, null, _react.default.createElement("path", {
+  fill: "none",
+  d: "M0 0h24v24H0V0z",
+  opacity: ".87"
+}), _react.default.createElement("path", {
+  d: "M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm4.3 14.3c-.39.39-1.02.39-1.41 0L12 13.41 9.11 16.3c-.39.39-1.02.39-1.41 0a.9959.9959 0 010-1.41L10.59 12 7.7 9.11a.9959.9959 0 010-1.41c.39-.39 1.02-.39 1.41 0L12 10.59l2.89-2.89c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41L13.41 12l2.89 2.89c.38.38.38 1.02 0 1.41z"
+})), 'CancelRounded');
+
+exports.default = _default;
+
+/***/ }),
+
 /***/ "./node_modules/@material-ui/icons/CheckCircle.js":
 /*!********************************************************!*\
   !*** ./node_modules/@material-ui/icons/CheckCircle.js ***!
@@ -34475,6 +34508,35 @@ var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/crea
 var _default = (0, _createSvgIcon.default)(_react.default.createElement("path", {
   d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
 }), 'CheckCircle');
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/icons/CheckCircleRounded.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@material-ui/icons/CheckCircleRounded.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)(_react.default.createElement("path", {
+  d: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM9.29 16.29L5.7 12.7a.9959.9959 0 010-1.41c.39-.39 1.02-.39 1.41 0L10 14.17l6.88-6.88c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-7.59 7.59c-.38.39-1.02.39-1.41 0z"
+}), 'CheckCircleRounded');
 
 exports.default = _default;
 
@@ -34649,6 +34711,35 @@ var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/crea
 var _default = (0, _createSvgIcon.default)(_react.default.createElement("path", {
   d: "M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"
 }), 'Description');
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/icons/Edit.js":
+/*!*************************************************!*\
+  !*** ./node_modules/@material-ui/icons/Edit.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)(_react.default.createElement("path", {
+  d: "M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+}), 'Edit');
 
 exports.default = _default;
 
@@ -35071,6 +35162,35 @@ var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/crea
 var _default = (0, _createSvgIcon.default)(_react.default.createElement("path", {
   d: "M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z"
 }), 'Print');
+
+exports.default = _default;
+
+/***/ }),
+
+/***/ "./node_modules/@material-ui/icons/Save.js":
+/*!*************************************************!*\
+  !*** ./node_modules/@material-ui/icons/Save.js ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "./node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+
+var _createSvgIcon = _interopRequireDefault(__webpack_require__(/*! ./utils/createSvgIcon */ "./node_modules/@material-ui/icons/utils/createSvgIcon.js"));
+
+var _default = (0, _createSvgIcon.default)(_react.default.createElement("path", {
+  d: "M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"
+}), 'Save');
 
 exports.default = _default;
 
@@ -86353,6 +86473,213 @@ if (true) {
 if (false) {} else {
   module.exports = __webpack_require__(/*! ./cjs/react-is.development.js */ "./node_modules/react-is/cjs/react-is.development.js");
 }
+
+/***/ }),
+
+/***/ "./node_modules/react-pace-progress/dist/pace.min.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/react-pace-progress/dist/pace.min.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function (t, e) {
+   true ? module.exports = e(__webpack_require__(/*! react */ "./node_modules/react/index.js"), __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js")) : undefined;
+}(window, function (n, r) {
+  return function (n) {
+    var r = {};
+
+    function o(t) {
+      if (r[t]) return r[t].exports;
+      var e = r[t] = {
+        i: t,
+        l: !1,
+        exports: {}
+      };
+      return n[t].call(e.exports, e, e.exports, o), e.l = !0, e.exports;
+    }
+
+    return o.m = n, o.c = r, o.d = function (t, e, n) {
+      o.o(t, e) || Object.defineProperty(t, e, {
+        enumerable: !0,
+        get: n
+      });
+    }, o.r = function (t) {
+      "undefined" != typeof Symbol && Symbol.toStringTag && Object.defineProperty(t, Symbol.toStringTag, {
+        value: "Module"
+      }), Object.defineProperty(t, "__esModule", {
+        value: !0
+      });
+    }, o.t = function (e, t) {
+      if (1 & t && (e = o(e)), 8 & t) return e;
+      if (4 & t && "object" == typeof e && e && e.__esModule) return e;
+      var n = Object.create(null);
+      if (o.r(n), Object.defineProperty(n, "default", {
+        enumerable: !0,
+        value: e
+      }), 2 & t && "string" != typeof e) for (var r in e) o.d(n, r, function (t) {
+        return e[t];
+      }.bind(null, r));
+      return n;
+    }, o.n = function (t) {
+      var e = t && t.__esModule ? function () {
+        return t.default;
+      } : function () {
+        return t;
+      };
+      return o.d(e, "a", e), e;
+    }, o.o = function (t, e) {
+      return Object.prototype.hasOwnProperty.call(t, e);
+    }, o.p = "/", o(o.s = 0);
+  }([function (t, e, n) {
+    t.exports = n(1);
+  }, function (t, e, n) {
+    "use strict";
+
+    n.r(e);
+    var o = n(2),
+        i = n.n(o),
+        r = n(3),
+        u = n.n(r);
+
+    function c(t) {
+      return (c = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (t) {
+        return typeof t;
+      } : function (t) {
+        return t && "function" == typeof Symbol && t.constructor === Symbol && t !== Symbol.prototype ? "symbol" : typeof t;
+      })(t);
+    }
+
+    function f() {
+      return (f = Object.assign || function (t) {
+        for (var e = 1; e < arguments.length; e++) {
+          var n = arguments[e];
+
+          for (var r in n) Object.prototype.hasOwnProperty.call(n, r) && (t[r] = n[r]);
+        }
+
+        return t;
+      }).apply(this, arguments);
+    }
+
+    function l(t, e) {
+      for (var n = 0; n < e.length; n++) {
+        var r = e[n];
+        r.enumerable = r.enumerable || !1, r.configurable = !0, "value" in r && (r.writable = !0), Object.defineProperty(t, r.key, r);
+      }
+    }
+
+    function p(t) {
+      return (p = Object.setPrototypeOf ? Object.getPrototypeOf : function (t) {
+        return t.__proto__ || Object.getPrototypeOf(t);
+      })(t);
+    }
+
+    function s(t, e) {
+      return (s = Object.setPrototypeOf || function (t, e) {
+        return t.__proto__ = e, t;
+      })(t, e);
+    }
+
+    function y(t) {
+      if (void 0 === t) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+      return t;
+    }
+
+    function b(t, e, n) {
+      return e in t ? Object.defineProperty(t, e, {
+        value: n,
+        enumerable: !0,
+        configurable: !0,
+        writable: !0
+      }) : t[e] = n, t;
+    }
+
+    var a = function (t) {
+      function a() {
+        var t, e, n, r;
+        !function (t, e) {
+          if (!(t instanceof e)) throw new TypeError("Cannot call a class as a function");
+        }(this, a);
+
+        for (var o = arguments.length, i = new Array(o), u = 0; u < o; u++) i[u] = arguments[u];
+
+        return n = this, r = (t = p(a)).call.apply(t, [this].concat(i)), b(y(y(e = !r || "object" !== c(r) && "function" != typeof r ? y(n) : r)), "state", {
+          width: 0
+        }), b(y(y(e)), "getStyles", function () {
+          var t = {
+            main: {
+              height: e.props.height || 10,
+              backgroundColor: e.props.color || "#2c3e50",
+              transition: "width 0.5s",
+              width: Math.floor(100 * e.state.width) + "%"
+            },
+            container: {
+              position: "absolute",
+              width: "100%"
+            }
+          };
+          return e.props.style && (t.main = Object.assign({}, e.props.style, t.main)), t;
+        }), e;
+      }
+
+      var e, n, r;
+      return function (t, e) {
+        if ("function" != typeof e && null !== e) throw new TypeError("Super expression must either be null or a function");
+        t.prototype = Object.create(e && e.prototype, {
+          constructor: {
+            value: t,
+            writable: !0,
+            configurable: !0
+          }
+        }), e && s(t, e);
+      }(a, o["Component"]), e = a, (n = [{
+        key: "componentDidMount",
+        value: function () {
+          var t = this;
+          this.intervalId = setInterval(function () {
+            t.setState({
+              width: t.state.width + .25 * (1 - t.state.width)
+            });
+          }, 500 + 200 * Math.random());
+        }
+      }, {
+        key: "componentWillUnmount",
+        value: function () {
+          clearInterval(this.intervalId);
+        }
+      }, {
+        key: "render",
+        value: function () {
+          var t = this.getStyles(),
+              e = this.props,
+              n = e.id,
+              r = e.className;
+          return i.a.createElement("div", {
+            style: t.container
+          }, i.a.createElement("div", f({
+            id: n,
+            className: r
+          }, {
+            style: t.main
+          })));
+        }
+      }]) && l(e.prototype, n), r && l(e, r), a;
+    }();
+
+    b(a, "propTypes", {
+      height: u.a.number,
+      color: u.a.string,
+      style: u.a.object,
+      id: u.a.string,
+      className: u.a.string
+    }), e.default = a;
+  }, function (t, e) {
+    t.exports = n;
+  }, function (t, e) {
+    t.exports = r;
+  }]).default;
+});
 
 /***/ }),
 

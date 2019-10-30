@@ -157,10 +157,10 @@ class LoginViews extends React.Component {
 							id="sm_password"
 							onChange={this.handleChange.bind( this )}
 						/>
-						<FormControlLabel
+						{/*<FormControlLabel
 							control={<Checkbox value="remember" color="primary"/>}
 							label="Remember me"
-						/>
+						/>*/}
 						<Button
 							type="submit"
 							fullWidth
@@ -170,13 +170,13 @@ class LoginViews extends React.Component {
 						>
 							Sign In
 						</Button>
-						<Grid container>
+						{/*<Grid container>
 							<Grid item xs>
 								<Link href="#" variant="body2">
 									Forgot password?
 								</Link>
 							</Grid>
-						</Grid>
+						</Grid>*/}
 					</form>
 				</div>
 			</Container>

@@ -8,6 +8,7 @@ import App from './App';
 class Pages extends React.Component {
 
   render() {
+
     let slug = this.props.match.params.slug;
     switch ( slug ) {
       case 'projects':

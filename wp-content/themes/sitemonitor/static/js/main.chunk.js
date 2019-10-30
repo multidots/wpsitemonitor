@@ -12,7 +12,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Home__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Home */ "./src/components/Home.js");
-var _jsxFileName = "/var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes/sitemonitor/react-src/src/components/App.js";
+var _jsxFileName = "C:\\Users\\Aslam\\Local Sites\\wpsitemoniter\\app\\public\\wp-content\\themes\\sitemonitor\\react-src\\src\\components\\App.js";
 
 
 
@@ -66,7 +66,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _views_Footer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../views/Footer */ "./src/views/Footer.js");
-var _jsxFileName = "/var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes/sitemonitor/react-src/src/components/Footer.js";
+var _jsxFileName = "C:\\Users\\Aslam\\Local Sites\\wpsitemoniter\\app\\public\\wp-content\\themes\\sitemonitor\\react-src\\src\\components\\Footer.js";
 
 
 
@@ -99,7 +99,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _views_Header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../views/Header */ "./src/views/Header.js");
-var _jsxFileName = "/var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes/sitemonitor/react-src/src/components/Header.js";
+var _jsxFileName = "C:\\Users\\Aslam\\Local Sites\\wpsitemoniter\\app\\public\\wp-content\\themes\\sitemonitor\\react-src\\src\\components\\Header.js";
 
 
 
@@ -133,7 +133,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Layout */ "./src/components/Layout.js");
 /* harmony import */ var _views_Home__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/Home */ "./src/views/Home.js");
-var _jsxFileName = "/var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes/sitemonitor/react-src/src/components/Home.js";
+var _jsxFileName = "C:\\Users\\Aslam\\Local Sites\\wpsitemoniter\\app\\public\\wp-content\\themes\\sitemonitor\\react-src\\src\\components\\Home.js";
 
 
 
@@ -174,7 +174,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Header__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Header */ "./src/components/Header.js");
 /* harmony import */ var _Footer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Footer */ "./src/components/Footer.js");
-var _jsxFileName = "/var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes/sitemonitor/react-src/src/components/Layout.js";
+/* harmony import */ var react_pace_progress__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-pace-progress */ "./node_modules/react-pace-progress/dist/pace.min.js");
+/* harmony import */ var react_pace_progress__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_pace_progress__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var mui_datatables__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! mui-datatables */ "./node_modules/mui-datatables/dist/index.js");
+/* harmony import */ var mui_datatables__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(mui_datatables__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+var _jsxFileName = "C:\\Users\\Aslam\\Local Sites\\wpsitemoniter\\app\\public\\wp-content\\themes\\sitemonitor\\react-src\\src\\components\\Layout.js";
+
+
+
 
 
 
@@ -187,19 +195,19 @@ class Layout extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 12
+        lineNumber: 14
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Header__WEBPACK_IMPORTED_MODULE_1__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 13
+        lineNumber: 15
       },
       __self: this
     }), this.props.children, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Footer__WEBPACK_IMPORTED_MODULE_2__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 15
+        lineNumber: 17
       },
       __self: this
     }));
@@ -225,7 +233,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _views_Login__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/Login */ "./src/views/Login.js");
 /* harmony import */ var _Layout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Layout */ "./src/components/Layout.js");
-var _jsxFileName = "/var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes/sitemonitor/react-src/src/components/Login.js";
+var _jsxFileName = "C:\\Users\\Aslam\\Local Sites\\wpsitemoniter\\app\\public\\wp-content\\themes\\sitemonitor\\react-src\\src\\components\\Login.js";
 
 
 
@@ -286,7 +294,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Login__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Login */ "./src/components/Login.js");
 /* harmony import */ var _Projects__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Projects */ "./src/components/Projects.js");
 /* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./App */ "./src/components/App.js");
-var _jsxFileName = "/var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes/sitemonitor/react-src/src/components/Pages.js";
+var _jsxFileName = "C:\\Users\\Aslam\\Local Sites\\wpsitemoniter\\app\\public\\wp-content\\themes\\sitemonitor\\react-src\\src\\components\\Pages.js";
 
 
 
@@ -303,7 +311,7 @@ class Pages extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Projects__WEBPACK_IMPORTED_MODULE_4__["default"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 15
+            lineNumber: 16
           },
           __self: this
         });
@@ -313,7 +321,7 @@ class Pages extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Login__WEBPACK_IMPORTED_MODULE_3__["default"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 20
+            lineNumber: 21
           },
           __self: this
         });
@@ -327,14 +335,14 @@ class Pages extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Layout__WEBPACK_IMPORTED_MODULE_2__["default"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 28
+            lineNumber: 29
           },
           __self: this
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_views_Pages__WEBPACK_IMPORTED_MODULE_1__["default"], {
           slug: slug,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 29
+            lineNumber: 30
           },
           __self: this
         }));
@@ -360,7 +368,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Layout */ "./src/components/Layout.js");
 /* harmony import */ var _views_ProjectDetail__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/ProjectDetail */ "./src/views/ProjectDetail.js");
-var _jsxFileName = "/var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes/sitemonitor/react-src/src/components/ProjectDetail.js";
+var _jsxFileName = "C:\\Users\\Aslam\\Local Sites\\wpsitemoniter\\app\\public\\wp-content\\themes\\sitemonitor\\react-src\\src\\components\\ProjectDetail.js";
 
 
 
@@ -402,7 +410,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Layout__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Layout */ "./src/components/Layout.js");
 /* harmony import */ var _views_ProjectStatus__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../views/ProjectStatus */ "./src/views/ProjectStatus.js");
-var _jsxFileName = "/var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes/sitemonitor/react-src/src/components/ProjectStatus.js";
+var _jsxFileName = "C:\\Users\\Aslam\\Local Sites\\wpsitemoniter\\app\\public\\wp-content\\themes\\sitemonitor\\react-src\\src\\components\\ProjectStatus.js";
 
 
 
@@ -444,7 +452,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _views_Projects__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../views/Projects */ "./src/views/Projects.js");
 /* harmony import */ var _Layout__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Layout */ "./src/components/Layout.js");
-var _jsxFileName = "/var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes/sitemonitor/react-src/src/components/Projects.js";
+var _jsxFileName = "C:\\Users\\Aslam\\Local Sites\\wpsitemoniter\\app\\public\\wp-content\\themes\\sitemonitor\\react-src\\src\\components\\Projects.js";
 
 
 
@@ -490,25 +498,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_ProjectDetail__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/ProjectDetail */ "./src/components/ProjectDetail.js");
 /* harmony import */ var _components_ProjectStatus__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/ProjectStatus */ "./src/components/ProjectStatus.js");
 /* harmony import */ var _components_Pages__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Pages */ "./src/components/Pages.js");
-var _jsxFileName = "/var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes/sitemonitor/react-src/src/index.js";
+var _jsxFileName = "C:\\Users\\Aslam\\Local Sites\\wpsitemoniter\\app\\public\\wp-content\\themes\\sitemonitor\\react-src\\src\\index.js";
 
 
 
 
 
 
- //import './views/style.css';
+ //import './pase.js';
+//import './pase.css';
+//import './views/style.css';
 
 const routing = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["BrowserRouter"], {
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 13
+    lineNumber: 16
   },
   __self: undefined
 }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 14
+    lineNumber: 17
   },
   __self: undefined
 }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
@@ -517,7 +527,7 @@ const routing = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react
   component: _components_Pages__WEBPACK_IMPORTED_MODULE_6__["default"],
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 15
+    lineNumber: 18
   },
   __self: undefined
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
@@ -526,7 +536,7 @@ const routing = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react
   component: _components_ProjectDetail__WEBPACK_IMPORTED_MODULE_4__["default"],
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 16
+    lineNumber: 19
   },
   __self: undefined
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
@@ -535,7 +545,7 @@ const routing = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react
   component: _components_ProjectStatus__WEBPACK_IMPORTED_MODULE_5__["default"],
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 17
+    lineNumber: 20
   },
   __self: undefined
 }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Route"], {
@@ -544,7 +554,7 @@ const routing = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react
   component: _components_Pages__WEBPACK_IMPORTED_MODULE_6__["default"],
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 18
+    lineNumber: 21
   },
   __self: undefined
 })));
@@ -659,8 +669,8 @@ function unregister() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _var_vagrant_md_www_sitemap_wp_public_html_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
-/* harmony import */ var _var_vagrant_md_www_sitemap_wp_public_html_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var C_Users_Aslam_Local_Sites_wpsitemoniter_app_public_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var C_Users_Aslam_Local_Sites_wpsitemoniter_app_public_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/IconButton */ "./node_modules/@material-ui/core/esm/IconButton/index.js");
@@ -682,13 +692,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Constants__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../components/Constants */ "./src/components/Constants.js");
 /* harmony import */ var _Message__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./Message */ "./src/views/Message.js");
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
+/* harmony import */ var react_pace_progress__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! react-pace-progress */ "./node_modules/react-pace-progress/dist/pace.min.js");
+/* harmony import */ var react_pace_progress__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(react_pace_progress__WEBPACK_IMPORTED_MODULE_20__);
 
 
-var _jsxFileName = "/var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes/sitemonitor/react-src/src/views/CustomToolbar.js";
+var _jsxFileName = "C:\\Users\\Aslam\\Local Sites\\wpsitemoniter\\app\\public\\wp-content\\themes\\sitemonitor\\react-src\\src\\views\\CustomToolbar.js";
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { Object(_var_vagrant_md_www_sitemap_wp_public_html_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { Object(C_Users_Aslam_Local_Sites_wpsitemoniter_app_public_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 
 
 
@@ -714,7 +727,11 @@ const defaultToolbarStyles = {
 };
 const useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_6__["makeStyles"])(theme => ({
   appBar: {
-    position: 'relative'
+    position: 'relative',
+    marginBottom: "10px"
+  },
+  container: {
+    paddingTop: "10px"
   },
   title: {
     marginLeft: theme.spacing(2),
@@ -728,7 +745,7 @@ const Transition = react__WEBPACK_IMPORTED_MODULE_2___default.a.forwardRef(funct
   }, props, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 36
+      lineNumber: 41
     },
     __self: this
   }));
@@ -738,7 +755,7 @@ function CustomToolbar() {
   const classes = useStyles();
 
   const _React$useState = react__WEBPACK_IMPORTED_MODULE_2___default.a.useState(false),
-        _React$useState2 = Object(_var_vagrant_md_www_sitemap_wp_public_html_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_React$useState, 2),
+        _React$useState2 = Object(C_Users_Aslam_Local_Sites_wpsitemoniter_app_public_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_React$useState, 2),
         open = _React$useState2[0],
         setOpen = _React$useState2[1];
 
@@ -749,9 +766,10 @@ function CustomToolbar() {
     sm_sitemap_option: true,
     sm_robots_option: true,
     sm_admin_option: true,
-    form_error_msg: ""
+    form_error_msg: "",
+    isLoading: false
   }),
-        _React$useState4 = Object(_var_vagrant_md_www_sitemap_wp_public_html_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_React$useState3, 2),
+        _React$useState4 = Object(C_Users_Aslam_Local_Sites_wpsitemoniter_app_public_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_1__["default"])(_React$useState3, 2),
         state = _React$useState4[0],
         setState = _React$useState4[1];
 
@@ -809,6 +827,9 @@ function CustomToolbar() {
     }
 
     const token = localStorage.getItem('token');
+    setState(_objectSpread({}, state, {
+      ['isLoading']: true
+    }));
     fetch("/wp-json/md-site-monitor/add_project", {
       method: 'POST',
       body: JSON.stringify(state),
@@ -826,7 +847,7 @@ function CustomToolbar() {
   return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_2___default.a.Fragment, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 112
+      lineNumber: 119
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Tooltip__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -834,20 +855,20 @@ function CustomToolbar() {
     className: "add_btn",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 113
+      lineNumber: 120
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_3__["default"], {
     onClick: handleClickOpen,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 114
+      lineNumber: 121
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_icons_Add__WEBPACK_IMPORTED_MODULE_5___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 115
+      lineNumber: 122
     },
     __self: this
   }))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Dialog__WEBPACK_IMPORTED_MODULE_8__["default"], {
@@ -857,27 +878,27 @@ function CustomToolbar() {
     TransitionComponent: Transition,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 119
+      lineNumber: 126
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("form", {
     onSubmit: handleLocationSubmit,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 120
+      lineNumber: 127
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_AppBar__WEBPACK_IMPORTED_MODULE_9__["default"], {
     className: classes.appBar,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 121
+      lineNumber: 128
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Toolbar__WEBPACK_IMPORTED_MODULE_10__["default"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 122
+      lineNumber: 129
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_3__["default"], {
@@ -887,26 +908,34 @@ function CustomToolbar() {
     "aria-label": "close",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 123
+      lineNumber: 130
     },
     __self: this
   }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_icons_Close__WEBPACK_IMPORTED_MODULE_11___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 124
+      lineNumber: 131
     },
     __self: this
   })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_19__["Typography"], {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 126
+      lineNumber: 133
     },
     __self: this
-  }, "Add Project"))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Container__WEBPACK_IMPORTED_MODULE_13__["default"], {
+  }, "Add Project"))), state.isLoading ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_pace_progress__WEBPACK_IMPORTED_MODULE_20___default.a, {
+    color: "#3f51b5",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 141
+    },
+    __self: this
+  }) : '', react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Container__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    className: classes.container,
     maxWidth: "sm",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 132
+      lineNumber: 146
     },
     __self: this
   }, state.form_error_msg ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_Message__WEBPACK_IMPORTED_MODULE_18__["default"], {
@@ -914,7 +943,7 @@ function CustomToolbar() {
     message: state.form_error_msg,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 138
+      lineNumber: 152
     },
     __self: this
   }) : '', react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_14__["default"], {
@@ -928,7 +957,7 @@ function CustomToolbar() {
     autoFocus: true,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 147
+      lineNumber: 161
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_14__["default"], {
@@ -942,7 +971,7 @@ function CustomToolbar() {
     id: "sm_domain_url",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 157
+      lineNumber: 171
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_14__["default"], {
@@ -956,7 +985,7 @@ function CustomToolbar() {
     id: "sm_domain_url",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 167
+      lineNumber: 181
     },
     __self: this
   }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -967,7 +996,7 @@ function CustomToolbar() {
     className: classes.submit,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 178
+      lineNumber: 192
     },
     __self: this
   }, "Add Project")))));
@@ -994,7 +1023,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_Link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/Link */ "./node_modules/@material-ui/core/esm/Link/index.js");
 /* harmony import */ var _material_ui_core_Container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Container */ "./node_modules/@material-ui/core/esm/Container/index.js");
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
-var _jsxFileName = "/var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes/sitemonitor/react-src/src/views/Footer.js";
+var _jsxFileName = "C:\\Users\\Aslam\\Local Sites\\wpsitemoniter\\app\\public\\wp-content\\themes\\sitemonitor\\react-src\\src\\views\\Footer.js";
 
 
 
@@ -1096,7 +1125,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _logo_png__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./logo.png */ "./src/views/logo.png");
 /* harmony import */ var _logo_png__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_logo_png__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var _material_ui_core_ListItem__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/ListItem */ "./node_modules/@material-ui/core/esm/ListItem/index.js");
-var _jsxFileName = "/var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes/sitemonitor/react-src/src/views/Header.js";
+var _jsxFileName = "C:\\Users\\Aslam\\Local Sites\\wpsitemoniter\\app\\public\\wp-content\\themes\\sitemonitor\\react-src\\src\\views\\Header.js";
 
 
 
@@ -1306,7 +1335,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
 /* harmony import */ var _material_ui_core_Container__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/Container */ "./node_modules/@material-ui/core/esm/Container/index.js");
 /* harmony import */ var _material_ui_core_Link__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/core/Link */ "./node_modules/@material-ui/core/esm/Link/index.js");
-var _jsxFileName = "/var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes/sitemonitor/react-src/src/views/Home.js";
+var _jsxFileName = "C:\\Users\\Aslam\\Local Sites\\wpsitemoniter\\app\\public\\wp-content\\themes\\sitemonitor\\react-src\\src\\views\\Home.js";
 
 
 
@@ -1578,7 +1607,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_Container__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @material-ui/core/Container */ "./node_modules/@material-ui/core/esm/Container/index.js");
 /* harmony import */ var _components_Constants__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../components/Constants */ "./src/components/Constants.js");
 /* harmony import */ var _Message__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./Message */ "./src/views/Message.js");
-var _jsxFileName = "/var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes/sitemonitor/react-src/src/views/Login.js";
+var _jsxFileName = "C:\\Users\\Aslam\\Local Sites\\wpsitemoniter\\app\\public\\wp-content\\themes\\sitemonitor\\react-src\\src\\views\\Login.js";
 
 
 
@@ -1783,22 +1812,6 @@ class LoginViews extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component 
         lineNumber: 150
       },
       __self: this
-    }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      control: react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Checkbox__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        value: "remember",
-        color: "primary",
-        __source: {
-          fileName: _jsxFileName,
-          lineNumber: 161
-        },
-        __self: this
-      }),
-      label: "Remember me",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 160
-      },
-      __self: this
     }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_2__["default"], {
       type: "submit",
       fullWidth: true,
@@ -1810,30 +1823,7 @@ class LoginViews extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component 
         lineNumber: 164
       },
       __self: this
-    }, "Sign In"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
-      container: true,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 173
-      },
-      __self: this
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_8__["default"], {
-      item: true,
-      xs: true,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 174
-      },
-      __self: this
-    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Link__WEBPACK_IMPORTED_MODULE_7__["default"], {
-      href: "#",
-      variant: "body2",
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 175
-      },
-      __self: this
-    }, "Forgot password?"))))));
+    }, "Sign In"))));
   }
 
   render() {
@@ -1862,7 +1852,7 @@ class LoginViews extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CustomizedSnackbars; });
-/* harmony import */ var _var_vagrant_md_www_sitemap_wp_public_html_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var C_Users_Aslam_Local_Sites_wpsitemoniter_app_public_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
@@ -1880,7 +1870,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_icons_Warning__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Warning__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
 
-var _jsxFileName = "/var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes/sitemonitor/react-src/src/views/Message.js";
+var _jsxFileName = "C:\\Users\\Aslam\\Local Sites\\wpsitemoniter\\app\\public\\wp-content\\themes\\sitemonitor\\react-src\\src\\views\\Message.js";
 
 
 
@@ -1930,7 +1920,7 @@ function MySnackbarContentWrapper(props) {
         message = props.message,
         onClose = props.onClose,
         variant = props.variant,
-        other = Object(_var_vagrant_md_www_sitemap_wp_public_html_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_0__["default"])(props, ["className", "message", "onClose", "variant"]);
+        other = Object(C_Users_Aslam_Local_Sites_wpsitemoniter_app_public_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_0__["default"])(props, ["className", "message", "onClose", "variant"]);
 
   const Icon = variantIcon[variant];
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_SnackbarContent__WEBPACK_IMPORTED_MODULE_8__["default"], Object.assign({
@@ -1997,7 +1987,7 @@ function CustomizedSnackbars(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-var _jsxFileName = "/var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes/sitemonitor/react-src/src/views/NotFoundPage.js";
+var _jsxFileName = "C:\\Users\\Aslam\\Local Sites\\wpsitemoniter\\app\\public\\wp-content\\themes\\sitemonitor\\react-src\\src\\views\\NotFoundPage.js";
 
 
 class NotFoundPage extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
@@ -2029,7 +2019,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _NotFoundPage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NotFoundPage */ "./src/views/NotFoundPage.js");
-var _jsxFileName = "/var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes/sitemonitor/react-src/src/views/Pages.js";
+/* harmony import */ var react_pace_progress__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-pace-progress */ "./node_modules/react-pace-progress/dist/pace.min.js");
+/* harmony import */ var react_pace_progress__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_pace_progress__WEBPACK_IMPORTED_MODULE_2__);
+var _jsxFileName = "C:\\Users\\Aslam\\Local Sites\\wpsitemoniter\\app\\public\\wp-content\\themes\\sitemonitor\\react-src\\src\\views\\Pages.js";
+
 
 
 
@@ -2037,25 +2030,35 @@ class PagesViews extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component 
   constructor(props) {
     super(props);
     this.state = {
-      pageData: false
+      pageData: false,
+      isLoading: true
     };
     this.createMarkup = this.createMarkup.bind();
   }
 
   componentDidMount(props) {
+    this.setState({
+      isLoading: true
+    });
     let slug = this.props.slug;
     fetch("/wp-json/wp/v2/pages?slug=".concat(slug)).then(response => response.json()).then(data => {
       if (Object.keys(data).length === 0) {
         fetch("/wp-json/wp/v2/posts?slug=".concat(slug)).then(response => response.json()).then(data => {
-          if (Object.keys(data).length === 0) {} else {
+          if (Object.keys(data).length === 0) {
             this.setState({
-              pageData: data[0]
+              isLoading: false
+            });
+          } else {
+            this.setState({
+              pageData: data[0],
+              isLoading: false
             });
           }
         });
       } else {
         this.setState({
-          pageData: data[0]
+          pageData: data[0],
+          isLoading: false
         });
       }
     });
@@ -2072,20 +2075,27 @@ class PagesViews extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component 
     return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 47
+        lineNumber: 52
       },
       __self: this
-    }, false === is404 || typeof is404 === 'undefined' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NotFoundPage__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    }, this.state.isLoading ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_pace_progress__WEBPACK_IMPORTED_MODULE_2___default.a, {
+      color: "#3f51b5",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 48
+        lineNumber: 53
+      },
+      __self: this
+    }) : false === is404 || typeof is404 === 'undefined' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NotFoundPage__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 54
       },
       __self: this
     }) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "entry",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 49
+        lineNumber: 55
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2093,7 +2103,7 @@ class PagesViews extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component 
       dangerouslySetInnerHTML: this.createMarkup(this.state.pageData.content.rendered),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 50
+        lineNumber: 56
       },
       __self: this
     })));
@@ -2114,8 +2124,8 @@ class PagesViews extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component 
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _var_vagrant_md_www_sitemap_wp_public_html_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
-/* harmony import */ var _var_vagrant_md_www_sitemap_wp_public_html_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var C_Users_Aslam_Local_Sites_wpsitemoniter_app_public_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var C_Users_Aslam_Local_Sites_wpsitemoniter_app_public_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
@@ -2145,13 +2155,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @material-ui/core/TextField */ "./node_modules/@material-ui/core/esm/TextField/index.js");
 /* harmony import */ var _material_ui_icons_Save__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @material-ui/icons/Save */ "./node_modules/@material-ui/icons/Save.js");
 /* harmony import */ var _material_ui_icons_Save__WEBPACK_IMPORTED_MODULE_24___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_Save__WEBPACK_IMPORTED_MODULE_24__);
+/* harmony import */ var react_pace_progress__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! react-pace-progress */ "./node_modules/react-pace-progress/dist/pace.min.js");
+/* harmony import */ var react_pace_progress__WEBPACK_IMPORTED_MODULE_25___default = /*#__PURE__*/__webpack_require__.n(react_pace_progress__WEBPACK_IMPORTED_MODULE_25__);
 
 
-var _jsxFileName = "/var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes/sitemonitor/react-src/src/views/ProjectDetail.js";
+var _jsxFileName = "C:\\Users\\Aslam\\Local Sites\\wpsitemoniter\\app\\public\\wp-content\\themes\\sitemonitor\\react-src\\src\\views\\ProjectDetail.js";
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { Object(_var_vagrant_md_www_sitemap_wp_public_html_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { Object(C_Users_Aslam_Local_Sites_wpsitemoniter_app_public_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 
 
 
@@ -2318,7 +2331,7 @@ const IOSSwitch = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["
   focusVisible: {}
 }))((_ref) => {
   let classes = _ref.classes,
-      props = Object(_var_vagrant_md_www_sitemap_wp_public_html_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_0__["default"])(_ref, ["classes"]);
+      props = Object(C_Users_Aslam_Local_Sites_wpsitemoniter_app_public_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_0__["default"])(_ref, ["classes"]);
 
   return react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Switch__WEBPACK_IMPORTED_MODULE_21__["default"], Object.assign({
     focusVisibleClassName: classes.focusVisible,
@@ -2333,7 +2346,7 @@ const IOSSwitch = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_3__["
   }, props, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 169
+      lineNumber: 170
     },
     __self: undefined
   }));
@@ -2366,6 +2379,9 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
     };
 
     this.xhrRequestUpdateProject = () => {
+      this.setState({
+        isLoading: true
+      });
       const token = localStorage.getItem('token');
       let domain_id = this.state.project_id;
       return fetch("/wp-json/md-site-monitor/update_project", {
@@ -2376,7 +2392,11 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
         }
       }).then(res => {
         return res.json();
-      }).then(function (response) {}).catch(err => {
+      }).then(function (response) {
+        this.setState({
+          isLoading: false
+        });
+      }).catch(err => {
         this.setState({
           isLoading: false
         });
@@ -2394,7 +2414,8 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       error: {
         project_name: false,
         domain_url: false
-      }
+      },
+      isLoading: true
     };
     this.ProjectFeaturesBox = this.ProjectFeaturesBox.bind(this);
     this.editProjectData = this.editProjectData.bind(this);
@@ -2425,14 +2446,16 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
         this.setState({
           fullReportData: [],
           sitemapData: [],
-          sitemapErrorMsg: 'Sitemap reports not generated yet.'
+          sitemapErrorMsg: 'Sitemap reports not generated yet.',
+          isLoading: false
         });
       } else {
         this.setState({
           fullReportData: data,
           projectData: data.project_details,
           sitemapData: data.sitemap,
-          sitemapErrorMsg: Object.keys(data.sitemap).length === 0 ? 'Sitemap reports not generated yet.' : ''
+          sitemapErrorMsg: Object.keys(data.sitemap).length === 0 ? 'Sitemap reports not generated yet.' : '',
+          isLoading: false
         });
       }
     });
@@ -2459,21 +2482,51 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
   editProjectData() {
     let project_name = this.state.projectData.project_name;
     let domain_url = this.state.projectData.domain_url;
+    let sitemap_url = this.state.projectData.sitemap_url;
+    let isValidUrl = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
 
     if ("" === project_name) {
       this.setState({
         error: {
-          project_name: true
+          project_name: true,
+          msg: "Please enter project name"
         }
       });
       return false;
-    } else if ("" === domain_url) {
+    }
+
+    if ("" === domain_url) {
       this.setState({
         error: {
-          domain_url: true
+          domain_url: true,
+          msg: "Please enter domain URL"
         }
       });
       return false;
+    }
+
+    if ("" !== domain_url) {
+      if (!isValidUrl.test(domain_url)) {
+        this.setState({
+          error: {
+            domain_url: true,
+            msg: "Please enter valid domain URL"
+          }
+        });
+        return false;
+      }
+    }
+
+    if ("" !== sitemap_url) {
+      if (!isValidUrl.test(sitemap_url)) {
+        this.setState({
+          error: {
+            sitemap_url: true,
+            msg: "Please enter valid sitemap URL"
+          }
+        });
+        return false;
+      }
     }
 
     if (true === this.state.edit_data) {
@@ -2483,7 +2536,11 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
 
     let value = this.state.edit_data ? false : true;
     this.setState({
-      edit_data: value
+      edit_data: value,
+      error: {
+        domain_url: false,
+        project_name: false
+      }
     });
   }
 
@@ -2506,7 +2563,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       spacing: 3,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 346
+        lineNumber: 386
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -2516,7 +2573,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       md: 8,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 348
+        lineNumber: 388
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -2525,20 +2582,20 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       md: 12,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 349
+        lineNumber: 389
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_6__["default"], {
       className: classes.card,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 350
+        lineNumber: 390
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_7__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 351
+        lineNumber: 391
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -2546,13 +2603,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 352
+        lineNumber: 392
       },
       __self: this
     }, "Project Details", this.state.edit_data ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 355
+        lineNumber: 395
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_19__["default"], {
@@ -2560,13 +2617,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       onClick: this.cancelProjectData.bind(this),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 356
+        lineNumber: 396
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_icons_Close__WEBPACK_IMPORTED_MODULE_22___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 357
+        lineNumber: 397
       },
       __self: this
     })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_19__["default"], {
@@ -2574,13 +2631,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       onClick: this.editProjectData.bind(this),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 359
+        lineNumber: 399
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_icons_Save__WEBPACK_IMPORTED_MODULE_24___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 360
+        lineNumber: 400
       },
       __self: this
     }))) : react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_19__["default"], {
@@ -2588,13 +2645,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       onClick: this.editProjectData.bind(this),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 365
+        lineNumber: 405
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_icons_Edit__WEBPACK_IMPORTED_MODULE_16___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 366
+        lineNumber: 406
       },
       __self: this
     }))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Table__WEBPACK_IMPORTED_MODULE_13__["default"], {
@@ -2602,19 +2659,19 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       "aria-label": "simple table",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 371
+        lineNumber: 411
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_14__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 372
+        lineNumber: 412
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_17__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 373
+        lineNumber: 413
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_15__["default"], {
@@ -2622,22 +2679,24 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       scope: "row",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 374
+        lineNumber: 414
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("b", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 375
+        lineNumber: 415
       },
       __self: this
     }, "Project Name")), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_15__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 377
+        lineNumber: 417
       },
       __self: this
-    }, this.state.edit_data ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_23__["default"], {
+    }, this.state.edit_data ? this.state.error.project_name ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_23__["default"], {
+      error: "error",
+      helperText: this.state.error.msg,
       variant: "outlined",
       margin: "normal",
       value: this.state.projectData.project_name,
@@ -2646,13 +2705,25 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       onChange: this.handleUpdate.bind(this),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 379
+        lineNumber: 420
+      },
+      __self: this
+    }) : react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_23__["default"], {
+      variant: "outlined",
+      margin: "normal",
+      value: this.state.projectData.project_name,
+      id: "project_name",
+      name: "project_name",
+      onChange: this.handleUpdate.bind(this),
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 429
       },
       __self: this
     }) : this.state.projectData.project_name)), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_17__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 391
+        lineNumber: 442
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_15__["default"], {
@@ -2660,22 +2731,24 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       scope: "row",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 392
+        lineNumber: 443
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("b", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 393
+        lineNumber: 444
       },
       __self: this
     }, "Domain URL")), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_15__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 395
+        lineNumber: 446
       },
       __self: this
-    }, this.state.edit_data ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_23__["default"], {
+    }, this.state.edit_data ? this.state.error.domain_url ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_23__["default"], {
+      error: "error",
+      helperText: this.state.error.msg,
       variant: "outlined",
       margin: "normal",
       value: this.state.projectData.domain_url,
@@ -2684,7 +2757,19 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       onChange: this.handleUpdate.bind(this),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 397
+        lineNumber: 450
+      },
+      __self: this
+    }) : react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_23__["default"], {
+      variant: "outlined",
+      margin: "normal",
+      value: this.state.projectData.domain_url,
+      id: "domain_url",
+      name: "domain_url",
+      onChange: this.handleUpdate.bind(this),
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 459
       },
       __self: this
     }) : react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
@@ -2692,13 +2777,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       href: this.state.projectData.domain_url,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 404
+        lineNumber: 466
       },
       __self: this
     }, this.state.projectData.domain_url))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_17__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 409
+        lineNumber: 472
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_15__["default"], {
@@ -2706,22 +2791,24 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       scope: "row",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 410
+        lineNumber: 473
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("b", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 411
+        lineNumber: 474
       },
       __self: this
     }, "Sitemap URL")), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_15__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 413
+        lineNumber: 476
       },
       __self: this
-    }, this.state.edit_data ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_23__["default"], {
+    }, this.state.edit_data ? this.state.error.sitemap_url ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_23__["default"], {
+      error: "error",
+      helperText: this.state.error.msg,
       variant: "outlined",
       margin: "normal",
       value: this.state.projectData.sitemap_url,
@@ -2730,44 +2817,56 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       onChange: this.handleUpdate.bind(this),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 415
+        lineNumber: 480
       },
       __self: this
-    }) : this.state.projectData.sitemap_url ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
+    }) : react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_23__["default"], {
+      variant: "outlined",
+      margin: "normal",
+      value: this.state.projectData.sitemap_url,
+      id: "sitemap_url",
+      name: "sitemap_url",
+      onChange: this.handleUpdate.bind(this),
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 489
+      },
+      __self: this
+    }) : react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("a", {
       target: "_blank",
       href: this.state.projectData.sitemap_url,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 422
+        lineNumber: 496
       },
       __self: this
-    }, this.state.projectData.sitemap_url) : '-'))))))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    }, this.state.projectData.sitemap_url)))))))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
       item: true,
       xs: 12,
       md: 12,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 434
+        lineNumber: 509
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_6__["default"], {
       className: classes.card,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 435
+        lineNumber: 510
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
       className: classes.cardDetails,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 436
+        lineNumber: 511
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_7__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 437
+        lineNumber: 512
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -2775,7 +2874,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 438
+        lineNumber: 513
       },
       __self: this
     }, "Sitemap History", react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_20__["default"], {
@@ -2786,13 +2885,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
         value: "sitemap",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 443
+          lineNumber: 518
         },
         __self: this
       }),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 441
+        lineNumber: 516
       },
       __self: this
     })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -2800,7 +2899,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 451
+        lineNumber: 526
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_SiteMapReport__WEBPACK_IMPORTED_MODULE_18__["default"], {
@@ -2808,13 +2907,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       sitemapMsg: this.state.sitemapErrorMsg,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 452
+        lineNumber: 527
       },
       __self: this
     })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_10__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 454
+        lineNumber: 529
       },
       __self: this
     }), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_9__["Link"], {
@@ -2824,7 +2923,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 456
+        lineNumber: 531
       },
       __self: this
     }, "View More")))))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -2834,7 +2933,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       md: 4,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 463
+        lineNumber: 538
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -2843,27 +2942,27 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       md: 12,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 464
+        lineNumber: 539
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_6__["default"], {
       className: classes.card,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 465
+        lineNumber: 540
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
       className: classes.cardDetails,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 466
+        lineNumber: 541
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_7__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 467
+        lineNumber: 542
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -2871,7 +2970,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 468
+        lineNumber: 543
       },
       __self: this
     }, "Wp-Admin URL", react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_20__["default"], {
@@ -2882,13 +2981,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
         value: "admin",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 472
+          lineNumber: 547
         },
         __self: this
       }),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 470
+        lineNumber: 545
       },
       __self: this
     }), 1 === parseInt(this.state.fullReportData.admin_status) ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_icons_CheckCircleRounded__WEBPACK_IMPORTED_MODULE_11___default.a, {
@@ -2898,7 +2997,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 479
+        lineNumber: 554
       },
       __self: this
     }) : react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_icons_CancelRounded__WEBPACK_IMPORTED_MODULE_12___default.a, {
@@ -2908,14 +3007,14 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 481
+        lineNumber: 556
       },
       __self: this
     })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 484
+        lineNumber: 559
       },
       __self: this
     }, 1 === parseInt(this.state.fullReportData.admin_status) ? 'Custom URL set for the WP Admin.' : 'Default WP Admin URL set for the project.'), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -2923,7 +3022,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       className: "status_text",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 489
+        lineNumber: 564
       },
       __self: this
     }, this.state.fullReportData.admin_status_text))))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -2933,27 +3032,27 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       className: classes.grid_item,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 496
+        lineNumber: 571
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_6__["default"], {
       className: classes.card,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 497
+        lineNumber: 572
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
       className: classes.cardDetails,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 498
+        lineNumber: 573
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_7__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 499
+        lineNumber: 574
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -2961,7 +3060,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 500
+        lineNumber: 575
       },
       __self: this
     }, "Robots", react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_20__["default"], {
@@ -2972,13 +3071,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
         value: "roborts",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 504
+          lineNumber: 579
         },
         __self: this
       }),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 502
+        lineNumber: 577
       },
       __self: this
     }), 1 === parseInt(this.state.fullReportData.robots_status) ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_icons_CheckCircleRounded__WEBPACK_IMPORTED_MODULE_11___default.a, {
@@ -2988,7 +3087,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 511
+        lineNumber: 586
       },
       __self: this
     }) : react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_icons_CancelRounded__WEBPACK_IMPORTED_MODULE_12___default.a, {
@@ -2998,14 +3097,14 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 513
+        lineNumber: 588
       },
       __self: this
     })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 515
+        lineNumber: 590
       },
       __self: this
     }, 1 === parseInt(this.state.fullReportData.robots_status) ? 'We have found the robots.txt file on the root.' : 'We can\'t found the robots.txt file on the root.'), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -3013,7 +3112,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       className: "status_text",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 520
+        lineNumber: 595
       },
       __self: this
     }, this.state.fullReportData.robots_status_text))))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -3023,27 +3122,27 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       className: classes.grid_item,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 527
+        lineNumber: 602
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_6__["default"], {
       className: classes.card,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 528
+        lineNumber: 603
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
       className: classes.cardDetails,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 529
+        lineNumber: 604
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_7__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 530
+        lineNumber: 605
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -3051,7 +3150,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 531
+        lineNumber: 606
       },
       __self: this
     }, "SSL", react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_20__["default"], {
@@ -3062,13 +3161,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
         value: "https",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 535
+          lineNumber: 610
         },
         __self: this
       }),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 533
+        lineNumber: 608
       },
       __self: this
     }), 1 === parseInt(this.state.fullReportData.ssl_status) ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_icons_CheckCircleRounded__WEBPACK_IMPORTED_MODULE_11___default.a, {
@@ -3078,7 +3177,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 542
+        lineNumber: 617
       },
       __self: this
     }) : react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_icons_CancelRounded__WEBPACK_IMPORTED_MODULE_12___default.a, {
@@ -3088,14 +3187,14 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 544
+        lineNumber: 619
       },
       __self: this
     })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 546
+        lineNumber: 621
       },
       __self: this
     }, 1 === parseInt(this.state.fullReportData.ssl_status) ? 'Voila! site have a secure connection.' : 'Sorry, We could not found any secure connection for this project.'), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -3103,7 +3202,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       className: "status_text",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 551
+        lineNumber: 626
       },
       __self: this
     }, this.state.fullReportData.ssl_status_text))))), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -3113,27 +3212,27 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       className: classes.grid_item,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 558
+        lineNumber: 633
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_6__["default"], {
       className: classes.card,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 559
+        lineNumber: 634
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("div", {
       className: classes.cardDetails,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 560
+        lineNumber: 635
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_7__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 561
+        lineNumber: 636
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -3141,7 +3240,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 562
+        lineNumber: 637
       },
       __self: this
     }, "Captcha", react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_20__["default"], {
@@ -3152,13 +3251,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
         value: "captcha",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 566
+          lineNumber: 641
         },
         __self: this
       }),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 564
+        lineNumber: 639
       },
       __self: this
     }), 1 === parseInt(this.state.fullReportData.captcha_status) ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_icons_CheckCircleRounded__WEBPACK_IMPORTED_MODULE_11___default.a, {
@@ -3168,7 +3267,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 573
+        lineNumber: 648
       },
       __self: this
     }) : react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_icons_CancelRounded__WEBPACK_IMPORTED_MODULE_12___default.a, {
@@ -3178,14 +3277,14 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 575
+        lineNumber: 650
       },
       __self: this
     })), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 577
+        lineNumber: 652
       },
       __self: this
     }, 1 === parseInt(this.state.fullReportData.captcha_status) ? 'We have found captcha is successfully implemented on your project.' : 'Sorry! We could not found any captcha on your project.'), react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -3193,7 +3292,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       className: "status_text",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 582
+        lineNumber: 657
       },
       __self: this
     }, this.state.fullReportData.captcha_status_text)))))));
@@ -3204,13 +3303,20 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
       maxWidth: "xl",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 596
+        lineNumber: 671
       },
       __self: this
-    }, react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(this.ProjectFeaturesBox, {
+    }, this.state.isLoading ? react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(react_pace_progress__WEBPACK_IMPORTED_MODULE_25___default.a, {
+      color: "#3f51b5",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 597
+        lineNumber: 672
+      },
+      __self: this
+    }) : react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(this.ProjectFeaturesBox, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 672
       },
       __self: this
     }));
@@ -3231,7 +3337,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_2___default.a.Co
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _var_vagrant_md_www_sitemap_wp_public_html_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+/* harmony import */ var C_Users_Aslam_Local_Sites_wpsitemoniter_app_public_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
@@ -3253,11 +3359,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_icons_ExitToApp__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_ExitToApp__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 
-var _jsxFileName = "/var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes/sitemonitor/react-src/src/views/ProjectDetailSidebar.js";
+var _jsxFileName = "C:\\Users\\Aslam\\Local Sites\\wpsitemoniter\\app\\public\\wp-content\\themes\\sitemonitor\\react-src\\src\\views\\ProjectDetailSidebar.js";
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { Object(_var_vagrant_md_www_sitemap_wp_public_html_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { Object(C_Users_Aslam_Local_Sites_wpsitemoniter_app_public_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_0__["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 
 
@@ -3524,7 +3630,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/Grid */ "./node_modules/@material-ui/core/esm/Grid/index.js");
 /* harmony import */ var _ProjectDetailSidebar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ProjectDetailSidebar */ "./src/views/ProjectDetailSidebar.js");
 /* harmony import */ var _SiteMapReport__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SiteMapReport */ "./src/views/SiteMapReport.js");
-var _jsxFileName = "/var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes/sitemonitor/react-src/src/views/ProjectStatus.js";
+var _jsxFileName = "C:\\Users\\Aslam\\Local Sites\\wpsitemoniter\\app\\public\\wp-content\\themes\\sitemonitor\\react-src\\src\\views\\ProjectStatus.js";
 
 
 
@@ -3626,7 +3732,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Co
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _var_vagrant_md_www_sitemap_wp_public_html_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
+/* harmony import */ var C_Users_Aslam_Local_Sites_wpsitemoniter_app_public_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutProperties.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _material_ui_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core */ "./node_modules/@material-ui/core/esm/index.js");
@@ -3647,11 +3753,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_icons_FiberManualRecord__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_FiberManualRecord__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var _material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @material-ui/core/FormControlLabel */ "./node_modules/@material-ui/core/esm/FormControlLabel/index.js");
 /* harmony import */ var _material_ui_core_Switch__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @material-ui/core/Switch */ "./node_modules/@material-ui/core/esm/Switch/index.js");
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./style.css */ "./src/views/style.css");
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_style_css__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var _CustomToolbar__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./CustomToolbar */ "./src/views/CustomToolbar.js");
+/* harmony import */ var react_pace_progress__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! react-pace-progress */ "./node_modules/react-pace-progress/dist/pace.min.js");
+/* harmony import */ var react_pace_progress__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(react_pace_progress__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./style.css */ "./src/views/style.css");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_style_css__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var _CustomToolbar__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./CustomToolbar */ "./src/views/CustomToolbar.js");
 
-var _jsxFileName = "/var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes/sitemonitor/react-src/src/views/Projects.js";
+var _jsxFileName = "C:\\Users\\Aslam\\Local Sites\\wpsitemoniter\\app\\public\\wp-content\\themes\\sitemonitor\\react-src\\src\\views\\Projects.js";
+
 
 
 
@@ -3712,7 +3821,7 @@ const IOSSwitch = Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["withSty
   focusVisible: {}
 }))((_ref) => {
   let classes = _ref.classes,
-      props = Object(_var_vagrant_md_www_sitemap_wp_public_html_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_0__["default"])(_ref, ["classes"]);
+      props = Object(C_Users_Aslam_Local_Sites_wpsitemoniter_app_public_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_objectWithoutProperties__WEBPACK_IMPORTED_MODULE_0__["default"])(_ref, ["classes"]);
 
   return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Switch__WEBPACK_IMPORTED_MODULE_14__["default"], Object.assign({
     focusVisibleClassName: classes.focusVisible,
@@ -3727,7 +3836,7 @@ const IOSSwitch = Object(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["withSty
   }, props, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 65
+      lineNumber: 66
     },
     __self: undefined
   }));
@@ -3910,7 +4019,7 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Compone
       count: 11,
       rowsPerPage: _components_Constants__WEBPACK_IMPORTED_MODULE_4__["ROW_PER_PAGE"],
       data: [['Loading Data...']],
-      isLoading: false,
+      isLoading: true,
       searchText: ''
     };
   }
@@ -3949,7 +4058,7 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Compone
             },
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 260
+              lineNumber: 261
             },
             __self: this
           }, value);
@@ -3991,7 +4100,7 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Compone
             popupId: "demo-popup-popper",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 295
+              lineNumber: 296
             },
             __self: this
           }, popupState => react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(HtmlTooltip, {
@@ -4001,7 +4110,7 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Compone
             title: "",
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 298
+              lineNumber: 299
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Button__WEBPACK_IMPORTED_MODULE_10__["default"], Object.assign({
@@ -4009,13 +4118,13 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Compone
           }, Object(material_ui_popup_state__WEBPACK_IMPORTED_MODULE_11__["bindToggle"])(popupState), {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 302
+              lineNumber: 303
             },
             __self: this
           }), 1 == cron_status ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 304
+              lineNumber: 305
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_FiberManualRecord__WEBPACK_IMPORTED_MODULE_12___default.a, {
@@ -4025,13 +4134,13 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Compone
             },
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 304
+              lineNumber: 305
             },
             __self: this
           }), " ", status_text) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 306
+              lineNumber: 307
             },
             __self: this
           }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_FiberManualRecord__WEBPACK_IMPORTED_MODULE_12___default.a, {
@@ -4041,7 +4150,7 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Compone
             },
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 306
+              lineNumber: 307
             },
             __self: this
           }), " ", status_text))));
@@ -4060,7 +4169,7 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Compone
             return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 334
+                lineNumber: 335
               },
               __self: this
             }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_13__["default"], {
@@ -4070,13 +4179,13 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Compone
                 value: project_id,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 337
+                  lineNumber: 338
                 },
                 __self: this
               }),
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 335
+                lineNumber: 336
               },
               __self: this
             }), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(HtmlTooltip, {
@@ -4087,19 +4196,19 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Compone
                 className: "status_tooltip",
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 347
+                  lineNumber: 348
                 },
                 __self: this
               }, typeof tableMeta.rowData[3] != 'undefined' || null != tableMeta.rowData[3] ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 349
+                  lineNumber: 350
                 },
                 __self: this
               }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 350
+                  lineNumber: 351
                 },
                 __self: this
               }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_FiberManualRecord__WEBPACK_IMPORTED_MODULE_12___default.a, {
@@ -4109,13 +4218,13 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Compone
                 },
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 350
+                  lineNumber: 351
                 },
                 __self: this
               }), "  Sitemap"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 351
+                  lineNumber: 352
                 },
                 __self: this
               }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_FiberManualRecord__WEBPACK_IMPORTED_MODULE_12___default.a, {
@@ -4125,13 +4234,13 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Compone
                 },
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 351
+                  lineNumber: 352
                 },
                 __self: this
               }), "  Admin URL"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 352
+                  lineNumber: 353
                 },
                 __self: this
               }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_FiberManualRecord__WEBPACK_IMPORTED_MODULE_12___default.a, {
@@ -4141,13 +4250,13 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Compone
                 },
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 352
+                  lineNumber: 353
                 },
                 __self: this
               }), "  Robots"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 353
+                  lineNumber: 354
                 },
                 __self: this
               }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_FiberManualRecord__WEBPACK_IMPORTED_MODULE_12___default.a, {
@@ -4157,13 +4266,13 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Compone
                 },
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 353
+                  lineNumber: 354
                 },
                 __self: this
               }), "  SSL"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 354
+                  lineNumber: 355
                 },
                 __self: this
               }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_FiberManualRecord__WEBPACK_IMPORTED_MODULE_12___default.a, {
@@ -4173,26 +4282,26 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Compone
                 },
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 354
+                  lineNumber: 355
                 },
                 __self: this
               }), "  Captcha")) : ""),
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 344
+                lineNumber: 345
               },
               __self: this
             }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_7__["default"], {
               "aria-label": "settings",
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 361
+                lineNumber: 362
               },
               __self: this
             }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_MoreVert__WEBPACK_IMPORTED_MODULE_9___default.a, {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 362
+                lineNumber: 363
               },
               __self: this
             }))));
@@ -4226,14 +4335,14 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Compone
         className: classes.iconContainer,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 390
+          lineNumber: 391
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Tooltip__WEBPACK_IMPORTED_MODULE_6__["default"], {
         title: 'Delete Projects',
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 391
+          lineNumber: 392
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_IconButton__WEBPACK_IMPORTED_MODULE_7__["default"], {
@@ -4241,22 +4350,22 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Compone
         onClick: this.handleDeleteProject.bind(this, selectedRows, displayData),
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 392
+          lineNumber: 393
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_Delete__WEBPACK_IMPORTED_MODULE_8___default.a, {
         className: classes.icon,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 394
+          lineNumber: 395
         },
         __self: this
       })))),
       customToolbar: () => {
-        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_CustomToolbar__WEBPACK_IMPORTED_MODULE_16__["default"], {
+        return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_CustomToolbar__WEBPACK_IMPORTED_MODULE_17__["default"], {
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 401
+            lineNumber: 402
           },
           __self: this
         });
@@ -4290,19 +4399,32 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Compone
         }
       }
     };
-    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(mui_datatables__WEBPACK_IMPORTED_MODULE_3___default.a, {
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 432
+      },
+      __self: this
+    }, this.state.isLoading ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(react_pace_progress__WEBPACK_IMPORTED_MODULE_15___default.a, {
+      color: "#3f51b5",
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 433
+      },
+      __self: this
+    }) : react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(mui_datatables__WEBPACK_IMPORTED_MODULE_3___default.a, {
       title: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["Typography"], {
         component: 'span',
         variant: 'body2',
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 432
+          lineNumber: 435
         },
         __self: this
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 433
+          lineNumber: 436
         },
         __self: this
       }, "Project Reports"), isLoading && react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core__WEBPACK_IMPORTED_MODULE_2__["CircularProgress"], {
@@ -4314,7 +4436,7 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Compone
         },
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 435
+          lineNumber: 438
         },
         __self: this
       })),
@@ -4323,10 +4445,10 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Compone
       options: options,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 430
+        lineNumber: 433
       },
       __self: this
-    });
+    }));
   }
 
 }
@@ -4347,7 +4469,7 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Compone
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return SiteMapReport; });
-/* harmony import */ var _var_vagrant_md_www_sitemap_wp_public_html_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var C_Users_Aslam_Local_Sites_wpsitemoniter_app_public_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
@@ -4358,7 +4480,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_icons_ExpandMore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/icons/ExpandMore */ "./node_modules/@material-ui/icons/ExpandMore.js");
 /* harmony import */ var _material_ui_icons_ExpandMore__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_ExpandMore__WEBPACK_IMPORTED_MODULE_7__);
 
-var _jsxFileName = "/var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes/sitemonitor/react-src/src/views/SiteMapReport.js";
+var _jsxFileName = "C:\\Users\\Aslam\\Local Sites\\wpsitemoniter\\app\\public\\wp-content\\themes\\sitemonitor\\react-src\\src\\views\\SiteMapReport.js";
 
 
 
@@ -4390,7 +4512,7 @@ function SiteMapReport(props) {
   const classes = useStyles();
 
   const _React$useState = react__WEBPACK_IMPORTED_MODULE_1___default.a.useState(false),
-        _React$useState2 = Object(_var_vagrant_md_www_sitemap_wp_public_html_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_React$useState, 2),
+        _React$useState2 = Object(C_Users_Aslam_Local_Sites_wpsitemoniter_app_public_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_React$useState, 2),
         expanded = _React$useState2[0],
         setExpanded = _React$useState2[1];
 
@@ -4511,10 +4633,10 @@ module.exports = __webpack_require__.p + "static/media/logo.3d149670.png";
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes/sitemonitor/react-src/src/index.js */"./src/index.js");
+module.exports = __webpack_require__(/*! C:\Users\Aslam\Local Sites\wpsitemoniter\app\public\wp-content\themes\sitemonitor\react-src\src\index.js */"./src/index.js");
 
 
 /***/ })
 
-},[[0,"runtime-main",1]]]);
+},[[0,"runtime-main",0]]]);
 //# sourceMappingURL=main.chunk.js.map
