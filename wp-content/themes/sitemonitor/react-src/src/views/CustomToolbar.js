@@ -188,6 +188,18 @@ function CustomToolbar() {
                   onChange={handleTextChange}
                   id="sm_domain_url"
                 />
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    name="notify_to"
+                    label="Who Notify"
+                    type="text"
+                    placeholder="hello@multidots.com,contact@multidots.com"
+                    onChange={handleTextChange}
+                    id="notify_to"
+                />
+
 
                 <Button
                   type="submit"

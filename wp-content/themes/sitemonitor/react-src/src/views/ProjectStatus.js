@@ -3,6 +3,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import ProjectDetailSidebar from './ProjectDetailSidebar';
 import SiteMapReport from './SiteMapReport';
+import Pace from "react-pace-progress";
 
 
 class ProjectDetailViews extends React.Component {
@@ -12,6 +13,7 @@ class ProjectDetailViews extends React.Component {
     this.state = {
       sitemapData: [],
       sitemapErrorMsg: "Please wait... Data will be loaded soon.",
+      isLoading: true,
     };
     this.ProjectStatusBox = this.ProjectStatusBox.bind( this );
   }
@@ -20,6 +22,7 @@ class ProjectDetailViews extends React.Component {
     let domain_id = this.props.data.match.params.id;
     let type = this.props.data.match.params.status;
     const token = localStorage.getItem( 'token' );
+    this.setState( { isLoading: true } );
     fetch( `/wp-json/md-site-monitor/project_report?project_id=${domain_id}&type=${type}`, {
         method: 'GET',
         headers: {
@@ -39,11 +42,14 @@ class ProjectDetailViews extends React.Component {
           this.setState( {
             sitemapData: [],
             sitemapErrorMsg: "Sitemap reports not generated yet.",
+            isLoading: false,
+
           } );
         } else {
           this.setState( {
             sitemapData: data,
             sitemapErrorMsg: "",
+            isLoading: false,
           } );
         }
       } );
@@ -60,7 +66,9 @@ class ProjectDetailViews extends React.Component {
   render() {
     return (
       <Container maxWidth="xl">
-        <this.ProjectStatusBox/>
+        {this.state.isLoading ? <Pace color="#3f51b5"/> :
+            <this.ProjectStatusBox/>
+        }
       </Container>
     );
   }

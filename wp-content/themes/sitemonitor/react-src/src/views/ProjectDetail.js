@@ -22,6 +22,10 @@ import CloseIcon from '@material-ui/icons/Close';
 import TextField from '@material-ui/core/TextField';
 import SaveIcon from '@material-ui/icons/Save';
 import Pace from "react-pace-progress";
+import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
+import ExpandMoreIcon from "@material-ui/core/SvgIcon/SvgIcon";
+import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
+import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 
 const useStyles = makeStyles( theme => ({
   spacing: {
@@ -127,6 +131,7 @@ const useStyles = makeStyles( theme => ({
   nested: {
     paddingLeft: theme.spacing( 4 ),
   },
+
 }) );
 
 const IOSSwitch = withStyles( theme => ({
@@ -220,9 +225,13 @@ class ProjectDetailViews extends React.Component {
       }
     )
       .then( response => {
+        console.log(response.status);
         if ( 401 === parseInt( response.status ) ) {
           localStorage.removeItem( 'token' );
           window.location.href = '/sign-in';
+        }
+        if ( 403 === parseInt( response.status ) ) {
+          window.location.href = '/projects';
         }
         return response.json();
       } )
@@ -382,6 +391,16 @@ class ProjectDetailViews extends React.Component {
 
     const classes = useStyles();
     const sitemap_page = '/projects/' + this.state.project_id + '/' + 'sitemap';
+
+
+    const reportData = props.reportData;
+    //const classes = useStyles();
+    const [expanded, setExpanded] = React.useState(false);
+
+    const handleChange = panel => (event, isExpanded) => {
+      setExpanded(isExpanded ? panel : false);
+    };
+
     return (
       <Grid container item xs={12} md={12} spacing={3}>
 
@@ -506,7 +525,7 @@ class ProjectDetailViews extends React.Component {
               </CardContent>
             </Card>
           </Grid>
-          <Grid item xs={12} md={12}>
+          {/*<Grid item xs={12} md={12}>
             <Card className={classes.card}>
               <div className={classes.cardDetails}>
                 <CardContent>
@@ -532,6 +551,69 @@ class ProjectDetailViews extends React.Component {
                 </CardContent>
               </div>
             </Card>
+          </Grid>*/}
+
+          <Grid item xs={12} md={12}>
+
+
+                <ExpansionPanel id={'panel-main-sitemap-bh-header'} expanded={expanded === "sitemap"} onChange={handleChange("sitemap")}>
+                  <ExpansionPanelSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1bh-content"
+                      id={'panel-sitemap-bh-header'}
+                      className="sitemap_Container"
+                  >
+                    <Typography variant="h5" paragraph>
+                      Sitemap History
+
+                      <FormControlLabel className={classes.status_switch}
+                                        control={
+                                          <IOSSwitch
+                                              checked={parseInt(this.state.projectData.sitemap_status)}
+                                              onChange={this.handleChange.bind( this )}
+                                              value="sitemap"
+                                          />
+                                        }
+                      />
+                    </Typography>
+
+                  </ExpansionPanelSummary>
+                  <ExpansionPanelDetails  id={'exp-panel-main-sitemap-bh-header'}>
+                    <Typography variant="subtitle1" paragraph>
+                      <SiteMapReport reportData={this.state.sitemapData} sitemapMsg={this.state.sitemapErrorMsg}/>
+                    </Typography>
+                  </ExpansionPanelDetails>
+                </ExpansionPanel>
+                <ExpansionPanel id={'panel-main-robots-bh-header'} expanded={expanded === "robots"} onChange={handleChange("robots")}>
+                  <ExpansionPanelSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls="panel1bh-content"
+                      id={'panel-robots-bh-header'}
+                      className="sitemap_Container"
+                  >
+                    <Typography>
+                      <Typography variant="h5" paragraph>
+                        Robots History
+
+                        <FormControlLabel className={classes.status_switch}
+                                          control={
+                                            <IOSSwitch
+                                                checked={parseInt(this.state.projectData.sitemap_status)}
+                                                onChange={this.handleChange.bind( this )}
+                                                value="sitemap"
+                                            />
+                                          }
+                        />
+                      </Typography>
+                    </Typography>
+
+                  </ExpansionPanelSummary>
+                  <ExpansionPanelDetails  id={'exp-panel-main-robots-bh-header'}>
+                    <Typography variant="subtitle1" paragraph>
+                      <SiteMapReport reportData={this.state.sitemapData} sitemapMsg={this.state.sitemapErrorMsg}/>
+                    </Typography>
+                  </ExpansionPanelDetails>
+                </ExpansionPanel>
           </Grid>
         </Grid>
 
