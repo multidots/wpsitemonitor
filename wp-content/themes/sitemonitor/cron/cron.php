@@ -415,13 +415,13 @@ switch ($type) {
                                 echo "<pre>";
                                 var_dump($response_code);
                                 var_dump( $dataOfOldScan->seo_status );
-                                if( empty ( $dataOfOldScan->seo_status ) ){
+                                if( isset ( $dataOfOldScan->seo_status ) ){
                                     echo "if";
                                 } else {
                                     echo "else";
                                 }
                                 die();
-                                if (!empty ($response_code)) {
+                                if (! empty ($response_code)) {
 
                                     if (200 === $response_code) {
 
@@ -438,7 +438,7 @@ switch ($type) {
 
                                     } else {
 
-                                        if( empty ( $dataOfOldScan->seo_status ) ){
+                                        if( ! empty ( $dataOfOldScan->seo_status ) ){
                                             //Insert Query
                                             $admin_data = $wpdb->query($wpdb->prepare("INSERT INTO %1s (`domain_id`, `cron_id`, `seo_status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_seo_data_history, $domain_id, $last_insert_cron_id, '0', current_time('mysql', 1)));      //db call ok; no-cache ok
                                             $admin_data_id = $wpdb->insert_id;
