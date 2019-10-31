@@ -414,6 +414,7 @@ switch ($type) {
                                 $response_code = wp_remote_retrieve_response_code($response);
                                 echo "<pre>";
                                 var_dump($response_code);
+                                var_dump( $dataOfOldScan->seo_status );
                                 if( empty ( $dataOfOldScan->seo_status ) ){
                                     echo "if";
                                 } else {
