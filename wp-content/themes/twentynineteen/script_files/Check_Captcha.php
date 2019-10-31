@@ -201,6 +201,8 @@
                         }
                     }
                 }
+            }else {
+                print_r( " No of Scan URL is missing " );
             }
             break;
 
