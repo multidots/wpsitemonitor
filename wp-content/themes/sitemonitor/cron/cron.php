@@ -397,7 +397,8 @@ switch ($type) {
                         $last_insert_cron_id = $wpdb->insert_id;
 
                         $dataOfOldScan =  $wpdb->get_row( $wpdb->prepare( "SELECT seo_status FROM %1s WHERE domain_id = %d ORDER BY id desc LIMIT 0,1",$sm_seo_data_history,$domain_id ) );       //db call ok; no-cache ok
-
+                        echo "<pre>";
+                        var_dump($dataOfOldScan);die();
                         //check first time or not
                         if (empty($domian_list->seo_data)) {
 
