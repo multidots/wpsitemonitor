@@ -294,6 +294,12 @@ switch ($type) {
 
                             $dataOfOldScan =  $wpdb->get_row( $wpdb->prepare( "SELECT status FROM %1s WHERE domain_id = %d ORDER BY id desc LIMIT 0,1",$sm_admin_data_history_tbl_name,$domain_id ) );       //db call ok; no-cache ok
 
+                            echo "<pre>";
+                            var_dump ( $dataOfOldScan );
+                            var_dump( $last_insert_cron_id );
+                            var_dump( $response_code );
+                            die();
+
                             if ( ! empty ( $response_code ) ) {
 
                                 if ( 200 === $response_code ) {
