@@ -397,9 +397,7 @@ switch ($type) {
                         $last_insert_cron_id = $wpdb->insert_id;
 
                         $dataOfOldScan =  $wpdb->get_row( $wpdb->prepare( "SELECT seo_status FROM %1s WHERE domain_id = %d ORDER BY id desc LIMIT 0,1",$sm_seo_data_history,$domain_id ) );       //db call ok; no-cache ok
-                        echo "<pre>";
-                        var_dump($domian_list);
-                        var_dump($dataOfOldScan);
+
                         //check first time or not
                         if (empty($domian_list->seo_data)) {
 
@@ -415,7 +413,13 @@ switch ($type) {
 
                                 $response_code = wp_remote_retrieve_response_code($response);
                                 echo "<pre>";
-                                var_dump($response_code);die();
+                                var_dump($response_code);
+                                if( empty ( $dataOfOldScan->seo_status ) ){
+                                    echo "if";
+                                } else {
+                                    echo "else";
+                                }
+                                die();
                                 if (!empty ($response_code)) {
 
                                     if (200 === $response_code) {
