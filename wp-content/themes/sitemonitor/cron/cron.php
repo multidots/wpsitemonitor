@@ -402,8 +402,6 @@ switch ($type) {
                         var_dump($dataOfOldScan);
                         //check first time or not
                         if (empty($domian_list->seo_data)) {
-                            echo "<pre>";
-                            print_r ("406");die();
 
                             if (isset($last_insert_cron_id)) {
 
@@ -416,7 +414,8 @@ switch ($type) {
                                 $response = wp_remote_get($site_login_url);
 
                                 $response_code = wp_remote_retrieve_response_code($response);
-
+                                echo "<pre>";
+                                var_dump($response_code);die();
                                 if (!empty ($response_code)) {
 
                                     if (200 === $response_code) {
@@ -447,8 +446,6 @@ switch ($type) {
                             }
 
                         } else {
-                            echo "<pre>";
-                            print_r ("451");die();
 
                             $site_url = $domian_list->domain_url;
 
