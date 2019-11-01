@@ -11,7 +11,8 @@ $sql = "CREATE TABLE IF NOT EXISTS {$sm_domain_list} (
 	user_id bigint(20) NOT NULL,
 	project_name varchar(255) NULL,
 	domain_url varchar(255) NOT NULL,
-	sitemap_url varchar(255) NULL ,					
+	sitemap_url varchar(255) NULL ,
+	notify_me varchar(255) NULL,					
 	created_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_date timestamp NULL DEFAULT CURRENT_TIMESTAMP,	
 	PRIMARY KEY  (id)
@@ -69,6 +70,8 @@ $sql = "CREATE TABLE IF NOT EXISTS {$sm_seo_data_history} (
 	domain_id int(20) NOT NULL,
 	cron_id int(20) NOT NULL,
 	seo_status int(11) NOT NULL DEFAULT 0,
+	seo_data longtext NULL,
+	seo_diff_data longtext NULL,
 	created_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_date timestamp NULL DEFAULT CURRENT_TIMESTAMP,	
 	FOREIGN KEY (domain_id) REFERENCES " . $sm_domain_list . "(id) ON DELETE CASCADE,
