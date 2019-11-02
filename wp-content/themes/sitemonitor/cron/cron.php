@@ -916,9 +916,6 @@ switch ($type) {
                 )
             ); //db call ok; no-cache ok
 
-            echo "<pre>";
-            print_r ($domian_lists);die();
-
             if( !empty( $domian_lists ) ) {
 
                 foreach ( $domian_lists as $domian_list ) {
