@@ -713,14 +713,14 @@ switch ($type) {
                         $response_contact = wp_remote_get($site_login_url_contact);
                         $response_code_contact = wp_remote_retrieve_response_code($response_contact);
 
-                            echo "<pre>";
-                            var_dump($response_code);
-                            var_dump($response_code_contact);
-                            var_dump($dataOfOldScan->captcha_status);die();
-
                         if ($response_code === 200) {
 
                             $status = $class_file->url_get_content_html($site_login_url);
+
+                            echo "<pre>";
+                            var_dump($status);
+                            var_dump($dataOfOldScan->captcha_status);die();
+
 
                             if( isset( $dataOfOldScan->captcha_status ) ) {
 
