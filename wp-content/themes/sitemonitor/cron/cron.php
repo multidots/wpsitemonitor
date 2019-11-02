@@ -685,8 +685,7 @@ switch ($type) {
                         )
                     )
                 );  //db call ok; no-cache ok
-                echo "<pre>";
-                print_r ( $domian_lists );die();
+              
 
                 if (!empty ($domian_lists)) {
 
@@ -739,7 +738,8 @@ switch ($type) {
                                 $domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `captcha_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                             //db call ok; no-cache ok
                             }
 
-                        } elseif( $response_code_contact === 200 ) {
+                        }
+                        elseif( $response_code_contact === 200 ) {
 
                             $status = $class_file->url_get_content_html($site_login_url_contact);
 
@@ -764,7 +764,8 @@ switch ($type) {
                                 $domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `captcha_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                             //db call ok; no-cache ok
                             }
 
-                        } else {
+                        }
+                        else {
 
                             $response = wp_remote_get($domain_page_sitemap_url);
                             $response_code = wp_remote_retrieve_response_code($response);
