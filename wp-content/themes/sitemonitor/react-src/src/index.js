@@ -7,6 +7,9 @@ import ProjectsDetail from './components/ProjectDetail';
 import ProjectDetailStatus from './components/ProjectStatus';
 import Pages from './components/Pages';
 
+//import './pase.js';
+//import './pase.css';
+
 //import './views/style.css';
 
 const routing = (

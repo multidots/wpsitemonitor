@@ -13,6 +13,7 @@
     "mui-datatables": "^2.11.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
+    "react-pace-progress": "^2.0.0",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.1.1"
@@ -43,5 +44,5 @@
     ]
   },
   "homepage": "/wp-content/themes/sitemonitor",
-  "browserLaunchTo": "http://sitemap_wp.test"
+  "browserLaunchTo": "http://wpsitemoniter.local/"
 }

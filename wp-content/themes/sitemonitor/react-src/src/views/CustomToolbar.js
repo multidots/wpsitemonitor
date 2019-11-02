@@ -17,6 +17,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import * as Constants from '../components/Constants';
 import CustomizedSnackbars from './Message';
 import { Typography } from '@material-ui/core';
+import Pace from "react-pace-progress";
 
 const defaultToolbarStyles = {
   iconButton: {},
@@ -25,6 +26,10 @@ const defaultToolbarStyles = {
 const useStyles = makeStyles( theme => ({
   appBar: {
     position: 'relative',
+    marginBottom:"10px"
+  },
+  container: {
+    paddingTop:"10px"
   },
   title: {
     marginLeft: theme.spacing( 2 ),
@@ -48,7 +53,8 @@ function CustomToolbar() {
     sm_sitemap_option: true,
     sm_robots_option: true,
     sm_admin_option: true,
-    form_error_msg: ""
+    form_error_msg: "",
+    isLoading: false
   } );
 
   const handleSwitchChange = name => event => {
@@ -91,6 +97,7 @@ function CustomToolbar() {
     }
 
     const token = localStorage.getItem( 'token' );
+    setState( {...state, ['isLoading']: true} );
     fetch( `/wp-json/md-site-monitor/add_project`, {
       method: 'POST',
       body: JSON.stringify( state ),
@@ -128,8 +135,15 @@ function CustomToolbar() {
               </Typography>
             </Toolbar>
           </AppBar>
+          {
+            state.isLoading ?
 
-              <Container maxWidth="sm">
+                <Pace color="#3f51b5"/>
+
+                :
+                ''
+          }
+              <Container className={classes.container} maxWidth="sm">
 
 
                 {
@@ -174,6 +188,18 @@ function CustomToolbar() {
                   onChange={handleTextChange}
                   id="sm_domain_url"
                 />
+                <TextField
+                    variant="outlined"
+                    margin="normal"
+                    fullWidth
+                    name="notify_to"
+                    label="Who Notify"
+                    type="text"
+                    placeholder="hello@multidots.com,contact@multidots.com"
+                    onChange={handleTextChange}
+                    id="notify_to"
+                />
+
 
                 <Button
                   type="submit"
