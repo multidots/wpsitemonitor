@@ -891,12 +891,12 @@ switch ($type) {
                 $wpdb->prepare("
                 SELECT dl.project_name,users.user_email,users.user_login,dl.id
                 FROM   %1s  users 
-                INNER JOIN  %1s dl ON ( dl.user_id = users.id )
-                INNER JOIN  %1s sdh ON ( sdh.domain_id = dl.id )
-                INNER JOIN  %1s adh ON ( adh.domain_id = dl.id )
-                INNER JOIN  %1s rdh ON ( rdh.domain_id = dl.id)
-                INNER JOIN  %1s shh ON ( shh.domain_id = dl.id)
-                INNER JOIN  %1s acch ON ( acch.domain_id = dl.id)
+                LEFT JOIN  %1s dl ON ( dl.user_id = users.id )
+                LEFT JOIN  %1s sdh ON ( sdh.domain_id = dl.id )
+                LEFT JOIN  %1s adh ON ( adh.domain_id = dl.id )
+                LEFT JOIN  %1s rdh ON ( rdh.domain_id = dl.id)
+                LEFT JOIN  %1s shh ON ( shh.domain_id = dl.id)
+                LEFT JOIN  %1s acch ON ( acch.domain_id = dl.id)
                 WHERE sdh.updated_date > DATE(NOW()) - INTERVAL %d DAY 
                     OR adh.updated_date > DATE(NOW()) - INTERVAL %d DAY
                     OR rdh.updated_date > DATE(NOW()) - INTERVAL %d DAY
