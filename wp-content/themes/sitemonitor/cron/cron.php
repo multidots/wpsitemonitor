@@ -891,7 +891,7 @@
 
                 $domian_lists = $wpdb->get_results(
                     $wpdb->prepare("
-                    SELECT dl.project_name,users.user_email,users.user_login,dl.id
+                    SELECT dl.project_name,users.user_email,users.user_login,dl.id,dl.notify_to
                     FROM   %1s  users 
                     LEFT JOIN  %1s dl ON ( dl.user_id = users.id )
                     LEFT JOIN  %1s sdh ON ( sdh.domain_id = dl.id )
