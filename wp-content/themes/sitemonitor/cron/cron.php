@@ -725,11 +725,17 @@ switch ($type) {
                             if( isset( $dataOfOldScan->captcha_status ) ) {
 
                                 if ( $dataOfOldScan->captcha_status !== $status ) {
+                                    echo "<pre>";
+                                    print_r ("if");die();
 
                                     //Insert Query
                                     $admin_data    = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `captcha_status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_site_captcha_check_history, $domain_id, $last_insert_cron_id, $status, current_time( 'mysql', 1 ) ) );       //db call ok; no-cache ok
                                     $admin_data_id = $wpdb->insert_id;
+                                } else {
+                                    echo "<pre>";
+                                    print_r ("else");die();
                                 }
+                                die("error");
                                 $cron_tbl_update           = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, 1, current_time( 'mysql', 1 ), $last_insert_cron_id ) );       //db call ok; no-cache ok
                                 $domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `captcha_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                             //db call ok; no-cache ok
 
