@@ -498,18 +498,16 @@
             break;*/
     }
 
-
-    die();
             $domian_lists = $wpdb->get_results(
                 $wpdb->prepare("
                 SELECT dl.id,dl.project_name,users.user_email,users.user_login
                 FROM   %1s  users 
-                INNER JOIN  %1s dl ON ( dl.user_id = users.id )
-                INNER JOIN  %1s sdh ON ( sdh.domain_id = dl.id )
-                INNER JOIN  %1s adh ON ( adh.domain_id = dl.id )
-                INNER JOIN  %1s rdh ON ( rdh.domain_id = dl.id)
-                INNER JOIN  %1s shh ON ( shh.domain_id = dl.id)
-                INNER JOIN  %1s acch ON ( acch.domain_id = dl.id)
+                LEFT JOIN  %1s dl ON ( dl.user_id = users.id )
+                LEFT JOIN  %1s sdh ON ( sdh.domain_id = dl.id )
+                LEFT JOIN  %1s adh ON ( adh.domain_id = dl.id )
+                LEFT JOIN  %1s rdh ON ( rdh.domain_id = dl.id)
+                LEFT JOIN  %1s shh ON ( shh.domain_id = dl.id)
+                LEFT JOIN  %1s acch ON ( acch.domain_id = dl.id)
                 WHERE sdh.updated_date > DATE(NOW()) - INTERVAL %d DAY 
                     OR adh.updated_date > DATE(NOW()) - INTERVAL %d DAY
                     OR rdh.updated_date > DATE(NOW()) - INTERVAL %d DAY
@@ -524,14 +522,12 @@
                         $sm_seo_data_history,
                         $sm_site_https_history,
                         $sm_site_captcha_check_history,
-                        3, 3, 3, 3, 3
+                        1,1,1,1,1
                     )
                 )
             ); //db call ok; no-cache ok
-            echo "<pre>";
-            print_r($domian_lists);
 
-            $finalArray = [];
+           /* $finalArray = [];
 
             foreach ($domian_lists as $arr) {
                 $project = $arr->user_email;
@@ -539,10 +535,7 @@
                 foreach ($arr as $a) {
                     $finalArray[$project][] = $a;
                 }
-            }
-
-            print_r($finalArray);
-            die();
+            }*/
 
             if (!empty($domian_lists)) {
 
@@ -555,10 +548,12 @@
                     $user_login = isset($domian_list->user_login) ? $domian_list->user_login : "";
                     $site_url = $site_project_url . $domain_id;
 
-//            $body = add_site_email_template( $domain_url );
+                    $multiple_recipients = array( 'recipient1@example.com', 'recipient2@foo.example.com' );
+
+                    //$body = add_site_email_template( $domain_url );
                     $body = "Body";
                     $headers = array('Content-Type: text/html; charset=UTF-8');
-                    wp_mail($user_email, 'your site cron run completed.', $body, $headers);
+                    wp_mail($multiple_recipients, 'your site cron run completed.', $body, $headers);
                 }
             } else {
                 print_r(" No Record Found ");

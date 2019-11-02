@@ -884,8 +884,6 @@ switch ($type) {
         }
         break;
 
-        die();
-
     case 'result':
         if( isset( $no_of_records ) ) {
 
@@ -917,6 +915,9 @@ switch ($type) {
                     )
                 )
             ); //db call ok; no-cache ok
+
+            echo "<pre>";
+            print_r ($domian_lists);die();
 
             if( !empty( $domian_lists ) ) {
 
