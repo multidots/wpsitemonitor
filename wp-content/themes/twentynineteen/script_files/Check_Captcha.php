@@ -452,55 +452,11 @@
             break;
 
                             die();
-
-                            /*if (isset($last_insert_cron_id)) {
-
-                                $site_url = $domian_list->domain_url;
-
-                                $site_url = rtrim($site_url, "/") . '/';
-
-                                $site_login_url = $site_url . "robots.txt";
-
-                                $response = wp_remote_get($site_login_url);
-
-                                $response_code = wp_remote_retrieve_response_code($response);
-
-                                if (!empty ($response_code)) {
-
-                                    if (200 === $response_code) {
-
-                                        //Insert Query
-                                        $admin_data = $wpdb->query($wpdb->prepare("INSERT INTO %1s (`domain_id`, `cron_id`, `seo_status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_seo_data_history, $domain_id, $last_insert_cron_id, '1', current_time('mysql', 1)));       ///db call ok; no-cache ok
-                                        $admin_data_id = $wpdb->insert_id;
-                                        if (isset($admin_data_id)) {
-                                            $cron_tbl_update = $wpdb->query($wpdb->prepare("UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time('mysql', 1), $last_insert_cron_id));       //db call ok; no-cache ok
-                                            $domain_scan_status_update = $wpdb->query($wpdb->prepare("UPDATE %1s SET `robots_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time('mysql', 1), $domain_id));                                               //db call ok; no-cache ok
-                                        }
-
-                                    } else {
-
-                                        //Insert Query
-                                        $admin_data = $wpdb->query($wpdb->prepare("INSERT INTO %1s (`domain_id`, `cron_id`, `seo_status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_seo_data_history, $domain_id, $last_insert_cron_id, '0', current_time('mysql', 1)));      //db call ok; no-cache ok
-                                        $admin_data_id = $wpdb->insert_id;
-                                        if (isset($admin_data_id)) {
-                                            $cron_tbl_update = $wpdb->query($wpdb->prepare("UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, '1', current_time('mysql', 1), $last_insert_cron_id));       //db call ok; no-cache ok
-                                            $domain_scan_status_update = $wpdb->query($wpdb->prepare("UPDATE %1s SET `robots_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time('mysql', 1), $domain_id));                                                //db call ok; no-cache ok
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            } else {
-                print_r(" No of Scan URL is missing ");
-            }
-            break;*/
     }
 
             $domian_lists = $wpdb->get_results(
                 $wpdb->prepare("
-                SELECT dl.id,dl.project_name,users.user_email,users.user_login
+                SELECT dl.id,dl.project_name,users.user_email,users.user_login,dl.notify_to
                 FROM   %1s  users 
                 LEFT JOIN  %1s dl ON ( dl.user_id = users.id )
                 LEFT JOIN  %1s sdh ON ( sdh.domain_id = dl.id )
@@ -527,6 +483,9 @@
                 )
             ); //db call ok; no-cache ok
 
+            echo "<pre>";
+            print_r ( $domian_lists );die();
+
            /* $finalArray = [];
 
             foreach ($domian_lists as $arr) {
@@ -547,13 +506,12 @@
                     $user_email = isset($domian_list->user_email) ? $domian_list->user_email : "";
                     $user_login = isset($domian_list->user_login) ? $domian_list->user_login : "";
                     $site_url = $site_project_url . $domain_id;
-
-                    $multiple_recipients = array( 'recipient1@example.com', 'recipient2@foo.example.com' );
+                    $notify_to = isset($domian_list->notify_to) ? $domian_list->notify_to : $user_email;
 
                     //$body = add_site_email_template( $domain_url );
                     $body = "Body";
                     $headers = array('Content-Type: text/html; charset=UTF-8');
-                    wp_mail($multiple_recipients, 'your site cron run completed.', $body, $headers);
+                    wp_mail($notify_to, 'your site cron run completed.', $body, $headers);
                 }
             } else {
                 print_r(" No Record Found ");

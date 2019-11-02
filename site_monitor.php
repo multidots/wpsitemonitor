@@ -12,7 +12,7 @@ $sql = "CREATE TABLE IF NOT EXISTS {$sm_domain_list} (
 	project_name varchar(255) NULL,
 	domain_url varchar(255) NOT NULL,
 	sitemap_url varchar(255) NULL ,
-	notify_me varchar(255) NULL,					
+	notify_to varchar(255) NULL,					
 	created_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_date timestamp NULL DEFAULT CURRENT_TIMESTAMP,	
 	PRIMARY KEY  (id)

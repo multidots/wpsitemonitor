@@ -42,25 +42,25 @@ switch ($type) {
                 $domian_lists = $wpdb->get_results(
                     $wpdb->prepare(
                         "
-                            SELECT dl.*, dh.cron_id, dh.sitemap_xml_data, dh.sitemap_diff_data,dc.*,dl.id
-                            FROM   %1s dl
-                            LEFT JOIN 
-                                    (
-                                        SELECT * 
-                                        FROM   %1s dh
-                                        WHERE  id 
-                                        IN (
-                                            SELECT Max(id) 
+                                SELECT dl.*, dh.cron_id, dh.sitemap_xml_data, dh.sitemap_diff_data,dc.*,dl.id
+                                FROM   %1s dl
+                                LEFT JOIN 
+                                        (
+                                            SELECT * 
                                             FROM   %1s dh
-                                            GROUP  BY domain_id
-                                            )
-                                    )dh 
-                            ON dl.id = dh.domain_id
-                            LEFT JOIN %1s dc ON dl.id = dc.domain_id
-                            WHERE dc.sitemap_scan_date <= DATE(NOW()) - INTERVAL %d DAY     
-                            AND dc.sitemap_status = %d
-                            ORDER BY dc.sitemap_scan_date ASC
-                            LIMIT 0,%d",
+                                            WHERE  id 
+                                            IN (
+                                                SELECT Max(id) 
+                                                FROM   %1s dh
+                                                GROUP  BY domain_id
+                                                )
+                                        )dh 
+                                ON dl.id = dh.domain_id
+                                LEFT JOIN %1s dc ON dl.id = dc.domain_id
+                                WHERE dc.sitemap_scan_date <= DATE(NOW()) - INTERVAL %d DAY     
+                                AND dc.sitemap_status = %d
+                                ORDER BY dc.sitemap_scan_date ASC
+                                LIMIT 0,%d",
                         array(
                             $domain_tbl_name,
                             $sm_sitemap_data_history_tbl_name,
@@ -238,25 +238,25 @@ switch ($type) {
                 $domian_lists = $wpdb->get_results(
                     $wpdb->prepare(
                         "
-                                        SELECT dl.*, dh.cron_id,dh.status,dc.updated_date,dc.*,dl.id
-                                        FROM   %1s dl 
-                                        LEFT JOIN 
-                                                (
-                                                    SELECT dh.* 
-                                                    FROM   %1s dh
-                                                    WHERE  id 
-                                                    IN (
-                                                        SELECT Max(id) 
-                                                        FROM   %1s dh 
-                                                        GROUP  BY domain_id
-                                                        )
-                                                )dh 
-                                        ON dl.id = dh.domain_id
-                                        LEFT JOIN %1s dc ON dl.id = dc.domain_id
-                                        WHERE dc.adminurl_scan_date <= DATE(NOW()) - INTERVAL %d DAY     
-                                        AND dc.admin_status = %d
-                                        ORDER BY dc.adminurl_scan_date ASC
-                                        LIMIT 0,%d",
+                                            SELECT dl.*, dh.cron_id,dh.status,dc.updated_date,dc.*,dl.id
+                                            FROM   %1s dl 
+                                            LEFT JOIN 
+                                                    (
+                                                        SELECT dh.* 
+                                                        FROM   %1s dh
+                                                        WHERE  id 
+                                                        IN (
+                                                            SELECT Max(id) 
+                                                            FROM   %1s dh 
+                                                            GROUP  BY domain_id
+                                                            )
+                                                    )dh 
+                                            ON dl.id = dh.domain_id
+                                            LEFT JOIN %1s dc ON dl.id = dc.domain_id
+                                            WHERE dc.adminurl_scan_date <= DATE(NOW()) - INTERVAL %d DAY     
+                                            AND dc.admin_status = %d
+                                            ORDER BY dc.adminurl_scan_date ASC
+                                            LIMIT 0,%d",
                         array(
                             $domain_tbl_name,
                             $sm_admin_data_history_tbl_name,
@@ -358,25 +358,25 @@ switch ($type) {
                 $domian_lists = $wpdb->get_results(
                     $wpdb->prepare(
                         "
-                                    SELECT dl.*, dh.*,dh.cron_id,dh.seo_status,dc.updated_date,dc.*,dl.id
-                                    FROM   {$wpdb->prefix}sm_domain_list dl 
-                                    LEFT JOIN 
-                                            (
-                                                SELECT dh.* 
-                                                FROM   {$wpdb->prefix}sm_seo_data_history dh
-                                                WHERE  id 
-                                                IN (
-                                                    SELECT Max(id) 
-                                                    FROM   {$wpdb->prefix}sm_seo_data_history dh 
-                                                    GROUP  BY domain_id
-                                                    )
-                                            )dh 
-                                    ON dl.id = dh.domain_id
-                                    LEFT JOIN {$wpdb->prefix}sm_domain_scan_status dc ON dl.id = dc.domain_id
-                                    WHERE dc.robots_scan_date <= DATE(NOW()) - INTERVAL %d DAY     
-                                    AND dc.roborts_status = %s
-                                    ORDER BY dc.robots_scan_date ASC
-                                    LIMIT 0,%d",
+                                        SELECT dl.*, dh.*,dh.cron_id,dh.seo_status,dc.updated_date,dc.*,dl.id
+                                        FROM   {$wpdb->prefix}sm_domain_list dl 
+                                        LEFT JOIN 
+                                                (
+                                                    SELECT dh.* 
+                                                    FROM   {$wpdb->prefix}sm_seo_data_history dh
+                                                    WHERE  id 
+                                                    IN (
+                                                        SELECT Max(id) 
+                                                        FROM   {$wpdb->prefix}sm_seo_data_history dh 
+                                                        GROUP  BY domain_id
+                                                        )
+                                                )dh 
+                                        ON dl.id = dh.domain_id
+                                        LEFT JOIN {$wpdb->prefix}sm_domain_scan_status dc ON dl.id = dc.domain_id
+                                        WHERE dc.robots_scan_date <= DATE(NOW()) - INTERVAL %d DAY     
+                                        AND dc.roborts_status = %s
+                                        ORDER BY dc.robots_scan_date ASC
+                                        LIMIT 0,%d",
                         array(
                             $cron_days,
                             1,
@@ -532,25 +532,25 @@ switch ($type) {
                 $domian_lists = $wpdb->get_results(
                     $wpdb->prepare(
                         "
-                                SELECT dl.*, shh.*,dl.id
-                                FROM   %1s dl 
-                                LEFT JOIN 
-                                        (
-                                            SELECT shh.* 
-                                            FROM   %1s shh
-                                            WHERE  id 
-                                            IN (
-                                                SELECT Max(id) 
-                                                FROM   %1s shh 
-                                                GROUP  BY domain_id
-                                                )
-                                        )shh 
-                                ON dl.id = shh.domain_id
-                                LEFT JOIN %1s dc ON dl.id = dc.domain_id
-                                WHERE dc.https_scan_date <= DATE(NOW()) - INTERVAL %d DAY     
-                                AND dc.https_status = %d
-                                ORDER BY dc.https_scan_date ASC
-                                LIMIT 0,%d",
+                                    SELECT dl.*, shh.*,dl.id
+                                    FROM   %1s dl 
+                                    LEFT JOIN 
+                                            (
+                                                SELECT shh.* 
+                                                FROM   %1s shh
+                                                WHERE  id 
+                                                IN (
+                                                    SELECT Max(id) 
+                                                    FROM   %1s shh 
+                                                    GROUP  BY domain_id
+                                                    )
+                                            )shh 
+                                    ON dl.id = shh.domain_id
+                                    LEFT JOIN %1s dc ON dl.id = dc.domain_id
+                                    WHERE dc.https_scan_date <= DATE(NOW()) - INTERVAL %d DAY     
+                                    AND dc.https_status = %d
+                                    ORDER BY dc.https_scan_date ASC
+                                    LIMIT 0,%d",
                         array(
                             $domain_tbl_name,
                             $sm_site_https_history,
@@ -655,25 +655,25 @@ switch ($type) {
 
                 $domian_lists = $wpdb->get_results(
                     $wpdb->prepare("
-                                SELECT dl.*, cch.*,dl.id
-                                FROM   %1s dl 
-                                LEFT JOIN 
-                                        (
-                                            SELECT cch.* 
-                                            FROM   %1s cch
-                                            WHERE  id 
-                                            IN (
-                                                SELECT Max(id) 
-                                                FROM  %1s  cch 
-                                                GROUP  BY domain_id
-                                                )
-                                        )cch 
-                                ON dl.id = cch.domain_id
-                                LEFT JOIN %1s dc ON dl.id = dc.domain_id
-                                WHERE dc.captcha_scan_date <= DATE(NOW()) - INTERVAL %d DAY   
-                                AND dc.captcha_status = %d
-                                ORDER BY dc.captcha_scan_date ASC
-                                LIMIT 0,%d",
+                                    SELECT dl.*, cch.*,dl.id
+                                    FROM   %1s dl 
+                                    LEFT JOIN 
+                                            (
+                                                SELECT cch.* 
+                                                FROM   %1s cch
+                                                WHERE  id 
+                                                IN (
+                                                    SELECT Max(id) 
+                                                    FROM  %1s  cch 
+                                                    GROUP  BY domain_id
+                                                    )
+                                            )cch 
+                                    ON dl.id = cch.domain_id
+                                    LEFT JOIN %1s dc ON dl.id = dc.domain_id
+                                    WHERE dc.captcha_scan_date <= DATE(NOW()) - INTERVAL %d DAY   
+                                    AND dc.captcha_status = %d
+                                    ORDER BY dc.captcha_scan_date ASC
+                                    LIMIT 0,%d",
                         array(
                             $domain_tbl_name,
                             $sm_site_captcha_check_history,
@@ -685,6 +685,7 @@ switch ($type) {
                         )
                     )
                 );  //db call ok; no-cache ok
+
 
                 if (!empty ($domian_lists)) {
 
@@ -718,8 +719,7 @@ switch ($type) {
 
                             if( isset( $dataOfOldScan->captcha_status ) ) {
 
-                                if ( $dataOfOldScan->captcha_status !== $status ) {
-
+                                if ( $dataOfOldScan->captcha_status != $status ) {
                                     //Insert Query
                                     $admin_data    = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `captcha_status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_site_captcha_check_history, $domain_id, $last_insert_cron_id, $status, current_time( 'mysql', 1 ) ) );       //db call ok; no-cache ok
                                     $admin_data_id = $wpdb->insert_id;
@@ -737,13 +737,14 @@ switch ($type) {
                                 $domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `captcha_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                             //db call ok; no-cache ok
                             }
 
-                        } elseif( $response_code_contact === 200 ) {
+                        }
+                        elseif( $response_code_contact === 200 ) {
 
                             $status = $class_file->url_get_content_html($site_login_url_contact);
 
                             if( isset( $dataOfOldScan->captcha_status ) ) {
 
-                                if ( $dataOfOldScan->captcha_status !== $status ) {
+                                if ( $dataOfOldScan->captcha_status != $status ) {
 
                                     //Insert Query
                                     $admin_data    = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `captcha_status`, `updated_date`) VALUES (%d, %s, %s, %s)", $sm_site_captcha_check_history, $domain_id, $last_insert_cron_id, $status, current_time( 'mysql', 1 ) ) );       //db call ok; no-cache ok
@@ -762,7 +763,8 @@ switch ($type) {
                                 $domain_scan_status_update = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `captcha_scan_date` = %s WHERE domain_id = %d", $sm_domain_scan_status, current_time( 'mysql', 1 ), $domain_id ) );                                             //db call ok; no-cache ok
                             }
 
-                        } else {
+                        }
+                        else {
 
                             $response = wp_remote_get($domain_page_sitemap_url);
                             $response_code = wp_remote_retrieve_response_code($response);
@@ -827,7 +829,7 @@ switch ($type) {
 
                                     if( isset( $dataOfOldScan->captcha_status ) ) {
 
-                                        if ( $dataOfOldScan->captcha_status !== '0' ) {
+                                        if ( $dataOfOldScan->captcha_status != '0' ) {
 
                                             //Insert Query
                                             $admin_data    = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `captcha_status`, `log`, `updated_date`) VALUES (%d, %s, %s, %s, %s)", $sm_site_captcha_check_history, $domain_id, $last_insert_cron_id, '0', $log, current_time( 'mysql', 1 ) ) );       //db call ok; no-cache ok
@@ -853,7 +855,7 @@ switch ($type) {
 
                                 if( isset( $dataOfOldScan->captcha_status ) ) {
 
-                                    if ( $dataOfOldScan->captcha_status !== '0' ) {
+                                    if ( $dataOfOldScan->captcha_status != '0' ) {
 
                                         //Insert Query
                                         $admin_data    = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `captcha_status`, `log`, `updated_date`) VALUES (%d, %s, %s, %s, %s)", $sm_site_captcha_check_history, $domain_id, $last_insert_cron_id, '0', $log, current_time( 'mysql', 1 ) ) );       //db call ok; no-cache ok
@@ -889,20 +891,20 @@ switch ($type) {
 
             $domian_lists = $wpdb->get_results(
                 $wpdb->prepare("
-                SELECT dl.project_name,users.user_email,users.user_login,dl.id
-                FROM   %1s  users 
-                LEFT JOIN  %1s dl ON ( dl.user_id = users.id )
-                LEFT JOIN  %1s sdh ON ( sdh.domain_id = dl.id )
-                LEFT JOIN  %1s adh ON ( adh.domain_id = dl.id )
-                LEFT JOIN  %1s rdh ON ( rdh.domain_id = dl.id)
-                LEFT JOIN  %1s shh ON ( shh.domain_id = dl.id)
-                LEFT JOIN  %1s acch ON ( acch.domain_id = dl.id)
-                WHERE sdh.updated_date > DATE(NOW()) - INTERVAL %d DAY 
-                    OR adh.updated_date > DATE(NOW()) - INTERVAL %d DAY
-                    OR rdh.updated_date > DATE(NOW()) - INTERVAL %d DAY
-                    OR shh.updated_date > DATE(NOW()) - INTERVAL %d DAY
-                    OR acch.updated_date > DATE(NOW()) - INTERVAL %d DAY
-                GROUP BY dl.id",
+                    SELECT dl.project_name,users.user_email,users.user_login,dl.id
+                    FROM   %1s  users 
+                    LEFT JOIN  %1s dl ON ( dl.user_id = users.id )
+                    LEFT JOIN  %1s sdh ON ( sdh.domain_id = dl.id )
+                    LEFT JOIN  %1s adh ON ( adh.domain_id = dl.id )
+                    LEFT JOIN  %1s rdh ON ( rdh.domain_id = dl.id)
+                    LEFT JOIN  %1s shh ON ( shh.domain_id = dl.id)
+                    LEFT JOIN  %1s acch ON ( acch.domain_id = dl.id)
+                    WHERE sdh.updated_date > DATE(NOW()) - INTERVAL %d DAY 
+                        OR adh.updated_date > DATE(NOW()) - INTERVAL %d DAY
+                        OR rdh.updated_date > DATE(NOW()) - INTERVAL %d DAY
+                        OR shh.updated_date > DATE(NOW()) - INTERVAL %d DAY
+                        OR acch.updated_date > DATE(NOW()) - INTERVAL %d DAY
+                    GROUP BY dl.id",
                     array(
                         $users,
                         $domain_tbl_name,
