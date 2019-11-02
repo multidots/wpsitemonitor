@@ -685,7 +685,7 @@ switch ($type) {
                         )
                     )
                 );  //db call ok; no-cache ok
-              
+
 
                 if (!empty ($domian_lists)) {
 
@@ -712,6 +712,11 @@ switch ($type) {
 
                         $response_contact = wp_remote_get($site_login_url_contact);
                         $response_code_contact = wp_remote_retrieve_response_code($response_contact);
+
+                            echo "<pre>";
+                            var_dump($response_code);
+                            var_dump($response_code_contact);
+                            var_dump($dataOfOldScan->captcha_status);die();
 
                         if ($response_code === 200) {
 
