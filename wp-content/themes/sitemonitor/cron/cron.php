@@ -719,7 +719,7 @@ switch ($type) {
 
                             if( isset( $dataOfOldScan->captcha_status ) ) {
 
-                                if ( $dataOfOldScan->captcha_status !== $status ) {
+                                if ( $dataOfOldScan->captcha_status != $status ) {
                                     echo "<pre>";
                                     print_r ("if");die();
 
