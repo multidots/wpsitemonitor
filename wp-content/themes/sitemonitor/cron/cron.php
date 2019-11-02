@@ -717,11 +717,6 @@ switch ($type) {
 
                             $status = $class_file->url_get_content_html($site_login_url);
 
-                            echo "<pre>";
-                            var_dump($status);
-                            var_dump($dataOfOldScan->captcha_status);die();
-
-
                             if( isset( $dataOfOldScan->captcha_status ) ) {
 
                                 if ( $dataOfOldScan->captcha_status !== $status ) {
