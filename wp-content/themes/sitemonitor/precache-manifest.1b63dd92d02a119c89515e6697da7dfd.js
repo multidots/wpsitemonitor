@@ -1,14 +1,14 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "110ce227922f59b67d15e83ed767ffe4",
+    "revision": "4940d1a2a9480163aa72a5d7661f12ed",
     "url": "/wp-content/themes/sitemonitor/index.php"
   },
   {
-    "revision": "831664c9f812aa22fd62",
+    "revision": "c1ed3553f90ce9b9db7e",
     "url": "/wp-content/themes/sitemonitor/static/css/main.chunk.css"
   },
   {
-    "revision": "5cba0e0c117f7469da8e",
+    "revision": "cebda361e6ac78708401",
     "url": "/wp-content/themes/sitemonitor/static/js/2.chunk.js"
   },
   {
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/wp-content/themes/sitemonitor/static/js/bundle.js"
   },
   {
-    "revision": "831664c9f812aa22fd62",
+    "revision": "c1ed3553f90ce9b9db7e",
     "url": "/wp-content/themes/sitemonitor/static/js/main.chunk.js"
   },
   {

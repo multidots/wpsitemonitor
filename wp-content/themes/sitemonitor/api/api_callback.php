@@ -178,7 +178,7 @@ function sm_projects_status( $request ) {
 function sm_add_project( $request ) {
 
 	$auth = validate_token();
-	sleep(1);
+    sleep(1);
 	if ( ! isset( $auth['status'] ) || empty( $auth['status'] ) || false === $auth['status'] ) {
 		return new WP_Error( 'invalid_user', esc_html__( 'User ID not found', 'md_site_monitor' ), array( 'status' => 403 ) );
 	}
@@ -272,7 +272,7 @@ function sm_add_project( $request ) {
 function sm_project_update( $request ) {
 
 	$auth = validate_token();
-	sleep(1);
+    sleep(1);
 	if ( ! isset( $auth['status'] ) || empty( $auth['status'] ) || false === $auth['status'] ) {
 		return new WP_Error( 'invalid_user', esc_html__( 'User ID not found', 'md_site_monitor' ), array( 'status' => 403 ) );
 	}
@@ -332,7 +332,7 @@ function sm_get_domains( $request ) {
 
 	global $wpdb;
 	$auth = validate_token();
-	sleep(1);
+    sleep(1);
 	if ( ! isset( $auth['status'] ) || empty( $auth['status'] ) || false === $auth['status'] ) {
 		return new WP_Error( 'invalid_user', esc_html__( 'User ID not found', 'md_site_monitor' ), array( 'status' => 403 ) );
 	}
@@ -419,7 +419,7 @@ function sm_get_domains( $request ) {
 function sm_project_report( $request ) {
 
 	$auth = validate_token();
-	sleep(1);
+    sleep(1);
 	global $wpdb;
 
 	if ( ! isset( $auth['status'] ) || empty( $auth['status'] ) || false === $auth['status'] ) {
@@ -428,7 +428,7 @@ function sm_project_report( $request ) {
 
 	$project_id = filter_input( INPUT_GET, 'project_id', FILTER_SANITIZE_NUMBER_INT );
 	$type       = filter_input( INPUT_GET, 'type', FILTER_SANITIZE_STRING );
-	$sm_user_id = $auth['uid'];
+    $sm_user_id = $auth['uid'];
 
 	$api_responce = array();
 
@@ -445,9 +445,9 @@ function sm_project_report( $request ) {
 		case 'all';
 			$api_responce = get_all_type_report( $project_id, $sm_user_id);
 
-			if(empty($api_responce['project_details'])){
-				return new WP_Error( 'invalid_project', esc_html__( 'Domain not found', 'md_site_monitor' ), array( 'status' => 403 ) );
-			}
+            if(empty($api_responce['project_details'])){
+                return new WP_Error( 'invalid_project', esc_html__( 'Domain not found', 'md_site_monitor' ), array( 'status' => 403 ) );
+            }
 			break;
 	}
 
@@ -476,8 +476,8 @@ function sitemap_report( $project_id , $limit = 7) {
 					ORDER BY id ASC LIMIT 0, %d", //AND created_date >= DATE(NOW()) - INTERVAL 30 DAY
 		$sm_sitemap_data_history,
 		$project_id,
-		$limit
-	), ARRAY_A );
+        $limit
+        ), ARRAY_A );
 
 	$sitemap_filter_data = array();
 
@@ -536,7 +536,7 @@ function robots_report( $project_id ) {
 					SELECT * FROM %1s 
 					WHERE domain_id = %d AND created_date >= DATE(NOW()) - INTERVAL 30 DAY
 					ORDER BY id ASC",
-		$sm_seo_data_history,
+        $sm_seo_data_history,
 		$project_id ), ARRAY_A );
 
 	$sitemap_filter_data = array();
@@ -622,7 +622,7 @@ function get_all_type_report( $project_id, $sm_user_id ) {
 		$domain_table_name,
 		$domain_scan_status,
 		$project_id,
-		$sm_user_id
+        $sm_user_id
 	), ARRAY_A );
 
 	$sitemap_filter_data['project_details'] = $project_details;
