@@ -1,7 +1,7 @@
 <?php
 
 function add_site_email_template($string){
-	$email_template = "<div style=\"font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;box-sizing:border-box;background-color:#f6f6f6;color:#364349;height:100%;line-height:1.4;margin:0;width:100%!important;word-break:break-word\"> 
+    $email_template = "<div style=\"font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;box-sizing:border-box;background-color:#f6f6f6;color:#364349;height:100%;line-height:1.4;margin:0;width:100%!important;word-break:break-word\"> 
     <table width=\"100%\" cellpadding=\"0\" cellspacing=\"0\" style=\"font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;box-sizing:border-box;background-color:#06214a;margin:0 auto;padding:0;width:100%;max-width:600px\">
         <tbody>
             <tr> 
@@ -90,7 +90,7 @@ function add_site_email_template($string){
 </div>
 ";
 
-	return $email_template;
+    return $email_template;
 }
 
 function cron_completed_email_template($string){
