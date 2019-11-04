@@ -178,7 +178,6 @@ function sm_projects_status( $request ) {
 function sm_add_project( $request ) {
 
 	$auth = validate_token();
-    sleep(1);
 	if ( ! isset( $auth['status'] ) || empty( $auth['status'] ) || false === $auth['status'] ) {
 		return new WP_Error( 'invalid_user', esc_html__( 'User ID not found', 'md_site_monitor' ), array( 'status' => 403 ) );
 	}
@@ -272,7 +271,6 @@ function sm_add_project( $request ) {
 function sm_project_update( $request ) {
 
 	$auth = validate_token();
-    sleep(1);
 	if ( ! isset( $auth['status'] ) || empty( $auth['status'] ) || false === $auth['status'] ) {
 		return new WP_Error( 'invalid_user', esc_html__( 'User ID not found', 'md_site_monitor' ), array( 'status' => 403 ) );
 	}
@@ -332,7 +330,6 @@ function sm_get_domains( $request ) {
 
 	global $wpdb;
 	$auth = validate_token();
-    sleep(1);
 	if ( ! isset( $auth['status'] ) || empty( $auth['status'] ) || false === $auth['status'] ) {
 		return new WP_Error( 'invalid_user', esc_html__( 'User ID not found', 'md_site_monitor' ), array( 'status' => 403 ) );
 	}
@@ -419,7 +416,6 @@ function sm_get_domains( $request ) {
 function sm_project_report( $request ) {
 
 	$auth = validate_token();
-    sleep(1);
 	global $wpdb;
 
 	if ( ! isset( $auth['status'] ) || empty( $auth['status'] ) || false === $auth['status'] ) {
@@ -547,28 +543,28 @@ function robots_report( $project_id ) {
 			$sitemap_filter_data[ $key ]['id']                = esc_html( $data['id'] );
 			$sitemap_filter_data[ $key ]['domain_id']         = esc_html( $data['domain_id'] );
 			$sitemap_filter_data[ $key ]['cron_id']           = esc_html( $data['cron_id'] );
-			$sitemap_filter_data[ $key ]['sitemap_xml_data']  = ! empty( $data['sitemap_xml_data'] ) ? json_decode( $data['sitemap_xml_data'] ) : array();
-			$sitemap_filter_data[ $key ]['sitemap_diff_data'] = ! empty( $data['sitemap_diff_data'] ) ? json_decode( $data['sitemap_diff_data'] ) : array();
+			$sitemap_filter_data[ $key ]['robots_data_xml']  = ! empty( $data['seo_data'] ) ? json_decode( $data['seo_data'] ) : array();
+			$sitemap_filter_data[ $key ]['robots_data_diff'] = ! empty( $data['seo_diff_data'] ) ? json_decode( $data['seo_diff_data'] ) : array();
 			$sitemap_filter_data[ $key ]['date']              = ! empty( $data['created_date'] ) ? esc_html( date( 'd-m-Y', strtotime( $data['created_date'] ) ) ) : '';
 
-			if ( ! empty( $sitemap_filter_data[ $key ]['sitemap_xml_data'] ) ) {
-				$current_diff_count                           = count( $sitemap_filter_data[ $key ]['sitemap_xml_data'] );
-				$sitemap_filter_data[ $key ]['sitemap_count'] = $current_diff_count;
+			if ( ! empty( $sitemap_filter_data[ $key ]['seo_data_xml'] ) ) {
+				$current_diff_count                           = count( $sitemap_filter_data[ $key ]['seo_data_xml'] );
+				$sitemap_filter_data[ $key ]['robots_count'] = $current_diff_count;
 				$old_key                                      = $key - 1;
-				$old_diff_count                               = $sitemap_filter_data[ $old_key ]['sitemap_count'];
+				$old_diff_count                               = $sitemap_filter_data[ $old_key ]['robots_count'];
 				$diff_count                                   = absint( $current_diff_count ) - absint( $old_diff_count );
 				if ( $diff_count === 0 ) {
-					$sitemap_filter_data[ $key ]['sitemap_text_class'] = "sitemap_text green_text";
-					$sitemap_filter_data[ $key ]['sitemap_diff_text'] = sprintf( __( 'No any changes found in the sitemap', 'sitemonitor' ), $diff_count );
+					$sitemap_filter_data[ $key ]['robots_text_class'] = "sitemap_text green_text";
+					$sitemap_filter_data[ $key ]['robots_diff_text'] = sprintf( __( 'No any changes found in the sitemap', 'sitemonitor' ), $diff_count );
 				} else if ( $diff_count > 0 ) {
-					$sitemap_filter_data[ $key ]['sitemap_diff_text'] = sprintf( __( 'Sitemap Updated - %d recored was added', 'sitemonitor' ), $diff_count );
-					$sitemap_filter_data[ $key ]['sitemap_text_class'] = "sitemap_text green_text";
+					$sitemap_filter_data[ $key ]['robots_diff_text'] = sprintf( __( 'Robots Updated - %d recored was added', 'sitemonitor' ), $diff_count );
+					$sitemap_filter_data[ $key ]['robots_text_class'] = "sitemap_text green_text";
 				} else {
-					$sitemap_filter_data[ $key ]['sitemap_text_class'] = "sitemap_text red_text";
-					$sitemap_filter_data[ $key ]['sitemap_diff_text'] = sprintf( __( 'Sitemap Updated - %d recored was removed', 'sitemonitor' ), abs( $diff_count ) );
+					$sitemap_filter_data[ $key ]['robots_text_class'] = "sitemap_text red_text";
+					$sitemap_filter_data[ $key ]['robots_diff_text'] = sprintf( __( 'Robots Updated - %d recored was removed', 'sitemonitor' ), abs( $diff_count ) );
 				}
 			} else {
-				$sitemap_filter_data[ $key ]['sitemap_diff_text'] = __( 'sitemap was added', 'sitemonitor' );
+				$sitemap_filter_data[ $key ]['robots_diff_text'] = __( 'Robots was added', 'sitemonitor' );
 			}
 
 		}

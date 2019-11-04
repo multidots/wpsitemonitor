@@ -13,6 +13,27 @@
       <executable />
     </execution>
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -80,6 +101,7 @@
       <workItem from="1571812168051" duration="8162000" />
       <workItem from="1571892804036" duration="16552000" />
       <workItem from="1571975650903" duration="14610000" />
+      <workItem from="1572847221808" duration="6314000" />
     </task>
     <servers />
   </component>
@@ -125,6 +147,15 @@
           <url>file://$PROJECT_DIR$/script_xml.php</url>
           <line>36</line>
           <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php-line-method">
+          <url>file://$PROJECT_DIR$/wp-content/themes/sitemonitor/api/email_template.php</url>
+          <line>2</line>
+          <properties>
+            <option name="className" value="" />
+            <option name="methodName" value="\add_site_email_template" />
+          </properties>
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

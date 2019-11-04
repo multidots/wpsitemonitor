@@ -44,5 +44,5 @@
     ]
   },
   "homepage": "/wp-content/themes/sitemonitor",
-  "browserLaunchTo": "http://wpsitemoniter.local/"
+  "browserLaunchTo": "http://sitemap_wp.test/"
 }

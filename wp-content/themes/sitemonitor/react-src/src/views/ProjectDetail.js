@@ -5,8 +5,6 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Container from '@material-ui/core/Container';
-import { Link, Redirect } from 'react-router-dom';
-import Divider from '@material-ui/core/Divider';
 import CheckCircleRoundedIcon from '@material-ui/icons/CheckCircleRounded';
 import CancelRoundedIcon from '@material-ui/icons/CancelRounded';
 import Table from '@material-ui/core/Table';
@@ -14,7 +12,6 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import EditIcon from '@material-ui/icons/Edit';
 import TableRow from '@material-ui/core/TableRow';
-import SiteMapReport from './SiteMapReport';
 import Avatar from '@material-ui/core/Avatar';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
@@ -26,6 +23,9 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpandMoreIcon from "@material-ui/core/SvgIcon/SvgIcon";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+
+import SiteMapReport from './SiteMapReport';
+import robotsReport from './robotsReports';
 
 const useStyles = makeStyles( theme => ({
   spacing: {
@@ -195,6 +195,7 @@ class ProjectDetailViews extends React.Component {
       fullReportData: [],
       projectData: [],
       sitemapData: [],
+      robotsData: [],
       sitemapErrorMsg: 'Loading...',
       edit_data: false,
       project_id: this.props.data.match.params.id,
@@ -241,6 +242,8 @@ class ProjectDetailViews extends React.Component {
             fullReportData: [],
             sitemapData: [],
             sitemapErrorMsg: 'Sitemap reports not generated yet.',
+            robotsData: [],
+            robotsErrorMsg: 'Robots reports not generated yet.',
             isLoading: false
           } );
         } else {
@@ -249,6 +252,8 @@ class ProjectDetailViews extends React.Component {
             projectData: data.project_details,
             sitemapData: data.sitemap,
             sitemapErrorMsg: (Object.keys( data.sitemap ).length === 0) ? 'Sitemap reports not generated yet.' : '',
+            robotsData: data.robots_data,
+            robotsErrorMsg: (Object.keys( data.robots_data ).length === 0) ? 'Robots reports not generated yet.' : '',
             isLoading: false
           } );
         }
@@ -584,6 +589,7 @@ class ProjectDetailViews extends React.Component {
                     </Typography>
                   </ExpansionPanelDetails>
                 </ExpansionPanel>
+
                 <ExpansionPanel id={'panel-main-robots-bh-header'} expanded={expanded === "robots"} onChange={handleChange("robots")}>
                   <ExpansionPanelSummary
                       expandIcon={<ExpandMoreIcon />}
@@ -598,9 +604,9 @@ class ProjectDetailViews extends React.Component {
                         <FormControlLabel className={classes.status_switch}
                                           control={
                                             <IOSSwitch
-                                                checked={parseInt(this.state.projectData.sitemap_status)}
+                                                checked={parseInt(this.state.projectData.roborts_status)}
                                                 onChange={this.handleChange.bind( this )}
-                                                value="sitemap"
+                                                value="roborts"
                                             />
                                           }
                         />
@@ -610,7 +616,7 @@ class ProjectDetailViews extends React.Component {
                   </ExpansionPanelSummary>
                   <ExpansionPanelDetails  id={'exp-panel-main-robots-bh-header'}>
                     <Typography variant="subtitle1" paragraph>
-                      <SiteMapReport reportData={this.state.sitemapData} sitemapMsg={this.state.sitemapErrorMsg}/>
+                      <robotsReport reportData={this.state.robotsData} sitemapMsg={this.state.robotsErrorMsg}/>
                     </Typography>
                   </ExpansionPanelDetails>
                 </ExpansionPanel>
@@ -645,37 +651,6 @@ class ProjectDetailViews extends React.Component {
                   </Typography>
                   <Typography paragraph className="status_text">
                     {this.state.fullReportData.admin_status_text}
-                  </Typography>
-                </CardContent>
-              </div>
-            </Card>
-          </Grid>
-          <Grid item xs={12} md={12} className={classes.grid_item}>
-            <Card className={classes.card}>
-              <div className={classes.cardDetails}>
-                <CardContent>
-                  <Typography variant="h5" paragraph>
-                    Robots
-                    <FormControlLabel className={classes.status_switch}
-                      control={
-                        <IOSSwitch
-                          checked={parseInt(this.state.projectData.roborts_status)}
-                          onChange={this.handleChange.bind( this )}
-                          value="roborts"
-                        />
-                      }
-                    />
-                    {1 === parseInt( this.state.fullReportData.robots_status ) ? <CheckCircleRoundedIcon
-                      className={classes.status_icon} style={{ color: '#43a047' }}/> : (
-                      <CancelRoundedIcon className={classes.status_icon} style={{ color: '#D3302F' }}/>)}
-                  </Typography>
-                  <Typography paragraph>
-                    {1 === parseInt( this.state.fullReportData.robots_status ) ? 'We have found the robots.txt file on the root.' : (
-                      'We can\'t found the robots.txt file on the root.'
-                    )}
-                  </Typography>
-                  <Typography paragraph className="status_text">
-                    {this.state.fullReportData.robots_status_text}
                   </Typography>
                 </CardContent>
               </div>
