@@ -1428,6 +1428,11 @@ text-align: left;
 }
 .status_tooltip li {
   padding: 0;
+  font-size: 16px;
+  margin-bottom: 7px;
+}
+.status_tooltip li:last-child {
+  margin-bottom: 0;
 }
 
 
