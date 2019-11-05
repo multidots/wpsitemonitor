@@ -20,7 +20,7 @@ import TextField from '@material-ui/core/TextField';
 import SaveIcon from '@material-ui/icons/Save';
 import Pace from "react-pace-progress";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
-import ExpandMoreIcon from "@material-ui/core/SvgIcon/SvgIcon";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import Divider from '@material-ui/core/Divider';
@@ -415,7 +415,7 @@ class ProjectDetailViews extends React.Component {
         <Grid container item xs={8} md={8}>
           <Grid item xs={12} md={12}>
             <Card className={classes.card}>
-              <CardContent>
+              <CardContent className="project-details-container-main">
                 <Typography variant="h5" paragraph>
                   Project Details
                   { this.state.edit_data ?
@@ -576,11 +576,10 @@ class ProjectDetailViews extends React.Component {
                     </Typography>
 
                   </ExpansionPanelSummary>
-                  <ExpansionPanelDetails  id={'exp-panel-main-sitemap-bh-header'}>
+                  <ExpansionPanelDetails  id={'exp-panel-main-sitemap-bh-header'} className="view_more_container-main">
                     <SiteMapReport reportData={this.state.sitemapData} sitemapMsg={this.state.sitemapErrorMsg}/>
                     <Divider/>
-                    <div>
-                    <Link className={classes.report_link} to={{ pathname: sitemap_page }}>View More</Link>
+                    <div className="view_more_container">
                       <FormControlLabel className={classes.status_switch}
                                         control={
                                           <IOSSwitch
@@ -590,6 +589,7 @@ class ProjectDetailViews extends React.Component {
                                           />
                                         }
                       />
+                      <Link className={classes.report_link} to={{ pathname: sitemap_page }}>View More</Link>
                     </div>
                   </ExpansionPanelDetails>
                 </ExpansionPanel>
@@ -608,11 +608,10 @@ class ProjectDetailViews extends React.Component {
                     </Typography>
 
                   </ExpansionPanelSummary>
-                  <ExpansionPanelDetails  id={'exp-panel-main-robots-bh-header'}>
+                  <ExpansionPanelDetails  id={'exp-panel-main-robots-bh-header'} className="view_more_container-main">
                     <RobotsHistoryReport reportData={this.state.robotsData} sitemapMsg={this.state.robotsErrorMsg}/>
                     <Divider/>
-                    <div>
-                      <Link className={classes.report_link} to={{ pathname: robots_page }}>View More</Link>
+                    <div className="view_more_container">
                       <FormControlLabel className={classes.status_switch}
                                         control={
                                           <IOSSwitch
@@ -622,6 +621,7 @@ class ProjectDetailViews extends React.Component {
                                           />
                                         }
                       />
+                      <Link className={classes.report_link} to={{ pathname: robots_page }}>View More</Link>
                     </div>
                   </ExpansionPanelDetails>
                 </ExpansionPanel>
