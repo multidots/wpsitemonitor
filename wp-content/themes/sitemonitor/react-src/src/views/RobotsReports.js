@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function robotsReport(props) {
+export default function RobotsHistoryReport(props) {
   const reportData = props.reportData;
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -37,7 +37,6 @@ export default function robotsReport(props) {
 
   return (
     <div className={classes.root}>
-      <h2>hello</h2>
       { Object.keys(reportData).length == 0 ?
 
         <Typography>
@@ -53,8 +52,8 @@ export default function robotsReport(props) {
               id={'panel'+ Data.id +'bh-header'}
               className="sitemap_Container"
             >
-              <Typography className={Data.sitemap_text_class}>
-                {Data.sitemap_diff_text}
+              <Typography className={Data.robots_text_class}>
+                {Data.robots_diff_text}
               </Typography>
               <Typography className="sitemap_date">
                 <b className="sitemap_date">{Data.date}</b>

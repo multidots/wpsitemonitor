@@ -2175,8 +2175,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _material_ui_core_SvgIcon_SvgIcon__WEBPACK_IMPORTED_MODULE_25___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_SvgIcon_SvgIcon__WEBPACK_IMPORTED_MODULE_25__);
 /* harmony import */ var _material_ui_core_ExpansionPanelDetails__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! @material-ui/core/ExpansionPanelDetails */ "./node_modules/@material-ui/core/esm/ExpansionPanelDetails/index.js");
 /* harmony import */ var _material_ui_core_ExpansionPanel__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @material-ui/core/ExpansionPanel */ "./node_modules/@material-ui/core/esm/ExpansionPanel/index.js");
-/* harmony import */ var _SiteMapReport__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./SiteMapReport */ "./src/views/SiteMapReport.js");
-/* harmony import */ var _robotsReports__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./robotsReports */ "./src/views/robotsReports.js");
+/* harmony import */ var _material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @material-ui/core/Divider */ "./node_modules/@material-ui/core/esm/Divider/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _SiteMapReport__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./SiteMapReport */ "./src/views/SiteMapReport.js");
+/* harmony import */ var _RobotsReports__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./RobotsReports */ "./src/views/RobotsReports.js");
 
 
 
@@ -2185,6 +2187,8 @@ var _jsxFileName = "/var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { Object(_var_vagrant_md_www_sitemap_wp_public_html_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+
 
 
 
@@ -2370,7 +2374,7 @@ const IOSSwitch = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_4__["
   }, props, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 175
+      lineNumber: 177
     },
     __self: undefined
   }));
@@ -2590,6 +2594,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
     let input_type = this.state.error.project_name ? "" : "error";
     const classes = useStyles();
     const sitemap_page = '/projects/' + this.state.project_id + '/' + 'sitemap';
+    const robots_page = '/projects/' + this.state.project_id + '/' + 'robots';
     const reportData = props.reportData; //const classes = useStyles();
 
     const _React$useState = react__WEBPACK_IMPORTED_MODULE_3___default.a.useState(false),
@@ -2609,7 +2614,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       spacing: 3,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 410
+        lineNumber: 413
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -2619,7 +2624,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       md: 8,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 412
+        lineNumber: 415
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -2628,20 +2633,20 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       md: 12,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 413
+        lineNumber: 416
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_7__["default"], {
       className: classes.card,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 414
+        lineNumber: 417
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_8__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 415
+        lineNumber: 418
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -2649,13 +2654,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 416
+        lineNumber: 419
       },
       __self: this
     }, "Project Details", this.state.edit_data ? react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 419
+        lineNumber: 422
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_17__["default"], {
@@ -2663,13 +2668,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       onClick: this.cancelProjectData.bind(this),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 420
+        lineNumber: 423
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_icons_Close__WEBPACK_IMPORTED_MODULE_20___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 421
+        lineNumber: 424
       },
       __self: this
     })), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_17__["default"], {
@@ -2677,13 +2682,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       onClick: this.editProjectData.bind(this),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 423
+        lineNumber: 426
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_icons_Save__WEBPACK_IMPORTED_MODULE_22___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 424
+        lineNumber: 427
       },
       __self: this
     }))) : react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Avatar__WEBPACK_IMPORTED_MODULE_17__["default"], {
@@ -2691,13 +2696,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       onClick: this.editProjectData.bind(this),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 429
+        lineNumber: 432
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_icons_Edit__WEBPACK_IMPORTED_MODULE_15___default.a, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 430
+        lineNumber: 433
       },
       __self: this
     }))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Table__WEBPACK_IMPORTED_MODULE_12__["default"], {
@@ -2705,19 +2710,19 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       "aria-label": "simple table",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 435
+        lineNumber: 438
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_TableBody__WEBPACK_IMPORTED_MODULE_13__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 436
+        lineNumber: 439
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_16__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 437
+        lineNumber: 440
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_14__["default"], {
@@ -2725,19 +2730,19 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       scope: "row",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 438
+        lineNumber: 441
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("b", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 439
+        lineNumber: 442
       },
       __self: this
     }, "Project Name")), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_14__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 441
+        lineNumber: 444
       },
       __self: this
     }, this.state.edit_data ? this.state.error.project_name ? react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_21__["default"], {
@@ -2751,7 +2756,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       onChange: this.handleUpdate.bind(this),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 444
+        lineNumber: 447
       },
       __self: this
     }) : react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_21__["default"], {
@@ -2763,13 +2768,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       onChange: this.handleUpdate.bind(this),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 453
+        lineNumber: 456
       },
       __self: this
     }) : this.state.projectData.project_name)), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_16__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 466
+        lineNumber: 469
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_14__["default"], {
@@ -2777,19 +2782,19 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       scope: "row",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 467
+        lineNumber: 470
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("b", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 468
+        lineNumber: 471
       },
       __self: this
     }, "Domain URL")), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_14__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 470
+        lineNumber: 473
       },
       __self: this
     }, this.state.edit_data ? this.state.error.domain_url ? react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_21__["default"], {
@@ -2803,7 +2808,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       onChange: this.handleUpdate.bind(this),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 474
+        lineNumber: 477
       },
       __self: this
     }) : react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_21__["default"], {
@@ -2815,7 +2820,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       onChange: this.handleUpdate.bind(this),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 483
+        lineNumber: 486
       },
       __self: this
     }) : react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("a", {
@@ -2823,13 +2828,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       href: this.state.projectData.domain_url,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 490
+        lineNumber: 493
       },
       __self: this
     }, this.state.projectData.domain_url))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_TableRow__WEBPACK_IMPORTED_MODULE_16__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 496
+        lineNumber: 499
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_14__["default"], {
@@ -2837,19 +2842,19 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       scope: "row",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 497
+        lineNumber: 500
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("b", {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 498
+        lineNumber: 501
       },
       __self: this
     }, "Sitemap URL")), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_TableCell__WEBPACK_IMPORTED_MODULE_14__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 500
+        lineNumber: 503
       },
       __self: this
     }, this.state.edit_data ? this.state.error.sitemap_url ? react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_21__["default"], {
@@ -2863,7 +2868,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       onChange: this.handleUpdate.bind(this),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 504
+        lineNumber: 507
       },
       __self: this
     }) : react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_TextField__WEBPACK_IMPORTED_MODULE_21__["default"], {
@@ -2875,7 +2880,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       onChange: this.handleUpdate.bind(this),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 513
+        lineNumber: 516
       },
       __self: this
     }) : react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("a", {
@@ -2883,7 +2888,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       href: this.state.projectData.sitemap_url,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 520
+        lineNumber: 523
       },
       __self: this
     }, this.state.projectData.sitemap_url)))))))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -2892,7 +2897,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       md: 12,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 561
+        lineNumber: 564
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_ExpansionPanel__WEBPACK_IMPORTED_MODULE_27__["default"], {
@@ -2901,14 +2906,14 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       onChange: handleChange("sitemap"),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 564
+        lineNumber: 567
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_ExpansionPanelSummary__WEBPACK_IMPORTED_MODULE_24__["default"], {
       expandIcon: react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_SvgIcon_SvgIcon__WEBPACK_IMPORTED_MODULE_25___default.a, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 566
+          lineNumber: 569
         },
         __self: this
       }),
@@ -2917,7 +2922,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       className: "sitemap_Container",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 565
+        lineNumber: 568
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -2925,10 +2930,47 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 571
+        lineNumber: 574
       },
       __self: this
-    }, "Sitemap History", react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_18__["default"], {
+    }, "Sitemap History")), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_ExpansionPanelDetails__WEBPACK_IMPORTED_MODULE_26__["default"], {
+      id: 'exp-panel-main-sitemap-bh-header',
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 579
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_SiteMapReport__WEBPACK_IMPORTED_MODULE_30__["default"], {
+      reportData: this.state.sitemapData,
+      sitemapMsg: this.state.sitemapErrorMsg,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 580
+      },
+      __self: this
+    }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_28__["default"], {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 581
+      },
+      __self: this
+    }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 582
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_29__["Link"], {
+      className: classes.report_link,
+      to: {
+        pathname: sitemap_page
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 583
+      },
+      __self: this
+    }, "View More"), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_18__["default"], {
       className: classes.status_switch,
       control: react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(IOSSwitch, {
         checked: parseInt(this.state.projectData.sitemap_status),
@@ -2936,36 +2978,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
         value: "sitemap",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 576
+          lineNumber: 586
         },
         __self: this
       }),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 574
-      },
-      __self: this
-    }))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_ExpansionPanelDetails__WEBPACK_IMPORTED_MODULE_26__["default"], {
-      id: 'exp-panel-main-sitemap-bh-header',
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 586
-      },
-      __self: this
-    }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      variant: "subtitle1",
-      paragraph: true,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 587
-      },
-      __self: this
-    }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_SiteMapReport__WEBPACK_IMPORTED_MODULE_28__["default"], {
-      reportData: this.state.sitemapData,
-      sitemapMsg: this.state.sitemapErrorMsg,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 588
+        lineNumber: 584
       },
       __self: this
     })))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_ExpansionPanel__WEBPACK_IMPORTED_MODULE_27__["default"], {
@@ -2974,14 +2993,14 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       onChange: handleChange("robots"),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 593
+        lineNumber: 597
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_ExpansionPanelSummary__WEBPACK_IMPORTED_MODULE_24__["default"], {
       expandIcon: react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_SvgIcon_SvgIcon__WEBPACK_IMPORTED_MODULE_25___default.a, {
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 595
+          lineNumber: 599
         },
         __self: this
       }),
@@ -2990,13 +3009,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       className: "sitemap_Container",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 594
+        lineNumber: 598
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 600
+        lineNumber: 604
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -3004,10 +3023,47 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 601
+        lineNumber: 605
       },
       __self: this
-    }, "Robots History", react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_18__["default"], {
+    }, "Robots History"))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_ExpansionPanelDetails__WEBPACK_IMPORTED_MODULE_26__["default"], {
+      id: 'exp-panel-main-robots-bh-header',
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 611
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_RobotsReports__WEBPACK_IMPORTED_MODULE_31__["default"], {
+      reportData: this.state.robotsData,
+      sitemapMsg: this.state.robotsErrorMsg,
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 612
+      },
+      __self: this
+    }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Divider__WEBPACK_IMPORTED_MODULE_28__["default"], {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 613
+      },
+      __self: this
+    }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 614
+      },
+      __self: this
+    }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_29__["Link"], {
+      className: classes.report_link,
+      to: {
+        pathname: robots_page
+      },
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 615
+      },
+      __self: this
+    }, "View More"), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_18__["default"], {
       className: classes.status_switch,
       control: react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(IOSSwitch, {
         checked: parseInt(this.state.projectData.roborts_status),
@@ -3015,36 +3071,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
         value: "roborts",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 606
+          lineNumber: 618
         },
         __self: this
       }),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 604
-      },
-      __self: this
-    })))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_ExpansionPanelDetails__WEBPACK_IMPORTED_MODULE_26__["default"], {
-      id: 'exp-panel-main-robots-bh-header',
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 617
-      },
-      __self: this
-    }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5__["default"], {
-      variant: "subtitle1",
-      paragraph: true,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 618
-      },
-      __self: this
-    }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("robotsReport", {
-      reportData: this.state.robotsData,
-      sitemapMsg: this.state.robotsErrorMsg,
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 619
+        lineNumber: 616
       },
       __self: this
     })))))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -3054,7 +3087,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       md: 4,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 626
+        lineNumber: 631
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -3063,27 +3096,27 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       md: 12,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 627
+        lineNumber: 632
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_7__["default"], {
       className: classes.card,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 628
+        lineNumber: 633
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
       className: classes.cardDetails,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 629
+        lineNumber: 634
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_8__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 630
+        lineNumber: 635
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -3091,7 +3124,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 631
+        lineNumber: 636
       },
       __self: this
     }, "Wp-Admin URL", react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_18__["default"], {
@@ -3102,13 +3135,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
         value: "admin",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 635
+          lineNumber: 640
         },
         __self: this
       }),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 633
+        lineNumber: 638
       },
       __self: this
     }), 1 === parseInt(this.state.fullReportData.admin_status) ? react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_icons_CheckCircleRounded__WEBPACK_IMPORTED_MODULE_10___default.a, {
@@ -3118,7 +3151,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 642
+        lineNumber: 647
       },
       __self: this
     }) : react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_icons_CancelRounded__WEBPACK_IMPORTED_MODULE_11___default.a, {
@@ -3128,14 +3161,14 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 644
+        lineNumber: 649
       },
       __self: this
     })), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5__["default"], {
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 647
+        lineNumber: 652
       },
       __self: this
     }, 1 === parseInt(this.state.fullReportData.admin_status) ? 'Custom URL set for the WP Admin.' : 'Default WP Admin URL set for the project.'), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -3143,7 +3176,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       className: "status_text",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 652
+        lineNumber: 657
       },
       __self: this
     }, this.state.fullReportData.admin_status_text))))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -3153,27 +3186,27 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       className: classes.grid_item,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 659
+        lineNumber: 664
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_7__["default"], {
       className: classes.card,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 660
+        lineNumber: 665
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
       className: classes.cardDetails,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 661
+        lineNumber: 666
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_8__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 662
+        lineNumber: 667
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -3181,7 +3214,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 663
+        lineNumber: 668
       },
       __self: this
     }, "SSL", react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_18__["default"], {
@@ -3192,13 +3225,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
         value: "https",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 667
+          lineNumber: 672
         },
         __self: this
       }),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 665
+        lineNumber: 670
       },
       __self: this
     }), 1 === parseInt(this.state.fullReportData.ssl_status) ? react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_icons_CheckCircleRounded__WEBPACK_IMPORTED_MODULE_10___default.a, {
@@ -3208,7 +3241,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 674
+        lineNumber: 679
       },
       __self: this
     }) : react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_icons_CancelRounded__WEBPACK_IMPORTED_MODULE_11___default.a, {
@@ -3218,14 +3251,14 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 676
+        lineNumber: 681
       },
       __self: this
     })), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5__["default"], {
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 678
+        lineNumber: 683
       },
       __self: this
     }, 1 === parseInt(this.state.fullReportData.ssl_status) ? 'Voila! site have a secure connection.' : 'Sorry, We could not found any secure connection for this project.'), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -3233,7 +3266,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       className: "status_text",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 683
+        lineNumber: 688
       },
       __self: this
     }, this.state.fullReportData.ssl_status_text))))), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Grid__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -3243,27 +3276,27 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       className: classes.grid_item,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 690
+        lineNumber: 695
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Card__WEBPACK_IMPORTED_MODULE_7__["default"], {
       className: classes.card,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 691
+        lineNumber: 696
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
       className: classes.cardDetails,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 692
+        lineNumber: 697
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_CardContent__WEBPACK_IMPORTED_MODULE_8__["default"], {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 693
+        lineNumber: 698
       },
       __self: this
     }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -3271,7 +3304,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 694
+        lineNumber: 699
       },
       __self: this
     }, "Captcha", react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_FormControlLabel__WEBPACK_IMPORTED_MODULE_18__["default"], {
@@ -3282,13 +3315,13 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
         value: "captcha",
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 698
+          lineNumber: 703
         },
         __self: this
       }),
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 696
+        lineNumber: 701
       },
       __self: this
     }), 1 === parseInt(this.state.fullReportData.captcha_status) ? react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_icons_CheckCircleRounded__WEBPACK_IMPORTED_MODULE_10___default.a, {
@@ -3298,7 +3331,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 705
+        lineNumber: 710
       },
       __self: this
     }) : react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_icons_CancelRounded__WEBPACK_IMPORTED_MODULE_11___default.a, {
@@ -3308,14 +3341,14 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       },
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 707
+        lineNumber: 712
       },
       __self: this
     })), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5__["default"], {
       paragraph: true,
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 709
+        lineNumber: 714
       },
       __self: this
     }, 1 === parseInt(this.state.fullReportData.captcha_status) ? 'We have found captcha is successfully implemented on your project.' : 'Sorry! We could not found any captcha on your project.'), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_5__["default"], {
@@ -3323,7 +3356,7 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       className: "status_text",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 714
+        lineNumber: 719
       },
       __self: this
     }, this.state.fullReportData.captcha_status_text)))))));
@@ -3334,20 +3367,20 @@ class ProjectDetailViews extends react__WEBPACK_IMPORTED_MODULE_3___default.a.Co
       maxWidth: "xl",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 728
+        lineNumber: 733
       },
       __self: this
     }, this.state.isLoading ? react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(react_pace_progress__WEBPACK_IMPORTED_MODULE_23___default.a, {
       color: "#3f51b5",
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 729
+        lineNumber: 734
       },
       __self: this
     }) : react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(this.ProjectFeaturesBox, {
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 729
+        lineNumber: 734
       },
       __self: this
     }));
@@ -4506,6 +4539,151 @@ class ProjectsViews extends react__WEBPACK_IMPORTED_MODULE_1___default.a.Compone
 
 /***/ }),
 
+/***/ "./src/views/RobotsReports.js":
+/*!************************************!*\
+  !*** ./src/views/RobotsReports.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return RobotsHistoryReport; });
+/* harmony import */ var _var_vagrant_md_www_sitemap_wp_public_html_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core_ExpansionPanel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/ExpansionPanel */ "./node_modules/@material-ui/core/esm/ExpansionPanel/index.js");
+/* harmony import */ var _material_ui_core_ExpansionPanelDetails__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/ExpansionPanelDetails */ "./node_modules/@material-ui/core/esm/ExpansionPanelDetails/index.js");
+/* harmony import */ var _material_ui_core_ExpansionPanelSummary__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/ExpansionPanelSummary */ "./node_modules/@material-ui/core/esm/ExpansionPanelSummary/index.js");
+/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Typography */ "./node_modules/@material-ui/core/esm/Typography/index.js");
+/* harmony import */ var _material_ui_icons_ExpandMore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/icons/ExpandMore */ "./node_modules/@material-ui/icons/ExpandMore.js");
+/* harmony import */ var _material_ui_icons_ExpandMore__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_ExpandMore__WEBPACK_IMPORTED_MODULE_7__);
+
+var _jsxFileName = "/var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes/sitemonitor/react-src/src/views/RobotsReports.js";
+
+
+
+
+
+
+
+const useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["makeStyles"])(theme => ({
+  root: {
+    width: '100%',
+    marginTop: "50px"
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    flexBasis: '33.33%',
+    flexShrink: 0
+  },
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary
+  },
+  diff_links: {
+    backgroundColor: "yellow",
+    marginBottom: "5px"
+  }
+}));
+function RobotsHistoryReport(props) {
+  const reportData = props.reportData;
+  const classes = useStyles();
+
+  const _React$useState = react__WEBPACK_IMPORTED_MODULE_1___default.a.useState(false),
+        _React$useState2 = Object(_var_vagrant_md_www_sitemap_wp_public_html_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_React$useState, 2),
+        expanded = _React$useState2[0],
+        setExpanded = _React$useState2[1];
+
+  const handleChange = panel => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: classes.root,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 39
+    },
+    __self: this
+  }, Object.keys(reportData).length == 0 ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 42
+    },
+    __self: this
+  }, props.sitemapMsg) : reportData.map(Data => react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_ExpansionPanel__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    id: 'panel-main-' + Data.id + 'bh-header',
+    expanded: expanded === Data.id,
+    onChange: handleChange(Data.id),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 48
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_ExpansionPanelSummary__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    expandIcon: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_ExpandMore__WEBPACK_IMPORTED_MODULE_7___default.a, {
+      __source: {
+        fileName: _jsxFileName,
+        lineNumber: 50
+      },
+      __self: this
+    }),
+    "aria-controls": "panel1bh-content",
+    id: 'panel' + Data.id + 'bh-header',
+    className: "sitemap_Container",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 49
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    className: Data.robots_text_class,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 55
+    },
+    __self: this
+  }, Data.robots_diff_text), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    className: "sitemap_date",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 58
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", {
+    className: "sitemap_date",
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 59
+    },
+    __self: this
+  }, Data.date))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_ExpansionPanelDetails__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    id: 'exp-panel-main-' + Data.id + 'bh-header',
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 62
+    },
+    __self: this
+  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 63
+    },
+    __self: this
+  }, Data.robots_data_diff.map(diff => react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    className: classes.diff_links,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 65
+    },
+    __self: this
+  }, diff)))))));
+}
+
+/***/ }),
+
 /***/ "./src/views/SiteMapReport.js":
 /*!************************************!*\
   !*** ./src/views/SiteMapReport.js ***!
@@ -4662,157 +4840,6 @@ module.exports = __webpack_require__.p + "static/media/logo.3d149670.png";
 
 /***/ }),
 
-/***/ "./src/views/robotsReports.js":
-/*!************************************!*\
-  !*** ./src/views/robotsReports.js ***!
-  \************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return robotsReport; });
-/* harmony import */ var _var_vagrant_md_www_sitemap_wp_public_html_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/slicedToArray */ "./node_modules/@babel/runtime/helpers/esm/slicedToArray.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "./node_modules/@material-ui/core/esm/styles/index.js");
-/* harmony import */ var _material_ui_core_ExpansionPanel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/ExpansionPanel */ "./node_modules/@material-ui/core/esm/ExpansionPanel/index.js");
-/* harmony import */ var _material_ui_core_ExpansionPanelDetails__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/ExpansionPanelDetails */ "./node_modules/@material-ui/core/esm/ExpansionPanelDetails/index.js");
-/* harmony import */ var _material_ui_core_ExpansionPanelSummary__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @material-ui/core/ExpansionPanelSummary */ "./node_modules/@material-ui/core/esm/ExpansionPanelSummary/index.js");
-/* harmony import */ var _material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @material-ui/core/Typography */ "./node_modules/@material-ui/core/esm/Typography/index.js");
-/* harmony import */ var _material_ui_icons_ExpandMore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @material-ui/icons/ExpandMore */ "./node_modules/@material-ui/icons/ExpandMore.js");
-/* harmony import */ var _material_ui_icons_ExpandMore__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_material_ui_icons_ExpandMore__WEBPACK_IMPORTED_MODULE_7__);
-
-var _jsxFileName = "/var/vagrant-md/www/sitemap_wp/public_html/wp-content/themes/sitemonitor/react-src/src/views/robotsReports.js";
-
-
-
-
-
-
-
-const useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["makeStyles"])(theme => ({
-  root: {
-    width: '100%',
-    marginTop: "50px"
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    flexBasis: '33.33%',
-    flexShrink: 0
-  },
-  secondaryHeading: {
-    fontSize: theme.typography.pxToRem(15),
-    color: theme.palette.text.secondary
-  },
-  diff_links: {
-    backgroundColor: "yellow",
-    marginBottom: "5px"
-  }
-}));
-function robotsReport(props) {
-  const reportData = props.reportData;
-  const classes = useStyles();
-
-  const _React$useState = react__WEBPACK_IMPORTED_MODULE_1___default.a.useState(false),
-        _React$useState2 = Object(_var_vagrant_md_www_sitemap_wp_public_html_wp_content_themes_sitemonitor_react_src_node_modules_babel_runtime_helpers_esm_slicedToArray__WEBPACK_IMPORTED_MODULE_0__["default"])(_React$useState, 2),
-        expanded = _React$useState2[0],
-        setExpanded = _React$useState2[1];
-
-  const handleChange = panel => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
-  };
-
-  return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    className: classes.root,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 39
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 40
-    },
-    __self: this
-  }, "hello"), Object.keys(reportData).length == 0 ? react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 43
-    },
-    __self: this
-  }, props.sitemapMsg) : reportData.map(Data => react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_ExpansionPanel__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    id: 'panel-main-' + Data.id + 'bh-header',
-    expanded: expanded === Data.id,
-    onChange: handleChange(Data.id),
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 49
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_ExpansionPanelSummary__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    expandIcon: react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_icons_ExpandMore__WEBPACK_IMPORTED_MODULE_7___default.a, {
-      __source: {
-        fileName: _jsxFileName,
-        lineNumber: 51
-      },
-      __self: this
-    }),
-    "aria-controls": "panel1bh-content",
-    id: 'panel' + Data.id + 'bh-header',
-    className: "sitemap_Container",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 50
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    className: Data.sitemap_text_class,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 56
-    },
-    __self: this
-  }, Data.sitemap_diff_text), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    className: "sitemap_date",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 59
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("b", {
-    className: "sitemap_date",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 60
-    },
-    __self: this
-  }, Data.date))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_ExpansionPanelDetails__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    id: 'exp-panel-main-' + Data.id + 'bh-header',
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 63
-    },
-    __self: this
-  }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 64
-    },
-    __self: this
-  }, Data.robots_data_diff.map(diff => react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_core_Typography__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    className: classes.diff_links,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 66
-    },
-    __self: this
-  }, diff)))))));
-}
-
-/***/ }),
-
 /***/ "./src/views/style.css":
 /*!*****************************!*\
   !*** ./src/views/style.css ***!
@@ -4836,5 +4863,5 @@ module.exports = __webpack_require__(/*! /var/vagrant-md/www/sitemap_wp/public_h
 
 /***/ })
 
-},[[0,"runtime-main",0]]]);
+},[[0,"runtime-main",1]]]);
 //# sourceMappingURL=main.chunk.js.map

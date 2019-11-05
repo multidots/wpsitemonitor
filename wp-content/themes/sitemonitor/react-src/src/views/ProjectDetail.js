@@ -23,9 +23,11 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpandMoreIcon from "@material-ui/core/SvgIcon/SvgIcon";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
+import Divider from '@material-ui/core/Divider';
+import { Link, Redirect } from 'react-router-dom';
 
 import SiteMapReport from './SiteMapReport';
-import robotsReport from './robotsReports';
+import RobotsHistoryReport from './RobotsReports';
 
 const useStyles = makeStyles( theme => ({
   spacing: {
@@ -396,6 +398,7 @@ class ProjectDetailViews extends React.Component {
 
     const classes = useStyles();
     const sitemap_page = '/projects/' + this.state.project_id + '/' + 'sitemap';
+    const robots_page = '/projects/' + this.state.project_id + '/' + 'robots';
 
 
     const reportData = props.reportData;
@@ -570,23 +573,24 @@ class ProjectDetailViews extends React.Component {
                   >
                     <Typography variant="h5" paragraph>
                       Sitemap History
-
-                      <FormControlLabel className={classes.status_switch}
-                                        control={
-                                          <IOSSwitch
-                                              checked={parseInt(this.state.projectData.sitemap_status)}
-                                              onChange={this.handleChange.bind( this )}
-                                              value="sitemap"
-                                          />
-                                        }
-                      />
                     </Typography>
 
                   </ExpansionPanelSummary>
                   <ExpansionPanelDetails  id={'exp-panel-main-sitemap-bh-header'}>
-                    <Typography variant="subtitle1" paragraph>
-                      <SiteMapReport reportData={this.state.sitemapData} sitemapMsg={this.state.sitemapErrorMsg}/>
-                    </Typography>
+                    <SiteMapReport reportData={this.state.sitemapData} sitemapMsg={this.state.sitemapErrorMsg}/>
+                    <Divider/>
+                    <div>
+                    <Link className={classes.report_link} to={{ pathname: sitemap_page }}>View More</Link>
+                      <FormControlLabel className={classes.status_switch}
+                                        control={
+                                          <IOSSwitch
+                                            checked={parseInt(this.state.projectData.sitemap_status)}
+                                            onChange={this.handleChange.bind( this )}
+                                            value="sitemap"
+                                          />
+                                        }
+                      />
+                    </div>
                   </ExpansionPanelDetails>
                 </ExpansionPanel>
 
@@ -600,24 +604,25 @@ class ProjectDetailViews extends React.Component {
                     <Typography>
                       <Typography variant="h5" paragraph>
                         Robots History
-
-                        <FormControlLabel className={classes.status_switch}
-                                          control={
-                                            <IOSSwitch
-                                                checked={parseInt(this.state.projectData.roborts_status)}
-                                                onChange={this.handleChange.bind( this )}
-                                                value="roborts"
-                                            />
-                                          }
-                        />
                       </Typography>
                     </Typography>
 
                   </ExpansionPanelSummary>
                   <ExpansionPanelDetails  id={'exp-panel-main-robots-bh-header'}>
-                    <Typography variant="subtitle1" paragraph>
-                      <robotsReport reportData={this.state.robotsData} sitemapMsg={this.state.robotsErrorMsg}/>
-                    </Typography>
+                    <RobotsHistoryReport reportData={this.state.robotsData} sitemapMsg={this.state.robotsErrorMsg}/>
+                    <Divider/>
+                    <div>
+                      <Link className={classes.report_link} to={{ pathname: robots_page }}>View More</Link>
+                      <FormControlLabel className={classes.status_switch}
+                                        control={
+                                          <IOSSwitch
+                                            checked={parseInt(this.state.projectData.roborts_status)}
+                                            onChange={this.handleChange.bind( this )}
+                                            value="roborts"
+                                          />
+                                        }
+                      />
+                    </div>
                   </ExpansionPanelDetails>
                 </ExpansionPanel>
           </Grid>
