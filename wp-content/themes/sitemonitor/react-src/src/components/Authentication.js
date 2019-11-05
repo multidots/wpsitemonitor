@@ -48,7 +48,7 @@ class Authentication extends React.Component{
 		return(
 			<div>
 				{isAlreadyAuthenticated ? <Redirect to={{ pathname: this.props.location.pathname }}/> : (
-					<Redirect to={{ pathname: '/sign-in' }}/>
+					<Redirect to={{ pathname: '/' }}/>
 				)}
 			</div>
 		);

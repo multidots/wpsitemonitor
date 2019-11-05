@@ -61,9 +61,7 @@ export default function RobotsHistoryReport(props) {
             </ExpansionPanelSummary>
             <ExpansionPanelDetails  id={'exp-panel-main-'+ Data.id +'bh-header'}>
               <Typography>
-                {Data.robots_data_diff.map(diff => (
-                  <Typography className={classes.diff_links}>{diff}</Typography>
-                ))}
+                {Data.robots_data_diff}
               </Typography>
             </ExpansionPanelDetails>
           </ExpansionPanel>

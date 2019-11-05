@@ -1487,3 +1487,8 @@ text-align: left;
   width: 100%;
   box-sizing: border-box;
 }
+
+.history_container .history_container-inner-div {
+  margin-top: 50px !important;
+  margin-bottom: 50px !important;
+}

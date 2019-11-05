@@ -143,7 +143,7 @@ class ProjectsViews extends React.Component {
     } ).then( res => {
       if ( 403 === parseInt( res.status ) || 401 === parseInt( res.status ) ) {
         localStorage.removeItem( 'token' );
-        window.location.href = '/sign-in';
+        window.location.href = '/';
       }
       if ( 404 === parseInt( res.status ) ) {
         return new Promise( ( resolve, reject ) => {

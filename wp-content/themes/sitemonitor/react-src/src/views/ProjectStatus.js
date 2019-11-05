@@ -3,6 +3,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import ProjectDetailSidebar from './ProjectDetailSidebar';
 import SiteMapReport from './SiteMapReport';
+import RobotsHistoryReport from './RobotsReports';
 import Pace from "react-pace-progress";
 
 
@@ -33,7 +34,7 @@ class ProjectDetailViews extends React.Component {
       .then( response => {
         if(401 === parseInt(response.status)) {
           localStorage.removeItem('token');
-          window.location.href = '/sign-in';
+          window.location.href = '/';
         }
         return response.json()
       } )
@@ -41,7 +42,7 @@ class ProjectDetailViews extends React.Component {
         if (typeof data === 'undefined' || null === data || Object.keys(data).length === 0) {
           this.setState( {
             sitemapData: [],
-            sitemapErrorMsg: "Sitemap reports not generated yet.",
+            sitemapErrorMsg: "Reports not generated yet.",
             isLoading: false,
 
           } );
@@ -58,7 +59,11 @@ class ProjectDetailViews extends React.Component {
   ProjectStatusBox( props ) {
     return (
       <Grid container item xs={12} spacing={6}>
+        { this.props.data.match.params.status === "robots" ?
+          <RobotsHistoryReport reportData={this.state.sitemapData} sitemapMsg={this.state.sitemapErrorMsg}/>
+          :
           <SiteMapReport reportData={this.state.sitemapData} sitemapMsg={this.state.sitemapErrorMsg}/>
+        }
       </Grid>
     );
   }

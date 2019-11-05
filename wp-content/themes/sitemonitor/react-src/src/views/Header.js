@@ -30,12 +30,12 @@ class HeaderViews extends Component {
 
     handleLogout(){
        localStorage.removeItem('token');
-        window.location.href='/sign-in';
+        window.location.href='/';
     }
 
     renderRedirect = () => {
         if (this.state.redirect) {
-            return  <Redirect to={{pathname: '/sign-in'}} />
+            return  <Redirect to={{pathname: '/'}} />
         }
     }
 
@@ -65,7 +65,7 @@ class HeaderViews extends Component {
                         </IconButton>
 
                         <Typography variant="h6" className={classes.title}>
-                            <Link className={classes.title} to={{'pathname': "/projects"}}>Site Monitor</Link>
+                            <Link className={classes.title} to={{'pathname': "/projects"}}>MD Site Monitor</Link>
                         </Typography>
 
                         {isAlreadyAuthenticated ?
@@ -75,7 +75,6 @@ class HeaderViews extends Component {
                             : (
                             <div>
                             {this.renderRedirect()}
-                            <Button onClick={this.setRedirect} color="inherit">Login</Button>
                             </div>
                         )}
                     </Toolbar>

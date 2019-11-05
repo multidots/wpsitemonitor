@@ -195,7 +195,7 @@ function CustomToolbar() {
                     name="notify_to"
                     label="Who Notify"
                     type="text"
-                    placeholder="hello@multidots.com,contact@multidots.com"
+                    placeholder="test@example.com"
                     onChange={handleTextChange}
                     id="notify_to"
                 />

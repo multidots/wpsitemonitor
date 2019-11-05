@@ -105,7 +105,7 @@ class ProjectDetailSidebar extends React.Component {
 
   handleLogout(){
     localStorage.removeItem('token');
-    window.location.href='/sign-in';
+    window.location.href='/';
   }
 
   Sidebar(){

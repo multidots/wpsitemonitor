@@ -231,7 +231,7 @@ class ProjectDetailViews extends React.Component {
         console.log(response.status);
         if ( 401 === parseInt( response.status ) ) {
           localStorage.removeItem( 'token' );
-          window.location.href = '/sign-in';
+          window.location.href = '/';
         }
         if ( 403 === parseInt( response.status ) ) {
           window.location.href = '/projects';
@@ -533,38 +533,8 @@ class ProjectDetailViews extends React.Component {
               </CardContent>
             </Card>
           </Grid>
-          {/*<Grid item xs={12} md={12}>
-            <Card className={classes.card}>
-              <div className={classes.cardDetails}>
-                <CardContent>
-                  <Typography variant="h5" paragraph>
-                    Sitemap History
-
-                    <FormControlLabel className={classes.status_switch}
-                      control={
-                        <IOSSwitch
-                          checked={parseInt(this.state.projectData.sitemap_status)}
-                          onChange={this.handleChange.bind( this )}
-                          value="sitemap"
-                        />
-                      }
-                    />
-                  </Typography>
-                  <Typography variant="subtitle1" paragraph>
-                    <SiteMapReport reportData={this.state.sitemapData} sitemapMsg={this.state.sitemapErrorMsg}/>
-                  </Typography>
-                  <Divider/>
-
-                  <Link className={classes.report_link} to={{ pathname: sitemap_page }}>View More</Link>
-                </CardContent>
-              </div>
-            </Card>
-          </Grid>*/}
-
-          <Grid item xs={12} md={12}>
-
-
-                <ExpansionPanel id={'panel-main-sitemap-bh-header'} expanded={expanded === "sitemap"} onChange={handleChange("sitemap")}>
+          <Grid className="history_container" item xs={12} md={12}>
+                <ExpansionPanel id={'panel-main-sitemap-bh-header'} className="history_container-inner-div" expanded={expanded === "sitemap"} onChange={handleChange("sitemap")}>
                   <ExpansionPanelSummary
                       expandIcon={<ExpandMoreIcon />}
                       aria-controls="panel1bh-content"
@@ -593,7 +563,6 @@ class ProjectDetailViews extends React.Component {
                     </div>
                   </ExpansionPanelDetails>
                 </ExpansionPanel>
-
                 <ExpansionPanel id={'panel-main-robots-bh-header'} expanded={expanded === "robots"} onChange={handleChange("robots")}>
                   <ExpansionPanelSummary
                       expandIcon={<ExpandMoreIcon />}
