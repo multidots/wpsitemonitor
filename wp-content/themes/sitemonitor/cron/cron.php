@@ -806,20 +806,20 @@ switch ($type) {
 
             $domian_lists = $wpdb->get_results(
                 $wpdb->prepare("
-                    SELECT dl.project_name,users.user_email,users.user_login,dl.id
-                    FROM   %1s  users 
-                    LEFT JOIN  %1s dl ON ( dl.user_id = users.id )
-                    LEFT JOIN  %1s sdh ON ( sdh.domain_id = dl.id )
-                    LEFT JOIN  %1s adh ON ( adh.domain_id = dl.id )
-                    LEFT JOIN  %1s rdh ON ( rdh.domain_id = dl.id)
-                    LEFT JOIN  %1s shh ON ( shh.domain_id = dl.id)
-                    LEFT JOIN  %1s acch ON ( acch.domain_id = dl.id)
-                    WHERE sdh.updated_date > DATE(NOW()) - INTERVAL %d DAY 
-                        OR adh.updated_date > DATE(NOW()) - INTERVAL %d DAY
-                        OR rdh.updated_date > DATE(NOW()) - INTERVAL %d DAY
-                        OR shh.updated_date > DATE(NOW()) - INTERVAL %d DAY
-                        OR acch.updated_date > DATE(NOW()) - INTERVAL %d DAY
-                    GROUP BY dl.id",
+                SELECT dl.id,dl.project_name,users.user_email,users.user_login,dl.notify_to
+                FROM   %1s  users 
+                LEFT JOIN  %1s dl ON ( dl.user_id = users.id )
+                LEFT JOIN  %1s sdh ON ( sdh.domain_id = dl.id )
+                LEFT JOIN  %1s adh ON ( adh.domain_id = dl.id )
+                LEFT JOIN  %1s rdh ON ( rdh.domain_id = dl.id)
+                LEFT JOIN  %1s shh ON ( shh.domain_id = dl.id)
+                LEFT JOIN  %1s acch ON ( acch.domain_id = dl.id)
+                WHERE sdh.updated_date > DATE(NOW()) - INTERVAL %d DAY 
+                    OR adh.updated_date > DATE(NOW()) - INTERVAL %d DAY
+                    OR rdh.updated_date > DATE(NOW()) - INTERVAL %d DAY
+                    OR shh.updated_date > DATE(NOW()) - INTERVAL %d DAY
+                    OR acch.updated_date > DATE(NOW()) - INTERVAL %d DAY
+                GROUP BY dl.id",
                     array(
                         $users,
                         $domain_tbl_name,
@@ -842,12 +842,18 @@ switch ($type) {
                     $project_name = isset($domian_list->project_name) ? $domian_list->project_name : "";
                     $user_email = isset($domian_list->user_email) ? $domian_list->user_email : "";
                     $user_login = isset($domian_list->user_login) ? $domian_list->user_login : "";
-                    $site_url = $site_project_url.$domain_id;
+                    $site_url = $site_project_url . $domain_id;
+                    $notify_to = isset($domian_list->notify_to) ? $domian_list->notify_to : $user_email;
 
                     $body = cron_completed_email_template( $site_url );
 
-                    $headers = array( 'Content-Type: text/html; charset=UTF-8' );
-                    wp_mail( $user_email, 'your site cron run completed.', $body, $headers );
+                    $headers[]= 'Content-Type: text/html; charset=UTF-8';
+
+                    $notify_to = preg_split ("/\,/", $notify_to);
+                    foreach( $notify_to as $email ) {
+                        $headers[] = 'Cc: '.$email;
+                    }
+                    wp_mail( $notify_to, 'your site cron run completed.', $body, $headers );
                 }
             }
             else{
