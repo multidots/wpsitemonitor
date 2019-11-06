@@ -107,7 +107,8 @@ function md_sitemonitor_set_default_tables() {
 	user_id bigint(20) NOT NULL,
 	project_name varchar(255) NULL,
 	domain_url varchar(255) NOT NULL,
-	sitemap_url varchar(255) NULL ,					
+	sitemap_url varchar(255) NULL ,
+	notify_to varchar(255) NULL,					
 	created_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	updated_date timestamp NULL DEFAULT CURRENT_TIMESTAMP,	
 	PRIMARY KEY  (id)
@@ -199,6 +200,7 @@ function md_sitemonitor_set_default_tables() {
 	dbDelta( $sql );
 
 
+
 	$sm_site_critical_history = $wpdb->prefix . 'sm_site_critical_history';
 
 	$sql = "CREATE TABLE IF NOT EXISTS {$sm_site_critical_history} (
@@ -232,6 +234,7 @@ function md_sitemonitor_set_default_tables() {
 	dbDelta( $sql );
 
 
+
 	$sm_site_captcha_check_history = $wpdb->prefix . 'sm_site_captcha_check_history';
 
 	$sql = "CREATE TABLE IF NOT EXISTS {$sm_site_captcha_check_history} (
@@ -246,6 +249,7 @@ function md_sitemonitor_set_default_tables() {
 	FOREIGN KEY (cron_id) REFERENCES " . $sm_cron_status . "(id) ON DELETE CASCADE
 	) {$charset_collate};";
 	dbDelta( $sql );
+
 }
 
 add_action( "after_switch_theme", "md_sitemonitor_set_default_tables" );
