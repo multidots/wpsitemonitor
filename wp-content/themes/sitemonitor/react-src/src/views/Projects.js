@@ -417,8 +417,11 @@ class ProjectsViews extends React.Component {
             if ( tableState.searchText == null ) {
               tableState.searchText = '';
             }
-            this.setState( { searchText: tableState.searchText } );
-            this.changePage( tableState.page, tableState.searchText );
+            if(tableState.searchText.length > 3){
+              this.setState( { searchText: tableState.searchText } );
+              this.changePage( tableState.page, tableState.searchText );
+            }
+
             break;
           default:
             return;

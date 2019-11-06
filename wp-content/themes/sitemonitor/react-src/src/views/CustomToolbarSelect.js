@@ -28,7 +28,6 @@ class CustomToolbarSelect extends React.Component {
         nextSelectedRows.push( index );
       }
     });
-    console.log(nextSelectedRows);
   };
 
   render() {

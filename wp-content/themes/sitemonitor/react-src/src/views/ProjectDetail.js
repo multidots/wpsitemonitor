@@ -228,7 +228,6 @@ class ProjectDetailViews extends React.Component {
       }
     )
       .then( response => {
-        console.log(response.status);
         if ( 401 === parseInt( response.status ) ) {
           localStorage.removeItem( 'token' );
           window.location.href = '/';
