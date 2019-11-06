@@ -114,7 +114,7 @@ switch ($type) {
                                         $url_list_result_json = wp_json_encode( $url_list_result );  //wp_json
                                         if ( $last_insert_cron_id ) {
                                             //Insert Query
-                                            $insert_data      = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `sitemap_xml_data`, `updated_date`) VALUES (%d, %d, %s, %s, %s)", $sm_sitemap_data_history_tbl_name, absint( $domain_id ), absint( $last_insert_cron_id ), $url_list_result_json, $url_list_result_json, current_time( 'mysql', 1 ) ) );     //db call ok; no-cache ok
+                                            $insert_data      = $wpdb->query( $wpdb->prepare( "INSERT INTO %1s (`domain_id`, `cron_id`, `sitemap_xml_data`, `sitemap_diff_data`, `updated_date`) VALUES (%d, %d, %s, %s, %s)", $sm_sitemap_data_history_tbl_name, absint( $domain_id ), absint( $last_insert_cron_id ), $url_list_result_json, $url_list_result_json, current_time( 'mysql', 1 ) ) );     //db call ok; no-cache ok
                                             $last_insert_data = $wpdb->insert_id;
                                             if ( isset( $last_insert_data ) ) {
                                                 $cron_tbl_update           = $wpdb->query( $wpdb->prepare( "UPDATE %1s SET `domain_id` = %d, `status` = %s, `updated_date` = %s WHERE id = %d", $sm_cron_status_tbl_name, $domain_id, 1, current_time( 'mysql', 1 ), $last_insert_cron_id ) );       //db call ok; no-cache ok
