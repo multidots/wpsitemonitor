@@ -857,10 +857,6 @@
                     )
                 )
             ); //db call ok; no-cache ok
-
-            echo "<pre>";
-            print_r ( $domian_lists );die();
-
            /* $finalArray = [];
 
             foreach ($domian_lists as $arr) {
@@ -885,8 +881,15 @@
 
                     //$body = add_site_email_template( $domain_url );
                     $body = "Body";
-                    $headers = array('Content-Type: text/html; charset=UTF-8');
-                    wp_mail($notify_to, 'your site cron run completed.', $body, $headers);
+                    $headers[]= 'Content-Type: text/html; charset=UTF-8';
+
+                    $notify_to = preg_split ("/\,/", $notify_to);
+                    foreach($notify_to as $email){
+                        $headers[] = 'Cc: '.$email;
+                    }
+                    echo "<pre>";
+                    print_r ( $headers );die();
+                    wp_mail( $notify_to, 'your site cron run completed.', $body, $headers );
                 }
             } else {
                 print_r(" No Record Found ");
